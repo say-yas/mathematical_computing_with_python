@@ -1,0 +1,1032 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Aug 9, 2026 — Python Basics Review (with a NumPy Dataset) &#8212; Mathematical Computing with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Aug9_python_basics';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Mathematical Computing with Python" href="../intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Mathematical Computing with Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Mathematical Computing with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Aug 9, 2026 — Python Basics Review (with a NumPy Dataset)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/say-yas/mathematical_computing_with_python/blob/main/book/notebooks/Aug9_python_basics.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/notebooks/Aug9_python_basics.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Aug9_python_basics.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/Aug9_python_basics.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Aug 9, 2026 — Python Basics Review (with a NumPy Dataset)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-and-data-types">1. Variables and Data Types</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#try-it-yourself">Try it yourself</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-data-structures">2. Core Data Structures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#control-flow-if-for-while">3. Control Flow: <code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">4. Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-quick-note-on-list-comprehensions">A quick note on list comprehensions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-numpy">5. Introducing NumPy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="aug-9-2026-python-basics-review-with-a-numpy-dataset">
+<h1>Aug 9, 2026 — Python Basics Review (with a NumPy Dataset)<a class="headerlink" href="#aug-9-2026-python-basics-review-with-a-numpy-dataset" title="Link to this heading">#</a></h1>
+<p><strong>Course:</strong> Mathematical Computing with Python</p>
+<p>Welcome! Before we get into mathematical computing, we need a solid refresher
+on core Python. This notebook reviews the fundamentals (variables, data
+types, control flow, functions) and then jumps into <strong>NumPy</strong>, the library
+that underlies almost everything we’ll do this semester, by exploring a
+small dataset of student exam scores.</p>
+<p><strong>By the end of this class you should be able to:</strong></p>
+<ul class="simple">
+<li><p>Use Python’s basic data types and data structures confidently</p></li>
+<li><p>Write conditionals, loops, and functions</p></li>
+<li><p>Create and manipulate NumPy arrays</p></li>
+<li><p>Compute basic descriptive statistics on a dataset</p></li>
+<li><p>Make a simple plot with Matplotlib</p></li>
+</ul>
+<section id="variables-and-data-types">
+<h2>1. Variables and Data Types<a class="headerlink" href="#variables-and-data-types" title="Link to this heading">#</a></h2>
+<p>Python is dynamically typed: a variable’s type is determined by the value
+assigned to it, and can change if you reassign it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Numbers</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>          <span class="c1"># int</span>
+<span class="n">pi_approx</span> <span class="o">=</span> <span class="mf">3.14159</span>   <span class="c1"># float</span>
+
+<span class="c1"># Text</span>
+<span class="n">course_name</span> <span class="o">=</span> <span class="s2">"Mathematical Computing with Python"</span>
+
+<span class="c1"># Boolean</span>
+<span class="n">is_first_class</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">pi_approx</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">course_name</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">is_first_class</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class 'int'&gt; &lt;class 'float'&gt; &lt;class 'str'&gt; &lt;class 'bool'&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="try-it-yourself">
+<h3>Try it yourself<a class="headerlink" href="#try-it-yourself" title="Link to this heading">#</a></h3>
+<p>Change <code class="docutils literal notranslate"><span class="pre">x</span></code> to a float and re-run the cell above. Notice how <code class="docutils literal notranslate"><span class="pre">type(x)</span></code> changes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basic arithmetic</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"a + b ="</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"a - b ="</span><span class="p">,</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"a * b ="</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"a / b ="</span><span class="p">,</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>   <span class="c1"># true division -&gt; float</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"a // b ="</span><span class="p">,</span> <span class="n">a</span> <span class="o">//</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># floor division -&gt; int</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"a % b ="</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span><span class="p">)</span>   <span class="c1"># remainder</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"a ** b ="</span><span class="p">,</span> <span class="n">a</span> <span class="o">**</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># exponent</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a + b = 9
+a - b = 5
+a * b = 14
+a / b = 3.5
+a // b = 3
+a % b = 1
+a ** b = 49
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="core-data-structures">
+<h2>2. Core Data Structures<a class="headerlink" href="#core-data-structures" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Structure</p></th>
+<th class="head"><p>Ordered</p></th>
+<th class="head"><p>Mutable</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p></td>
+<td><p>yes</p></td>
+<td><p>yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tuple</span></code></p></td>
+<td><p>yes</p></td>
+<td><p>no</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2,</span> <span class="pre">3)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p></td>
+<td><p>yes (insertion order)</p></td>
+<td><p>yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{&quot;a&quot;:</span> <span class="pre">1}</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set</span></code></p></td>
+<td><p>no</p></td>
+<td><p>yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{1,</span> <span class="pre">2,</span> <span class="pre">3}</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scores_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">88</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">74</span><span class="p">]</span>   <span class="c1"># list: ordered, mutable</span>
+<span class="n">scores_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">85</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"List:"</span><span class="p">,</span> <span class="n">scores_list</span><span class="p">)</span>
+
+<span class="n">coordinates</span> <span class="o">=</span> <span class="p">(</span><span class="mf">40.7128</span><span class="p">,</span> <span class="o">-</span><span class="mf">74.0060</span><span class="p">)</span>        <span class="c1"># tuple: ordered, immutable</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Tuple:"</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">)</span>
+
+<span class="n">student</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Amara"</span><span class="p">,</span> <span class="s2">"score"</span><span class="p">:</span> <span class="mi">92</span><span class="p">,</span> <span class="s2">"passed"</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>  <span class="c1"># dict</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Dict:"</span><span class="p">,</span> <span class="n">student</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Student score:"</span><span class="p">,</span> <span class="n">student</span><span class="p">[</span><span class="s2">"score"</span><span class="p">])</span>
+
+<span class="n">unique_grades</span> <span class="o">=</span> <span class="p">{</span><span class="mi">88</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">88</span><span class="p">}</span>     <span class="c1"># set: drops duplicates</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Set:"</span><span class="p">,</span> <span class="n">unique_grades</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>List: [88, 92, 79, 95, 61, 74, 85]
+Tuple: (40.7128, -74.006)
+Dict: {'name': 'Amara', 'score': 92, 'passed': True}
+Student score: 92
+Set: {88, 92, 79}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Slicing works on lists, tuples, and strings</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scores_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>     <span class="c1"># first element</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scores_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>    <span class="c1"># last element</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scores_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>   <span class="c1"># elements at index 1, 2, 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scores_list</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># reversed</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>88
+85
+[92, 79, 95]
+[85, 74, 61, 95, 79, 92, 88]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="control-flow-if-for-while">
+<h2>3. Control Flow: <code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">while</span></code><a class="headerlink" href="#control-flow-if-for-while" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="mi">74</span>
+
+<span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+    <span class="n">grade</span> <span class="o">=</span> <span class="s2">"A"</span>
+<span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+    <span class="n">grade</span> <span class="o">=</span> <span class="s2">"B"</span>
+<span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+    <span class="n">grade</span> <span class="o">=</span> <span class="s2">"C"</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">grade</span> <span class="o">=</span> <span class="s2">"F"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"A score of </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2"> earns a grade of </span><span class="si">{</span><span class="n">grade</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A score of 74 earns a grade of C
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># for loop over a list</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">scores_list</span><span class="p">:</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">"pass"</span> <span class="k">if</span> <span class="n">s</span> <span class="o">&gt;=</span> <span class="mi">70</span> <span class="k">else</span> <span class="s2">"fail"</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"score=</span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s2">&gt;3</span><span class="si">}</span><span class="s2">  -&gt;  </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>score= 88  -&gt;  pass
+score= 92  -&gt;  pass
+score= 79  -&gt;  pass
+score= 95  -&gt;  pass
+score= 61  -&gt;  fail
+score= 74  -&gt;  pass
+score= 85  -&gt;  pass
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># while loop</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">scores_list</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="n">scores_list</span><span class="p">[</span><span class="n">count</span><span class="p">]</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Total:"</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Average:"</span><span class="p">,</span> <span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">scores_list</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total: 574
+Average: 82.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="functions">
+<h2>4. Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
+<p>Functions let us package logic for reuse. This is essential once our mathematical
+computations get more involved.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">average</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Return the arithmetic mean of a list of numbers."""</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">letter_grade</span><span class="p">(</span><span class="n">score</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Convert a numeric score to a letter grade."""</span>
+    <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"A"</span>
+    <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"B"</span>
+    <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"C"</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"F"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Average score:"</span><span class="p">,</span> <span class="n">average</span><span class="p">(</span><span class="n">scores_list</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Letter grades:"</span><span class="p">,</span> <span class="p">[</span><span class="n">letter_grade</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">scores_list</span><span class="p">])</span>  <span class="c1"># list comprehension</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average score: 82.0
+Letter grades: ['B', 'A', 'C', 'A', 'F', 'C', 'B']
+</pre></div>
+</div>
+</div>
+</div>
+<section id="a-quick-note-on-list-comprehensions">
+<h3>A quick note on list comprehensions<a class="headerlink" href="#a-quick-note-on-list-comprehensions" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">[letter_grade(s)</span> <span class="pre">for</span> <span class="pre">s</span> <span class="pre">in</span> <span class="pre">scores_list]</span></code> is shorthand for:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">scores_list</span><span class="p">:</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">letter_grade</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>You’ll see this compact style constantly in mathematical/scientific Python code.</p>
+</section>
+</section>
+<section id="introducing-numpy">
+<h2>5. Introducing NumPy<a class="headerlink" href="#introducing-numpy" title="Link to this heading">#</a></h2>
+<p>Plain Python lists are flexible but slow for numerical work, and they don’t
+support element-wise math out of the box. <strong>NumPy</strong> gives us the <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>
+object: a fast, fixed-type, multi-dimensional array with vectorized
+operations.</p>
+<p>Let’s rebuild our gradebook example as a small <strong>dataset</strong> and explore it
+with NumPy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># reproducibility: everyone gets the same "random" data</span>
+
+<span class="c1"># Simulate a small dataset: exam scores for 30 students across 3 exams</span>
+<span class="n">n_students</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">exam1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n_students</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">exam2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">78</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n_students</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">exam3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">82</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n_students</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Clip so nobody scores above 100 or below 0</span>
+<span class="n">exam1</span><span class="p">,</span> <span class="n">exam2</span><span class="p">,</span> <span class="n">exam3</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="p">(</span><span class="n">exam1</span><span class="p">,</span> <span class="n">exam2</span><span class="p">,</span> <span class="n">exam3</span><span class="p">))</span>
+
+<span class="c1"># Stack into one 2D array: rows = students, columns = exams</span>
+<span class="n">gradebook</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">exam1</span><span class="p">,</span> <span class="n">exam2</span><span class="p">,</span> <span class="n">exam3</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Shape (students, exams):"</span><span class="p">,</span> <span class="n">gradebook</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gradebook</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>  <span class="c1"># first 5 students</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape (students, exams): (30, 3)
+[[80.  73.2 77.7]
+ [73.6 92.8 80.3]
+ [81.5 77.9 72. ]
+ [90.2 69.5 71.2]
+ [72.7 84.6 89.3]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice <code class="docutils literal notranslate"><span class="pre">gradebook</span></code> is a single NumPy array containing everyone’s scores.
+Unlike the plain Python list from Section 2, this is a genuine <strong>dataset</strong>:
+rows are observations (students), columns are variables (exams) — a layout
+you’ll see constantly in mathematical computing and data analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Indexing and slicing a 2D array</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"First student's scores:"</span><span class="p">,</span> <span class="n">gradebook</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Everyone's Exam 2 scores:"</span><span class="p">,</span> <span class="n">gradebook</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"First 3 students, all exams:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gradebook</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First student's scores: [80.  73.2 77.7]
+Everyone's Exam 2 scores: [73.2 92.8 77.9 69.5 84.6 68.2 79.7 62.3 67.4 79.6 83.9 79.4 77.1 75.6
+ 66.2 72.2 74.3 86.5 80.7 63.9 80.6 74.9 72.6 82.9 86.2 85.5 71.3 75.5
+ 80.7 85.8]
+First 3 students, all exams:
+[[80.  73.2 77.7]
+ [73.6 92.8 80.3]
+ [81.5 77.9 72. ]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Vectorized operations: no explicit loop needed!</span>
+<span class="n">final_scores</span> <span class="o">=</span> <span class="n">gradebook</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>   <span class="c1"># average across exams, per student</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Final average per student (first 5):"</span><span class="p">,</span> <span class="n">final_scores</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">class_average_per_exam</span> <span class="o">=</span> <span class="n">gradebook</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># average per exam, across students</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Class average per exam:"</span><span class="p">,</span> <span class="n">class_average_per_exam</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final average per student (first 5): [77.  82.2 77.1 77.  82.2]
+Class average per exam: [73.1 77.  82.1]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Descriptive statistics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Overall mean:   "</span><span class="p">,</span> <span class="n">gradebook</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Overall std dev:"</span><span class="p">,</span> <span class="n">gradebook</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Min score:      "</span><span class="p">,</span> <span class="n">gradebook</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Max score:      "</span><span class="p">,</span> <span class="n">gradebook</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Median (Exam 1):"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">exam1</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overall mean:    77.42
+Overall std dev: 9.12
+Min score:       55.9
+Max score:       96.1
+Median (Exam 1): 72.7
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Boolean masking: a core NumPy idiom</span>
+<span class="n">passing_mask</span> <span class="o">=</span> <span class="n">final_scores</span> <span class="o">&gt;=</span> <span class="mi">70</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Number of students passing overall:"</span><span class="p">,</span> <span class="n">passing_mask</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Passing students' final scores:"</span><span class="p">,</span> <span class="n">final_scores</span><span class="p">[</span><span class="n">passing_mask</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of students passing overall: 28
+Passing students' final scores: [77.  82.2 77.1 77.  82.2 78.4 84.  78.7 74.3 78.7 79.9 81.8 78.7 75.9
+ 77.  74.  81.3 76.5 83.4 77.6 81.2 73.7 76.8 79.7 75.  79.8 75.6 81.5]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="exercise">
+<h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Compute how many students scored above 90 on <strong>any single exam</strong>.</p></li>
+<li><p>Compute the standard deviation of <code class="docutils literal notranslate"><span class="pre">final_scores</span></code>.</p></li>
+<li><p>Create a new array <code class="docutils literal notranslate"><span class="pre">bonus_scores</span></code> that adds 2 points to every score in
+<code class="docutils literal notranslate"><span class="pre">gradebook</span></code>, capped at 100 (hint: look up <code class="docutils literal notranslate"><span class="pre">np.clip</span></code>).</p></li>
+</ol>
+<p>Use the empty cell below to work these out.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your work here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Reviewed Python fundamentals: variables, types, data structures, control
+flow, and functions.</p></li>
+<li><p>Introduced NumPy arrays as the foundation for numerical/mathematical
+computing: creation, indexing, vectorized math, and descriptive statistics.</p></li>
+</ul>
+<p><strong>Next class:</strong> we’ll learn how to prepare plots in Python.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Mathematical Computing with Python</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-and-data-types">1. Variables and Data Types</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#try-it-yourself">Try it yourself</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-data-structures">2. Core Data Structures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#control-flow-if-for-while">3. Control Flow: <code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">4. Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-quick-note-on-list-comprehensions">A quick note on list comprehensions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-numpy">5. Introducing NumPy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By YSharareh Sayyad
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
