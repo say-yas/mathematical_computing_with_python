@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Mathematical Computing with Python &#8212; Mathematical Computing with Python</title>
+    <title>Using Python in Jupyter Notebooks &#8212; Mathematical Computing with Python</title>
   
   
   
@@ -60,11 +60,10 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'using_python';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Aug 9, 2026 — Python Basics Review (with a NumPy Dataset)" href="notebooks/Aug9_python_basics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -187,7 +186,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="intro.html">
   
   
   
@@ -208,8 +207,8 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
                     Mathematical Computing with Python
                 </a>
             </li>
@@ -267,6 +266,37 @@
 
 
 
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/say-yas/mathematical_computing_with_python/blob/main/book/using_python.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
 <div class="dropdown dropdown-source-buttons">
   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
     <i class="fab fa-github"></i>
@@ -292,7 +322,7 @@
       
       
       
-      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/intro.md" target="_blank"
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/using_python.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -309,7 +339,7 @@
       
       
       
-      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fusing_python.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -339,7 +369,7 @@
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="_sources/using_python.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -349,7 +379,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -415,7 +445,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Mathematical Computing with Python</h1>
+    <h1>Using Python in Jupyter Notebooks</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -425,9 +455,12 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-this-site">How to use this site</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schedule">Schedule</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-jupyter">Installing Jupyter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confirm-the-install">Confirm the install</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#give-your-environment-a-kernel">Give your environment a kernel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#launch-the-notebook-server">Launch the notebook server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-quick-sanity-check">A quick sanity check</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-thing-to-remember">One thing to remember</a></li>
 </ul>
             </nav>
         </div>
@@ -439,55 +472,91 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="mathematical-computing-with-python">
-<h1>Mathematical Computing with Python<a class="headerlink" href="#mathematical-computing-with-python" title="Link to this heading">#</a></h1>
-<p>Welcome to the course site! This book collects the lecture notebooks used in
-class, in order, so you can follow along, review material after class, and
-run the code yourself.</p>
-<section id="how-to-use-this-site">
-<h2>How to use this site<a class="headerlink" href="#how-to-use-this-site" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Each chapter in the left sidebar corresponds to one class session.</p></li>
-<li><p>Every page is a live Jupyter notebook, you can read the rendered output
-here, or click the rocket icon at the top of a page to launch it in
-<strong>Google Colab</strong> and run the code interactively.</p></li>
-<li><p>Code cells show both the code and its output, so the site works even if
-you don’t run anything yourself.</p></li>
-</ul>
+  <section class="tex2jax_ignore mathjax_ignore" id="using-python-in-jupyter-notebooks">
+<h1>Using Python in Jupyter Notebooks<a class="headerlink" href="#using-python-in-jupyter-notebooks" title="Link to this heading">#</a></h1>
+<p><em>A quick test page for the site.</em></p>
+<p>Most lectures in this course happens inside Jupyter notebooks. A notebook mixes
+code, its output, and formatted text (Markdown) in one document that runs in
+your browser. This page is a notebook itself. Below is how to get one
+installed and running, and how to check that the install actually works.</p>
+<section id="installing-jupyter">
+<h2>Installing Jupyter<a class="headerlink" href="#installing-jupyter" title="Link to this heading">#</a></h2>
+<p>Open a terminal (macOS/Linux) or Anaconda Prompt (Windows) and install
+Jupyter into your environment.</p>
+<p><strong>If you’re using conda:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>your-environment-name
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>notebook
+</pre></div>
+</div>
+<p><strong>If you’re using plain pip:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>notebook
+</pre></div>
+</div>
+<p>Either way, this adds a <code class="docutils literal notranslate"><span class="pre">jupyter</span></code> command you can run from that environment.</p>
 </section>
-<section id="schedule">
-<h2>Schedule<a class="headerlink" href="#schedule" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Class</p></th>
-<th class="head"><p>Topic</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Aug 9</p></td>
-<td><p>Python basics review, first look at NumPy</p></td>
-</tr>
-<tr class="row-odd"><td><p>Aug 11</p></td>
-<td><p><em>(coming soon)</em></p></td>
-</tr>
-<tr class="row-even"><td><p>Aug 14</p></td>
-<td><p><em>(coming soon)</em></p></td>
-</tr>
-</tbody>
-</table>
+<section id="confirm-the-install">
+<h2>Confirm the install<a class="headerlink" href="#confirm-the-install" title="Link to this heading">#</a></h2>
+<p>After installing, check that the command is actually available:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>which<span class="w"> </span>jupyter
+/path/to/your/environment/bin/jupyter
+</pre></div>
+</div>
+<p>If nothing prints, the install didn’t land in the environment you’re
+currently using, which is the most common source of “command not found”
+errors.</p>
+</section>
+<section id="give-your-environment-a-kernel">
+<h2>Give your environment a kernel<a class="headerlink" href="#give-your-environment-a-kernel" title="Link to this heading">#</a></h2>
+<p>If you created a dedicated environment for this course (recommended), Jupyter
+needs a <strong>kernel</strong> so it knows how to run code using that environment
+specifically.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>your-environment-name
+pip<span class="w"> </span>install<span class="w"> </span>ipykernel
+python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>your-environment-name<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">"Python (your-environment-name)"</span>
+</pre></div>
+</div>
+<p>Once this is done, “Python (your-environment-name)” will show up as a
+selectable kernel inside Jupyter, and code you run in a notebook will use
+that environment’s packages.</p>
+</section>
+<section id="launch-the-notebook-server">
+<h2>Launch the notebook server<a class="headerlink" href="#launch-the-notebook-server" title="Link to this heading">#</a></h2>
+<p>From any folder you want to work in:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter<span class="w"> </span>notebook
+</pre></div>
+</div>
+<p>This opens a browser tab showing the files in that folder. From there you
+can create a new notebook or open an existing <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file, like the Class 1
+notebook in this book.</p>
+</section>
+<section id="a-quick-sanity-check">
+<h2>A quick sanity check<a class="headerlink" href="#a-quick-sanity-check" title="Link to this heading">#</a></h2>
+<p>Run the cell below. If it executes without error and prints the message,
+your notebook environment is working correctly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Jupyter is running Python"</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"This cell ran successfully."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jupyter is running Python 3.11.16
+This cell ran successfully.
+</pre></div>
+</div>
+</div>
 </div>
 </section>
-<section id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
-<p>No prior Python experience is assumed for Class 1. We start from the very
-basics before moving into NumPy. If you want to work along locally instead
-of in Colab, see the <a class="reference external" href="https://github.com/say-yas/mathematical_computing_with_python#readme">repository README</a>
-for setup instructions.</p>
-<p>The same code is also available in the
-<a class="reference external" href="https://github.com/say-yas/wsu_math300">wsu_math300</a> repository.</p>
+<section id="one-thing-to-remember">
+<h2>One thing to remember<a class="headerlink" href="#one-thing-to-remember" title="Link to this heading">#</a></h2>
+<p>Cells in a notebook can be run out of order, and variables stick around
+between cells once you’ve run them. If your results look wrong, try
+<strong>Restart Kernel and Run All Cells</strong> from the Kernel menu; this reruns
+everything top to bottom and is the fastest way to rule out stale state as
+the cause of a bug.</p>
 </section>
-<div class="toctree-wrapper compound">
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -520,15 +589,6 @@ for setup instructions.</p>
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="right-next"
-       href="notebooks/Aug9_python_basics.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Aug 9, 2026 — Python Basics Review (with a NumPy Dataset)</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -547,9 +607,12 @@ for setup instructions.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-this-site">How to use this site</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schedule">Schedule</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-jupyter">Installing Jupyter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confirm-the-install">Confirm the install</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#give-your-environment-a-kernel">Give your environment a kernel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#launch-the-notebook-server">Launch the notebook server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-quick-sanity-check">A quick sanity check</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-thing-to-remember">One thing to remember</a></li>
 </ul>
   </nav></div>
 

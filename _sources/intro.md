@@ -18,12 +18,12 @@ run the code yourself.
 | Class | Topic |
 |---|---|
 | Aug 9 | Python basics review, first look at NumPy |
-| 2 | *(coming soon)* |
-| 3 | *(coming soon)* |
+| Aug 11 | *(coming soon)* |
+| Aug 14 | *(coming soon)* |
 
 ## Prerequisites
 
-No prior Python experience is assumed for Class 1 — we start from the very
+No prior Python experience is assumed for Class 1. We start from the very
 basics before moving into NumPy. If you want to work along locally instead
 of in Colab, see the [repository README](https://github.com/say-yas/mathematical_computing_with_python#readme)
 for setup instructions.
