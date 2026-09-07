@@ -1,4 +1,5 @@
 format: jb-book
 root: intro
 chapters:
+  - file: notebooks/using_python
   - file: notebooks/Aug9_python_basics
