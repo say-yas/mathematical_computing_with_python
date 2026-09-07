@@ -24,9 +24,6 @@ mathematical_computing_with_python/
 
 1. Create a new GitHub repository named `mathematical_computing_with_python`
    and push this folder's contents to it.
-2. In `book/_config.yml`, replace `say-yas` with your actual
-   GitHub username (two spots: `repository.url`, and it's also referenced
-   in `intro.md`).
 3. In your repo on GitHub, go to **Settings → Pages** and set:
    - **Source:** Deploy from a branch
    - **Branch:** `gh-pages` / `/(root)`
