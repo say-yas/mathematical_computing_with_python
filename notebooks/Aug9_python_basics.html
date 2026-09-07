@@ -460,12 +460,17 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-data-structures">2. Core Data Structures</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#control-flow-if-for-while">3. Control Flow: <code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#control-flow-if-for-while">3. Control Flow: <code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">while</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-forms">General forms</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">4. Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-form">General form</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-quick-note-on-list-comprehensions">A quick note on list comprehensions</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-numpy">5. Introducing NumPy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-a-package">Importing a package</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
 </ul>
 </li>
@@ -639,6 +644,29 @@ Set: {88, 92, 79}
 </section>
 <section id="control-flow-if-for-while">
 <h2>3. Control Flow: <code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">while</span></code><a class="headerlink" href="#control-flow-if-for-while" title="Link to this heading">#</a></h2>
+<section id="general-forms">
+<h3>General forms<a class="headerlink" href="#general-forms" title="Link to this heading">#</a></h3>
+<p><strong><code class="docutils literal notranslate"><span class="pre">if</span></code> / <code class="docutils literal notranslate"><span class="pre">elif</span></code> / <code class="docutils literal notranslate"><span class="pre">else</span></code></strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">condition1</span><span class="p">:</span>
+    <span class="c1"># runs if condition1 is True</span>
+<span class="k">elif</span> <span class="n">condition2</span><span class="p">:</span>
+    <span class="c1"># runs if condition1 is False and condition2 is True</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># runs if none of the above are True</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">elif</span></code> and <code class="docutils literal notranslate"><span class="pre">else</span></code> are both optional, and you can chain as many <code class="docutils literal notranslate"><span class="pre">elif</span></code>s as you need.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">for</span></code> loop</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+    <span class="c1"># runs once per item in iterable (a list, string, range, etc.)</span>
+</pre></div>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">while</span></code> loop</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="n">condition</span><span class="p">:</span>
+    <span class="c1"># runs repeatedly as long as condition is True</span>
+    <span class="c1"># something inside the loop must eventually make condition False</span>
+</pre></div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="mi">74</span>
@@ -705,10 +733,24 @@ Average: 82.0
 </div>
 </div>
 </section>
+</section>
 <section id="functions">
 <h2>4. Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
 <p>Functions let us package logic for reuse. This is essential once our mathematical
 computations get more involved.</p>
+<section id="general-form">
+<h3>General form<a class="headerlink" href="#general-form" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">function_name</span><span class="p">(</span><span class="n">parameter1</span><span class="p">,</span> <span class="n">parameter2</span><span class="p">,</span> <span class="o">...</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Optional docstring describing what the function does."""</span>
+    <span class="c1"># body: do something with the parameters</span>
+    <span class="k">return</span> <span class="n">result</span>  <span class="c1"># optional; omit if the function has no output</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">parameter1,</span> <span class="pre">parameter2,</span> <span class="pre">...</span></code> are placeholders filled in each time the function is called.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">return</span></code> sends a value back to wherever the function was called; a function with no <code class="docutils literal notranslate"><span class="pre">return</span></code> implicitly returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p>Parameters can have default values: <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">f(x,</span> <span class="pre">y=0):</span></code> makes <code class="docutils literal notranslate"><span class="pre">y</span></code> optional when calling <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">average</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
@@ -738,6 +780,7 @@ Letter grades: ['B', 'A', 'C', 'A', 'F', 'C', 'B']
 </div>
 </div>
 </div>
+</section>
 <section id="a-quick-note-on-list-comprehensions">
 <h3>A quick note on list comprehensions<a class="headerlink" href="#a-quick-note-on-list-comprehensions" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">[letter_grade(s)</span> <span class="pre">for</span> <span class="pre">s</span> <span class="pre">in</span> <span class="pre">scores_list]</span></code> is shorthand for:</p>
@@ -751,6 +794,17 @@ Letter grades: ['B', 'A', 'C', 'A', 'F', 'C', 'B']
 </section>
 <section id="introducing-numpy">
 <h2>5. Introducing NumPy<a class="headerlink" href="#introducing-numpy" title="Link to this heading">#</a></h2>
+<section id="importing-a-package">
+<h3>Importing a package<a class="headerlink" href="#importing-a-package" title="Link to this heading">#</a></h3>
+<p>Before using NumPy, you need to import it. The standard convention is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span></code> brings in the package under its full name.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">as</span> <span class="pre">np</span></code> gives it a shorter alias, so you write <code class="docutils literal notranslate"><span class="pre">np.array(...)</span></code> instead of <code class="docutils literal notranslate"><span class="pre">numpy.array(...)</span></code> everywhere. This is the convention essentially everyone uses for NumPy.</p></li>
+<li><p>You only need to do this once per notebook or script, at the top, before any code that uses <code class="docutils literal notranslate"><span class="pre">np</span></code>.</p></li>
+</ul>
 <p>Plain Python lists are flexible but slow for numerical work, and they don’t
 support element-wise math out of the box. <strong>NumPy</strong> gives us the <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>
 object: a fast, fixed-type, multi-dimensional array with vectorized
@@ -874,6 +928,7 @@ Passing students' final scores: [77.  82.2 77.1 77.  82.2 78.4 84.  78.7 74.3 78
 </div>
 </div>
 </div>
+</section>
 <section id="exercise">
 <h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
@@ -968,12 +1023,17 @@ Matplotlib, turning arrays into visual, explorable data.</p>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-data-structures">2. Core Data Structures</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#control-flow-if-for-while">3. Control Flow: <code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#control-flow-if-for-while">3. Control Flow: <code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">while</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-forms">General forms</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">4. Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-form">General form</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-quick-note-on-list-comprehensions">A quick note on list comprehensions</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-numpy">5. Introducing NumPy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-a-package">Importing a package</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
 </ul>
 </li>
