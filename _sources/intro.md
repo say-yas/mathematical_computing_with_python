@@ -24,9 +24,7 @@ run the code yourself.
 ## Prerequisites
 
 No prior Python experience is assumed for Class 1. We start from the very
-basics before moving into NumPy. If you want to work along locally instead
-of in Colab, see the [repository README](https://github.com/say-yas/mathematical_computing_with_python#readme)
-for setup instructions.
+basics before moving into NumPy. 
 
 The same code is also available in the
 [wsu_math300](https://github.com/say-yas/wsu_math300) repository.
