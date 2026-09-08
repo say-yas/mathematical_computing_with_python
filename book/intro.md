@@ -17,8 +17,8 @@ run the code yourself.
 
 | Class | Topic |
 |---|---|
-| Aug 9 | Python basics review, first look at NumPy |
-| Aug 11 | *(coming soon)* |
+| Aug 9 | Intro to GitHub and Python |
+| Aug 11 | Python basics review, first look at NumPy |
 | Aug 14 | *(coming soon)* |
 
 ## Prerequisites
