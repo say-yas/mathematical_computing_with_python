@@ -1,6 +1,6 @@
 format: jb-book
 root: intro
 chapters:
-  - file: notebooks/using_python
-  - file: notebooks/using_github
-  - file: notebooks/Aug9_python_basics
+  - file: notebooks/Aug9_using_python
+  - file: notebooks/Aug9_using_github
+  - file: notebooks/Aug11_python_basics
