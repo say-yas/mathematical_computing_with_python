@@ -529,7 +529,7 @@
 </section>
 <section id="variables-and-data-types">
 <h2>Variables and Data Types<a class="headerlink" href="#variables-and-data-types" title="Link to this heading">#</a></h2>
-<p>A <strong>variable</strong> is a name that refers to a value. In Python you don’t declare a variable’s type ahead of time and you don’t need a special keyword to create one - you just assign a value to a name with <code class="docutils literal notranslate"><span class="pre">=</span></code>:</p>
+<p>A <strong>variable</strong> is a name that refers to a value. In Python you don’t declare a variable’s type ahead of time and you don’t need a special keyword to create one. You just assign a value to a name with <code class="docutils literal notranslate"><span class="pre">=</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="n">value</span>
 </pre></div>
 </div>
@@ -537,18 +537,21 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 <span class="n">x</span> <span class="o">=</span> <span class="mf">3.14</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 <span class="n">x</span> <span class="o">=</span> <span class="s1">'cd'</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
-3.14
-cd
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10 &lt;class 'int'&gt;
+3.14 &lt;class 'float'&gt;
+cd &lt;class 'str'&gt;
+True &lt;class 'bool'&gt;
 </pre></div>
 </div>
 </div>
@@ -658,6 +661,8 @@ cd
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"List:"</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"First element:"</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Last element:"</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
@@ -667,11 +672,11 @@ cd
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>List: [1, 2, 3, 4]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>List: [1, 2, 3, 4, 5, [7, 8]]
 First element: 1
-Last element: 4
+Last element: [7, 8]
 Elements 1 through 2: [2, 3]
-Reversed: [4, 3, 2, 1]
+Reversed: [[7, 8], 5, 4, 3, 2, 1]
 </pre></div>
 </div>
 </div>
@@ -704,12 +709,18 @@ Latitude: 40.7128
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">student</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Amara"</span><span class="p">,</span> <span class="s2">"score"</span><span class="p">:</span> <span class="mi">92</span><span class="p">,</span> <span class="s2">"passed"</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Dict:"</span><span class="p">,</span> <span class="n">student</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Student score:"</span><span class="p">,</span> <span class="n">student</span><span class="p">[</span><span class="s2">"score"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"keys:"</span><span class="p">,</span> <span class="n">student</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"values:"</span><span class="p">,</span> <span class="n">student</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"items:"</span><span class="p">,</span> <span class="n">student</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dict: {'name': 'Amara', 'score': 92, 'passed': True}
 Student score: 92
+keys: dict_keys(['name', 'score', 'passed'])
+values: dict_values(['Amara', 92, True])
+items: dict_items([('name', 'Amara'), ('score', 92), ('passed', True)])
 </pre></div>
 </div>
 </div>
