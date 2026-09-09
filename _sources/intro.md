@@ -23,8 +23,8 @@ run the code yourself.
 
 ## Prerequisites
 
-No prior Python experience is assumed for Class 1. We start from the very
-basics before moving into NumPy. 
+No prior Python experience is assumed. We start from the very
+basics before moving into various numerical algorithms. 
 
 The same code is also available in the
 [wsu_math300](https://github.com/say-yas/wsu_math300) repository.
