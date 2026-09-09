@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Using GitHub: Repositories, Commits, Push/Pull, and Forks &#8212; Mathematical Computing with Python</title>
+    <title>Using Python in Jupyter Notebooks &#8212; Mathematical Computing with Python</title>
   
   
   
@@ -60,12 +60,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Aug9_using_github';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/starting_with_python';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Python Basics Review (with a NumPy Dataset)" href="Aug11_python_basics.html" />
-    <link rel="prev" title="Using Python in Jupyter Notebooks" href="Aug9_using_python.html" />
+    <link rel="next" title="Using GitHub: Repositories, Commits, Push/Pull, and Forks" href="starting_with_github.html" />
+    <link rel="prev" title="Mathematical Computing with Python" href="../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -214,9 +214,9 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Aug9_using_python.html">Using Python in Jupyter Notebooks</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Using GitHub: Repositories, Commits, Push/Pull, and Forks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Aug11_python_basics.html">Python Basics Review (with a NumPy Dataset)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Using Python in Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="starting_with_github.html">Using GitHub: Repositories, Commits, Push/Pull, and Forks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics_python.html">Python Basics</a></li>
 </ul>
 
     </div>
@@ -268,6 +268,37 @@
 
 
 
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/say-yas/mathematical_computing_with_python/blob/main/book/notebooks/starting_with_python.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
 <div class="dropdown dropdown-source-buttons">
   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
     <i class="fab fa-github"></i>
@@ -293,7 +324,7 @@
       
       
       
-      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/notebooks/Aug9_using_github.md" target="_blank"
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/notebooks/starting_with_python.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -310,7 +341,7 @@
       
       
       
-      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Aug9_using_github.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fnotebooks/starting_with_python.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -340,7 +371,7 @@
       
       
       
-      <li><a href="../_sources/notebooks/Aug9_using_github.md" target="_blank"
+      <li><a href="../_sources/notebooks/starting_with_python.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -350,7 +381,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -416,7 +447,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Using GitHub: Repositories, Commits, Push/Pull, and Forks</h1>
+    <h1>Using Python in Jupyter Notebooks</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -426,13 +457,12 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-walkthrough">Video walkthrough</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-repository">Creating a repository</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#committing-changes">Committing changes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pushing-and-pulling">Pushing and pulling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forking">Forking</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#doing-this-with-github-desktop">Doing this with GitHub Desktop</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-summary">Quick summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-jupyter">Installing Jupyter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confirm-the-install">Confirm the install</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#give-your-environment-a-kernel">Give your environment a kernel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#launch-the-notebook-server">Launch the notebook server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-quick-sanity-check">A quick sanity check</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-thing-to-remember">One thing to remember</a></li>
 </ul>
             </nav>
         </div>
@@ -444,150 +474,90 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="using-github-repositories-commits-push-pull-and-forks">
-<h1>Using GitHub: Repositories, Commits, Push/Pull, and Forks<a class="headerlink" href="#using-github-repositories-commits-push-pull-and-forks" title="Link to this heading">#</a></h1>
-<p><em>A quick reference for the Git and GitHub commands you’ll use throughout this course.</em></p>
-<p>GitHub hosts your code online and tracks its history through Git. Below are
-the core actions you’ll use to create a project, save changes, and sync
-them between your computer and GitHub.</p>
-<section id="video-walkthrough">
-<h2>Video walkthrough<a class="headerlink" href="#video-walkthrough" title="Link to this heading">#</a></h2>
-<p>If you’d rather watch someone click through it, this beginner-friendly
-crash course covers installing GitHub Desktop and walks through cloning,
-committing, pushing, pulling, and handling branches in the app:</p>
-<p><a class="reference external" href="https://www.youtube.com/watch?v=MaqVvXv6zrU">How to Use Git &amp; GitHub Desktop Tutorial for Beginners</a></p>
-</section>
-<section id="creating-a-repository">
-<h2>Creating a repository<a class="headerlink" href="#creating-a-repository" title="Link to this heading">#</a></h2>
-<p><strong>Starting on GitHub (most common for a new project):</strong></p>
-<ol class="arabic simple">
-<li><p>Click the <strong>+</strong> icon in the top-right corner of GitHub, then <strong>New repository</strong>.</p></li>
-<li><p>Give it a name, choose public or private, and click <strong>Create repository</strong>.</p></li>
-<li><p>Clone it to your computer:</p></li>
-</ol>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/your-username/your-repo-name.git
-<span class="nb">cd</span><span class="w"> </span>your-repo-name
+  <section class="tex2jax_ignore mathjax_ignore" id="using-python-in-jupyter-notebooks">
+<h1>Using Python in Jupyter Notebooks<a class="headerlink" href="#using-python-in-jupyter-notebooks" title="Link to this heading">#</a></h1>
+<p><em>A quick test page for the site.</em></p>
+<p>Most lectures in this course happens inside Jupyter notebooks. A notebook mixes
+code, its output, and formatted text (Markdown) in one document that runs in
+your browser. This page is a notebook itself. Below is how to get one
+installed and running, and how to check that the install actually works.</p>
+<section id="installing-jupyter">
+<h2>Installing Jupyter<a class="headerlink" href="#installing-jupyter" title="Link to this heading">#</a></h2>
+<p>Open a terminal (macOS/Linux) or Anaconda Prompt (Windows) and install
+Jupyter into your environment.</p>
+<p><strong>If you’re using conda:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>your-environment-name
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>notebook
 </pre></div>
 </div>
-<p><strong>Starting from an existing local folder:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>your-existing-folder
-git<span class="w"> </span>init
-git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>https://github.com/your-username/your-repo-name.git
+<p><strong>If you’re using plain pip:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>notebook
 </pre></div>
 </div>
+<p>Either way, this adds a <code class="docutils literal notranslate"><span class="pre">jupyter</span></code> command you can run from that environment.</p>
 </section>
-<section id="committing-changes">
-<h2>Committing changes<a class="headerlink" href="#committing-changes" title="Link to this heading">#</a></h2>
-<p>A <strong>commit</strong> is a saved snapshot of your changes, with a message describing
-what changed.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>filename.py<span class="w">        </span><span class="c1"># stage a specific file</span>
-git<span class="w"> </span>add<span class="w"> </span>.<span class="w">                  </span><span class="c1"># stage everything you've changed</span>
-git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Add function to compute averages"</span>
+<section id="confirm-the-install">
+<h2>Confirm the install<a class="headerlink" href="#confirm-the-install" title="Link to this heading">#</a></h2>
+<p>After installing, check that the command is actually available:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>which<span class="w"> </span>jupyter
+/path/to/your/environment/bin/jupyter
 </pre></div>
 </div>
-<p>Commit often, in small logical chunks. It’s much easier to track down a bug
-in ten small commits than in one giant one.</p>
+<p>If nothing prints, the install didn’t land in the environment you’re
+currently using, which is the most common source of “command not found”
+errors.</p>
 </section>
-<section id="pushing-and-pulling">
-<h2>Pushing and pulling<a class="headerlink" href="#pushing-and-pulling" title="Link to this heading">#</a></h2>
-<p><strong>Push</strong> sends your commits from your computer up to GitHub:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+<section id="give-your-environment-a-kernel">
+<h2>Give your environment a kernel<a class="headerlink" href="#give-your-environment-a-kernel" title="Link to this heading">#</a></h2>
+<p>If you created a dedicated environment for this course (recommended), Jupyter
+needs a <strong>kernel</strong> so it knows how to run code using that environment
+specifically.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>your-environment-name
+pip<span class="w"> </span>install<span class="w"> </span>ipykernel
+python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>your-environment-name<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">"Python (your-environment-name)"</span>
 </pre></div>
 </div>
-<p><strong>Pull</strong> brings down changes from GitHub that aren’t on your computer yet
-(for example, changes a teammate made, or edits you made from another
-machine):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>main
+<p>Once this is done, “Python (your-environment-name)” will show up as a
+selectable kernel inside Jupyter, and code you run in a notebook will use
+that environment’s packages.</p>
+</section>
+<section id="launch-the-notebook-server">
+<h2>Launch the notebook server<a class="headerlink" href="#launch-the-notebook-server" title="Link to this heading">#</a></h2>
+<p>From any folder you want to work in:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter<span class="w"> </span>notebook
 </pre></div>
 </div>
-<p>A good habit: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> before you start working, and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> after you
-commit, so you rarely end up out of sync.</p>
+<p>This opens a browser tab showing the files in that folder. From there you
+can create a new notebook or open an existing <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file, like the Class 1
+notebook in this book.</p>
 </section>
-<section id="forking">
-<h2>Forking<a class="headerlink" href="#forking" title="Link to this heading">#</a></h2>
-<p>A <strong>fork</strong> is your own personal copy of someone else’s repository on GitHub.
-You’d fork when you want to contribute to a project you don’t have write
-access to, or adapt someone else’s code as a starting point for your own.</p>
-<ol class="arabic simple">
-<li><p>On the repository’s GitHub page, click <strong>Fork</strong> (top-right).</p></li>
-<li><p>This creates <code class="docutils literal notranslate"><span class="pre">your-username/repo-name</span></code> under your own account.</p></li>
-<li><p>Clone <em>your fork</em>, not the original:</p></li>
-</ol>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/your-username/repo-name.git
+<section id="a-quick-sanity-check">
+<h2>A quick sanity check<a class="headerlink" href="#a-quick-sanity-check" title="Link to this heading">#</a></h2>
+<p>Run the cell below. If it executes without error and prints the message,
+your notebook environment is working correctly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Jupyter is running Python"</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"This cell ran successfully."</span><span class="p">)</span>
 </pre></div>
 </div>
-<ol class="arabic simple" start="4">
-<li><p>Changes you push go to your fork. If you want to propose them back to the
-original project, open a <strong>pull request</strong> from your fork.</p></li>
-</ol>
-</section>
-<section id="doing-this-with-github-desktop">
-<h2>Doing this with GitHub Desktop<a class="headerlink" href="#doing-this-with-github-desktop" title="Link to this heading">#</a></h2>
-<p>If you’d rather avoid the command line, <a class="reference external" href="https://desktop.github.com/">GitHub Desktop</a>
-does everything above through a GUI. The same four actions map over directly:</p>
-<p><strong>Creating a repository</strong></p>
-<ul class="simple">
-<li><p>File → New Repository (to start fresh), or File → Clone Repository (to
-copy an existing one from GitHub onto your computer).</p></li>
-</ul>
-<p><strong>Committing changes</strong></p>
-<ul class="simple">
-<li><p>Any file you’ve changed shows up automatically in the left-hand “Changes”
-list, with a diff on the right.</p></li>
-<li><p>Check the files you want to include, type a summary in the box at the
-bottom left, and click <strong>Commit to main</strong>.</p></li>
-</ul>
-<p><strong>Pushing and pulling</strong></p>
-<ul class="simple">
-<li><p>After committing, click <strong>Push origin</strong> in the top bar to send your
-commits to GitHub.</p></li>
-<li><p>Click <strong>Fetch origin</strong> (it becomes <strong>Pull origin</strong> when there’s something
-new) to bring down changes from GitHub.</p></li>
-</ul>
-<p><strong>Forking</strong></p>
-<ul class="simple">
-<li><p>GitHub Desktop doesn’t create the fork itself; fork the repository on
-GitHub.com first (click <strong>Fork</strong>), then in GitHub Desktop use File → Clone
-Repository and select your fork.</p></li>
-</ul>
-<p>The commands and the GUI buttons do the exact same thing under the hood.
-Use whichever fits how you like to work; many people mix both, using the
-terminal for quick commands and GitHub Desktop to review diffs visually
-before committing.</p>
-</section>
-<section id="quick-summary">
-<h2>Quick summary<a class="headerlink" href="#quick-summary" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Action</p></th>
-<th class="head"><p>Command / Where</p></th>
-<th class="head"><p>GitHub Desktop</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Create a repo</p></td>
-<td><p>GitHub “+” button, or <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> locally</p></td>
-<td><p>File → New/Clone Repository</p></td>
-</tr>
-<tr class="row-odd"><td><p>Save a snapshot</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">.</span></code> then <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;message&quot;</span></code></p></td>
-<td><p>Check files, write summary, <strong>Commit to main</strong></p></td>
-</tr>
-<tr class="row-even"><td><p>Send changes to GitHub</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">main</span></code></p></td>
-<td><p><strong>Push origin</strong></p></td>
-</tr>
-<tr class="row-odd"><td><p>Get changes from GitHub</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">origin</span> <span class="pre">main</span></code></p></td>
-<td><p><strong>Fetch origin</strong> / <strong>Pull origin</strong></p></td>
-</tr>
-<tr class="row-even"><td><p>Copy someone else’s repo</p></td>
-<td><p>Click <strong>Fork</strong> on GitHub</p></td>
-<td><p>Fork on GitHub.com, then Clone in Desktop</p></td>
-</tr>
-</tbody>
-</table>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jupyter is running Python 3.11.16
+This cell ran successfully.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="one-thing-to-remember">
+<h2>One thing to remember<a class="headerlink" href="#one-thing-to-remember" title="Link to this heading">#</a></h2>
+<p>Cells in a notebook can be run out of order, and variables stick around
+between cells once you’ve run them. If your results look wrong, try
+<strong>Restart Kernel and Run All Cells</strong> from the Kernel menu; this reruns
+everything top to bottom and is the fastest way to rule out stale state as
+the cause of a bug.</p>
 </section>
 </section>
 
@@ -622,20 +592,20 @@ before committing.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Aug9_using_python.html"
+       href="../intro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Using Python in Jupyter Notebooks</p>
+        <p class="prev-next-title">Mathematical Computing with Python</p>
       </div>
     </a>
     <a class="right-next"
-       href="Aug11_python_basics.html"
+       href="starting_with_github.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Python Basics Review (with a NumPy Dataset)</p>
+        <p class="prev-next-title">Using GitHub: Repositories, Commits, Push/Pull, and Forks</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -657,13 +627,12 @@ before committing.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-walkthrough">Video walkthrough</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-repository">Creating a repository</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#committing-changes">Committing changes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pushing-and-pulling">Pushing and pulling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forking">Forking</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#doing-this-with-github-desktop">Doing this with GitHub Desktop</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-summary">Quick summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-jupyter">Installing Jupyter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confirm-the-install">Confirm the install</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#give-your-environment-a-kernel">Give your environment a kernel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#launch-the-notebook-server">Launch the notebook server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-quick-sanity-check">A quick sanity check</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-thing-to-remember">One thing to remember</a></li>
 </ul>
   </nav></div>
 
