@@ -1,0 +1,1151 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to Python, Part I &#8212; Mathematical Computing with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/intro_pythonI';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Using GitHub: Repositories, Commits, Push/Pull, and Forks" href="starting_with_github.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Mathematical Computing with Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Mathematical Computing with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="starting_with_python.html">Using Python in Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="starting_with_github.html">Using GitHub: Repositories, Commits, Push/Pull, and Forks</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to Python, Part I</a></li>
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/say-yas/mathematical_computing_with_python/blob/main/book/notebooks/intro_pythonI.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/notebooks/intro_pythonI.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fnotebooks/intro_pythonI.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/intro_pythonI.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Python, Part I</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to Python, Part I</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-print">How to print</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#operations">Operations</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-operators">Comparison operators</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#containers-lists">Containers: Lists</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lists">Lists</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-operation">Slicing Operation</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-lists">Useful lists</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#iterations">Iterations</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loops">For loops</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#while">While</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions">Practice Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q1-variables-and-printing">Q1: Variables and printing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q2-lists-and-slicing">Q2: Lists and slicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q3-loops-and-accumulation">Q3: Loops and accumulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q4-combining-loops-lists-and-slicing">Q4: Combining loops, lists, and slicing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-python-part-i">
+<h1>Introduction to Python, Part I<a class="headerlink" href="#introduction-to-python-part-i" title="Link to this heading">#</a></h1>
+<p>Welcome! This notebook covers the basic building blocks of Python: printing output, variables and data types, arithmetic and comparison operators, lists and slicing, and the two main kinds of loops (<code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code>).</p>
+<p>Each section starts with a short explanation, followed by a code cell you can run and experiment with. Try changing the values in the code cells to see how the output changes, that’s the best way to learn!</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="how-to-print">
+<h1>How to print<a class="headerlink" href="#how-to-print" title="Link to this heading">#</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">print()</span></code> function displays output to the screen. It’s the most basic, and most useful, tool for seeing what your code is doing.</p>
+<p>A few things demonstrated in the cell below:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">print(&quot;some</span> <span class="pre">text&quot;)</span></code> prints a string.</p></li>
+<li><p>You can pass multiple arguments separated by commas, e.g. <code class="docutils literal notranslate"><span class="pre">print(2,</span> <span class="pre">&quot;is</span> <span class="pre">a</span> <span class="pre">number.&quot;)</span></code>; <code class="docutils literal notranslate"><span class="pre">print</span></code> will insert a space between them automatically.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\n</span></code> inside a string creates a new line.</p></li>
+<li><p><strong>f-strings</strong> (<code class="docutils literal notranslate"><span class="pre">f&quot;x</span> <span class="pre">=</span> <span class="pre">{x}&quot;</span></code>) let you embed the value of a variable directly inside a string: the part in <code class="docutils literal notranslate"><span class="pre">{}</span></code> is evaluated and inserted.</p></li>
+<li><p>You can assign multiple variables at once: <code class="docutils literal notranslate"><span class="pre">x,</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">10,</span> <span class="pre">20</span></code>.</p></li>
+<li><p>You can put multiple statements on one line by separating them with a semicolon <code class="docutils literal notranslate"><span class="pre">;</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">2;</span> <span class="pre">z</span> <span class="pre">=</span> <span class="pre">5</span></code> (though it’s usually clearer to use separate lines).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Hello, World!"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">"is a number.</span><span class="se">\n</span><span class="s2">3 is also a number."</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"x = </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"x = </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">, y = </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">x</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span> <span class="n">z</span><span class="o">=</span><span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"x = </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">, z = </span><span class="si">{</span><span class="n">z</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, World!
+2 is a number.
+3 is also a number.
+x = 5
+x = 10, y = 20
+x = 2, z = 5
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="variables">
+<h1>Variables<a class="headerlink" href="#variables" title="Link to this heading">#</a></h1>
+<p>A <strong>variable</strong> is a name that refers to a value stored in memory. In Python, you don’t need to declare a variable’s type: it’s inferred automatically from the value you assign.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">type()</span></code> function tells you what kind of value a variable holds. The basic built-in types shown below are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: whole numbers (e.g. <code class="docutils literal notranslate"><span class="pre">2</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span></code>: decimal numbers (e.g. <code class="docutils literal notranslate"><span class="pre">3.14</span></code>, or <code class="docutils literal notranslate"><span class="pre">4.</span></code> which is the same as <code class="docutils literal notranslate"><span class="pre">4.0</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">str</span></code>: text, written with either double quotes <code class="docutils literal notranslate"><span class="pre">&quot;...&quot;</span></code> or single quotes <code class="docutils literal notranslate"><span class="pre">'...'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bool</span></code>: a truth value, either <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># This is an integer</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="c1"># Print the value of a and its type</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="mf">3.14</span> <span class="c1"># This is a float</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="c1"># Print the value of b and its type</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="mf">4.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="c1"># Print the value of c and its type</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="s2">"This is a string"</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="c1"># Print the value of d and its type</span>
+
+<span class="n">e</span> <span class="o">=</span> <span class="s1">'This is also a string'</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">))</span> <span class="c1"># Print the value of e and its type</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># This is a boolean</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">f</span><span class="p">))</span> <span class="c1"># Print the value of f and its type</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 &lt;class 'int'&gt;
+3.14 &lt;class 'float'&gt;
+4.0 &lt;class 'float'&gt;
+This is a string &lt;class 'str'&gt;
+This is also a string &lt;class 'str'&gt;
+True &lt;class 'bool'&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="operations">
+<h1>Operations<a class="headerlink" href="#operations" title="Link to this heading">#</a></h1>
+<p>Python supports the standard arithmetic operators:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p>addition</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>subtraction</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">*</span></code></p></td>
+<td><p>multiplication</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">**</span></code></p></td>
+<td><p>exponentiation (power)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">/</span></code></p></td>
+<td><p>division (always returns a <code class="docutils literal notranslate"><span class="pre">float</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">//</span></code></p></td>
+<td><p>floor division (division rounded down to the nearest whole number)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%</span></code></p></td>
+<td><p>modulo (the remainder after division)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Notice that combining an <code class="docutils literal notranslate"><span class="pre">int</span></code> and a <code class="docutils literal notranslate"><span class="pre">float</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></code> where <code class="docutils literal notranslate"><span class="pre">a</span></code> is an <code class="docutils literal notranslate"><span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> is a <code class="docutils literal notranslate"><span class="pre">float</span></code>) produces a <code class="docutils literal notranslate"><span class="pre">float</span></code> result.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="c1"># This is an addition operation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="c1"># Print the value of x and its type</span>
+
+<span class="n">y</span><span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="c1"># This is a subtraction operation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="c1"># Print the value of y and its type</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="c1"># This is a multiplication operation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">z</span><span class="p">))</span> <span class="c1"># Print the value of z and its type</span>
+
+<span class="n">z2</span> <span class="o">=</span> <span class="n">a</span> <span class="o">**</span> <span class="n">b</span> <span class="c1"># This is an exponentiation operation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z2</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">z2</span><span class="p">))</span> <span class="c1"># Print the value of z2 and its type</span>
+
+<span class="n">w</span> <span class="o">=</span> <span class="n">c</span> <span class="o">/</span> <span class="n">b</span> <span class="c1"># This is a division operation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">w</span><span class="p">))</span> <span class="c1"># Print the value of w and its type</span>
+
+<span class="n">v</span> <span class="o">=</span> <span class="n">c</span> <span class="o">//</span> <span class="n">a</span> <span class="c1"># This is a floor division operation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="c1"># Print the value of v and its type</span>
+
+<span class="n">u</span> <span class="o">=</span> <span class="n">c</span> <span class="o">%</span> <span class="n">a</span> <span class="c1"># This is a modulo operation  </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">u</span><span class="p">))</span> <span class="c1"># Print the value of u and its type</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.140000000000001 &lt;class 'float'&gt;
+-1.1400000000000001 &lt;class 'float'&gt;
+6.28 &lt;class 'float'&gt;
+8.815240927012887 &lt;class 'float'&gt;
+1.2738853503184713 &lt;class 'float'&gt;
+2.0 &lt;class 'float'&gt;
+0.0 &lt;class 'float'&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="comparison-operators">
+<h2>Comparison operators<a class="headerlink" href="#comparison-operators" title="Link to this heading">#</a></h2>
+<p>Comparison operators compare two values and return a <code class="docutils literal notranslate"><span class="pre">bool</span></code> (<code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;</span></code></p></td>
+<td><p>less than</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;=</span></code></p></td>
+<td><p>less than or equal to</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code></p></td>
+<td><p>greater than</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&gt;=</span></code></p></td>
+<td><p>greater than or equal to</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">==</span></code></p></td>
+<td><p>equal to (note the double <code class="docutils literal notranslate"><span class="pre">=</span></code>; a single <code class="docutils literal notranslate"><span class="pre">=</span></code> is assignment, not comparison!)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">2</span></code> (an <code class="docutils literal notranslate"><span class="pre">int</span></code>) and <code class="docutils literal notranslate"><span class="pre">2.0</span></code> (a <code class="docutils literal notranslate"><span class="pre">float</span></code>) are considered equal in value, even though they are different types.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span> <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
+ <span class="n">b</span> <span class="o">=</span> <span class="mf">2.0</span>
+ <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="c1"># Print the types of a and b</span>
+
+ <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># This is a less than comparison</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="c1"># Print the value of x and its type</span>
+
+ <span class="n">x2</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># This is a less than or equal to comparison</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span> <span class="c1"># Print the value of x2 and its type</span>
+
+ <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># This is a greater than comparison</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="c1"># Print the value of y and its type</span>
+
+ <span class="n">y2</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;=</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># This is a greater than or equal to comparison</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">y2</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">y2</span><span class="p">))</span> <span class="c1"># Print the value of y2 and its type</span>
+
+ <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># This is an equality comparison</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">z</span><span class="p">))</span> <span class="c1"># Print the value of z and its type</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class 'int'&gt; &lt;class 'float'&gt;
+False &lt;class 'bool'&gt;
+True &lt;class 'bool'&gt;
+False &lt;class 'bool'&gt;
+True &lt;class 'bool'&gt;
+True &lt;class 'bool'&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="containers-lists">
+<h1>Containers: Lists<a class="headerlink" href="#containers-lists" title="Link to this heading">#</a></h1>
+<p>A <strong>list</strong> is an ordered, mutable collection of values, written with square brackets <code class="docutils literal notranslate"><span class="pre">[...]</span></code> and separated by commas. Lists can hold any type of value, and can be changed after they’re created (e.g. by adding elements).</p>
+<section id="lists">
+<h2>Lists<a class="headerlink" href="#lists" title="Link to this heading">#</a></h2>
+<p>Some common list operations:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">len(list1)</span></code> returns the number of elements in the list.</p></li>
+<li><p><strong>Indexing</strong> with <code class="docutils literal notranslate"><span class="pre">list1[i]</span></code> retrieves the element at position <code class="docutils literal notranslate"><span class="pre">i</span></code>. Python indexing starts at <code class="docutils literal notranslate"><span class="pre">0</span></code>, so <code class="docutils literal notranslate"><span class="pre">list1[0]</span></code> is the <em>first</em> element.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list1.append(value)</span></code> adds <code class="docutils literal notranslate"><span class="pre">value</span></code> to the end of the list, modifying it in place.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">,</span> <span class="mf">4.4</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">]</span> <span class="c1"># This is a list</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">list1</span><span class="p">))</span> <span class="c1"># Print the value of list1 and its type</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">list1</span><span class="p">)</span> <span class="c1"># This is a length operation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">l</span><span class="p">))</span> <span class="c1"># Print the value of l and its type</span>
+
+<span class="n">first_element</span> <span class="o">=</span> <span class="n">list1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># This is an indexing operation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">first_element</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">first_element</span><span class="p">))</span> <span class="c1"># Print the value of first_element and its type</span>
+
+<span class="n">second_element</span> <span class="o">=</span> <span class="n">list1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># This is an indexing operation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">second_element</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">second_element</span><span class="p">))</span> <span class="c1"># Print the value of second_element and its type</span>
+
+<span class="c1"># append an element to the list</span>
+<span class="n">list1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">6.6</span><span class="p">)</span> <span class="c1"># This is an append operation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">list1</span><span class="p">))</span> <span class="c1"># Print the value of list1 and its type</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.1, 2.2, 3.2, 4.4, 5.5] &lt;class 'list'&gt;
+5 &lt;class 'int'&gt;
+1.1 &lt;class 'float'&gt;
+2.2 &lt;class 'float'&gt;
+[1.1, 2.2, 3.2, 4.4, 5.5, 6.6] &lt;class 'list'&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="slicing-operation">
+<h2>Slicing Operation<a class="headerlink" href="#slicing-operation" title="Link to this heading">#</a></h2>
+<p><strong>Slicing</strong> lets you extract a sub-portion of a list using the syntax <code class="docutils literal notranslate"><span class="pre">list[start:stop:step]</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">start</span></code> is the index to begin at (inclusive, default is the beginning of the list).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stop</span></code> is the index to end at (<strong>exclusive</strong>: the element at this index is <em>not</em> included; default is the end of the list).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">step</span></code> is how many elements to move forward each time (default is <code class="docutils literal notranslate"><span class="pre">1</span></code>). A negative step reverses the direction.</p></li>
+</ul>
+<p>Any of these can be omitted: <code class="docutils literal notranslate"><span class="pre">list1[:]</span></code> copies the whole list, <code class="docutils literal notranslate"><span class="pre">list1[::2]</span></code> takes every second element, and <code class="docutils literal notranslate"><span class="pre">list1[::-1]</span></code> reverses the list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"The list is:"</span><span class="p">,</span> <span class="n">list1</span><span class="p">)</span> <span class="c1"># Print the value of list1</span>
+
+<span class="n">sublist</span> <span class="o">=</span> <span class="n">list1</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># This is a slicing operation: start index is 1, end index is 3 (exclusive)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sublist</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">sublist</span><span class="p">))</span> <span class="c1"># Print the value of sublist and its type</span>
+
+<span class="n">sublist2</span> <span class="o">=</span> <span class="n">list1</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="c1"># This is a slicing operation: start index is 2, end index is the end of the list</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sublist2</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">sublist2</span><span class="p">))</span> <span class="c1"># Print the value of sublist2 and its type</span>
+
+<span class="n">sublist3</span> <span class="o">=</span> <span class="n">list1</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># This is a slicing operation: start index is the beginning of the list, end index is 3 (exclusive)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sublist3</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">sublist3</span><span class="p">))</span> <span class="c1"># Print the value of sublist3 and its type</span>
+
+<span class="n">sublist4</span> <span class="o">=</span> <span class="n">list1</span><span class="p">[:]</span> <span class="c1"># This is a slicing operation: start index is the beginning of the list, end index is the end of the list</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sublist4</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">sublist4</span><span class="p">))</span> <span class="c1"># Print the value of sublist4 and its type</span>
+
+<span class="n">sublist5</span> <span class="o">=</span> <span class="n">list1</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span> <span class="c1"># This is a slicing operation: start index is the beginning of the list, end index is the end of the list, step is 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sublist5</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">sublist5</span><span class="p">))</span> <span class="c1"># Print the value of sublist5 and its type</span>
+
+<span class="n">sublist6</span> <span class="o">=</span> <span class="n">list1</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="c1"># This is a slicing operation: start index is 1, end index is the end of the list, step is 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sublist6</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">sublist6</span><span class="p">))</span> <span class="c1"># Print the value of sublist6 and its type</span>
+
+<span class="n">sublist7</span> <span class="o">=</span> <span class="n">list1</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># This is a slicing operation: start index is the end of the list, end index is the beginning of the list, step is -1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sublist7</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">sublist7</span><span class="p">))</span> <span class="c1"># Print the value of sublist7 and its type</span>
+
+<span class="n">sublist8</span> <span class="o">=</span> <span class="n">list1</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># This is a slicing operation: start index is 3, end index is 1 (exclusive), step is -1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sublist8</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">sublist8</span><span class="p">))</span> <span class="c1"># Print the value of sublist8 and</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The list is: [1.1, 2.2, 3.2, 4.4, 5.5, 6.6]
+[2.2, 3.2] &lt;class 'list'&gt;
+[3.2, 4.4, 5.5, 6.6] &lt;class 'list'&gt;
+[1.1, 2.2, 3.2] &lt;class 'list'&gt;
+[1.1, 2.2, 3.2, 4.4, 5.5, 6.6] &lt;class 'list'&gt;
+[1.1, 3.2, 5.5] &lt;class 'list'&gt;
+[2.2, 4.4, 6.6] &lt;class 'list'&gt;
+[6.6, 5.5, 4.4, 3.2, 2.2, 1.1] &lt;class 'list'&gt;
+[4.4, 3.2] &lt;class 'list'&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="useful-lists">
+<h1>Useful lists<a class="headerlink" href="#useful-lists" title="Link to this heading">#</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">range(start,</span> <span class="pre">stop,</span> <span class="pre">step)</span></code> function generates a sequence of numbers without storing them all in memory at once. It’s commonly used for looping a fixed number of times. Like slicing, <code class="docutils literal notranslate"><span class="pre">stop</span></code> is exclusive and <code class="docutils literal notranslate"><span class="pre">start</span></code>/<code class="docutils literal notranslate"><span class="pre">step</span></code> are optional (defaulting to <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code>).</p>
+<p><code class="docutils literal notranslate"><span class="pre">range()</span></code> produces a special <code class="docutils literal notranslate"><span class="pre">range</span></code> object, not a list; wrap it in <code class="docutils literal notranslate"><span class="pre">list(...)</span></code> to see all its values as an actual list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">range_ints</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># This is a range object</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">range_ints</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">range_ints</span><span class="p">))</span> <span class="c1"># Print the value of range_ints and its type</span>
+
+<span class="n">list_ints_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">range_ints</span><span class="p">)</span> <span class="c1"># Convert the range object to a list</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_ints_list</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">list_ints_list</span><span class="p">))</span> <span class="c1"># Print the value of list_ints_list and its type</span>
+
+<span class="n">range2</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># This is a range object with start, stop, and step</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">range2</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">range2</span><span class="p">))</span> <span class="c1"># Print the value of range2 and its type</span>
+
+<span class="n">list_range2_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">range2</span><span class="p">)</span> <span class="c1"># Convert the range object to a list</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_range2_list</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">list_range2_list</span><span class="p">))</span> <span class="c1"># Print the value of list_range2_list and its type</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>range(0, 10) &lt;class 'range'&gt;
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9] &lt;class 'list'&gt;
+range(1, 10, 2) &lt;class 'range'&gt;
+[1, 3, 5, 7, 9] &lt;class 'list'&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="iterations">
+<h1>Iterations<a class="headerlink" href="#iterations" title="Link to this heading">#</a></h1>
+<p><strong>Loops</strong> let you repeat a block of code multiple times. Python has two main kinds: <code class="docutils literal notranslate"><span class="pre">for</span></code> loops (repeat once per item in a sequence) and <code class="docutils literal notranslate"><span class="pre">while</span></code> loops (repeat as long as a condition is true).</p>
+<section id="for-loops">
+<h2>For loops<a class="headerlink" href="#for-loops" title="Link to this heading">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">for</span></code> loop iterates over a sequence (like a <code class="docutils literal notranslate"><span class="pre">range</span></code> or a list), running the indented block of code once for each item. The loop variable (<code class="docutils literal notranslate"><span class="pre">i</span></code> below) takes on each value in the sequence in turn.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span> <span class="c1"># This is a for loop</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"i = </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">, x = </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the value of i and x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>i = 0, x = 2
+i = 1, x = 3
+i = 2, x = 4
+i = 3, x = 5
+i = 4, x = 6
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also loop directly over the elements of a list, rather than over indices. Here <code class="docutils literal notranslate"><span class="pre">idx</span></code> takes each value from the list <code class="docutils literal notranslate"><span class="pre">[2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">6]</span></code> in order.</p>
+<p>Note that reassigning the loop variable inside the loop body (<code class="docutils literal notranslate"><span class="pre">idx</span> <span class="pre">=</span> <span class="pre">idx</span> <span class="pre">-</span> <span class="pre">1</span></code>) only changes that variable for the current iteration; it doesn’t affect the original list or the next value the loop will use.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">]:</span> <span class="c1"># This is a for loop over a list</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"idx = </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> before subtraction"</span><span class="p">)</span> <span class="c1"># Print the value of idx</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"idx = </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the value of idx and y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>idx = 2 before subtraction
+idx = 1
+idx = 3 before subtraction
+idx = 2
+idx = 4 before subtraction
+idx = 3
+idx = 6 before subtraction
+idx = 5
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="while">
+<h1>While<a class="headerlink" href="#while" title="Link to this heading">#</a></h1>
+<p>A <code class="docutils literal notranslate"><span class="pre">while</span></code> loop repeats its block of code <strong>as long as</strong> its condition remains <code class="docutils literal notranslate"><span class="pre">True</span></code>. Unlike a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, the number of iterations isn’t fixed in advance; it depends on when the condition becomes <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>It’s important that something inside the loop eventually makes the condition <code class="docutils literal notranslate"><span class="pre">False</span></code> (here, <code class="docutils literal notranslate"><span class="pre">x</span></code> is decreased by <code class="docutils literal notranslate"><span class="pre">1</span></code> each time), otherwise the loop would run forever!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">while</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"x = </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">: "</span><span class="p">,</span> <span class="s2">"The condition is "</span><span class="p">,</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">)</span> <span class="c1"># Print the value of x after subtraction  </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x = 9:  The condition is  True
+x = 8:  The condition is  True
+x = 7:  The condition is  True
+x = 6:  The condition is  True
+x = 5:  The condition is  True
+x = 4:  The condition is  True
+x = 3:  The condition is  True
+x = 2:  The condition is  True
+x = 1:  The condition is  True
+x = 0:  The condition is  False
+</pre></div>
+</div>
+</div>
+</div>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>In this notebook you learned how to:</p>
+<ul class="simple">
+<li><p>Print output with <code class="docutils literal notranslate"><span class="pre">print()</span></code> and format strings with f-strings</p></li>
+<li><p>Create variables and check their type with <code class="docutils literal notranslate"><span class="pre">type()</span></code></p></li>
+<li><p>Use arithmetic operators (<code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">-</span> <span class="pre">*</span> <span class="pre">**</span> <span class="pre">/</span> <span class="pre">//</span> <span class="pre">%</span></code>) and comparison operators (<code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">&lt;=</span> <span class="pre">&gt;</span> <span class="pre">&gt;=</span> <span class="pre">==</span></code>)</p></li>
+<li><p>Create and work with lists: indexing, <code class="docutils literal notranslate"><span class="pre">len()</span></code>, <code class="docutils literal notranslate"><span class="pre">.append()</span></code>, and slicing</p></li>
+<li><p>Generate sequences of numbers with <code class="docutils literal notranslate"><span class="pre">range()</span></code></p></li>
+<li><p>Repeat code with <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code> loops</p></li>
+</ul>
+<p>Next steps: try writing your own small programs that combine these ideas, for example, a loop that builds a list of squared numbers, or a while loop that counts down and prints a message when it reaches zero.</p>
+</section>
+<section id="practice-questions">
+<h2>Practice Questions<a class="headerlink" href="#practice-questions" title="Link to this heading">#</a></h2>
+<p>The four questions below cover everything in this notebook (printing, variables and types, operators, lists, slicing, and loops), ordered from easy to hard.</p>
+<ul class="simple">
+<li><p><strong>New to Python?</strong> Focus on <strong>Q1</strong> (and <strong>Q2</strong> if you have time).</p></li>
+<li><p><strong>Already have programming experience?</strong> Start from <strong>Q3</strong> and work through <strong>Q4</strong> as well.</p></li>
+</ul>
+<p>For each question, write your code in the cell provided and make sure it prints your final answer.</p>
+<section id="q1-variables-and-printing">
+<h3>Q1: Variables and printing<a class="headerlink" href="#q1-variables-and-printing" title="Link to this heading">#</a></h3>
+<p>Create three variables: the name of a mathematical constant (a string, e.g. <code class="docutils literal notranslate"><span class="pre">&quot;pi&quot;</span></code>), its approximate value (a float), and the number of decimal digits you are using to approximate it (an integer). Using a single f-string, print a sentence that includes all three values. Then print the <code class="docutils literal notranslate"><span class="pre">type()</span></code> of each variable on its own line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: your code for Q1 here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="q2-lists-and-slicing">
+<h3>Q2: Lists and slicing<a class="headerlink" href="#q2-lists-and-slicing" title="Link to this heading">#</a></h3>
+<p>Create a list of at least six numbers. Using slicing, print (a) the first three elements, (b) the last three elements, (c) every other element, and (d) the list in reverse order.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: your code for Q2 here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="q3-loops-and-accumulation">
+<h3>Q3: Loops and accumulation<a class="headerlink" href="#q3-loops-and-accumulation" title="Link to this heading">#</a></h3>
+<p>Using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop and <code class="docutils literal notranslate"><span class="pre">range()</span></code>, compute the sum of squares of the integers from 1 to 10 (i.e. <span class="math notranslate nohighlight">\(1^2 + 2^2 + \cdots + 10^2\)</span>). Then, using a <code class="docutils literal notranslate"><span class="pre">while</span></code> loop, find the smallest integer <span class="math notranslate nohighlight">\(n\)</span> such that <span class="math notranslate nohighlight">\(1^2 + 2^2 + \cdots + n^2 &gt; 100\)</span>, and print both <span class="math notranslate nohighlight">\(n\)</span> and that sum.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: your code for Q3 here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="q4-combining-loops-lists-and-slicing">
+<h3>Q4: Combining loops, lists, and slicing<a class="headerlink" href="#q4-combining-loops-lists-and-slicing" title="Link to this heading">#</a></h3>
+<p>Recall that the Fibonacci sequence is defined by the recurrence:</p>
+<div class="math notranslate nohighlight">
+\[F_0 = 0, \quad F_1 = 1, \quad F_n = F_{n-1} + F_{n-2} \text{ for } n \geq 2,\]</div>
+<p>i.e. each term is the sum of the two terms before it.</p>
+<p>Using a loop, build a list containing the first 15 Fibonacci numbers (starting <span class="math notranslate nohighlight">\(0, 1, 1, 2, 3, \dots\)</span>). Then use slicing to extract only the values at even indices (index <span class="math notranslate nohighlight">\(0, 2, 4, \dots\)</span>), and print the sum of those extracted values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: your code for Q4 here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="starting_with_github.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Using GitHub: Repositories, Commits, Push/Pull, and Forks</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to Python, Part I</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-print">How to print</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#operations">Operations</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-operators">Comparison operators</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#containers-lists">Containers: Lists</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lists">Lists</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-operation">Slicing Operation</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-lists">Useful lists</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#iterations">Iterations</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loops">For loops</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#while">While</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions">Practice Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q1-variables-and-printing">Q1: Variables and printing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q2-lists-and-slicing">Q2: Lists and slicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q3-loops-and-accumulation">Q3: Loops and accumulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q4-combining-loops-lists-and-slicing">Q4: Combining loops, lists, and slicing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sharareh Sayyad
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
