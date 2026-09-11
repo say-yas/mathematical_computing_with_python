@@ -3,4 +3,4 @@ root: intro
 chapters:
   - file: notebooks/starting_with_python
   - file: notebooks/starting_with_github
-  - file: notebooks/basics_python
+  - file: notebooks/intro_pythonI
