@@ -18,8 +18,8 @@ run the code yourself.
 | Class | Topic |
 |---|---|
 | Sep 9 | Intro to GitHub and Python |
-| Sep 11 | Python basics review, first look at NumPy |
-| Sep 14 | *(coming soon)* |
+| Sep 11 | Python basics review I |
+| Sep 14 | Python basics review II |
 
 ## Prerequisites
 
