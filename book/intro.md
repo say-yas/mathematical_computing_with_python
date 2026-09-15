@@ -20,6 +20,7 @@ run the code yourself.
 | Sep 9 | Intro to GitHub and Python |
 | Sep 11 | Python basics review I |
 | Sep 14 | Python basics review II |
+| Sep 16 | Introduction to Numpy |
 
 ## Prerequisites
 
