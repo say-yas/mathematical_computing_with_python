@@ -5,3 +5,5 @@ chapters:
   - file: notebooks/starting_with_github
   - file: notebooks/intro_pythonI
   - file: notebooks/intro_pythonII
+  - file: notebooks/intro_pythonIII
+  - file: notebooks/intro_pythonIV_numpy
