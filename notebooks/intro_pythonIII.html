@@ -1,0 +1,1161 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to Python, Part III &#8212; Mathematical Computing with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/intro_pythonIII';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to Python, Part IV: NumPy" href="intro_pythonIV_numpy.html" />
+    <link rel="prev" title="Introduction to Python, Part II" href="intro_pythonII.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Mathematical Computing with Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Mathematical Computing with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="starting_with_python.html">Using Python in Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="starting_with_github.html">Using GitHub: Repositories, Commits, Push/Pull, and Forks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonI.html">Introduction to Python, Part I</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonII.html">Introduction to Python, Part II</a></li>
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to Python, Part III</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIV_numpy.html">Introduction to Python, Part IV: NumPy</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/say-yas/mathematical_computing_with_python/blob/main/book/notebooks/intro_pythonIII.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/notebooks/intro_pythonIII.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fnotebooks/intro_pythonIII.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/intro_pythonIII.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Python, Part III</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to Python, Part III</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#more-list-commands">More List Commands</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples">Tuples</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sets">Sets</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionaries">Dictionaries</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions">Practice Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q1-list-methods">Q1: List methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q2-tuples-and-unpacking">Q2: Tuples and unpacking</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q3-sets">Q3: Sets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q4-dictionaries">Q4: Dictionaries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q5-combining-everything">Q5: Combining everything</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-python-part-iii">
+<h1>Introduction to Python, Part III<a class="headerlink" href="#introduction-to-python-part-iii" title="Link to this heading">#</a></h1>
+<p>In Parts I and II we covered printing, variables and data types, operators, lists, <code class="docutils literal notranslate"><span class="pre">range()</span></code>, <code class="docutils literal notranslate"><span class="pre">if</span></code> statements, loops, and functions. This notebook completes the basics by covering the remaining core data structures: <strong>tuples</strong>, <strong>dictionaries</strong>, more commands for <strong>lists</strong>, and <strong>sets</strong>. The examples use ideas from a typical math class: roots of equations, divisors, coordinates, and polynomials.</p>
+<p>Each section starts with a short explanation, followed by a code cell you can run and experiment with. Try changing the values in the code cells to see how the output changes, that’s the best way to learn!</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="more-list-commands">
+<h1>More List Commands<a class="headerlink" href="#more-list-commands" title="Link to this heading">#</a></h1>
+<p>You already know <code class="docutils literal notranslate"><span class="pre">len()</span></code>, indexing, <code class="docutils literal notranslate"><span class="pre">.append()</span></code>, and slicing from Part I. Lists have several other useful methods for adding, removing, and reordering elements:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list1.insert(i,</span> <span class="pre">value)</span></code> inserts <code class="docutils literal notranslate"><span class="pre">value</span></code> at position <code class="docutils literal notranslate"><span class="pre">i</span></code>, shifting later elements to the right.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list1.remove(value)</span></code> removes the first occurrence of <code class="docutils literal notranslate"><span class="pre">value</span></code> from the list (by value, not by position).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list1.pop(i)</span></code> removes and returns the element at position <code class="docutils literal notranslate"><span class="pre">i</span></code> (default: the last element).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list1.extend(list2)</span></code> appends every element of <code class="docutils literal notranslate"><span class="pre">list2</span></code> to <code class="docutils literal notranslate"><span class="pre">list1</span></code>, one by one (unlike <code class="docutils literal notranslate"><span class="pre">.append(list2)</span></code>, which would add <code class="docutils literal notranslate"><span class="pre">list2</span></code> as a single nested element).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list1.count(value)</span></code> returns how many times <code class="docutils literal notranslate"><span class="pre">value</span></code> appears in the list.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list1.index(value)</span></code> returns the position of the first occurrence of <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p></li>
+</ul>
+<p>Suppose you’re solving the equation <span class="math notranslate nohighlight">\(x^3 - 6x^2 + 11x - 6 = 0\)</span> numerically, and you’re keeping a running list of candidate roots as you find them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">roots</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span> <span class="c1"># Candidate roots found so far (5 is a mistake we'll fix)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">roots</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">roots</span><span class="p">))</span> <span class="c1"># Print the value of roots and its type</span>
+
+<span class="n">roots</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span> <span class="c1"># Insert 0.5 at the front, another candidate to check</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span> <span class="c1"># Print the updated list</span>
+
+<span class="n">roots</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># Remove the incorrect candidate 5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span> <span class="c1"># Print the updated list</span>
+
+<span class="n">popped</span> <span class="o">=</span> <span class="n">roots</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="c1"># Remove and return the last element</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">popped</span><span class="p">,</span> <span class="n">roots</span><span class="p">)</span> <span class="c1"># Print the popped value and the remaining list</span>
+
+<span class="n">popped2</span> <span class="o">=</span> <span class="n">roots</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># Remove and return the element at position 0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">popped2</span><span class="p">,</span> <span class="n">roots</span><span class="p">)</span> <span class="c1"># Print the popped value and the remaining list</span>
+
+<span class="n">roots</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span> <span class="c1"># A classmate found two more candidates: add them individually</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span> <span class="c1"># Print the updated list</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="n">roots</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># Count how many times 3 appears in our candidate list</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1"># Print the count</span>
+
+<span class="n">idx</span> <span class="o">=</span> <span class="n">roots</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># Find the position of the candidate 4</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="c1"># Print the index</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 5] &lt;class 'list'&gt;
+[0.5, 1, 2, 5]
+[0.5, 1, 2]
+2 [0.5, 1]
+0.5 [1]
+[1, 3, 4]
+1
+2
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lists also have methods for reordering their elements in place:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list1.sort()</span></code> sorts the list in ascending order, modifying it in place (it returns <code class="docutils literal notranslate"><span class="pre">None</span></code>, not the sorted list).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list1.sort(reverse=True)</span></code> sorts in descending order instead.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list1.reverse()</span></code> reverses the order of the elements in place.</p></li>
+<li><p>The built-in <code class="docutils literal notranslate"><span class="pre">sorted(list1)</span></code> function, by contrast, returns a new sorted list and leaves the original list unchanged.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exam_scores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">78</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">71</span><span class="p">]</span> <span class="c1"># Scores from a math exam</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">exam_scores</span><span class="p">)</span> <span class="c1"># Print the original list</span>
+
+<span class="n">exam_scores</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span> <span class="c1"># Sort the list in place, ascending order</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">exam_scores</span><span class="p">)</span> <span class="c1"># Print the sorted list</span>
+
+<span class="n">exam_scores</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># Sort the list in place, descending order</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">exam_scores</span><span class="p">)</span> <span class="c1"># Print the sorted list</span>
+
+<span class="n">exam_scores</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span> <span class="c1"># Reverse the current order of the list in place</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">exam_scores</span><span class="p">)</span> <span class="c1"># Print the reversed list</span>
+
+<span class="n">unsorted_scores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">78</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">71</span><span class="p">]</span>
+<span class="n">ranked_scores</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">unsorted_scores</span><span class="p">)</span> <span class="c1"># Returns a NEW sorted list, doesn't modify unsorted_scores</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ranked_scores</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">ranked_scores</span><span class="p">))</span> <span class="c1"># Print the new sorted list</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">unsorted_scores</span><span class="p">)</span> <span class="c1"># unsorted_scores is unchanged</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[78, 92, 65, 88, 100, 71]
+[65, 71, 78, 88, 92, 100]
+[100, 92, 88, 78, 71, 65]
+[65, 71, 78, 88, 92, 100]
+[65, 71, 78, 88, 92, 100] &lt;class 'list'&gt;
+[78, 92, 65, 88, 100, 71]
+</pre></div>
+</div>
+</div>
+</div>
+<p>One subtlety worth knowing: when you write <code class="docutils literal notranslate"><span class="pre">list2</span> <span class="pre">=</span> <span class="pre">list1</span></code>, you are not making a copy; <code class="docutils literal notranslate"><span class="pre">list2</span></code> becomes another name for the same list, so modifying one modifies the other. To make an independent copy, use <code class="docutils literal notranslate"><span class="pre">.copy()</span></code> (or the slice <code class="docutils literal notranslate"><span class="pre">list1[:]</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefficients</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">]</span> <span class="c1"># Coefficients of x^3 - 6x^2 + 11x - 6</span>
+<span class="n">coefficients_alias</span> <span class="o">=</span> <span class="n">coefficients</span> <span class="c1"># This is the SAME list as coefficients, not a copy</span>
+<span class="n">coefficients_alias</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># Append a constant term of 0 to the alias</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">coefficients</span><span class="p">)</span> <span class="c1"># coefficients was also changed!</span>
+
+<span class="n">coefficients_copy</span> <span class="o">=</span> <span class="n">coefficients</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="c1"># coefficients_copy is an independent copy</span>
+<span class="n">coefficients_copy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">99</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">coefficients</span><span class="p">)</span> <span class="c1"># coefficients is unaffected</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">coefficients_copy</span><span class="p">)</span> <span class="c1"># only coefficients_copy has the new element</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, -6, 11, -6, 0]
+[1, -6, 11, -6, 0]
+[1, -6, 11, -6, 0, 99]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tuples">
+<h1>Tuples<a class="headerlink" href="#tuples" title="Link to this heading">#</a></h1>
+<p>A tuple is an ordered collection of values, written with parentheses <code class="docutils literal notranslate"><span class="pre">(...)</span></code> and separated by commas. Tuples behave a lot like lists (you can index and slice them), but with one key difference: tuples are immutable, meaning once created, their contents cannot be changed. There’s no <code class="docutils literal notranslate"><span class="pre">.append()</span></code>, <code class="docutils literal notranslate"><span class="pre">.insert()</span></code>, or <code class="docutils literal notranslate"><span class="pre">.remove()</span></code> for tuples.</p>
+<p>Tuples are a natural way to represent a point in the plane, since the coordinates <span class="math notranslate nohighlight">\((x, y)\)</span> of a point shouldn’t accidentally change once you’ve defined it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">point</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c1"># This is a tuple, representing the point (3, 4)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">point</span><span class="p">))</span> <span class="c1"># Print the value of point and its type</span>
+
+<span class="n">x_coord</span> <span class="o">=</span> <span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Indexing works just like lists</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x_coord</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">x_coord</span><span class="p">))</span> <span class="c1"># Print the value of x_coord and its type</span>
+
+<span class="n">sub</span> <span class="o">=</span> <span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># Slicing also works just like lists</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">sub</span><span class="p">))</span> <span class="c1"># Print the value of sub and its type</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">point</span><span class="p">)</span> <span class="c1"># len() works on tuples too</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">l</span><span class="p">))</span> <span class="c1"># Print the length of point</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># This will fail: tuples cannot be modified</span>
+<span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the error message</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 4) &lt;class 'tuple'&gt;
+3 &lt;class 'int'&gt;
+(3,) &lt;class 'tuple'&gt;
+2 &lt;class 'int'&gt;
+Error: 'tuple' object does not support item assignment
+</pre></div>
+</div>
+</div>
+</div>
+<p>A very common use of tuples is unpacking: assigning each element of a tuple to its own variable in a single line. You’ve actually already seen this idea in Part I with <code class="docutils literal notranslate"><span class="pre">x,</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">10,</span> <span class="pre">20</span></code>, that’s tuple unpacking too!</p>
+<p>Note: to create a tuple with a single element, you need a trailing comma, e.g. <code class="docutils literal notranslate"><span class="pre">(5,)</span></code>. Without the comma, <code class="docutils literal notranslate"><span class="pre">(5)</span></code> is just the integer <code class="docutils literal notranslate"><span class="pre">5</span></code> in parentheses.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">point</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">x_coord</span><span class="p">,</span> <span class="n">y_coord</span> <span class="o">=</span> <span class="n">point</span> <span class="c1"># Unpack the tuple into two variables</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"x_coord = </span><span class="si">{</span><span class="n">x_coord</span><span class="si">}</span><span class="s2">, y_coord = </span><span class="si">{</span><span class="n">y_coord</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print both values</span>
+
+<span class="n">single</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,)</span> <span class="c1"># A one-element tuple needs a trailing comma</span>
+<span class="n">not_a_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># This is just the integer 5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">single</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">single</span><span class="p">))</span> <span class="c1"># Print the value of single and its type</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">not_a_tuple</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">not_a_tuple</span><span class="p">))</span> <span class="c1"># Print the value of not_a_tuple and its type</span>
+
+<span class="c1"># Functions can also return multiple values, packaged as a tuple</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">midpoint</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span> <span class="c1"># p1 and p2 are (x, y) points</span>
+    <span class="n">mx</span> <span class="o">=</span> <span class="p">(</span><span class="n">p1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">p2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">my</span> <span class="o">=</span> <span class="p">(</span><span class="n">p1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">p2</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">mx</span><span class="p">,</span> <span class="n">my</span> <span class="c1"># This packs mx and my into a tuple automatically</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">midpoint</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span> <span class="c1"># Find the midpoint between two points</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="c1"># Print the resulting tuple</span>
+
+<span class="n">mx</span><span class="p">,</span> <span class="n">my</span> <span class="o">=</span> <span class="n">midpoint</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span> <span class="c1"># Unpack the returned tuple directly</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"midpoint = (</span><span class="si">{</span><span class="n">mx</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">my</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span> <span class="c1"># Print both coordinates</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_coord = 3, y_coord = 4
+(5,) &lt;class 'tuple'&gt;
+5 &lt;class 'int'&gt;
+(3.0, 4.0) &lt;class 'tuple'&gt;
+midpoint = (3.0, 4.0)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="sets">
+<h1>Sets<a class="headerlink" href="#sets" title="Link to this heading">#</a></h1>
+<p>A set is an unordered collection of unique values, written with curly braces <code class="docutils literal notranslate"><span class="pre">{...}</span></code>. Unlike lists and tuples, sets automatically remove duplicates and don’t keep track of order or position, so sets can’t be indexed or sliced.</p>
+<p>Sets are useful whenever you care about membership (is this value present?) or want to eliminate duplicates from a collection, such as the set of distinct roots of an equation.</p>
+<p>Note: to create an empty set, you must use <code class="docutils literal notranslate"><span class="pre">set()</span></code>, not <code class="docutils literal notranslate"><span class="pre">{}</span></code> (which creates an empty dictionary, as you’ll see below).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">roots</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">}</span> <span class="c1"># The equation gave repeated roots; a set keeps only distinct values</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">roots</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">roots</span><span class="p">))</span> <span class="c1"># Print the value of roots and its type</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span> <span class="c1"># len() works on sets too</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">l</span><span class="p">))</span> <span class="c1"># Print the number of distinct roots</span>
+
+<span class="n">roots</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># Add a newly discovered root</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span> <span class="c1"># Print the updated set</span>
+
+<span class="n">roots</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># Adding a value that's already present has no effect</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span> <span class="c1"># Print the set: still no duplicate 2</span>
+
+<span class="n">roots</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Remove a root (raises an error if not present)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span> <span class="c1"># Print the updated set</span>
+
+<span class="n">roots</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="c1"># Like remove(), but does NOT raise an error if not present</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span> <span class="c1"># Print the set: unchanged</span>
+
+<span class="n">is_root</span> <span class="o">=</span> <span class="mi">3</span> <span class="ow">in</span> <span class="n">roots</span> <span class="c1"># Membership check with 'in', very fast for sets</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">is_root</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">is_root</span><span class="p">))</span> <span class="c1"># Print the value of is_root and its type</span>
+
+<span class="n">empty_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span> <span class="c1"># This is how you create an empty set</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">empty_set</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">empty_set</span><span class="p">))</span> <span class="c1"># Print the value of empty_set and its type</span>
+
+<span class="n">sample_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span> <span class="c1"># A sequence of values from repeated calculations</span>
+<span class="n">distinct_values</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">sample_values</span><span class="p">)</span> <span class="c1"># Convert to a set to find the distinct values</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">distinct_values</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">distinct_values</span><span class="p">))</span> <span class="c1"># Print the distinct values</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{2, 3, -1} &lt;class 'set'&gt;
+3 &lt;class 'int'&gt;
+{0, 2, 3, -1}
+{0, 2, 3, -1}
+{0, 2, 3}
+{0, 2, 3}
+True &lt;class 'bool'&gt;
+set() &lt;class 'set'&gt;
+{2, 3, 4, 5} &lt;class 'set'&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Sets support the mathematical set operations you might already know from a discussion of divisors or number theory:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator / Method</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">|</span> <span class="pre">B</span></code> or <code class="docutils literal notranslate"><span class="pre">A.union(B)</span></code></p></td>
+<td><p>all elements in <code class="docutils literal notranslate"><span class="pre">A</span></code> or <code class="docutils literal notranslate"><span class="pre">B</span></code> (or both)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&amp;</span> <span class="pre">B</span></code> or <code class="docutils literal notranslate"><span class="pre">A.intersection(B)</span></code></p></td>
+<td><p>elements in both <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">-</span> <span class="pre">B</span></code> or <code class="docutils literal notranslate"><span class="pre">A.difference(B)</span></code></p></td>
+<td><p>elements in <code class="docutils literal notranslate"><span class="pre">A</span></code> but not in <code class="docutils literal notranslate"><span class="pre">B</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">^</span> <span class="pre">B</span></code> or <code class="docutils literal notranslate"><span class="pre">A.symmetric_difference(B)</span></code></p></td>
+<td><p>elements in exactly one of <code class="docutils literal notranslate"><span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">B</span></code> (not both)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For example, let <code class="docutils literal notranslate"><span class="pre">A</span></code> be the set of divisors of <code class="docutils literal notranslate"><span class="pre">12</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> be the set of divisors of <code class="docutils literal notranslate"><span class="pre">18</span></code>. The intersection <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&amp;</span> <span class="pre">B</span></code> is exactly the set of common divisors of 12 and 18, and its largest element is their greatest common divisor.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">}</span> <span class="c1"># Divisors of 12</span>
+<span class="n">B</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">18</span><span class="p">}</span> <span class="c1"># Divisors of 18</span>
+
+<span class="n">union_set</span> <span class="o">=</span> <span class="n">A</span> <span class="o">|</span> <span class="n">B</span> <span class="c1"># All divisors of 12 or 18 (or both)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">union_set</span><span class="p">)</span> <span class="c1"># Print the union</span>
+
+<span class="n">common_divisors</span> <span class="o">=</span> <span class="n">A</span> <span class="o">&amp;</span> <span class="n">B</span> <span class="c1"># Divisors shared by both 12 and 18</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">common_divisors</span><span class="p">)</span> <span class="c1"># Print the intersection</span>
+
+<span class="n">gcd_12_18</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">common_divisors</span><span class="p">)</span> <span class="c1"># The greatest common divisor is the largest common divisor</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gcd_12_18</span><span class="p">)</span> <span class="c1"># Print the greatest common divisor</span>
+
+<span class="n">only_divides_12</span> <span class="o">=</span> <span class="n">A</span> <span class="o">-</span> <span class="n">B</span> <span class="c1"># Divides 12 but not 18</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">only_divides_12</span><span class="p">)</span> <span class="c1"># Print the difference</span>
+
+<span class="n">sym_diff_set</span> <span class="o">=</span> <span class="n">A</span> <span class="o">^</span> <span class="n">B</span> <span class="c1"># Divides exactly one of the two numbers, not both</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sym_diff_set</span><span class="p">)</span> <span class="c1"># Print the symmetric difference</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{1, 2, 3, 4, 6, 9, 12, 18}
+{1, 2, 3, 6}
+6
+{4, 12}
+{18, 4, 9, 12}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="dictionaries">
+<h1>Dictionaries<a class="headerlink" href="#dictionaries" title="Link to this heading">#</a></h1>
+<p>A dictionary stores a collection of <code class="docutils literal notranslate"><span class="pre">key:</span> <span class="pre">value</span></code> pairs, written with curly braces <code class="docutils literal notranslate"><span class="pre">{key1:</span> <span class="pre">value1,</span> <span class="pre">key2:</span> <span class="pre">value2,</span> <span class="pre">...}</span></code>. Instead of accessing elements by numeric position (like a list), you access them by their key, which can be a string, a number, or any other immutable type.</p>
+<p>Dictionaries are a natural way to represent the coefficients of a polynomial: each power of <span class="math notranslate nohighlight">\(x\)</span> is a key, and its coefficient is the value. Consider <span class="math notranslate nohighlight">\(f(x) = 3x^2 - 5x + 2\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coeffs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"x^2"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"x^1"</span><span class="p">:</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="s2">"x^0"</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span> <span class="c1"># Coefficients of f(x) = 3x^2 - 5x + 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">coeffs</span><span class="p">))</span> <span class="c1"># Print the value of coeffs and its type</span>
+
+<span class="n">leading_coeff</span> <span class="o">=</span> <span class="n">coeffs</span><span class="p">[</span><span class="s2">"x^2"</span><span class="p">]</span> <span class="c1"># Access a value by its key</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">leading_coeff</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">leading_coeff</span><span class="p">))</span> <span class="c1"># Print the value of leading_coeff and its type</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span> <span class="c1"># len() returns the number of key:value pairs</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">l</span><span class="p">))</span> <span class="c1"># Print the number of terms</span>
+
+<span class="n">coeffs</span><span class="p">[</span><span class="s2">"x^1"</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">4</span> <span class="c1"># Update the coefficient of x to -4</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span> <span class="c1"># Print the updated dictionary</span>
+
+<span class="n">coeffs</span><span class="p">[</span><span class="s2">"x^3"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># Adding a new key automatically creates the entry</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span> <span class="c1"># Print the updated dictionary: now a cubic</span>
+
+<span class="n">has_x2</span> <span class="o">=</span> <span class="s2">"x^2"</span> <span class="ow">in</span> <span class="n">coeffs</span> <span class="c1"># 'in' checks the KEYS of a dictionary, not the values</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">has_x2</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">has_x2</span><span class="p">))</span> <span class="c1"># Print the value of has_x2 and its type</span>
+
+<span class="k">del</span> <span class="n">coeffs</span><span class="p">[</span><span class="s2">"x^3"</span><span class="p">]</span> <span class="c1"># Remove a key:value pair with 'del'</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span> <span class="c1"># Print the updated dictionary</span>
+
+<span class="n">removed_value</span> <span class="o">=</span> <span class="n">coeffs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"x^0"</span><span class="p">)</span> <span class="c1"># Remove a key and return its value</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">removed_value</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">)</span> <span class="c1"># Print the removed value and the remaining dictionary</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'x^2': 3, 'x^1': -5, 'x^0': 2} &lt;class 'dict'&gt;
+3 &lt;class 'int'&gt;
+3 &lt;class 'int'&gt;
+{'x^2': 3, 'x^1': -4, 'x^0': 2}
+{'x^2': 3, 'x^1': -4, 'x^0': 2, 'x^3': 1}
+True &lt;class 'bool'&gt;
+{'x^2': 3, 'x^1': -4, 'x^0': 2}
+2 {'x^2': 3, 'x^1': -4}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using <code class="docutils literal notranslate"><span class="pre">coeffs[&quot;key&quot;]</span></code> for a key that doesn’t exist raises an error. The <code class="docutils literal notranslate"><span class="pre">.get(key,</span> <span class="pre">default)</span></code> method is a safer alternative: it returns <code class="docutils literal notranslate"><span class="pre">default</span></code> (or <code class="docutils literal notranslate"><span class="pre">None</span></code> if you don’t specify one) instead of crashing, for example if <span class="math notranslate nohighlight">\(f(x)\)</span> has no constant term.</p>
+<p>To loop over a dictionary, you can use <code class="docutils literal notranslate"><span class="pre">.keys()</span></code>, <code class="docutils literal notranslate"><span class="pre">.values()</span></code>, or <code class="docutils literal notranslate"><span class="pre">.items()</span></code> (which gives you <code class="docutils literal notranslate"><span class="pre">key,</span> <span class="pre">value</span></code> pairs together, ready for unpacking in a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coeffs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"x^2"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"x^1"</span><span class="p">:</span> <span class="o">-</span><span class="mi">5</span><span class="p">}</span> <span class="c1"># f(x) = 3x^2 - 5x, no constant term</span>
+
+<span class="n">leading</span> <span class="o">=</span> <span class="n">coeffs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"x^2"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># Key exists, returns its value</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">leading</span><span class="p">)</span> <span class="c1"># Print the value</span>
+
+<span class="n">constant</span> <span class="o">=</span> <span class="n">coeffs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"x^0"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># Key doesn't exist, returns the default 0 instead</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">constant</span><span class="p">)</span> <span class="c1"># Print the default value</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Powers of x:"</span><span class="p">)</span> <span class="c1"># Loop over just the keys</span>
+<span class="k">for</span> <span class="n">power</span> <span class="ow">in</span> <span class="n">coeffs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">power</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Coefficients:"</span><span class="p">)</span> <span class="c1"># Loop over just the values</span>
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">coeffs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Terms:"</span><span class="p">)</span> <span class="c1"># Loop over key, value pairs together</span>
+<span class="k">for</span> <span class="n">power</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">coeffs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2"> * </span><span class="si">{</span><span class="n">power</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+0
+Powers of x:
+  x^2
+  x^1
+Coefficients:
+  3
+  -5
+Terms:
+  3 * x^2
+  -5 * x^1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dictionary values can be any type, including lists, tuples, or even other dictionaries, which lets you represent more complex, nested data, such as a gradebook mapping each student’s name to their list of quiz scores.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gradebook</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"Alice"</span><span class="p">:</span> <span class="p">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">92</span><span class="p">],</span>
+    <span class="s2">"Bob"</span><span class="p">:</span> <span class="p">[</span><span class="mi">78</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">95</span><span class="p">],</span>
+<span class="p">}</span> <span class="c1"># A dictionary where each value is a list of quiz scores</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">gradebook</span><span class="p">[</span><span class="s2">"Alice"</span><span class="p">])</span> <span class="c1"># Print Alice's list of quiz scores</span>
+
+<span class="n">average_alice</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">gradebook</span><span class="p">[</span><span class="s2">"Alice"</span><span class="p">])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">gradebook</span><span class="p">[</span><span class="s2">"Alice"</span><span class="p">])</span> <span class="c1"># Compute Alice's average</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Alice's average: </span><span class="si">{</span><span class="n">average_alice</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the average, formatted to 2 decimals</span>
+
+<span class="k">for</span> <span class="n">student_name</span><span class="p">,</span> <span class="n">score_list</span> <span class="ow">in</span> <span class="n">gradebook</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="c1"># Loop over each student and their scores</span>
+    <span class="n">avg</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">score_list</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">score_list</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">student_name</span><span class="si">}</span><span class="s2">'s average: </span><span class="si">{</span><span class="n">avg</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[90, 85, 92]
+Alice's average: 89.00
+Alice's average: 89.00
+Bob's average: 87.00
+</pre></div>
+</div>
+</div>
+</div>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>In this notebook you learned how to:</p>
+<ul class="simple">
+<li><p>Use further list methods: <code class="docutils literal notranslate"><span class="pre">.insert()</span></code>, <code class="docutils literal notranslate"><span class="pre">.remove()</span></code>, <code class="docutils literal notranslate"><span class="pre">.pop()</span></code>, <code class="docutils literal notranslate"><span class="pre">.extend()</span></code>, <code class="docutils literal notranslate"><span class="pre">.count()</span></code>, <code class="docutils literal notranslate"><span class="pre">.index()</span></code>, <code class="docutils literal notranslate"><span class="pre">.sort()</span></code>/<code class="docutils literal notranslate"><span class="pre">sorted()</span></code>, <code class="docutils literal notranslate"><span class="pre">.reverse()</span></code>, and <code class="docutils literal notranslate"><span class="pre">.copy()</span></code></p></li>
+<li><p>Create and use tuples: an ordered, immutable collection, including unpacking, using coordinate points as a running example</p></li>
+<li><p>Create and use sets: an unordered collection of unique values, including <code class="docutils literal notranslate"><span class="pre">.add()</span></code>, <code class="docutils literal notranslate"><span class="pre">.remove()</span></code>, <code class="docutils literal notranslate"><span class="pre">.discard()</span></code>, and the set operations union, intersection, difference, and symmetric difference, using divisors as a running example</p></li>
+<li><p>Create and use dictionaries: <code class="docutils literal notranslate"><span class="pre">key:</span> <span class="pre">value</span></code> pairs, accessing, adding, updating, and removing entries, <code class="docutils literal notranslate"><span class="pre">.get()</span></code> with a default, and looping with <code class="docutils literal notranslate"><span class="pre">.keys()</span></code>, <code class="docutils literal notranslate"><span class="pre">.values()</span></code>, and <code class="docutils literal notranslate"><span class="pre">.items()</span></code>, using polynomial coefficients as a running example</p></li>
+</ul>
+<p>Together with Parts I and II, you now have a solid foundation in Python’s core building blocks: variables, operators, control flow, functions, and all four major container types (lists, tuples, sets, and dictionaries).</p>
+</section>
+<section id="practice-questions">
+<h2>Practice Questions<a class="headerlink" href="#practice-questions" title="Link to this heading">#</a></h2>
+<p>The five questions below cover everything in this notebook (list methods, tuples, sets, and dictionaries), ordered from easy to hard.</p>
+<ul class="simple">
+<li><p>New to Python? Focus on Q1 and Q2 (and Q3 if you have time).</p></li>
+<li><p>Already have programming experience? Start from Q4 and work through Q5 as well.</p></li>
+</ul>
+<p>For each question, write your code in the cell provided and make sure it prints your final answer.</p>
+<section id="q1-list-methods">
+<h3>Q1: List methods<a class="headerlink" href="#q1-list-methods" title="Link to this heading">#</a></h3>
+<p>Create a list of at least six numbers representing candidate roots you found while solving an equation numerically. Sort the list in ascending order and print it, then sort it in descending order and print it. Finally, use <code class="docutils literal notranslate"><span class="pre">.insert()</span></code> to add the number <code class="docutils literal notranslate"><span class="pre">0</span></code> at the very front of the list, and print the result.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: your code for Q1 here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="q2-tuples-and-unpacking">
+<h3>Q2: Tuples and unpacking<a class="headerlink" href="#q2-tuples-and-unpacking" title="Link to this heading">#</a></h3>
+<p>Create a tuple representing a point in 3D space, e.g. <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code>. Unpack it into three separate variables and print a sentence using an f-string that reports all three coordinates. Then write a function <code class="docutils literal notranslate"><span class="pre">midpoint3d(p1,</span> <span class="pre">p2)</span></code> that takes two 3D point tuples and returns a tuple with the midpoint (the average of each coordinate). Test it on two points of your choice.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: your code for Q2 here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="q3-sets">
+<h3>Q3: Sets<a class="headerlink" href="#q3-sets" title="Link to this heading">#</a></h3>
+<p>Create two sets: the set of divisors of <code class="docutils literal notranslate"><span class="pre">20</span></code> and the set of divisors of <code class="docutils literal notranslate"><span class="pre">30</span></code>. Print their union, their intersection, and the greatest common divisor of 20 and 30 (the largest element of the intersection). Then, given the list <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">4,</span> <span class="pre">4,</span> <span class="pre">5]</span></code> of remainders computed in a loop, convert it to a set to find how many distinct remainders occur, and print that count.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: your code for Q3 here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="q4-dictionaries">
+<h3>Q4: Dictionaries<a class="headerlink" href="#q4-dictionaries" title="Link to this heading">#</a></h3>
+<p>Create a dictionary representing the coefficients of a quadratic function <span class="math notranslate nohighlight">\(f(x) = ax^2 + bx + c\)</span> of your choice, with keys <code class="docutils literal notranslate"><span class="pre">&quot;a&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;b&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;c&quot;</span></code>. Add a new key <code class="docutils literal notranslate"><span class="pre">&quot;discriminant&quot;</span></code> whose value is <span class="math notranslate nohighlight">\(b^2 - 4ac\)</span>, computed from the existing entries. Update the value of <code class="docutils literal notranslate"><span class="pre">&quot;a&quot;</span></code> to a different number, then remove the <code class="docutils literal notranslate"><span class="pre">&quot;c&quot;</span></code> entry entirely. Finally, loop over the remaining dictionary with <code class="docutils literal notranslate"><span class="pre">.items()</span></code> and print each key and value as <code class="docutils literal notranslate"><span class="pre">&quot;&lt;key&gt;:</span> <span class="pre">&lt;value&gt;&quot;</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: your code for Q4 here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="q5-combining-everything">
+<h3>Q5: Combining everything<a class="headerlink" href="#q5-combining-everything" title="Link to this heading">#</a></h3>
+<p>You’re given a list of student records from a math class, where each record is a tuple: <code class="docutils literal notranslate"><span class="pre">(name,</span> <span class="pre">[list</span> <span class="pre">of</span> <span class="pre">quiz</span> <span class="pre">scores])</span></code>. Some example data is provided below. Write a function <code class="docutils literal notranslate"><span class="pre">build_average_dict(records)</span></code> that takes such a list and returns a dictionary mapping each student’s name to their average score (rounded to 1 decimal place). Then, using that dictionary, find and print the name of the student with the highest average, along with the set of unique students who scored above 90 on any single quiz.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">records</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="p">[</span><span class="mi">88</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">79</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s2">"Bob"</span><span class="p">,</span> <span class="p">[</span><span class="mi">95</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">85</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s2">"Charlie"</span><span class="p">,</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">80</span><span class="p">]),</span>
+<span class="p">]</span>
+
+<span class="c1"># TODO: your code for Q5 here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro_pythonII.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Python, Part II</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="intro_pythonIV_numpy.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Python, Part IV: NumPy</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to Python, Part III</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#more-list-commands">More List Commands</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples">Tuples</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sets">Sets</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionaries">Dictionaries</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions">Practice Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q1-list-methods">Q1: List methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q2-tuples-and-unpacking">Q2: Tuples and unpacking</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q3-sets">Q3: Sets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q4-dictionaries">Q4: Dictionaries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q5-combining-everything">Q5: Combining everything</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sharareh Sayyad
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
