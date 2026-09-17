@@ -13,15 +13,6 @@ run the code yourself.
 - Code cells show both the code and its output, so the site works even if
   you don't run anything yourself.
 
-## Schedule
-
-| Class | Topic |
-|---|---|
-| Sep 9 | Intro to GitHub and Python |
-| Sep 11 | Python basics review I |
-| Sep 14 | Python basics review II |
-| Sep 16 | Introduction to Numpy |
-| Sep 18 | Plotting in Python |
 
 ## Prerequisites
 
