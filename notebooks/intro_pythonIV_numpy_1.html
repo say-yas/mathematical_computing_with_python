@@ -62,11 +62,10 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/intro_pythonIV_numpy';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/intro_pythonIV_numpy_1';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Introduction to Python, Part III" href="intro_pythonIII.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -168,6 +167,8 @@
       
       
       
+        
+      
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
@@ -214,7 +215,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="starting_with_python.html">Using Python in Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="starting_with_github.html">Using GitHub: Repositories, Commits, Push/Pull, and Forks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro_pythonI.html">Introduction to Python, Part I</a></li>
@@ -236,7 +237,7 @@
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to Python, Part IV: NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIV_numpy.html">Introduction to Python, Part IV: NumPy</a></li>
 
 
 
@@ -315,7 +316,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/say-yas/mathematical_computing_with_python/blob/main/book/notebooks/intro_pythonIV_numpy.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/say-yas/mathematical_computing_with_python/blob/main/book/notebooks/intro_pythonIV_numpy_1.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -363,7 +364,7 @@
       
       
       
-      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/notebooks/intro_pythonIV_numpy.ipynb" target="_blank"
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/notebooks/intro_pythonIV_numpy_1.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -380,7 +381,7 @@
       
       
       
-      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fnotebooks/intro_pythonIV_numpy.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fnotebooks/intro_pythonIV_numpy_1.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -410,7 +411,7 @@
       
       
       
-      <li><a href="../_sources/notebooks/intro_pythonIV_numpy.ipynb" target="_blank"
+      <li><a href="../_sources/notebooks/intro_pythonIV_numpy_1.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -501,27 +502,24 @@
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sequences-with-np-arange">Sequences with <code class="docutils literal notranslate"><span class="pre">np.arange</span></code></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sequences-with-np-linspace">Sequences with <code class="docutils literal notranslate"><span class="pre">np.linspace</span></code></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-arrays">Creating Arrays</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-numbers">Complex Numbers</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-with-arrays">Arithmetic with Arrays</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy-math-functions">NumPy Math Functions</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-your-own-functions-with-array-inputs">Writing Your Own Functions with Array Inputs</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#printing-elements-of-arrays">Printing Elements of Arrays</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#random-number-generators">Random Number Generators</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-and-slicing">Indexing and Slicing</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#array-copying">Array Copying</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reshaping">Reshaping</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#transpose">Transpose</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-multiplication">Matrix Multiplication</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-max-min-and-the-axis-argument">Sum, Max, Min, and the <code class="docutils literal notranslate"><span class="pre">axis</span></code> Argument</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reverse-and-flip">Reverse and Flip</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#unique-values">Unique Values</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-your-code-with-time">Timing Your Code with <code class="docutils literal notranslate"><span class="pre">time</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#unique-values">Unique Values</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions">Practice Questions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q1-arrays-arange-and-arithmetic">Q1: Arrays, arange, and arithmetic</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q2-evaluating-a-function-and-slicing">Q2: Evaluating a function and slicing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q3-complex-numbers-real-imaginary-parts-and-magnitude">Q3: Complex numbers, real/imaginary parts, and magnitude</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q4-building-3d-rotation-matrices">Q4: Building 3D Rotation Matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q3-random-sampling-with-a-function-and-a-loop">Q3: Random sampling with a function and a loop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q4-reshaping-and-a-row-by-row-function">Q4: Reshaping and a row-by-row function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q5-matrix-multiplication-with-a-function-and-a-loop">Q5: Matrix multiplication with a function and a loop</a></li>
 </ul>
 </li>
 </ul>
@@ -553,21 +551,21 @@
 <p>After installing, you import NumPy like any other module. By convention, it’s almost always imported under the short alias <code class="docutils literal notranslate"><span class="pre">np</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment the following line to install numpy if it is not already installed in your environment</span>
-<span class="c1"># %pip install numpy # Run once per environment; safe to re-run, it will just confirm numpy is installed</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span> <span class="c1"># The standard convention: import numpy under the alias np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pip</span> install numpy # Run once per environment; safe to re-run, it will just confirm numpy is installed
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span> <span class="c1"># The standard convention: import numpy under the alias np</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span> <span class="c1"># Print the installed version of numpy</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (2.4.6)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.4.6
 </pre></div>
 </div>
@@ -677,7 +675,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 2 3 4 5] &lt;class 'numpy.ndarray'&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 2 3 4 5]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> &lt;class 'numpy.ndarray'&gt;
 (5,)
 int64
 [[1 2 3]
@@ -778,42 +779,6 @@ int64
  [0. 0. 0.]]
 [[4. 4. 4.]
  [4. 4. 4.]]
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="complex-numbers">
-<h1>Complex Numbers<a class="headerlink" href="#complex-numbers" title="Link to this heading">#</a></h1>
-<p>NumPy arrays can also hold complex numbers, values with a real part and an imaginary part, written in Python with a trailing <code class="docutils literal notranslate"><span class="pre">j</span></code>, like <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">+</span> <span class="pre">4j</span></code>. Passing any complex value into <code class="docutils literal notranslate"><span class="pre">np.array()</span></code> (or explicitly setting <code class="docutils literal notranslate"><span class="pre">dtype=complex</span></code>) makes the whole array complex.</p>
-<p>Every complex array has two companion arrays you can access as attributes: <code class="docutils literal notranslate"><span class="pre">.real</span></code> gives the real part of every element, and <code class="docutils literal notranslate"><span class="pre">.imag</span></code> gives the imaginary part, each returned as a plain (real-valued) array of the same shape.</p>
-<p>Two more tools come up constantly with complex numbers:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">np.abs(arr)</span></code> computes the <strong>magnitude</strong> of every element, <span class="math notranslate nohighlight">\(\sqrt{\text{real}^2 + \text{imag}^2}\)</span>, the same formula as the length of a 2D vector <code class="docutils literal notranslate"><span class="pre">(real,</span> <span class="pre">imag)</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">np.conjugate(arr)</span></code> returns the <strong>complex conjugate</strong> of every element, flipping the sign of the imaginary part only (e.g. the conjugate of <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">+</span> <span class="pre">4j</span></code> is <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">-</span> <span class="pre">4j</span></code>).</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="n">j</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span><span class="n">j</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="n">j</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span> <span class="c1"># A complex array; one complex value makes them all complex</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="c1"># Print the array and its dtype: complex128</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">real</span><span class="p">)</span> <span class="c1"># The real part of every element, as a float array</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span> <span class="c1"># The imaginary part of every element, as a float array</span>
-
-<span class="n">magnitudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="c1"># abs() of a complex number gives sqrt(real**2 + imag**2)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">magnitudes</span><span class="p">)</span> <span class="c1"># Print the magnitudes</span>
-
-<span class="n">conjugates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="c1"># Flip the sign of the imaginary part of every element</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">conjugates</span><span class="p">)</span> <span class="c1"># Print the complex conjugates</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 3.+4.j  1.-2.j -0.-5.j  6.+0.j] complex128
-[ 3.  1. -0.  6.]
-[ 4. -2. -5.  0.]
-[5.         2.23606798 5.         6.        ]
-[ 3.-4.j  1.+2.j -0.+5.j  6.-0.j]
 </pre></div>
 </div>
 </div>
@@ -928,42 +893,6 @@ int64
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="printing-elements-of-arrays">
-<h1>Printing Elements of Arrays<a class="headerlink" href="#printing-elements-of-arrays" title="Link to this heading">#</a></h1>
-<p>NumPy arrays are still Python objects you can loop over with a regular <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, exactly like a list: <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">value</span> <span class="pre">in</span> <span class="pre">arr:</span></code> visits each element in turn. This is almost always slower than a vectorized operation, but it is useful whenever you want to <em>do something with each element individually</em>, such as printing a formatted message for every entry.</p>
-<p>An f-string (<code class="docutils literal notranslate"><span class="pre">f&quot;...&quot;</span></code>) is a convenient way to build that message: writing <code class="docutils literal notranslate"><span class="pre">{value}</span></code> (or <code class="docutils literal notranslate"><span class="pre">{value:.2f}</span></code> to control the number of decimal places) inside the string inserts the current value directly, without manually converting it to text with <code class="docutils literal notranslate"><span class="pre">str()</span></code> or <code class="docutils literal notranslate"><span class="pre">+</span></code>.</p>
-<p>When all you want is to <em>display</em> the whole array with a chosen number of decimals, rather than a custom message per element, <code class="docutils literal notranslate"><span class="pre">np.array2string</span></code> does it in one call instead of a loop. Its general form:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array2string</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">suppress_small</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">floatmode</span><span class="o">=</span><span class="s1">'fixed'</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">precision</span></code> sets how many decimals to show, <code class="docutils literal notranslate"><span class="pre">suppress_small=True</span></code> avoids switching to scientific notation for tiny values, and <code class="docutils literal notranslate"><span class="pre">floatmode='fixed'</span></code> makes every element show exactly that many decimals, matching what <code class="docutils literal notranslate"><span class="pre">{value:.2f}</span></code> gives one element at a time in the loop above.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temps_c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">37.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">])</span> <span class="c1"># Some temperatures in Celsius</span>
-<span class="n">temps_f</span> <span class="o">=</span> <span class="n">temps_c</span> <span class="o">*</span> <span class="mi">9</span> <span class="o">/</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">32</span> <span class="c1"># Vectorized conversion to Fahrenheit, computed all at once</span>
-
-<span class="k">for</span> <span class="n">c_val</span><span class="p">,</span> <span class="n">f_val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">temps_c</span><span class="p">,</span> <span class="n">temps_f</span><span class="p">):</span> <span class="c1"># Loop over both arrays together, one pair at a time</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">c_val</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> in celsius is </span><span class="si">{</span><span class="n">f_val</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> in fahrenheit"</span><span class="p">)</span> <span class="c1"># An f-string builds a formatted line for each pair, with 2 decimals each</span>
-
-<span class="c1"># Compare: the loop above prints one formatted pair at a time. array2string does the whole array at once;</span>
-<span class="c1"># floatmode='fixed' makes every element show exactly `precision` decimals, matching the :.2f used above.</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">array2string</span><span class="p">(</span><span class="n">temps_c</span><span class="p">,</span><span class="w"> </span><span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">suppress_small</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="w"> </span><span class="n">floatmode</span><span class="o">=</span><span class="s1">'fixed'</span><span class="p">)</span><span class="si">}</span><span class="s2"> in celsius is "</span>
-      <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">array2string</span><span class="p">(</span><span class="n">temps_f</span><span class="p">,</span><span class="w"> </span><span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">suppress_small</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="w"> </span><span class="n">floatmode</span><span class="o">=</span><span class="s1">'fixed'</span><span class="p">)</span><span class="si">}</span><span class="s2"> in fahrenheit"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00 in celsius is 32.00 in fahrenheit
-15.00 in celsius is 59.00 in fahrenheit
-25.00 in celsius is 77.00 in fahrenheit
-37.00 in celsius is 98.60 in fahrenheit
-100.00 in celsius is 212.00 in fahrenheit
-[  0.00  15.00  25.00  37.00 100.00] in celsius is [ 32.00  59.00  77.00  98.60 212.00] in fahrenheit
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 <section class="tex2jax_ignore mathjax_ignore" id="random-number-generators">
 <h1>Random Number Generators<a class="headerlink" href="#random-number-generators" title="Link to this heading">#</a></h1>
 <p>NumPy’s <code class="docutils literal notranslate"><span class="pre">random</span></code> module generates random numbers, useful for simulations, sampling, and statistics. The recommended modern approach is to create a generator with <code class="docutils literal notranslate"><span class="pre">np.random.default_rng(seed)</span></code>.</p>
@@ -1058,7 +987,7 @@ int64
 </div>
 <p>Arrays with three or more dimensions are often called tensors. A 3D tensor can be thought of as a stack of matrices; indexing extends naturally with one index per dimension:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>                                         <span class="c1"># a single element</span>
-<span class="n">T</span><span class="p">[</span><span class="n">i_start</span><span class="p">:</span><span class="n">i_stop</span><span class="p">:</span><span class="n">i_step</span><span class="p">,</span> <span class="n">j_start</span><span class="p">:</span><span class="n">j_stop</span><span class="p">:</span><span class="n">j_step</span><span class="p">,</span> <span class="n">k_start</span><span class="p">:</span><span class="n">k_stop</span><span class="p">:</span><span class="n">k_step</span><span class="p">]</span>  <span class="c1"># a sub-block</span>
+<span class="n">T</span><span class="p">[</span><span class="n">i_start</span><span class="p">:</span><span class="n">i_stop</span><span class="p">,</span> <span class="n">j_start</span><span class="p">:</span><span class="n">j_stop</span><span class="p">,</span> <span class="n">k_start</span><span class="p">:</span><span class="n">k_stop</span><span class="p">]</span>  <span class="c1"># a sub-block</span>
 </pre></div>
 </div>
 <p>The first index selects which matrix in the stack, and the remaining two behave just like 2D indexing within that matrix.</p>
@@ -1194,48 +1123,6 @@ Found a 3 at row 2, column 2
 [ 3 -1  4 -1  2]
 [3 0 4 0 5 0 2 6]
 [1 3 5]
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="array-copying">
-<h1>Array Copying<a class="headerlink" href="#array-copying" title="Link to this heading">#</a></h1>
-<p>Assigning an array to a new variable, <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">a</span></code>, does <strong>not</strong> create a new array: <code class="docutils literal notranslate"><span class="pre">b</span></code> is just another name pointing at the same data as <code class="docutils literal notranslate"><span class="pre">a</span></code>. Slicing behaves the same way, <code class="docutils literal notranslate"><span class="pre">a[1:3]</span></code> returns a <em>view</em>, not a copy, so changing an entry through the view changes the original array too. This is different from how <code class="docutils literal notranslate"><span class="pre">+</span></code> and slicing behave on Python lists, and it’s a very common source of bugs.</p>
-<p>To get an independent array that you can modify safely, use <code class="docutils literal notranslate"><span class="pre">.copy()</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Now <code class="docutils literal notranslate"><span class="pre">b</span></code> and <code class="docutils literal notranslate"><span class="pre">a</span></code> share no memory: changes to one never affect the other.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-
-<span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="c1"># b is NOT a new array, just another name for the same data</span>
-<span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">99</span> <span class="c1"># Modify b...</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># ...and a changes too! They are the same underlying array</span>
-
-<span class="n">view</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># Slicing also gives a view, not a copy</span>
-<span class="n">view</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="c1"># Modify the view...</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># ...and a changes again, at index 1</span>
-
-<span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="c1"># An explicit, independent copy</span>
-<span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># Modify c...</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># ...and a is unaffected this time</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="c1"># c has its own separate data</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="ow">is</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># True: same object</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="ow">is</span> <span class="n">c</span><span class="p">)</span> <span class="c1"># False: different objects, even though .copy() started from the same values</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[99  2  3  4  5]
-[99 -1  3  4  5]
-[99 -1  3  4  5]
-[ 0 -1  3  4  5]
-True
-False
 </pre></div>
 </div>
 </div>
@@ -1467,73 +1354,24 @@ False
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>It’s the NumPy analogue of converting a list to a set, but the result comes back sorted, and as an array rather than a set. Passing <code class="docutils literal notranslate"><span class="pre">return_counts=True</span></code> gives you how many times each unique value appeared and passing <code class="docutils literal notranslate"><span class="pre">return_index=True</span></code> returns the index of the first occurrence of each distinct value.</p>
+<p>It’s the NumPy analogue of converting a list to a set, but the result comes back sorted, and as an array rather than a set. Passing <code class="docutils literal notranslate"><span class="pre">return_counts=True</span></code> also gives you how many times each unique value appeared.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">remainders</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="c1"># Remainders computed in a loop, with repeats</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">remainders</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="c1"># Remainders computed in a loop, with repeats</span>
 
-<span class="n">values</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">remainders</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># Also get how many times each occurred</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Distinct values: </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the distinct values</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Counts: </span><span class="si">{</span><span class="n">counts</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print how many times each value appeared, in the same order as values</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Indices: </span><span class="si">{</span><span class="n">indices</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the index of the first occurrence of each distinct value</span>
+<span class="n">distinct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">remainders</span><span class="p">)</span> <span class="c1"># Sorted, distinct values only</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">distinct</span><span class="p">)</span> <span class="c1"># Print the distinct values</span>
+
+<span class="n">values</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">remainders</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># Also get how many times each occurred</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="c1"># Print the distinct values</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span> <span class="c1"># Print how many times each value appeared, in the same order as values</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Distinct values: [0.  1.3 2.1 3.2]
-Counts: [3 2 3 1]
-Indices: [1 2 0 6]
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="timing-your-code-with-time">
-<h1>Timing Your Code with <code class="docutils literal notranslate"><span class="pre">time</span></code><a class="headerlink" href="#timing-your-code-with-time" title="Link to this heading">#</a></h1>
-<p>When you want to compare how two pieces of code actually perform, for example the Python <code class="docutils literal notranslate"><span class="pre">for</span></code> loop from the section above versus a vectorized NumPy operation, you need a way to measure elapsed time. Python’s built-in <code class="docutils literal notranslate"><span class="pre">time</span></code> module handles this; unlike NumPy, it’s part of the standard library, so it just needs <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">time</span></code>, no installation required.</p>
-<p>The function to use is <code class="docutils literal notranslate"><span class="pre">time.perf_counter()</span></code>, a high-resolution clock designed specifically for timing code (prefer it over <code class="docutils literal notranslate"><span class="pre">time.time()</span></code> for benchmarking: it’s monotonic and unaffected by the system clock being adjusted). Its general pattern is:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-
-<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>   <span class="c1"># record the clock time right before the code runs</span>
-<span class="c1"># ... code to time ...</span>
-<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>     <span class="c1"># record the clock time right after</span>
-
-<span class="n">elapsed</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>         <span class="c1"># elapsed time, in seconds</span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code> are just numbers representing a moment in time in seconds; only their <em>difference</em> is meaningful, not their individual values.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span> <span class="c1"># Part of the standard library, no installation needed</span>
-
-<span class="n">n</span> <span class="o">=</span> <span class="mi">1_000_000</span>
-<span class="n">x_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="c1"># A plain Python list</span>
-<span class="n">x_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1"># The equivalent NumPy array</span>
-
-<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="c1"># Start the clock</span>
-<span class="n">squared_loop</span> <span class="o">=</span><span class="p">[]</span>
-<span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">x_list</span><span class="p">:</span>
-    <span class="n">squared_loop</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># Square every element with a Python loop</span>
-<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="c1"># Stop the clock</span>
-<span class="n">loop_time</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Python loop:       </span><span class="si">{</span><span class="n">loop_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> seconds"</span><span class="p">)</span>
-
-<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="c1"># Start the clock again</span>
-<span class="n">squared_vectorized</span> <span class="o">=</span> <span class="n">x_arr</span> <span class="o">**</span> <span class="mi">2</span> <span class="c1"># Square every element with a single vectorized NumPy operation</span>
-<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="c1"># Stop the clock</span>
-<span class="n">vectorized_time</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"NumPy vectorized:  </span><span class="si">{</span><span class="n">vectorized_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> seconds"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"NumPy was about </span><span class="si">{</span><span class="n">loop_time</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">vectorized_time</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">x faster"</span><span class="p">)</span> <span class="c1"># Compare the two timings directly</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python loop:       0.0702 seconds
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NumPy vectorized:  0.0019 seconds
-NumPy was about 36.7x faster
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 2 3]
+[0 1 2 3]
+[3 2 3 1]
 </pre></div>
 </div>
 </div>
@@ -1548,29 +1386,29 @@ NumPy was about 36.7x faster
 <li><p>Create arrays with <code class="docutils literal notranslate"><span class="pre">np.array()</span></code> (from a list or list of lists), <code class="docutils literal notranslate"><span class="pre">np.zeros()</span></code>, and <code class="docutils literal notranslate"><span class="pre">np.ones()</span></code></p></li>
 <li><p>Fill an array with a chosen value using <code class="docutils literal notranslate"><span class="pre">np.full()</span></code>, or overwrite an existing array’s contents with <code class="docutils literal notranslate"><span class="pre">.fill()</span></code></p></li>
 <li><p>Set and reason about an array’s <code class="docutils literal notranslate"><span class="pre">dtype</span></code>, and why an explicit <code class="docutils literal notranslate"><span class="pre">dtype=float</span></code> matters when you need decimal precision</p></li>
-<li><p>Create arrays of complex numbers with <code class="docutils literal notranslate"><span class="pre">.real</span></code> and <code class="docutils literal notranslate"><span class="pre">.imag</span></code>, and find their magnitude with <code class="docutils literal notranslate"><span class="pre">np.abs()</span></code></p></li>
 <li><p>Perform elementwise arithmetic (<code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">-</span> <span class="pre">*</span> <span class="pre">/</span> <span class="pre">**</span></code>) and understand broadcasting with scalars</p></li>
 <li><p>Apply vectorized math functions like <code class="docutils literal notranslate"><span class="pre">np.sin()</span></code>, <code class="docutils literal notranslate"><span class="pre">np.cos()</span></code>, <code class="docutils literal notranslate"><span class="pre">np.sqrt()</span></code>, <code class="docutils literal notranslate"><span class="pre">np.exp()</span></code>, and <code class="docutils literal notranslate"><span class="pre">np.log()</span></code></p></li>
 <li><p>Write your own functions that take a NumPy array as input and perform math operations on it</p></li>
-<li><p>Loop over an array’s elements with a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop and build per-element output with an f-string</p></li>
-<li><p>Print an array with a controlled number of decimals using <code class="docutils literal notranslate"><span class="pre">np.array2string(arr,</span> <span class="pre">precision=...)</span></code></p></li>
 <li><p>Generate random numbers with <code class="docutils literal notranslate"><span class="pre">np.random.default_rng()</span></code>, including reproducible results using a seed</p></li>
 <li><p>Index and slice 1D, 2D, and 3D (tensor) arrays, including selecting rows, columns, and sub-blocks</p></li>
 <li><p>Find the location of values satisfying a condition with <code class="docutils literal notranslate"><span class="pre">np.where()</span></code> and <code class="docutils literal notranslate"><span class="pre">np.argwhere()</span></code>, for both 1D and 2D arrays</p></li>
 <li><p>Filter an array down to the values satisfying a condition with boolean masking, <code class="docutils literal notranslate"><span class="pre">x[x</span> <span class="pre">&gt;</span> <span class="pre">n]</span></code></p></li>
-<li><p>Tell the difference between a view (plain assignment or slicing) and an independent array made with <code class="docutils literal notranslate"><span class="pre">.copy()</span></code></p></li>
 <li><p>Reshape arrays with <code class="docutils literal notranslate"><span class="pre">.reshape()</span></code>, including using <code class="docutils literal notranslate"><span class="pre">-1</span></code> to infer a dimension</p></li>
 <li><p>Transpose a matrix with <code class="docutils literal notranslate"><span class="pre">.T</span></code> or <code class="docutils literal notranslate"><span class="pre">np.transpose()</span></code></p></li>
 <li><p>Perform true matrix multiplication with <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>, <code class="docutils literal notranslate"><span class="pre">np.matmul()</span></code>, or <code class="docutils literal notranslate"><span class="pre">np.dot()</span></code>, as opposed to elementwise <code class="docutils literal notranslate"><span class="pre">*</span></code></p></li>
 <li><p>Aggregate arrays with <code class="docutils literal notranslate"><span class="pre">.sum()</span></code>, <code class="docutils literal notranslate"><span class="pre">.max()</span></code>, and <code class="docutils literal notranslate"><span class="pre">.min()</span></code>, using <code class="docutils literal notranslate"><span class="pre">axis</span></code> to aggregate along rows or columns</p></li>
 <li><p>Reverse and flip arrays with slicing and <code class="docutils literal notranslate"><span class="pre">np.flip()</span></code></p></li>
 <li><p>Find distinct values with <code class="docutils literal notranslate"><span class="pre">np.unique()</span></code>, including counts</p></li>
-<li><p>Time code with <code class="docutils literal notranslate"><span class="pre">time.perf_counter()</span></code>, and confirm that vectorized NumPy operations are faster than an equivalent Python loop</p></li>
 </ul>
 <p>Together with Parts I through III, you now have the core Python and NumPy tools needed to work with numerical and mathematical data.</p>
 </section>
 <section id="practice-questions">
 <h2>Practice Questions<a class="headerlink" href="#practice-questions" title="Link to this heading">#</a></h2>
+<p>The five questions below cover everything in this notebook (arrays, <code class="docutils literal notranslate"><span class="pre">arange</span></code>, dtype, arithmetic, functions, random numbers, slicing, tensors, reshaping, transpose, matrix multiplication, aggregation, flipping, and unique values), ordered from easy to hard.</p>
+<ul class="simple">
+<li><p>New to NumPy? Focus on Q1 and Q2 (and Q3 if you have time).</p></li>
+<li><p>Already comfortable with arrays? Start from Q4 and work through Q5 as well.</p></li>
+</ul>
 <p>For each question, write your code in the cell provided and make sure it prints your final answer.</p>
 <section id="q1-arrays-arange-and-arithmetic">
 <h3>Q1: Arrays, arange, and arithmetic<a class="headerlink" href="#q1-arrays-arange-and-arithmetic" title="Link to this heading">#</a></h3>
@@ -1612,7 +1450,7 @@ NumPy was about 36.7x faster
 </section>
 <section id="q2-evaluating-a-function-and-slicing">
 <h3>Q2: Evaluating a function and slicing<a class="headerlink" href="#q2-evaluating-a-function-and-slicing" title="Link to this heading">#</a></h3>
-<p>Create an array <code class="docutils literal notranslate"><span class="pre">x</span></code> of 9 evenly spaced values from <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">np.pi</span></code> using <code class="docutils literal notranslate"><span class="pre">np.linspace(0,</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">np.pi,</span> <span class="pre">9)</span></code>. Compute <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">np.cos(np.sin(x))</span></code> and print both arrays. Then, using slicing, print only the first three values of <code class="docutils literal notranslate"><span class="pre">y</span></code>, only the last three, and every other value.</p>
+<p>Create an array <code class="docutils literal notranslate"><span class="pre">x</span></code> of 9 evenly spaced values from <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">np.pi</span></code> using <code class="docutils literal notranslate"><span class="pre">np.linspace(0,</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">np.pi,</span> <span class="pre">9)</span></code>. Compute <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">np.sin(x)</span></code> and print both arrays. Then, using slicing, print only the first three values of <code class="docutils literal notranslate"><span class="pre">y</span></code>, only the last three, and every other value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: your code for Q2 here</span>
@@ -1630,7 +1468,7 @@ NumPy was about 36.7x faster
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span> <span class="c1"># 9 evenly spaced angles covering a full period</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># Print the angles</span>
 
-<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="c1"># Evaluate cos(sin(x)) at each of those 9 points</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># Evaluate sin(x) at each of those 9 points</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="c1"># Print the resulting values</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># Print the first three values of y</span>
@@ -1642,20 +1480,22 @@ NumPy was about 36.7x faster
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.         0.78539816 1.57079633 2.35619449 3.14159265 3.92699082
  4.71238898 5.49778714 6.28318531]
-[1.         0.7602446  0.54030231 0.7602446  1.         0.7602446
- 0.54030231 0.7602446  1.        ]
-[1.         0.7602446  0.54030231]
-[0.54030231 0.7602446  1.        ]
-[1.         0.54030231 1.         0.54030231 1.        ]
+[ 0.00000000e+00  7.07106781e-01  1.00000000e+00  7.07106781e-01
+  1.22464680e-16 -7.07106781e-01 -1.00000000e+00 -7.07106781e-01
+ -2.44929360e-16]
+[0.         0.70710678 1.        ]
+[-1.00000000e+00 -7.07106781e-01 -2.44929360e-16]
+[ 0.0000000e+00  1.0000000e+00  1.2246468e-16 -1.0000000e+00
+ -2.4492936e-16]
 </pre></div>
 </div>
 </div>
 </details>
 </div>
 </section>
-<section id="q3-complex-numbers-real-imaginary-parts-and-magnitude">
-<h3>Q3: Complex numbers, real/imaginary parts, and magnitude<a class="headerlink" href="#q3-complex-numbers-real-imaginary-parts-and-magnitude" title="Link to this heading">#</a></h3>
-<p>Create an array <code class="docutils literal notranslate"><span class="pre">z</span></code> of 6 complex numbers of your choice (mix positive and negative real and imaginary parts). Print <code class="docutils literal notranslate"><span class="pre">z.real</span></code> and <code class="docutils literal notranslate"><span class="pre">z.imag</span></code>. Then compute the magnitude of every element two ways: (1) with a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop that applies Python’s built-in <code class="docutils literal notranslate"><span class="pre">abs()</span></code> to each element and prints it with an f-string, and (2) with the single vectorized call <code class="docutils literal notranslate"><span class="pre">np.abs(z)</span></code>. Confirm the two options agree with <code class="docutils literal notranslate"><span class="pre">np.allclose</span></code>, and compare how much code each option needed.</p>
+<section id="q3-random-sampling-with-a-function-and-a-loop">
+<h3>Q3: Random sampling with a function and a loop<a class="headerlink" href="#q3-random-sampling-with-a-function-and-a-loop" title="Link to this heading">#</a></h3>
+<p>Using <code class="docutils literal notranslate"><span class="pre">np.random.default_rng(seed=0)</span></code>, generate an array of 200 samples from a normal distribution with mean <code class="docutils literal notranslate"><span class="pre">5</span></code> and standard deviation <code class="docutils literal notranslate"><span class="pre">2</span></code>. Write a function <code class="docutils literal notranslate"><span class="pre">count_above(arr,</span> <span class="pre">threshold)</span></code> that uses a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop over the elements of <code class="docutils literal notranslate"><span class="pre">arr</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">value</span> <span class="pre">in</span> <span class="pre">arr:</span></code>) to count how many exceed <code class="docutils literal notranslate"><span class="pre">threshold</span></code>. Call your function on the samples with a threshold of your choice, then check your answer against the faster, vectorized approach <code class="docutils literal notranslate"><span class="pre">np.sum(arr</span> <span class="pre">&gt;</span> <span class="pre">threshold)</span></code>, they should match.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: your code for Q3 here</span>
@@ -1670,51 +1510,36 @@ NumPy was about 36.7x faster
 <p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span> <span class="o">+</span> <span class="mi">2</span><span class="n">j</span><span class="p">,</span> <span class="mi">2</span><span class="o">+</span><span class="mi">4</span><span class="n">j</span><span class="p">,</span> <span class="mi">3</span><span class="o">+</span><span class="mf">6.2</span><span class="n">j</span><span class="p">,</span> <span class="mi">4</span><span class="o">+</span><span class="mi">3</span><span class="n">j</span><span class="p">,</span> <span class="mi">5</span><span class="o">+</span><span class="mi">4</span><span class="n">j</span><span class="p">,</span> <span class="mi">6</span><span class="o">+</span><span class="mi">5</span><span class="n">j</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"z = </span><span class="si">{</span><span class="n">z</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the complex array</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Real part of z: </span><span class="si">{</span><span class="n">z</span><span class="o">.</span><span class="n">real</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the real part of z</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Imaginary part of z: </span><span class="si">{</span><span class="n">z</span><span class="o">.</span><span class="n">imag</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the imaginary part of z</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># Create a random generator with a fixed seed</span>
 
-<span class="n">abs_list</span> <span class="o">=</span><span class="p">[]</span>
-<span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">z</span><span class="p">:</span>
-    <span class="n">abs_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">el</span><span class="p">))</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span> <span class="c1"># 200 random floats, normally distributed with mean 0 and standard deviation 1</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Absolute value of z: </span><span class="si">{</span><span class="n">abs_list</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the absolute</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">counter_above</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">thereshold</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="n">thereshold</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">count</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">abs_list</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">z</span><span class="p">)))</span> <span class="c1"># Check if the two methods give the same result")</span>
+
+<span class="n">thereshold</span> <span class="o">=</span> <span class="mf">0.7</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counter_above</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">thereshold</span><span class="p">))</span> <span class="c1"># Count how many samples are above 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">samples</span> <span class="o">&gt;</span> <span class="n">thereshold</span><span class="p">))</span> <span class="c1"># Count how many samples are above 1 using NumPy's vectorized operations</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>z = [1.+2.j  2.+4.j  3.+6.2j 4.+3.j  5.+4.j  6.+5.j ]
-Real part of z: [1. 2. 3. 4. 5. 6.]
-Imaginary part of z: [2.  4.  6.2 3.  4.  5. ]
-Absolute value of z: [np.float64(2.23606797749979), np.float64(4.47213595499958), np.float64(6.887670143089026), np.float64(5.0), np.float64(6.4031242374328485), np.float64(7.810249675906654)]
-True
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48
+48
 </pre></div>
 </div>
 </div>
 </details>
 </div>
 </section>
-<section id="q4-building-3d-rotation-matrices">
-<h3>Q4: Building 3D Rotation Matrices<a class="headerlink" href="#q4-building-3d-rotation-matrices" title="Link to this heading">#</a></h3>
-<p>In 3D, rotating a vector by an angle <span class="math notranslate nohighlight">\(\theta\)</span> (in radians) around one of the coordinate axes is done by multiplying it by a <span class="math notranslate nohighlight">\(3\times 3\)</span> <strong>rotation matrix</strong>. Rotation about the <span class="math notranslate nohighlight">\(x\)</span>-axis leaves the <span class="math notranslate nohighlight">\(x\)</span>-coordinate unchanged and rotates the <span class="math notranslate nohighlight">\(y\)</span>-<span class="math notranslate nohighlight">\(z\)</span> plane; rotation about the <span class="math notranslate nohighlight">\(y\)</span>-axis leaves <span class="math notranslate nohighlight">\(y\)</span> unchanged; rotation about the <span class="math notranslate nohighlight">\(z\)</span>-axis leaves <span class="math notranslate nohighlight">\(z\)</span> unchanged. The three matrices are:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-R_x(\theta) = \begin{bmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; \cos\theta &amp; -\sin\theta \\ 0 &amp; \sin\theta &amp; \cos\theta \end{bmatrix}
-\qquad
-R_y(\theta) = \begin{bmatrix} \cos\theta &amp; 0 &amp; \sin\theta \\ 0 &amp; 1 &amp; 0 \\ -\sin\theta &amp; 0 &amp; \cos\theta \end{bmatrix}
-\qquad
-R_z(\theta) = \begin{bmatrix} \cos\theta &amp; -\sin\theta &amp; 0 \\ \sin\theta &amp; \cos\theta &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}
-\end{split}\]</div>
-<p>To rotate a vector <span class="math notranslate nohighlight">\(v\)</span> (a 1D NumPy array with 3 entries) by angle <span class="math notranslate nohighlight">\(\theta\)</span> around a given axis, compute the matrix-vector product <span class="math notranslate nohighlight">\(R(\theta)\, v\)</span> with <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>.</p>
-<p><strong>Your task:</strong></p>
-<ol class="arabic simple">
-<li><p>Write three functions, <code class="docutils literal notranslate"><span class="pre">Rx(theta)</span></code>, <code class="docutils literal notranslate"><span class="pre">Ry(theta)</span></code>, and <code class="docutils literal notranslate"><span class="pre">Rz(theta)</span></code>, each taking an angle <code class="docutils literal notranslate"><span class="pre">theta</span></code> in radians and returning the corresponding <span class="math notranslate nohighlight">\(3\times 3\)</span> rotation matrix above as a NumPy array (use <code class="docutils literal notranslate"><span class="pre">np.cos</span></code> and <code class="docutils literal notranslate"><span class="pre">np.sin</span></code>).</p></li>
-<li><p>Create the vector <code class="docutils literal notranslate"><span class="pre">v</span> <span class="pre">=</span> <span class="pre">np.array([1,</span> <span class="pre">0,</span> <span class="pre">0])</span></code>. Using your three functions, rotate <code class="docutils literal notranslate"><span class="pre">v</span></code> by <code class="docutils literal notranslate"><span class="pre">theta</span> <span class="pre">=</span> <span class="pre">np.pi</span> <span class="pre">/</span> <span class="pre">2</span></code> around the <span class="math notranslate nohighlight">\(x\)</span>-axis, then separately around the <span class="math notranslate nohighlight">\(y\)</span>-axis, then separately around the <span class="math notranslate nohighlight">\(z\)</span>-axis, and print all three results. Think about why each result makes sense: <code class="docutils literal notranslate"><span class="pre">v</span></code> starts pointing along the <span class="math notranslate nohighlight">\(x\)</span>-axis, so which rotation(s) should leave it unchanged?</p></li>
-<li><p>a) Rotate <code class="docutils literal notranslate"><span class="pre">v</span></code> by <code class="docutils literal notranslate"><span class="pre">theta</span> <span class="pre">=</span> <span class="pre">np.pi</span> <span class="pre">/</span> <span class="pre">4</span></code> (45 degree) around the <span class="math notranslate nohighlight">\(z\)</span>-axis, then rotate that result by another <code class="docutils literal notranslate"><span class="pre">np.pi</span> <span class="pre">/</span> <span class="pre">4</span></code> radians (45 degrees) around the <span class="math notranslate nohighlight">\(z\)</span>-axis (i.e., apply <code class="docutils literal notranslate"><span class="pre">Rz</span></code> twice in a row). b) Compare this to rotating the original <code class="docutils literal notranslate"><span class="pre">v</span></code> once by <code class="docutils literal notranslate"><span class="pre">np.pi</span> <span class="pre">/</span> <span class="pre">2</span></code> radians (90 degrees) around the <span class="math notranslate nohighlight">\(z\)</span>-axis, using <code class="docutils literal notranslate"><span class="pre">np.allclose(arr1,</span> <span class="pre">arr2)</span></code> with <code class="docutils literal notranslate"><span class="pre">arr1</span></code> and <code class="docutils literal notranslate"><span class="pre">arr2</span></code> being the NumPy array of your final results from parts a) and b), and print whether they agree.</p></li>
-</ol>
+<section id="q4-reshaping-and-a-row-by-row-function">
+<h3>Q4: Reshaping and a row-by-row function<a class="headerlink" href="#q4-reshaping-and-a-row-by-row-function" title="Link to this heading">#</a></h3>
+<p>Create a 1D array with the integers from 1 to 20 using <code class="docutils literal notranslate"><span class="pre">np.arange(1,</span> <span class="pre">21)</span></code>, then reshape it into a <code class="docutils literal notranslate"><span class="pre">4x5</span></code> matrix <code class="docutils literal notranslate"><span class="pre">M</span></code>. Write a function <code class="docutils literal notranslate"><span class="pre">row_summary(M)</span></code> that loops over the rows of <code class="docutils literal notranslate"><span class="pre">M</span></code> with a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop (<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">row</span> <span class="pre">in</span> <span class="pre">M:</span></code>) and, for each row, prints its sum and its max using an f-string. Call your function on <code class="docutils literal notranslate"><span class="pre">M</span></code>. Then verify your printed values are correct by computing <code class="docutils literal notranslate"><span class="pre">M.sum(axis=1)</span></code> and <code class="docutils literal notranslate"><span class="pre">M.max(axis=1)</span></code> directly and comparing.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: your code for Q4 here</span>
@@ -1729,48 +1554,79 @@ R_z(\theta) = \begin{bmatrix} \cos\theta &amp; -\sin\theta &amp; 0 \\ \sin\theta
 <p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mat_rx</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
-    <span class="n">c</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
-    <span class="n">s</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="o">-</span><span class="n">s</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">c</span><span class="p">]])</span> <span class="c1"># Return the 3x3 rotation matrix about the x-axis</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">)</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">mat_ry</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
-    <span class="n">c</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
-    <span class="n">s</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="p">]])</span> <span class="c1"># Return the 3x3 rotation matrix about the y-axis</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">mat_rz</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
-    <span class="n">c</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
-    <span class="n">s</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">c</span><span class="p">,</span> <span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span> <span class="c1"># Return the 3x3 rotation matrix about the z-axis</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">row_summary</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">M</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Row: </span><span class="si">{</span><span class="n">row</span><span class="si">}</span><span class="s2">, Sum: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">row</span><span class="p">)</span><span class="si">}</span><span class="s2">, Mean: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">row</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="n">v</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="c1"># A vector along the x-axis</span>
-
-<span class="n">rx</span> <span class="o">=</span> <span class="n">mat_rx</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 90 degree rotation about the x-axis</span>
-<span class="n">ry</span> <span class="o">=</span> <span class="n">mat_ry</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 90 degree rotation about the y-axis</span>
-<span class="n">rz</span> <span class="o">=</span> <span class="n">mat_rz</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 90 degree rotation about the z-axis</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Rotation about x-axis: </span><span class="si">{</span><span class="n">rx</span><span class="w"> </span><span class="o">@</span><span class="w"> </span><span class="n">v</span><span class="si">}</span><span class="s2">. This keeps the vecor intact."</span><span class="p">)</span> <span class="c1"># Apply the rotation matrix to the vector</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Rotation about y-axis: </span><span class="si">{</span><span class="n">ry</span><span class="w"> </span><span class="o">@</span><span class="w"> </span><span class="n">v</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Apply the rotation matrix to the vector</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Rotation about z-axis: </span><span class="si">{</span><span class="n">rz</span><span class="w"> </span><span class="o">@</span><span class="w"> </span><span class="n">v</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Apply the rotation matrix to the vector</span>
-
-<span class="n">rx_pi4</span> <span class="o">=</span> <span class="n">mat_rz</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 45 degree rotation about the z-axis</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Rotation about z-axis by 45 degrees: </span><span class="si">{</span><span class="n">rx_pi4</span><span class="w"> </span><span class="o">@</span><span class="w"> </span><span class="n">v</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="n">twice_rotated</span> <span class="o">=</span> <span class="n">rx_pi4</span> <span class="o">@</span> <span class="p">(</span><span class="n">rx_pi4</span> <span class="o">@</span> <span class="n">v</span><span class="p">)</span> <span class="c1"># Apply the rotation matrix twice to the vector</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Rotation about z-axis by another 45 degrees: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">array2string</span><span class="p">(</span><span class="n">twice_rotated</span><span class="p">,</span><span class="w"> </span><span class="n">suppress_small</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="w"> </span><span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Apply the rotation matrix twice to the vector</span>
-
-<span class="n">vz_pi2</span> <span class="o">=</span> <span class="n">mat_rz</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">@</span> <span class="n">v</span> <span class="c1"># 90 degree rotation about the z-axis</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">vz_pi2</span><span class="p">,</span> <span class="n">twice_rotated</span><span class="p">))</span> <span class="c1"># Check if the two methods give the same result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">row_summary</span><span class="p">(</span><span class="n">M</span><span class="p">))</span> <span class="c1"># Call the function to print the summary of each row</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"sum: </span><span class="si">{</span><span class="n">M</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">, max: </span><span class="si">{</span><span class="n">M</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the sum and max of each row using NumPy's built-in functions</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rotation about x-axis: [1. 0. 0.]. This keeps the vecor intact.
-Rotation about y-axis: [ 6.123234e-17  0.000000e+00 -1.000000e+00]
-Rotation about z-axis: [6.123234e-17 1.000000e+00 0.000000e+00]
-Rotation about z-axis by 45 degrees: [0.70710678 0.70710678 0.        ]
-Rotation about z-axis by another 45 degrees: [0. 1. 0.]
-True
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Row: [1 2 3 4 5], Sum: 15, Mean: 5
+Row: [ 6  7  8  9 10], Sum: 40, Mean: 10
+Row: [11 12 13 14 15], Sum: 65, Mean: 15
+Row: [16 17 18 19 20], Sum: 90, Mean: 20
+None
+sum: [15 40 65 90], max: [ 5 10 15 20]
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="q5-matrix-multiplication-with-a-function-and-a-loop">
+<h3>Q5: Matrix multiplication with a function and a loop<a class="headerlink" href="#q5-matrix-multiplication-with-a-function-and-a-loop" title="Link to this heading">#</a></h3>
+<p>Write a function <code class="docutils literal notranslate"><span class="pre">apply_matrix(A,</span> <span class="pre">vectors)</span></code> that takes a matrix <code class="docutils literal notranslate"><span class="pre">A</span></code> and a list of 1D arrays <code class="docutils literal notranslate"><span class="pre">vectors</span></code>, and returns a new list containing <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">v</span></code> for every <code class="docutils literal notranslate"><span class="pre">v</span></code> in <code class="docutils literal notranslate"><span class="pre">vectors</span></code>, computed using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop over the list (not a single combined matrix operation). Create a <code class="docutils literal notranslate"><span class="pre">2x2</span></code> matrix <code class="docutils literal notranslate"><span class="pre">A</span></code> of your choice and a list of three different 2D vectors, then call your function and print each transformed vector. Finally, print <code class="docutils literal notranslate"><span class="pre">A</span></code> flipped along <code class="docutils literal notranslate"><span class="pre">axis=0</span></code> and along <code class="docutils literal notranslate"><span class="pre">axis=1</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span> <span class="c1"># A 90-degree rotation matrix</span>
+<span class="n">vectors</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])]</span>
+
+<span class="c1"># TODO: your code for Q5 here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span> <span class="c1"># A 90-degree rotation matrix</span>
+<span class="n">vectors</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">vectors</span><span class="p">):</span>
+    <span class="n">list_vectors</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vectors</span><span class="p">:</span>
+        <span class="n">transformed</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">v</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Original: </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">, Transformed: </span><span class="si">{</span><span class="n">transformed</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">list_vectors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transformed</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">list_vectors</span>
+
+<span class="n">apply_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">vectors</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span> <span class="c1"># Flip along axis 0: reverses the ROW order (upside down)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># Flip along axis 1: reverses the COLUMN order (left to right)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original: [1 0], Transformed: [0 1]
+Original: [0 1], Transformed: [-1  0]
+Original: [2 3], Transformed: [-3  2]
+[[ 1  0]
+ [ 0 -1]]
+[[-1  0]
+ [ 0  1]]
 </pre></div>
 </div>
 </div>
@@ -1810,15 +1666,6 @@ True
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="intro_pythonIII.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Introduction to Python, Part III</p>
-      </div>
-    </a>
 </div>
                 </footer>
               
@@ -1842,27 +1689,24 @@ True
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sequences-with-np-arange">Sequences with <code class="docutils literal notranslate"><span class="pre">np.arange</span></code></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sequences-with-np-linspace">Sequences with <code class="docutils literal notranslate"><span class="pre">np.linspace</span></code></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-arrays">Creating Arrays</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-numbers">Complex Numbers</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-with-arrays">Arithmetic with Arrays</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy-math-functions">NumPy Math Functions</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-your-own-functions-with-array-inputs">Writing Your Own Functions with Array Inputs</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#printing-elements-of-arrays">Printing Elements of Arrays</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#random-number-generators">Random Number Generators</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-and-slicing">Indexing and Slicing</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#array-copying">Array Copying</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reshaping">Reshaping</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#transpose">Transpose</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-multiplication">Matrix Multiplication</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-max-min-and-the-axis-argument">Sum, Max, Min, and the <code class="docutils literal notranslate"><span class="pre">axis</span></code> Argument</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reverse-and-flip">Reverse and Flip</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#unique-values">Unique Values</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-your-code-with-time">Timing Your Code with <code class="docutils literal notranslate"><span class="pre">time</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#unique-values">Unique Values</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions">Practice Questions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q1-arrays-arange-and-arithmetic">Q1: Arrays, arange, and arithmetic</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q2-evaluating-a-function-and-slicing">Q2: Evaluating a function and slicing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q3-complex-numbers-real-imaginary-parts-and-magnitude">Q3: Complex numbers, real/imaginary parts, and magnitude</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q4-building-3d-rotation-matrices">Q4: Building 3D Rotation Matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q3-random-sampling-with-a-function-and-a-loop">Q3: Random sampling with a function and a loop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q4-reshaping-and-a-row-by-row-function">Q4: Reshaping and a row-by-row function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q5-matrix-multiplication-with-a-function-and-a-loop">Q5: Matrix multiplication with a function and a loop</a></li>
 </ul>
 </li>
 </ul>
