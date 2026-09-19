@@ -1024,6 +1024,53 @@ The total first exceeded 50 once n = 10, with total = 55
 </div>
 </div>
 </div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> is positive."</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> is negative."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> is zero."</span><span class="p">)</span>
+
+
+<span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span>
+
+<span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> is positive."</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> is negative."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> is zero."</span><span class="p">)</span>
+
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> is positive."</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> is negative."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> is zero."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 is positive.
+-3 is negative.
+0 is zero.
+</pre></div>
+</div>
+</div>
+</details>
+</div>
 </section>
 <section id="q2-for-loops">
 <h3>Q2: For loops<a class="headerlink" href="#q2-for-loops" title="Link to this heading">#</a></h3>
@@ -1035,6 +1082,29 @@ The total first exceeded 50 once n = 10, with total = 55
 </div>
 </div>
 </div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_cubes</span> <span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">):</span>
+    <span class="n">list_cubes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_cubes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"sum of cubes = </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">list_cubes</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 8, 27, 64, 125, 216, 343, 512, 729, 1000]
+sum of cubes = 3025
+</pre></div>
+</div>
+</div>
+</details>
+</div>
 </section>
 <section id="q3-functions-and-loops">
 <h3>Q3: Functions and loops<a class="headerlink" href="#q3-functions-and-loops" title="Link to this heading">#</a></h3>
@@ -1045,6 +1115,32 @@ The total first exceeded 50 once n = 10, with total = 55
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cube</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span>
+
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"cube(</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">cube</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cube(1) = 1
+cube(2) = 8
+cube(3) = 27
+cube(4) = 64
+cube(5) = 125
+</pre></div>
+</div>
+</div>
+</details>
 </div>
 </section>
 <section id="q4-combining-loops-and-conditionals">
@@ -1058,6 +1154,37 @@ The total first exceeded 50 once n = 10, with total = 55
 </div>
 </div>
 </div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">51</span><span class="p">):</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">idx</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+         <span class="nb">sum</span> <span class="o">+=</span><span class="n">idx</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"sum of multiples of 3 or 5 below 51 = </span><span class="si">{</span><span class="nb">sum</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">sqr</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">sqr</span> <span class="o">&lt;=</span> <span class="mi">500</span><span class="p">:</span>
+    <span class="n">sqr</span> <span class="o">=</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The smallest integer n such that n^2 &gt; 500 is </span><span class="si">{</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s2">, with n^2 = </span><span class="si">{</span><span class="n">sqr</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sum of multiples of 3 or 5 below 51 = 593
+The smallest integer n such that n^2 &gt; 500 is 23, with n^2 = 529
+</pre></div>
+</div>
+</div>
+</details>
+</div>
 </section>
 <section id="q5-functions-loops-and-conditionals-together">
 <h3>Q5: Functions, loops, and conditionals together<a class="headerlink" href="#q5-functions-loops-and-conditionals-together" title="Link to this heading">#</a></h3>
@@ -1069,6 +1196,48 @@ The total first exceeded 50 once n = 10, with total = 55
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">is_prime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">50</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">is_prime</span><span class="p">(</span><span class="n">idx</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> is prime."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 is prime.
+3 is prime.
+5 is prime.
+7 is prime.
+11 is prime.
+13 is prime.
+17 is prime.
+19 is prime.
+23 is prime.
+29 is prime.
+31 is prime.
+37 is prime.
+41 is prime.
+43 is prime.
+47 is prime.
+</pre></div>
+</div>
+</div>
+</details>
 </div>
 </section>
 </section>
