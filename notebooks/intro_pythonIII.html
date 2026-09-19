@@ -971,6 +971,25 @@ Bob's average: 87.00
 </div>
 </div>
 </div>
+<div class="cell tag_hide_cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">roots</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.1</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">6.7</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span> 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"soritng roots: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the sorted list of roots</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"reversed roots: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">roots</span><span class="p">,</span><span class="w"> </span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the reversed list of roots</span>
+
+<span class="n">roots</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span> <span class="c1"># Insert 0.5 at the front, another candidate to check</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span> <span class="c1"># Print the updated list</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>soritng roots: [-1.2, 0.5, 1.0, 2.1, 3.5, 6.7]
+reversed roots: [6.7, 3.5, 2.1, 1.0, 0.5, -1.2]
+[0.0, 2.1, 3.5, -1.2, 0.5, 6.7, 1.0]
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="q2-tuples-and-unpacking">
 <h3>Q2: Tuples and unpacking<a class="headerlink" href="#q2-tuples-and-unpacking" title="Link to this heading">#</a></h3>
@@ -978,6 +997,37 @@ Bob's average: 87.00
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: your code for Q2 here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide_cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">point1</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">point2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Point 1: </span><span class="si">{</span><span class="n">point1</span><span class="si">}</span><span class="s2">, Point 2: </span><span class="si">{</span><span class="n">point2</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print both points</span>
+
+<span class="n">x_1</span><span class="p">,</span> <span class="n">y_1</span><span class="p">,</span> <span class="n">z_1</span> <span class="o">=</span> <span class="n">point1</span> <span class="c1"># Unpack the first point into three variables</span>
+<span class="n">x_2</span><span class="p">,</span> <span class="n">y_2</span><span class="p">,</span> <span class="n">z_2</span> <span class="o">=</span> <span class="n">point2</span> <span class="c1"># Unpack the second point into three variables</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Point 1 coordinates: x_1 = </span><span class="si">{</span><span class="n">x_1</span><span class="si">}</span><span class="s2">, y_1 = </span><span class="si">{</span><span class="n">y_1</span><span class="si">}</span><span class="s2">, z_1 = </span><span class="si">{</span><span class="n">z_1</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Point 2 coordinates: x_2 = </span><span class="si">{</span><span class="n">x_2</span><span class="si">}</span><span class="s2">, y_2 = </span><span class="si">{</span><span class="n">y_2</span><span class="si">}</span><span class="s2">, z_2 = </span><span class="si">{</span><span class="n">z_2</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">midpoint</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span> <span class="c1"># p1 and p2 are (x, y, z) points</span>
+    <span class="n">mx</span> <span class="o">=</span> <span class="p">(</span><span class="n">p1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">p2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">my</span> <span class="o">=</span> <span class="p">(</span><span class="n">p1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">p2</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">mz</span> <span class="o">=</span> <span class="p">(</span><span class="n">p1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">p2</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">mx</span><span class="p">,</span> <span class="n">my</span><span class="p">,</span> <span class="n">mz</span><span class="p">)</span> 
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">midpoint</span><span class="p">(</span><span class="n">point1</span><span class="p">,</span> <span class="n">point2</span><span class="p">)</span> <span class="c1"># Find the midpoint between two points</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Midpoint: </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the resulting midpoint</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Point 1: (2.0, 0, 0), Point 2: (0, 3.0, 0.5)
+Point 1 coordinates: x_1 = 2.0, y_1 = 0, z_1 = 0
+Point 2 coordinates: x_2 = 0, y_2 = 3.0, z_2 = 0.5
+Midpoint: (1.0, 1.5, 0.25)
 </pre></div>
 </div>
 </div>
@@ -993,6 +1043,30 @@ Bob's average: 87.00
 </div>
 </div>
 </div>
+<div class="cell tag_hide_cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">divisor_20</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">}</span> <span class="c1"># Divisors of 20</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">divisor_20</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">divisor_20</span><span class="p">))</span> <span class="c1"># Print the value of divisor_20</span>
+
+<span class="n">divisor_30</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">}</span> <span class="c1"># Divisors of 30</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">divisor_30</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">divisor_30</span><span class="p">))</span> <span class="c1"># Print the value of divisor_30</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"union of divisors: </span><span class="si">{</span><span class="n">divisor_20</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">divisor_30</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the union of the two sets</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"intersection of divisors: </span><span class="si">{</span><span class="n">divisor_20</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">divisor_30</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the intersection of the two sets</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"GCD of 20 and 30: </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">divisor_20</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">divisor_30</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the GCD of 20 and 30</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{1, 2, 4, 5, 20, 10} &lt;class 'set'&gt;
+{1, 2, 3, 5, 6, 10, 15, 30} &lt;class 'set'&gt;
+union of divisors: {1, 2, 3, 4, 5, 6, 10, 15, 20, 30}
+intersection of divisors: {1, 2, 10, 5}
+GCD of 20 and 30: 10
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="q4-dictionaries">
 <h3>Q4: Dictionaries<a class="headerlink" href="#q4-dictionaries" title="Link to this heading">#</a></h3>
@@ -1000,6 +1074,35 @@ Bob's average: 87.00
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: your code for Q4 here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide_cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dic_quad</span> <span class="o">=</span><span class="p">{</span><span class="s2">"a"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">:</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">:</span> <span class="mi">11</span><span class="p">}</span> <span class="c1"># Coefficients of x^2 - 6x + 11</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dic_quad</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">dic_quad</span><span class="p">))</span> <span class="c1"># Print the value of dic_quad and its type</span>
+
+<span class="n">dic_quad</span><span class="p">[</span><span class="s2">"discreminant"</span><span class="p">]</span> <span class="o">=</span> <span class="n">dic_quad</span><span class="p">[</span><span class="s2">"b"</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">dic_quad</span><span class="p">[</span><span class="s2">"a"</span><span class="p">]</span><span class="o">*</span><span class="n">dic_quad</span><span class="p">[</span><span class="s2">"c"</span><span class="p">]</span> <span class="c1"># Calculate the discriminant</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dic_quad</span><span class="p">)</span> <span class="c1"># Print the updated dictionary with the discriminant</span>
+
+<span class="n">dic_quad</span><span class="p">[</span><span class="s2">"a"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># Update the coefficient of x^2 to 2</span>
+<span class="k">del</span> <span class="n">dic_quad</span><span class="p">[</span><span class="s2">"c"</span><span class="p">]</span> <span class="c1"># Remove the constant term from the dictionary</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">dic_quad</span><span class="p">)</span> <span class="c1"># Print the updated dictionary</span>
+
+<span class="k">for</span> <span class="n">itm</span> <span class="ow">in</span> <span class="n">dic_quad</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="c1"># Loop over key, value pairs together</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">itm</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">itm</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print each key and its corresponding value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'a': 1, 'b': -6, 'c': 11} &lt;class 'dict'&gt;
+{'a': 1, 'b': -6, 'c': 11, 'discreminant': -8}
+{'a': 2, 'b': -6, 'discreminant': -8}
+  a: 2
+  b: -6
+  discreminant: -8
 </pre></div>
 </div>
 </div>
@@ -1017,6 +1120,35 @@ Bob's average: 87.00
 <span class="p">]</span>
 
 <span class="c1"># TODO: your code for Q5 here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide_cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">records</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="p">[</span><span class="mi">88</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">79</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s2">"Bob"</span><span class="p">,</span> <span class="p">[</span><span class="mi">95</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">85</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s2">"Charlie"</span><span class="p">,</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">80</span><span class="p">]),</span>
+<span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">build_average_dict</span><span class="p">(</span><span class="n">records</span><span class="p">):</span>
+    <span class="n">average_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">student_name</span><span class="p">,</span> <span class="n">score_list</span> <span class="ow">in</span> <span class="n">records</span><span class="p">:</span>
+        <span class="n">avg</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">score_list</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">score_list</span><span class="p">)</span>
+        <span class="n">average_dict</span><span class="p">[</span><span class="n">student_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">avg</span>
+    <span class="k">return</span> <span class="n">average_dict</span>
+
+<span class="n">average_scores</span> <span class="o">=</span> <span class="n">build_average_dict</span><span class="p">(</span><span class="n">records</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">average_scores</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"max average score: </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">average_scores</span><span class="o">.</span><span class="n">values</span><span class="p">())</span><span class="si">}</span><span class="s2"> for student </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">average_scores</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="o">=</span><span class="n">average_scores</span><span class="o">.</span><span class="n">get</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the maximum average score</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'Alice': 86.33333333333333, 'Bob': 90.33333333333333, 'Charlie': 71.66666666666667}
+max average score: 90.33333333333333 for student Bob
 </pre></div>
 </div>
 </div>
