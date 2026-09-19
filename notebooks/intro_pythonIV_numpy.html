@@ -1529,9 +1529,9 @@ Indices: [1 2 0 6]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python loop:       0.0511 seconds
-NumPy vectorized:  0.0011 seconds
-NumPy was about 46.0x faster
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python loop:       0.0930 seconds
+NumPy vectorized:  0.0016 seconds
+NumPy was about 57.8x faster
 </pre></div>
 </div>
 </div>
@@ -1580,6 +1580,33 @@ NumPy was about 46.0x faster
 </div>
 </div>
 </div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># Print x+5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># Print x*2</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># Print x squared</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="c1"># Print the square root of x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 6  7  8  9 10 11 12 13 14 15]
+[ 2  4  6  8 10 12 14 16 18 20]
+[  1   4   9  16  25  36  49  64  81 100]
+[1.         1.41421356 1.73205081 2.         2.23606798 2.44948974
+ 2.64575131 2.82842712 3.         3.16227766]
+</pre></div>
+</div>
+</div>
+</details>
+</div>
 </section>
 <section id="q2-evaluating-a-function-and-slicing">
 <h3>Q2: Evaluating a function and slicing<a class="headerlink" href="#q2-evaluating-a-function-and-slicing" title="Link to this heading">#</a></h3>
@@ -1591,6 +1618,38 @@ NumPy was about 46.0x faster
 </div>
 </div>
 </div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span> <span class="c1"># 9 evenly spaced angles covering a full period</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># Print the angles</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="c1"># Evaluate cos(sin(x)) at each of those 9 points</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="c1"># Print the resulting values</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># Print the first three values of y</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:])</span> <span class="c1"># Print the last three values of y</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># Print every other value of y, starting with the first</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.         0.78539816 1.57079633 2.35619449 3.14159265 3.92699082
+ 4.71238898 5.49778714 6.28318531]
+[1.         0.7602446  0.54030231 0.7602446  1.         0.7602446
+ 0.54030231 0.7602446  1.        ]
+[1.         0.7602446  0.54030231]
+[0.54030231 0.7602446  1.        ]
+[1.         0.54030231 1.         0.54030231 1.        ]
+</pre></div>
+</div>
+</div>
+</details>
+</div>
 </section>
 <section id="q3-complex-numbers-real-imaginary-parts-and-magnitude">
 <h3>Q3: Complex numbers, real/imaginary parts, and magnitude<a class="headerlink" href="#q3-complex-numbers-real-imaginary-parts-and-magnitude" title="Link to this heading">#</a></h3>
@@ -1601,6 +1660,39 @@ NumPy was about 46.0x faster
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span> <span class="o">+</span> <span class="mi">2</span><span class="n">j</span><span class="p">,</span> <span class="mi">2</span><span class="o">+</span><span class="mi">4</span><span class="n">j</span><span class="p">,</span> <span class="mi">3</span><span class="o">+</span><span class="mf">6.2</span><span class="n">j</span><span class="p">,</span> <span class="mi">4</span><span class="o">+</span><span class="mi">3</span><span class="n">j</span><span class="p">,</span> <span class="mi">5</span><span class="o">+</span><span class="mi">4</span><span class="n">j</span><span class="p">,</span> <span class="mi">6</span><span class="o">+</span><span class="mi">5</span><span class="n">j</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"z = </span><span class="si">{</span><span class="n">z</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the complex array</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Real part of z: </span><span class="si">{</span><span class="n">z</span><span class="o">.</span><span class="n">real</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the real part of z</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Imaginary part of z: </span><span class="si">{</span><span class="n">z</span><span class="o">.</span><span class="n">imag</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the imaginary part of z</span>
+
+<span class="n">abs_list</span> <span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">z</span><span class="p">:</span>
+    <span class="n">abs_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">el</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Absolute value of z: </span><span class="si">{</span><span class="n">abs_list</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the absolute</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">abs_list</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">z</span><span class="p">)))</span> <span class="c1"># Check if the two methods give the same result")</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>z = [1.+2.j  2.+4.j  3.+6.2j 4.+3.j  5.+4.j  6.+5.j ]
+Real part of z: [1. 2. 3. 4. 5. 6.]
+Imaginary part of z: [2.  4.  6.2 3.  4.  5. ]
+Absolute value of z: [np.float64(2.23606797749979), np.float64(4.47213595499958), np.float64(6.887670143089026), np.float64(5.0), np.float64(6.4031242374328485), np.float64(7.810249675906654)]
+True
+</pre></div>
+</div>
+</div>
+</details>
 </div>
 </section>
 <section id="q4-building-3d-rotation-matrices">
@@ -1627,6 +1719,60 @@ R_z(\theta) = \begin{bmatrix} \cos\theta &amp; -\sin\theta &amp; 0 \\ \sin\theta
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mat_rx</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="o">-</span><span class="n">s</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">c</span><span class="p">]])</span> <span class="c1"># Return the 3x3 rotation matrix about the x-axis</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">mat_ry</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="p">]])</span> <span class="c1"># Return the 3x3 rotation matrix about the y-axis</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">mat_rz</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">c</span><span class="p">,</span> <span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span> <span class="c1"># Return the 3x3 rotation matrix about the z-axis</span>
+
+<span class="n">v</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="c1"># A vector along the x-axis</span>
+
+<span class="n">rx</span> <span class="o">=</span> <span class="n">mat_rx</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 90 degree rotation about the x-axis</span>
+<span class="n">ry</span> <span class="o">=</span> <span class="n">mat_ry</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 90 degree rotation about the y-axis</span>
+<span class="n">rz</span> <span class="o">=</span> <span class="n">mat_rz</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 90 degree rotation about the z-axis</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Rotation about x-axis: </span><span class="si">{</span><span class="n">rx</span><span class="w"> </span><span class="o">@</span><span class="w"> </span><span class="n">v</span><span class="si">}</span><span class="s2">. This keeps the vecor intact."</span><span class="p">)</span> <span class="c1"># Apply the rotation matrix to the vector</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Rotation about y-axis: </span><span class="si">{</span><span class="n">ry</span><span class="w"> </span><span class="o">@</span><span class="w"> </span><span class="n">v</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Apply the rotation matrix to the vector</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Rotation about z-axis: </span><span class="si">{</span><span class="n">rz</span><span class="w"> </span><span class="o">@</span><span class="w"> </span><span class="n">v</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Apply the rotation matrix to the vector</span>
+
+<span class="n">rx_pi4</span> <span class="o">=</span> <span class="n">mat_rz</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 45 degree rotation about the z-axis</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Rotation about z-axis by 45 degrees: </span><span class="si">{</span><span class="n">rx_pi4</span><span class="w"> </span><span class="o">@</span><span class="w"> </span><span class="n">v</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">twice_rotated</span> <span class="o">=</span> <span class="n">rx_pi4</span> <span class="o">@</span> <span class="p">(</span><span class="n">rx_pi4</span> <span class="o">@</span> <span class="n">v</span><span class="p">)</span> <span class="c1"># Apply the rotation matrix twice to the vector</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Rotation about z-axis by another 45 degrees: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">array2string</span><span class="p">(</span><span class="n">twice_rotated</span><span class="p">,</span><span class="w"> </span><span class="n">suppress_small</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="w"> </span><span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Apply the rotation matrix twice to the vector</span>
+
+<span class="n">vz_pi2</span> <span class="o">=</span> <span class="n">mat_rz</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">@</span> <span class="n">v</span> <span class="c1"># 90 degree rotation about the z-axis</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">vz_pi2</span><span class="p">,</span> <span class="n">twice_rotated</span><span class="p">))</span> <span class="c1"># Check if the two methods give the same result</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rotation about x-axis: [1. 0. 0.]. This keeps the vecor intact.
+Rotation about y-axis: [ 6.123234e-17  0.000000e+00 -1.000000e+00]
+Rotation about z-axis: [6.123234e-17 1.000000e+00 0.000000e+00]
+Rotation about z-axis by 45 degrees: [0.70710678 0.70710678 0.        ]
+Rotation about z-axis by another 45 degrees: [0. 1. 0.]
+True
+</pre></div>
+</div>
+</div>
+</details>
 </div>
 </section>
 </section>
