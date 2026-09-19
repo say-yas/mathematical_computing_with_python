@@ -999,6 +999,34 @@ x = 0:  The condition is  False
 </div>
 </div>
 </div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi_str</span> <span class="o">=</span> <span class="s2">"pi"</span>
+<span class="n">pi_val</span> <span class="o">=</span> <span class="mf">3.14159</span>
+<span class="n">pi_digits</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"pi_str = </span><span class="si">{</span><span class="n">pi_str</span><span class="si">}</span><span class="s2">, pi_val = </span><span class="si">{</span><span class="n">pi_val</span><span class="si">}</span><span class="s2">, pi_digits = </span><span class="si">{</span><span class="n">pi_digits</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the values of pi_str, pi_val, and pi_digits</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Type of pi_str: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">pi_str</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Type of pi_val: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">pi_val</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Type of pi_digits: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">pi_digits</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pi_str = pi, pi_val = 3.14159, pi_digits = 5
+Type of pi_str: &lt;class 'str'&gt;
+Type of pi_val: &lt;class 'float'&gt;
+Type of pi_digits: &lt;class 'int'&gt;
+</pre></div>
+</div>
+</div>
+</details>
+</div>
 </section>
 <section id="q2-lists-and-slicing">
 <h3>Q2: Lists and slicing<a class="headerlink" href="#q2-lists-and-slicing" title="Link to this heading">#</a></h3>
@@ -1010,6 +1038,37 @@ x = 0:  The condition is  False
 </div>
 </div>
 </div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"my_list = </span><span class="si">{</span><span class="n">my_list</span><span class="si">}</span><span class="s2">, type of my_list = </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the value of my_list and its type</span>
+
+<span class="n">sublist_a</span> <span class="o">=</span> <span class="n">my_list</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># This is a slicing operation: start index is the beginning of the list, end index is 3 (exclusive)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"sublist_a = </span><span class="si">{</span><span class="n">sublist_a</span><span class="si">}</span><span class="s2">, type of sublist_a = </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">sublist_a</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the value of sublist_a and its type</span>
+
+<span class="n">sublist_b</span> <span class="o">=</span> <span class="n">my_list</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span> <span class="c1"># This is a slicing operation: start index is -3, end index is the end of the list</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"sublist_b = </span><span class="si">{</span><span class="n">sublist_b</span><span class="si">}</span><span class="s2">, type of sublist_b = </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">sublist_b</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the value of sublist_b and its type</span>
+
+<span class="n">sublist_c</span> <span class="o">=</span> <span class="n">my_list</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># This is a slicing operation: start index is the end of the list, end index is the beginning of the list, step is -1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"sublist_c = </span><span class="si">{</span><span class="n">sublist_c</span><span class="si">}</span><span class="s2">, type of sublist_c = </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">sublist_c</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the value of sublist_c and its type</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my_list = [1, 2, 3, 4, 5], type of my_list = &lt;class 'list'&gt;
+sublist_a = [1, 2, 3], type of sublist_a = &lt;class 'list'&gt;
+sublist_b = [3, 4, 5], type of sublist_b = &lt;class 'list'&gt;
+sublist_c = [5, 4, 3, 2, 1], type of sublist_c = &lt;class 'list'&gt;
+</pre></div>
+</div>
+</div>
+</details>
+</div>
 </section>
 <section id="q3-loops-and-accumulation">
 <h3>Q3: Loops and accumulation<a class="headerlink" href="#q3-loops-and-accumulation" title="Link to this heading">#</a></h3>
@@ -1020,6 +1079,35 @@ x = 0:  The condition is  False
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">):</span>
+    <span class="nb">sum</span> <span class="o">+=</span> <span class="n">idx</span><span class="o">**</span><span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The sum of squares from 1 to 10 is: </span><span class="si">{</span><span class="nb">sum</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the sum of squares from 1 to 10</span>
+
+<span class="n">n</span><span class="o">=</span><span class="mi">1</span>
+<span class="nb">sum</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">while</span> <span class="nb">sum</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
+    <span class="nb">sum</span> <span class="o">+=</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The sum of squares from 1 to </span><span class="si">{</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s2"> is: </span><span class="si">{</span><span class="nb">sum</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the sum of squares from 1 to n-1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The sum of squares from 1 to 10 is: 385
+The sum of squares from 1 to 7 is: 140
+</pre></div>
+</div>
+</div>
+</details>
 </div>
 </section>
 <section id="q4-combining-loops-lists-and-slicing">
@@ -1035,6 +1123,28 @@ x = 0:  The condition is  False
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">F_list</span> <span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">):</span>
+    <span class="n">F_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">F_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">F_list</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># This is a Fibonacci sequence generation</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The first 15 Fibonacci numbers are: </span><span class="si">{</span><span class="n">F_list</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Print the first 15 Fibonacci numbers</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The first 15 Fibonacci numbers are: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377]
+</pre></div>
+</div>
+</div>
+</details>
 </div>
 </section>
 </section>
