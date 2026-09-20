@@ -573,94 +573,7 @@
 <p>The standard import brings in the <code class="docutils literal notranslate"><span class="pre">pyplot</span></code> module under the alias <code class="docutils literal notranslate"><span class="pre">plt</span></code> (just like <code class="docutils literal notranslate"><span class="pre">numpy</span></code> is imported as <code class="docutils literal notranslate"><span class="pre">np</span></code>):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pip</span> install matplotlib ipympl mpld3
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: matplotlib in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (3.11.2)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting ipympl
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading ipympl-0.10.0-py3-none-any.whl.metadata (9.4 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting mpld3
-  Downloading mpld3-0.5.12-py3-none-any.whl.metadata (5.3 kB)
-Requirement already satisfied: contourpy&gt;=1.0.1 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from matplotlib) (1.3.3)
-Requirement already satisfied: cycler&gt;=0.10 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from matplotlib) (0.12.1)
-Requirement already satisfied: fonttools&gt;=4.28.2 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from matplotlib) (4.65.0)
-Requirement already satisfied: kiwisolver&gt;=1.3.1 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from matplotlib) (1.5.1)
-Requirement already satisfied: numpy&gt;=1.25 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from matplotlib) (2.4.6)
-Requirement already satisfied: packaging&gt;=20.0 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from matplotlib) (26.3)
-Requirement already satisfied: pillow&gt;=9 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from matplotlib) (12.3.0)
-Requirement already satisfied: pyparsing&gt;=3 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from matplotlib) (3.3.3)
-Requirement already satisfied: python-dateutil&gt;=2.7 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from matplotlib) (2.9.0.post0)
-Requirement already satisfied: ipython&lt;10 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipympl) (9.17.1)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting ipywidgets&lt;9,&gt;=7.6.0 (from ipympl)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading ipywidgets-8.1.9-py3-none-any.whl.metadata (2.4 kB)
-Requirement already satisfied: traitlets&lt;6 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipympl) (5.16.1)
-Requirement already satisfied: ipython-pygments-lexers&gt;=1.0.0 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipython&lt;10-&gt;ipympl) (1.1.1)
-Requirement already satisfied: jedi&gt;=0.18.2 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipython&lt;10-&gt;ipympl) (0.20.0)
-Requirement already satisfied: matplotlib-inline&gt;=0.1.6 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipython&lt;10-&gt;ipympl) (0.2.2)
-Requirement already satisfied: pexpect&gt;4.6 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipython&lt;10-&gt;ipympl) (4.9.0)
-Requirement already satisfied: prompt_toolkit&lt;3.1.0,&gt;=3.0.41 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipython&lt;10-&gt;ipympl) (3.0.53)
-Requirement already satisfied: psutil&gt;=7 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipython&lt;10-&gt;ipympl) (7.2.2)
-Requirement already satisfied: pygments&gt;=2.14.0 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipython&lt;10-&gt;ipympl) (2.21.0)
-Requirement already satisfied: stack_data&gt;=0.6.0 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipython&lt;10-&gt;ipympl) (0.6.3)
-Requirement already satisfied: typing_extensions&gt;=4.6 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipython&lt;10-&gt;ipympl) (4.16.0)
-Requirement already satisfied: comm&gt;=0.1.3 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipywidgets&lt;9,&gt;=7.6.0-&gt;ipympl) (0.2.3)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting widgetsnbextension~=4.0.16 (from ipywidgets&lt;9,&gt;=7.6.0-&gt;ipympl)
-  Downloading widgetsnbextension-4.0.16-py3-none-any.whl.metadata (1.6 kB)
-Collecting jupyterlab_widgets~=3.0.17 (from ipywidgets&lt;9,&gt;=7.6.0-&gt;ipympl)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading jupyterlab_widgets-3.0.17-py3-none-any.whl.metadata (20 kB)
-Requirement already satisfied: wcwidth&gt;=0.1.4 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from prompt_toolkit&lt;3.1.0,&gt;=3.0.41-&gt;ipython&lt;10-&gt;ipympl) (0.8.4)
-Requirement already satisfied: jinja2 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from mpld3) (3.1.6)
-Requirement already satisfied: parso&lt;0.9.0,&gt;=0.8.6 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from jedi&gt;=0.18.2-&gt;ipython&lt;10-&gt;ipympl) (0.8.7)
-Requirement already satisfied: ptyprocess&gt;=0.5 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from pexpect&gt;4.6-&gt;ipython&lt;10-&gt;ipympl) (0.7.0)
-Requirement already satisfied: six&gt;=1.5 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib) (1.17.0)
-Requirement already satisfied: executing&gt;=1.2.0 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from stack_data&gt;=0.6.0-&gt;ipython&lt;10-&gt;ipympl) (2.2.1)
-Requirement already satisfied: asttokens&gt;=2.1.0 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from stack_data&gt;=0.6.0-&gt;ipython&lt;10-&gt;ipympl) (3.0.2)
-Requirement already satisfied: pure-eval in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from stack_data&gt;=0.6.0-&gt;ipython&lt;10-&gt;ipympl) (0.2.4)
-Requirement already satisfied: MarkupSafe&gt;=2.0 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from jinja2-&gt;mpld3) (3.0.3)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading ipympl-0.10.0-py3-none-any.whl (519 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading ipywidgets-8.1.9-py3-none-any.whl (140 kB)
-Downloading jupyterlab_widgets-3.0.17-py3-none-any.whl (217 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading widgetsnbextension-4.0.16-py3-none-any.whl (2.2 MB)
-?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/2.2 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2.2/2.2 MB</span> <span class=" -Color -Color-Red">42.5 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
-?25hDownloading mpld3-0.5.12-py3-none-any.whl (203 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: widgetsnbextension, jupyterlab_widgets, mpld3, ipywidgets, ipympl
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25l
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25h
-Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 mpld3-0.5.12 widgetsnbextension-4.0.16
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %pip install matplotlib ipympl mpld3 # these are the packages needed for interactive plotting in this Jupyter notebook</span>
 </pre></div>
 </div>
 </div>
@@ -1194,7 +1107,7 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saved interactive_plot.html : open it in a browser to pan and zoom!
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mpld3 isn't installed. Run `%pip install mpld3` and re-run this cell to export an interactive HTML plot.
 </pre></div>
 </div>
 <img alt="../_images/19d148d7b03a986142805414e6b91fa45f667d802e4024d0ca36c9ac8dabafc1.png" src="../_images/19d148d7b03a986142805414e6b91fa45f667d802e4024d0ca36c9ac8dabafc1.png" />
