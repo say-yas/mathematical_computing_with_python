@@ -271,9 +271,6 @@
 
 
 
-
-
-
 </ul>
 
     </div>
@@ -519,7 +516,6 @@
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-anatomy-of-a-figure">The Anatomy of a Figure</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-basic-plot-fig-ax-plt-subplots">Making a Basic Plot: <code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">ax</span> <span class="pre">=</span> <span class="pre">plt.subplots()</span></code></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-a-plot">Customizing a Plot</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#using-latex-in-labels-and-titles">Using LaTeX in Labels and Titles</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-panels-with-plt-subplots">Multiple Panels with <code class="docutils literal notranslate"><span class="pre">plt.subplots</span></code></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#density-plots-and-contour-plots">Density Plots and Contour Plots</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-colors-and-colormaps">Choosing Colors and Colormaps</a></li>
@@ -527,17 +523,13 @@
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-and-html-plots">Interactive and HTML Plots</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-animated-gifs">Creating Animated GIFs</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-example-1-plotting-two-functions">Practice Example 1: Plotting Two Functions</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-example-2-plotting-fractals">Practice Example 2: Plotting Fractals</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-example-2-plotting-a-fractal-the-mandelbrot-set">Practice Example 2: Plotting a Fractal (the Mandelbrot Set)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-example-3-creating-your-own-gif">Practice Example 3: Creating Your Own GIF</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-example-4-the-ikeda-map">Practice Example 4: The Ikeda Map</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-example-5-the-gingerbread-man-map">Practice Example 5: The Gingerbread Man Map</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-exercises">Practice Exercises</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q1-a-single-customized-plot">Q1: A single customized plot</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q2-a-2x3-grid-of-panels">Q2: A 2x3 grid of panels</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q3-a-contour-plot-with-a-well-chosen-colormap">Q3: A contour plot with a well-chosen colormap</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q4-your-own-animated-gif">Q4: Your own animated GIF</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q5-exploring-the-ikeda-map-s-parameter">Q5: Exploring the Ikeda map’s parameter</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q6-design-your-own-fractal">Q6: Design your own fractal</a></li>
 </ul>
 </li>
 </ul>
@@ -556,9 +548,6 @@
 <h1>Introduction to Python, Part V: Plotting with Matplotlib<a class="headerlink" href="#introduction-to-python-part-v-plotting-with-matplotlib" title="Link to this heading">#</a></h1>
 <p>In Part IV we covered NumPy: arrays and fast, vectorized math. In this notebook we make that math <em>visible</em>. We’ll cover <strong>Matplotlib</strong>, the standard plotting library for Python, and its <code class="docutils literal notranslate"><span class="pre">pyplot</span></code> interface. Topics: the anatomy of a figure, basic 2D plots, multi-panel figures with <code class="docutils literal notranslate"><span class="pre">plt.subplots</span></code>, density/contour plots, choosing colors and colormaps, 3D plots, quick interactive/HTML plots, and animated GIFs.</p>
 <p>Each section starts with a short explanation, followed by a code cell you can run and experiment with. Try changing values in the code cells, that’s the best way to learn!</p>
-<blockquote>
-<div><p><strong>Note:</strong> this notebook covers the fundamentals, but for the full details on plotting with Matplotlib, including its complete terminology and every option available, see the official <a class="reference external" href="https://matplotlib.org/stable/users/explain/quick_start.html">Quick start guide</a>. It’s the best single reference to come back to once you’re past the basics here.</p>
-</div></blockquote>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="installing-and-importing-matplotlib">
 <h1>Installing and Importing Matplotlib<a class="headerlink" href="#installing-and-importing-matplotlib" title="Link to this heading">#</a></h1>
@@ -571,90 +560,6 @@
 </pre></div>
 </div>
 <p>The standard import brings in the <code class="docutils literal notranslate"><span class="pre">pyplot</span></code> module under the alias <code class="docutils literal notranslate"><span class="pre">plt</span></code> (just like <code class="docutils literal notranslate"><span class="pre">numpy</span></code> is imported as <code class="docutils literal notranslate"><span class="pre">np</span></code>):</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pip</span> install matplotlib ipympl mpld3
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: matplotlib in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (3.11.2)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting ipympl
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading ipympl-0.10.0-py3-none-any.whl.metadata (9.4 kB)
-Collecting mpld3
-  Downloading mpld3-0.5.12-py3-none-any.whl.metadata (5.3 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: contourpy&gt;=1.0.1 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from matplotlib) (1.3.3)
-Requirement already satisfied: cycler&gt;=0.10 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from matplotlib) (0.12.1)
-Requirement already satisfied: fonttools&gt;=4.28.2 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from matplotlib) (4.65.0)
-Requirement already satisfied: kiwisolver&gt;=1.3.1 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from matplotlib) (1.5.1)
-Requirement already satisfied: numpy&gt;=1.25 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from matplotlib) (2.4.6)
-Requirement already satisfied: packaging&gt;=20.0 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from matplotlib) (26.3)
-Requirement already satisfied: pillow&gt;=9 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from matplotlib) (12.3.0)
-Requirement already satisfied: pyparsing&gt;=3 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from matplotlib) (3.3.3)
-Requirement already satisfied: python-dateutil&gt;=2.7 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from matplotlib) (2.9.0.post0)
-Requirement already satisfied: ipython&lt;10 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipympl) (9.17.1)
-Collecting ipywidgets&lt;9,&gt;=7.6.0 (from ipympl)
-  Downloading ipywidgets-8.1.9-py3-none-any.whl.metadata (2.4 kB)
-Requirement already satisfied: traitlets&lt;6 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipympl) (5.16.1)
-Requirement already satisfied: ipython-pygments-lexers&gt;=1.0.0 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipython&lt;10-&gt;ipympl) (1.1.1)
-Requirement already satisfied: jedi&gt;=0.18.2 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipython&lt;10-&gt;ipympl) (0.20.0)
-Requirement already satisfied: matplotlib-inline&gt;=0.1.6 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipython&lt;10-&gt;ipympl) (0.2.2)
-Requirement already satisfied: pexpect&gt;4.6 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipython&lt;10-&gt;ipympl) (4.9.0)
-Requirement already satisfied: prompt_toolkit&lt;3.1.0,&gt;=3.0.41 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipython&lt;10-&gt;ipympl) (3.0.53)
-Requirement already satisfied: psutil&gt;=7 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipython&lt;10-&gt;ipympl) (7.2.2)
-Requirement already satisfied: pygments&gt;=2.14.0 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipython&lt;10-&gt;ipympl) (2.21.0)
-Requirement already satisfied: stack_data&gt;=0.6.0 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipython&lt;10-&gt;ipympl) (0.6.3)
-Requirement already satisfied: typing_extensions&gt;=4.6 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipython&lt;10-&gt;ipympl) (4.16.0)
-Requirement already satisfied: comm&gt;=0.1.3 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from ipywidgets&lt;9,&gt;=7.6.0-&gt;ipympl) (0.2.3)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting widgetsnbextension~=4.0.16 (from ipywidgets&lt;9,&gt;=7.6.0-&gt;ipympl)
-  Downloading widgetsnbextension-4.0.16-py3-none-any.whl.metadata (1.6 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting jupyterlab_widgets~=3.0.17 (from ipywidgets&lt;9,&gt;=7.6.0-&gt;ipympl)
-  Downloading jupyterlab_widgets-3.0.17-py3-none-any.whl.metadata (20 kB)
-Requirement already satisfied: wcwidth&gt;=0.1.4 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from prompt_toolkit&lt;3.1.0,&gt;=3.0.41-&gt;ipython&lt;10-&gt;ipympl) (0.8.4)
-Requirement already satisfied: jinja2 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from mpld3) (3.1.6)
-Requirement already satisfied: parso&lt;0.9.0,&gt;=0.8.6 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from jedi&gt;=0.18.2-&gt;ipython&lt;10-&gt;ipympl) (0.8.7)
-Requirement already satisfied: ptyprocess&gt;=0.5 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from pexpect&gt;4.6-&gt;ipython&lt;10-&gt;ipympl) (0.7.0)
-Requirement already satisfied: six&gt;=1.5 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib) (1.17.0)
-Requirement already satisfied: executing&gt;=1.2.0 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from stack_data&gt;=0.6.0-&gt;ipython&lt;10-&gt;ipympl) (2.2.1)
-Requirement already satisfied: asttokens&gt;=2.1.0 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from stack_data&gt;=0.6.0-&gt;ipython&lt;10-&gt;ipympl) (3.0.2)
-Requirement already satisfied: pure-eval in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from stack_data&gt;=0.6.0-&gt;ipython&lt;10-&gt;ipympl) (0.2.4)
-Requirement already satisfied: MarkupSafe&gt;=2.0 in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (from jinja2-&gt;mpld3) (3.0.3)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading ipympl-0.10.0-py3-none-any.whl (519 kB)
-Downloading ipywidgets-8.1.9-py3-none-any.whl (140 kB)
-Downloading jupyterlab_widgets-3.0.17-py3-none-any.whl (217 kB)
-Downloading widgetsnbextension-4.0.16-py3-none-any.whl (2.2 MB)
-?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/2.2 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2.2/2.2 MB</span> <span class=" -Color -Color-Red">158.4 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
-?25hDownloading mpld3-0.5.12-py3-none-any.whl (203 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: widgetsnbextension, jupyterlab_widgets, mpld3, ipywidgets, ipympl
-?25l
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25h
-Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 mpld3-0.5.12 widgetsnbextension-4.0.16
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment the following line to install matplotlib if it is not already installed in your environment</span>
@@ -699,8 +604,38 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 <li><p><strong>Grid</strong>: light reference lines behind the data, toggled with <code class="docutils literal notranslate"><span class="pre">ax.grid()</span></code>.</p></li>
 <li><p><strong>Spines</strong>: the four lines forming the border of the Axes (<code class="docutils literal notranslate"><span class="pre">ax.spines['top']</span></code>, <code class="docutils literal notranslate"><span class="pre">['right']</span></code>, <code class="docutils literal notranslate"><span class="pre">['bottom']</span></code>, <code class="docutils literal notranslate"><span class="pre">['left']</span></code>).</p></li>
 </ul>
-<p>The official Matplotlib documentation ships an actual diagram covering exactly this vocabulary. Rather than redrawing an imitation of it in code, here is that reference image directly, worth keeping open in a tab while you work through the rest of this notebook:</p>
-<p><img alt="Anatomy of a Figure, from the Matplotlib quick start guide" src="notebooks/attachment:anatomy_of_a_figure.png" /></p>
+<p>The code below builds a small labeled diagram of these pieces so you can see where each one lives on an actual figure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>                    <span class="c1"># fig = the whole Figure; ax = the one Axes inside it</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>                                 <span class="c1"># 200 x values from 0 to 4</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"tab:blue"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Line (ax.plot)"</span><span class="p">)</span>     <span class="c1"># A Line</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span>                        <span class="c1"># A scattering of Markers</span>
+           <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">,</span> <span class="mi">14</span><span class="p">))</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="mf">0.15</span><span class="p">,</span>
+           <span class="n">facecolors</span><span class="o">=</span><span class="s2">"none"</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s2">"tab:purple"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Markers (ax.scatter)"</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Title  (ax.set_title)"</span><span class="p">)</span>                       <span class="c1"># Title</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x Axis label  (ax.set_xlabel)"</span><span class="p">)</span>               <span class="c1"># x-axis label</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"y Axis label  (ax.set_ylabel)"</span><span class="p">)</span>               <span class="c1"># y-axis label</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">"lower right"</span><span class="p">)</span>                                <span class="c1"># Legend</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>                    <span class="c1"># Grid</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">"Spine (ax.spines)"</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">2.6</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">"-&gt;"</span><span class="p">))</span>                <span class="c1"># Point at the right spine</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">"Major tick (ax.xaxis.set_major_locator)"</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">),</span>
+            <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">1.6</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">),</span> <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">"-&gt;"</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">"Figure  (fig, ax = plt.subplots())"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"dimgray"</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3fde6ee426cc7797d96fbb8f9f929d7430876951f5a661a881b40db82aba69e6.png" src="../_images/3fde6ee426cc7797d96fbb8f9f929d7430876951f5a661a881b40db82aba69e6.png" />
+</div>
+</div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="making-a-basic-plot-fig-ax-plt-subplots">
 <h1>Making a Basic Plot: <code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">ax</span> <span class="pre">=</span> <span class="pre">plt.subplots()</span></code><a class="headerlink" href="#making-a-basic-plot-fig-ax-plt-subplots" title="Link to this heading">#</a></h1>
@@ -722,15 +657,12 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>              <span class="c1"># Create a Figure and a single Axes inside it</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>                         <span class="c1"># Plot y vs. x as a line on that Axes</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"A basic line plot"</span><span class="p">)</span>     <span class="c1"># Even a first plot should say what it shows</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>                    <span class="c1"># and what its axes represent</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"sin(x)"</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                            <span class="c1"># Render the figure</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/65a78e20b12dd8c9c974ac63810ec619282cb6765a4f9875efe03c96806892a7.png" src="../_images/65a78e20b12dd8c9c974ac63810ec619282cb6765a4f9875efe03c96806892a7.png" />
+<img alt="../_images/49ffd37b9db9fb530d543d0efd0aa4d96b04091adbbe6cd5dbfaf85ee4592839.png" src="../_images/49ffd37b9db9fb530d543d0efd0aa4d96b04091adbbe6cd5dbfaf85ee4592839.png" />
 </div>
 </div>
 <p>Compare the same plot using the pyplot (state-based) shortcut, <code class="docutils literal notranslate"><span class="pre">plt.plot(...)</span></code> directly, with no explicit <code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">ax</span></code>. It looks almost identical for one simple plot, but there’s no named <code class="docutils literal notranslate"><span class="pre">ax</span></code> to refer back to, which becomes limiting the moment you want more than one panel:</p>
@@ -810,32 +742,6 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="using-latex-in-labels-and-titles">
-<h1>Using LaTeX in Labels and Titles<a class="headerlink" href="#using-latex-in-labels-and-titles" title="Link to this heading">#</a></h1>
-<p>Any string passed to <code class="docutils literal notranslate"><span class="pre">ax.set_title()</span></code>, <code class="docutils literal notranslate"><span class="pre">ax.set_xlabel()</span></code>, <code class="docutils literal notranslate"><span class="pre">ax.set_ylabel()</span></code>, or a legend <code class="docutils literal notranslate"><span class="pre">label</span></code> can contain math typeset with LaTeX syntax.</p>
-<p><strong>Mathtext (built in, no setup required).</strong> Wrap the math in dollar signs inside a raw string, e.g. <code class="docutils literal notranslate"><span class="pre">r&quot;$\sin(x^2)$&quot;</span></code>. Matplotlib parses a useful subset of LaTeX math syntax itself (superscripts, subscripts, Greek letters, fractions, summations) and renders it with its own fonts, with no external software needed. This is what we’ve already been using for labels like <code class="docutils literal notranslate"><span class="pre">r&quot;$f(x)</span> <span class="pre">=</span> <span class="pre">\sin(x^2)$&quot;</span></code> earlier in this notebook, and it’s the right choice almost all the time.</p>
-<p>The general rule: reach for plain mathtext (<code class="docutils literal notranslate"><span class="pre">$...$</span></code> in a raw string) unless you specifically need a LaTeX package or exact document-matching fonts, in which case turn on <code class="docutils literal notranslate"><span class="pre">text.usetex</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-
-<span class="n">x_latex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_latex</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x_latex</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">"tab:blue"</span><span class="p">)</span>
-
-<span class="c1"># Mathtext: works everywhere, no LaTeX installation needed. Note the leading r for a raw string,</span>
-<span class="c1"># so that backslashes like \ln are passed through to Matplotlib's math parser untouched.</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Mathtext example: $y = \ln(x)$"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$x$"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$y = \ln(x)$"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/9ad2361d6749e91249dc15f631149eaf66f40034c97496071ae9968edc687fe3.png" src="../_images/9ad2361d6749e91249dc15f631149eaf66f40034c97496071ae9968edc687fe3.png" />
-</div>
-</div>
-</section>
 <section class="tex2jax_ignore mathjax_ignore" id="multiple-panels-with-plt-subplots">
 <h1>Multiple Panels with <code class="docutils literal notranslate"><span class="pre">plt.subplots</span></code><a class="headerlink" href="#multiple-panels-with-plt-subplots" title="Link to this heading">#</a></h1>
 <p>So far we’ve called <code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code> with no arguments, which gives one Figure with one Axes. Its general form is:</p>
@@ -888,8 +794,6 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axs</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">functions</span><span class="p">):</span>  <span class="c1"># axs.flatten() turns the 2x2 grid into a flat list of 4 Axes</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">"tab:green"</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>               <span class="c1"># Every panel gets its own axis labels, even in a grid</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">functions</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">:</span>            <span class="c1"># tan(x) blows up near pi/2; clip the y-axis so the plot stays readable</span>
@@ -902,7 +806,7 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/58b0584f87efc7ac8d5d1f93ba0f3c1677ced04d5388a65ea7a775255b603861.png" src="../_images/58b0584f87efc7ac8d5d1f93ba0f3c1677ced04d5388a65ea7a775255b603861.png" />
+<img alt="../_images/4e6a92973fdb7a1dcb637d166b8f7c446a0ecb177458d5140f3f4ee26a456855.png" src="../_images/4e6a92973fdb7a1dcb637d166b8f7c446a0ecb177458d5140f3f4ee26a456855.png" />
 </div>
 </div>
 </section>
@@ -1025,8 +929,6 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 <span class="p">):</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">gradient</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s2">"auto"</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_name</span><span class="p">)</span>  <span class="c1"># Stretch the gradient across the panel, colored by cmap_name</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">family</span><span class="si">}</span><span class="s2">: '</span><span class="si">{</span><span class="n">cmap_name</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"low value"</span> <span class="o">+</span> <span class="s2">" "</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="s2">"high value"</span><span class="p">)</span>  <span class="c1"># Describe the strip in words instead of meaningless tick numbers</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>   <span class="c1"># The actual pixel-column numbers aren't meaningful, only the direction of the gradient is</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>   <span class="c1"># This is just a color strip, a y-axis would be meaningless</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -1035,7 +937,7 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/593197f1585fceb4bfff33894810a1431074fe92fb3c1955b5ca5ca36e804dab.png" src="../_images/593197f1585fceb4bfff33894810a1431074fe92fb3c1955b5ca5ca36e804dab.png" />
+<img alt="../_images/c96cff6de4700c6d5062889d98f85b6390b6f9c684b382943134a26750ce9e43.png" src="../_images/c96cff6de4700c6d5062889d98f85b6390b6f9c684b382943134a26750ce9e43.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1046,15 +948,13 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"shift=</span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.5</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># Matplotlib cycles through tab10 automatically</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Default color cycle (no `color=` given)"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"sin(x) + shift"</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c667f1e53a3df1aeb66dd87fd66e37c169576cea4f9c2082a521151e2a570de8.png" src="../_images/c667f1e53a3df1aeb66dd87fd66e37c169576cea4f9c2082a521151e2a570de8.png" />
+<img alt="../_images/3854731d93b18afc837b0dcc1f01b9f66dacfff8fe404f9eb7dd01daf5d0c319.png" src="../_images/3854731d93b18afc837b0dcc1f01b9f66dacfff8fe404f9eb7dd01daf5d0c319.png" />
 </div>
 </div>
 <p>When your colormap represents a <em>diverging</em> quantity (values above and below some meaningful center, often 0), it’s important that the center of the colormap lines up with that meaningful value, not just with the midpoint of your data’s min and max. <code class="docutils literal notranslate"><span class="pre">matplotlib.colors.TwoSlopeNorm</span></code> (or the simpler <code class="docutils literal notranslate"><span class="pre">CenteredNorm</span></code>) handles this for you:</p>
@@ -1110,9 +1010,6 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">plot3D</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">t</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"tab:blue"</span><span class="p">)</span>  <span class="c1"># x=cos(t), y=sin(t), z=t traces a helix</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"ax.plot3D: a helix"</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"y"</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s2">"z"</span><span class="p">)</span>
 
 <span class="c1"># --- Panel 2: a 3D scatter ---</span>
 <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">"3d"</span><span class="p">)</span>
@@ -1120,10 +1017,6 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">zs</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>                  <span class="c1"># 200 random points in 3D</span>
 <span class="n">sca</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">scatter3D</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">zs</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">zs</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"viridis"</span><span class="p">)</span>   <span class="c1"># Color each point by its z value</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"ax.scatter3D"</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"y"</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s2">"z"</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sca</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"z value"</span><span class="p">)</span>  <span class="c1"># Since color is redundant with z here, label what it means</span>
 
 <span class="c1"># --- Panel 3: a surface, reusing the meshgrid idea from the contour section ---</span>
 <span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">"3d"</span><span class="p">)</span>
@@ -1133,9 +1026,6 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 <span class="n">Z2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">X2</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Y2</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>                     <span class="c1"># A "ripple" function</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X2</span><span class="p">,</span> <span class="n">Y2</span><span class="p">,</span> <span class="n">Z2</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"plasma"</span><span class="p">)</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"ax.plot_surface"</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"y"</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s2">"z"</span><span class="p">)</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">elev</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">azim</span><span class="o">=-</span><span class="mi">60</span><span class="p">)</span>                        <span class="c1"># Fix the viewing angle for a static export</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -1144,7 +1034,7 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4819ef6dd48b2412b0b820b09967fd0a15f444c3887335d8e4d7e4af0a1c8ba4.png" src="../_images/4819ef6dd48b2412b0b820b09967fd0a15f444c3887335d8e4d7e4af0a1c8ba4.png" />
+<img alt="../_images/6c57333ecc3bf011f3bee73d235e25935246e64b0246833f6ce9803d76eb8c8c.png" src="../_images/6c57333ecc3bf011f3bee73d235e25935246e64b0246833f6ce9803d76eb8c8c.png" />
 </div>
 </div>
 </section>
@@ -1164,18 +1054,23 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 <p>The code below builds a plot and exports it to HTML this way (this cell will raise an <code class="docutils literal notranslate"><span class="pre">ImportError</span></code> with a helpful message if <code class="docutils literal notranslate"><span class="pre">mpld3</span></code> isn’t installed, since it’s an optional extra rather than a core dependency).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %pip install mpld3 ipympl</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">"sin(x)"</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">"cos(x)"</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"This figure will be exported to an interactive HTML file"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"y"</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">mpld3</span>
     <span class="n">mpld3</span><span class="o">.</span><span class="n">save_html</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s2">"interactive_plot.html"</span><span class="p">)</span>  <span class="c1"># Writes a standalone HTML file with pan/zoom</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Saved interactive_plot.html : open it in a browser to pan and zoom!"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Saved interactive_plot.html . open it in a browser to pan and zoom!"</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"mpld3 isn't installed. Run `%pip install mpld3` and re-run this cell to export an interactive HTML plot."</span><span class="p">)</span>
 
@@ -1184,10 +1079,10 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saved interactive_plot.html : open it in a browser to pan and zoom!
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mpld3 isn't installed. Run `%pip install mpld3` and re-run this cell to export an interactive HTML plot.
 </pre></div>
 </div>
-<img alt="../_images/19d148d7b03a986142805414e6b91fa45f667d802e4024d0ca36c9ac8dabafc1.png" src="../_images/19d148d7b03a986142805414e6b91fa45f667d802e4024d0ca36c9ac8dabafc1.png" />
+<img alt="../_images/3c9f77de8bbadf05c85b1ce95b32a04776b55318c3a48494d1d8f629fbc83ea6.png" src="../_images/3c9f77de8bbadf05c85b1ce95b32a04776b55318c3a48494d1d8f629fbc83ea6.png" />
 </div>
 </div>
 </section>
@@ -1210,8 +1105,6 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"A traveling sine wave"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"sin(x + phase)"</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
     <span class="n">phase</span> <span class="o">=</span> <span class="n">frame</span> <span class="o">*</span> <span class="mf">0.1</span>                              <span class="c1"># How far the wave has shifted by this frame</span>
@@ -1241,48 +1134,9 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/52c12cc7be177ffced1424bbb0a82eb23704b4b9bc607ddea7a7a7cad825771d.gif" src="../_images/52c12cc7be177ffced1424bbb0a82eb23704b4b9bc607ddea7a7a7cad825771d.gif" />
+<img alt="../_images/130c93cca02abcb8cee6422defcf6da8831967a6c30772e49bfe0260759448ae.gif" src="../_images/130c93cca02abcb8cee6422defcf6da8831967a6c30772e49bfe0260759448ae.gif" />
 </div>
 </div>
-<p>A <code class="docutils literal notranslate"><span class="pre">.gif</span></code> file is convenient for a notebook or a web page, but LaTeX documents cannot embed a GIF directly. If you want to embed this animation in a LaTeX document (for example with the <code class="docutils literal notranslate"><span class="pre">animate</span></code> package), what you need instead is the individual frames saved as a numbered sequence of image files, which <code class="docutils literal notranslate"><span class="pre">\animategraphics</span></code> then plays back for you. The code below reruns the same traveling-wave animation, but instead of handing it to <code class="docutils literal notranslate"><span class="pre">FuncAnimation</span></code>, we manually loop over every frame and call <code class="docutils literal notranslate"><span class="pre">fig.savefig(...)</span></code> into a folder, naming each file with a zero-padded frame number so they sort in the right order (<code class="docutils literal notranslate"><span class="pre">frame_000.png</span></code>, <code class="docutils literal notranslate"><span class="pre">frame_001.png</span></code>, and so on).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-
-<span class="n">frame_dir</span> <span class="o">=</span> <span class="s2">"frames"</span>
-<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">frame_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Create the output folder if it doesn't already exist</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">))</span>
-<span class="n">line</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_anim</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_anim</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">"tab:blue"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"A traveling sine wave"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"sin(x + phase)"</span><span class="p">)</span>
-
-<span class="n">n_frames</span> <span class="o">=</span> <span class="mi">60</span>
-<span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_frames</span><span class="p">):</span>
-    <span class="n">phase</span> <span class="o">=</span> <span class="n">frame</span> <span class="o">*</span> <span class="mf">0.1</span>
-    <span class="n">line</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_anim</span> <span class="o">+</span> <span class="n">phase</span><span class="p">))</span>                       <span class="c1"># Same update rule as the GIF version above</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">frame_dir</span><span class="si">}</span><span class="s2">/frame_</span><span class="si">{</span><span class="n">frame</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">.png"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>   <span class="c1"># Zero-padded to 3 digits: frame_000.png ... frame_059.png</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Saved </span><span class="si">{</span><span class="n">n_frames</span><span class="si">}</span><span class="s2"> frames to the '</span><span class="si">{</span><span class="n">frame_dir</span><span class="si">}</span><span class="s2">/' folder"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saved 60 frames to the 'frames/' folder
-</pre></div>
-</div>
-</div>
-</div>
-<p>With those frames saved, embedding the animation in a LaTeX document only needs the <code class="docutils literal notranslate"><span class="pre">animate</span></code> package and one command pointing at the frame folder’s shared filename prefix (<code class="docutils literal notranslate"><span class="pre">frames/frame_</span></code>), the starting frame number, and the ending frame number:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>\<span class="n">usepackage</span><span class="p">{</span><span class="n">animate</span><span class="p">}</span>
-<span class="o">...</span>
-\<span class="n">animategraphics</span><span class="p">[</span><span class="n">loop</span><span class="p">,</span><span class="n">autoplay</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mf">0.7</span>\<span class="n">linewidth</span><span class="p">]{</span><span class="mi">20</span><span class="p">}{</span><span class="n">frames</span><span class="o">/</span><span class="n">frame_</span><span class="p">}{</span><span class="mi">000</span><span class="p">}{</span><span class="mi">059</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">{20}</span></code> is the playback frame rate, and it should generally match the <code class="docutils literal notranslate"><span class="pre">fps</span></code> you used when saving the GIF version so both play back at the same speed. Compiling that document (with <code class="docutils literal notranslate"><span class="pre">pdflatex</span></code>, run with the <code class="docutils literal notranslate"><span class="pre">-shell-escape</span></code> flag since <code class="docutils literal notranslate"><span class="pre">animate</span></code> needs it to find the frame files) embeds a fully interactive, scrubbable animation directly in the resulting PDF, viewable in Adobe Acrobat or any PDF reader with JavaScript support.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="practice-example-1-plotting-two-functions">
 <h1>Practice Example 1: Plotting Two Functions<a class="headerlink" href="#practice-example-1-plotting-two-functions" title="Link to this heading">#</a></h1>
@@ -1336,141 +1190,68 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="practice-example-2-plotting-fractals">
-<h1>Practice Example 2: Plotting Fractals<a class="headerlink" href="#practice-example-2-plotting-fractals" title="Link to this heading">#</a></h1>
-<p>Following the approach in NumPy’s own <a class="reference external" href="https://numpy.org/numpy-tutorials/tutorial-plotting-fractals/#creating-your-own-fractals">Plotting Fractals tutorial</a>, we’ll draw <strong>escape-time fractals</strong>, the family that includes the Mandelbrot set. The general recipe, for a starting value <span class="math notranslate nohighlight">\(z_0\)</span> and a per-pixel point <span class="math notranslate nohighlight">\(p\)</span> on the complex plane:</p>
+<section class="tex2jax_ignore mathjax_ignore" id="practice-example-2-plotting-a-fractal-the-mandelbrot-set">
+<h1>Practice Example 2: Plotting a Fractal (the Mandelbrot Set)<a class="headerlink" href="#practice-example-2-plotting-a-fractal-the-mandelbrot-set" title="Link to this heading">#</a></h1>
+<p>Following the approach in NumPy’s own <a class="reference external" href="https://numpy.org/numpy-tutorials/tutorial-plotting-fractals/#creating-your-own-fractals">Plotting Fractals tutorial</a>, we’ll draw the <strong>Mandelbrot set</strong>. For every point <span class="math notranslate nohighlight">\(c\)</span> in the complex plane, we repeatedly apply</p>
 <div class="math notranslate nohighlight">
-\[z_{n+1} = \text{get\_next}(z_n, p)\]</div>
-<p>and ask: does <span class="math notranslate nohighlight">\(|z_n|\)</span> stay bounded forever, or does it “escape” past some radius? Points where it stays bounded (after many iterations) belong to the fractal set; points that escape are colored by <em>how quickly</em> they escaped, which is what produces the fractal image. Different choices of the update rule <code class="docutils literal notranslate"><span class="pre">get_next</span></code> and the starting value <span class="math notranslate nohighlight">\(z_0\)</span> produce entirely different fractals from the same underlying algorithm, so rather than writing one function tied to the Mandelbrot formula specifically, we’ll write one general <strong>helper function</strong> that takes <code class="docutils literal notranslate"><span class="pre">get_next</span></code> as an argument, then reuse it for several different fractals, including ones you invent yourself.</p>
-<p>We build this entirely with vectorized NumPy operations (no nested Python loops over every pixel), reusing exactly the <code class="docutils literal notranslate"><span class="pre">np.meshgrid</span></code> idea from the density plots section, but this time treating the grid as complex numbers <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">=</span> <span class="pre">X</span> <span class="pre">+</span> <span class="pre">1j</span> <span class="pre">*</span> <span class="pre">Y</span></code>.</p>
+\[z_{n+1} = z_n^2 + c, \qquad z_0 = 0\]</div>
+<p>and ask: does <span class="math notranslate nohighlight">\(|z_n|\)</span> stay bounded forever, or does it “escape” to infinity? Points where it stays bounded (after many iterations) belong to the Mandelbrot set; points that escape are colored by <em>how quickly</em> they escaped, which is what produces the famous fractal image.</p>
+<p>We build this entirely with vectorized NumPy operations (no nested Python loops over every pixel), reusing exactly the <code class="docutils literal notranslate"><span class="pre">np.meshgrid</span></code> idea from the density plots section, but this time treating the grid as complex numbers <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">=</span> <span class="pre">X</span> <span class="pre">+</span> <span class="pre">1j</span> <span class="pre">*</span> <span class="pre">Y</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">escape_time_fractal</span><span class="p">(</span><span class="n">get_next</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">x_range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span> <span class="n">y_range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span>
-                         <span class="n">initial_z</span><span class="o">=</span><span class="mi">0</span><span class="n">j</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">escape_radius</span><span class="o">=</span><span class="mf">2.0</span><span class="p">):</span>
-    <span class="c1"># A general-purpose helper for ANY escape-time fractal.</span>
-    <span class="c1">#   get_next(z, p): given the current value z and this pixel's point p on the complex plane,</span>
-    <span class="c1">#                   returns the next z in the sequence. This is the only piece that changes</span>
-    <span class="c1">#                   between different fractals, everything else below is bookkeeping.</span>
-    <span class="c1">#   initial_z:      the starting z for every pixel. Pass a fixed complex number (e.g. 0j) to</span>
-    <span class="c1">#                   start every pixel at the same place (this is what the Mandelbrot set does),</span>
-    <span class="c1">#                   or pass None to start each pixel's z at its OWN point p (this is what a</span>
-    <span class="c1">#                   Julia set does instead).</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">x_range</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>                    <span class="c1"># Real-axis coordinates</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">y_range</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>                   <span class="c1"># Imaginary-axis coordinates</span>
-    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>                             <span class="c1"># A grid of coordinates, just like in the contour plots section</span>
-    <span class="n">P</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">Y</span>                                       <span class="c1"># Treat the grid as complex numbers p = x + iy</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mandelbrot</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">x_range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">y_range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.25</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">),</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="c1"># Returns an array of escape iteration counts for a grid of complex points c = x + i*y.</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">x_range</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>                 <span class="c1"># Real-axis coordinates</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">y_range</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>                <span class="c1"># Imaginary-axis coordinates</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>                          <span class="c1"># A grid of coordinates, just like in the contour plots section</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">Y</span>                                    <span class="c1"># Treat the grid as complex numbers c = x + iy</span>
 
-    <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">initial_z</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span> <span class="k">if</span> <span class="n">initial_z</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">P</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># Starting z for every pixel</span>
-    <span class="n">escape_iter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>  <span class="c1"># Assume "never escapes" (max_iter) until proven otherwise</span>
-    <span class="n">still_active</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>          <span class="c1"># Which pixels haven't escaped yet</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>                              <span class="c1"># z_0 = 0 for every point, same shape as C</span>
+    <span class="n">escape_iter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>  <span class="c1"># Assume "never escapes" (max_iter) until proven otherwise</span>
+    <span class="n">still_active</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>       <span class="c1"># Which points haven't escaped yet</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
-        <span class="n">Z</span><span class="p">[</span><span class="n">still_active</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_next</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">still_active</span><span class="p">],</span> <span class="n">P</span><span class="p">[</span><span class="n">still_active</span><span class="p">])</span>  <span class="c1"># Update only the pixels still in play</span>
-        <span class="n">escaped_now</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">escape_radius</span>           <span class="c1"># Past escape_radius guarantees eventual escape to infinity</span>
-        <span class="n">newly_escaped</span> <span class="o">=</span> <span class="n">escaped_now</span> <span class="o">&amp;</span> <span class="n">still_active</span>         <span class="c1"># Pixels escaping for the FIRST time on this iteration</span>
-        <span class="n">escape_iter</span><span class="p">[</span><span class="n">newly_escaped</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>                     <span class="c1"># Record how many iterations they took</span>
-        <span class="n">still_active</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">escaped_now</span>                       <span class="c1"># Remove them from further consideration</span>
+        <span class="n">Z</span><span class="p">[</span><span class="n">still_active</span><span class="p">]</span> <span class="o">=</span> <span class="n">Z</span><span class="p">[</span><span class="n">still_active</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">C</span><span class="p">[</span><span class="n">still_active</span><span class="p">]</span>  <span class="c1"># Update only the points still in play</span>
+        <span class="n">escaped_now</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span>                    <span class="c1"># |z| &gt; 2 guarantees eventual escape to infinity</span>
+        <span class="n">newly_escaped</span> <span class="o">=</span> <span class="n">escaped_now</span> <span class="o">&amp;</span> <span class="n">still_active</span>      <span class="c1"># Points escaping for the FIRST time on this iteration</span>
+        <span class="n">escape_iter</span><span class="p">[</span><span class="n">newly_escaped</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>                  <span class="c1"># Record how many iterations they took</span>
+        <span class="n">still_active</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">escaped_now</span>                    <span class="c1"># Remove them from further consideration</span>
 
     <span class="k">return</span> <span class="n">escape_iter</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>With the helper written once, drawing the classic <strong>Mandelbrot set</strong> is just one call: <code class="docutils literal notranslate"><span class="pre">get_next(z,</span> <span class="pre">p)</span> <span class="pre">=</span> <span class="pre">z**2</span> <span class="pre">+</span> <span class="pre">p</span></code>, starting every pixel at <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span> <span class="pre">0</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mandelbrot_get_next</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">p</span>
 
-<span class="n">escape_counts</span> <span class="o">=</span> <span class="n">escape_time_fractal</span><span class="p">(</span>
-    <span class="n">mandelbrot_get_next</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
-    <span class="n">x_range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">y_range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.25</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">),</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="n">escape_counts</span> <span class="o">=</span> <span class="n">mandelbrot</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>  <span class="c1"># Compute the fractal grid</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">escape_counts</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.25</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"twilight_shifted"</span><span class="p">)</span>  <span class="c1"># Color by escape speed</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"The Mandelbrot Set"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Re(p)"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Im(p)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Re(c)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Im(c)"</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4c95a2e4d8c018d8f94c769ef480246e7addf553c535237b238a09c0ab5f3c72.png" src="../_images/4c95a2e4d8c018d8f94c769ef480246e7addf553c535237b238a09c0ab5f3c72.png" />
+<img alt="../_images/59350f6ce5d1f274b4958b984aad6ed37abbe6efcd9d9a9d2ebd57e441054481.png" src="../_images/59350f6ce5d1f274b4958b984aad6ed37abbe6efcd9d9a9d2ebd57e441054481.png" />
 </div>
 </div>
-<p>Zooming into a small region (by narrowing <code class="docutils literal notranslate"><span class="pre">x_range</span></code>/<code class="docutils literal notranslate"><span class="pre">y_range</span></code> and reusing the same helper) reveals more fine structure, one of the hallmark features of a fractal: it looks intricate no matter how far you zoom in.</p>
+<p>Zooming into a small region (by narrowing <code class="docutils literal notranslate"><span class="pre">x_range</span></code>/<code class="docutils literal notranslate"><span class="pre">y_range</span></code> and reusing the same <code class="docutils literal notranslate"><span class="pre">mandelbrot</span></code> function) reveals more fine structure, one of the hallmark features of a fractal: it looks intricate no matter how far you zoom in.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">zoomed</span> <span class="o">=</span> <span class="n">escape_time_fractal</span><span class="p">(</span>
-    <span class="n">mandelbrot_get_next</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
-    <span class="n">x_range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.75</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.73</span><span class="p">),</span> <span class="n">y_range</span><span class="o">=</span><span class="p">(</span><span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.11</span><span class="p">),</span>  <span class="c1"># A tiny window near an interesting boundary</span>
-    <span class="n">max_iter</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>                                    <span class="c1"># More iterations needed at high zoom</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">zoomed</span> <span class="o">=</span> <span class="n">mandelbrot</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+                     <span class="n">x_range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.75</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.73</span><span class="p">),</span> <span class="n">y_range</span><span class="o">=</span><span class="p">(</span><span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.11</span><span class="p">),</span>  <span class="c1"># A tiny window near an interesting boundary</span>
+                     <span class="n">max_iter</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>                                    <span class="c1"># More iterations needed at high zoom</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">zoomed</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.75</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.73</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.11</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"twilight_shifted"</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Zooming into the Mandelbrot Set"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Re(p)"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Im(p)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Re(c)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Im(c)"</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/28ce44177946be5feea07ba0a20635496fed1fdbbb2619c623cdc14f6806951f.png" src="../_images/28ce44177946be5feea07ba0a20635496fed1fdbbb2619c623cdc14f6806951f.png" />
-</div>
-</div>
-<p>This is where the flexibility of <code class="docutils literal notranslate"><span class="pre">escape_time_fractal</span></code> pays off: a <strong>Julia set</strong> uses the exact same update formula, <span class="math notranslate nohighlight">\(z_{n+1} = z_n^2 + c\)</span>, but with the roles reversed. Instead of starting every pixel at <span class="math notranslate nohighlight">\(z_0 = 0\)</span> and varying <span class="math notranslate nohighlight">\(c\)</span> across the grid, a Julia set fixes <span class="math notranslate nohighlight">\(c\)</span> at one constant value and starts each pixel’s <span class="math notranslate nohighlight">\(z_0\)</span> at its <em>own</em> grid point. That’s exactly what <code class="docutils literal notranslate"><span class="pre">initial_z=None</span></code> does in the helper above: it tells <code class="docutils literal notranslate"><span class="pre">escape_time_fractal</span></code> to start each pixel at its own point on the grid, and we bake the fixed <code class="docutils literal notranslate"><span class="pre">c</span></code> into <code class="docutils literal notranslate"><span class="pre">get_next</span></code> via a closure instead of passing it in as <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_julia</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.8</span> <span class="o">+</span> <span class="mf">0.156</span><span class="n">j</span>                          <span class="c1"># A fixed constant, chosen because it produces an interesting shape</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">julia_get_next</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>                        <span class="c1"># p is ignored entirely; c is fixed instead of coming from the grid</span>
-    <span class="k">return</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c_julia</span>
-
-
-<span class="n">julia_counts</span> <span class="o">=</span> <span class="n">escape_time_fractal</span><span class="p">(</span>
-    <span class="n">julia_get_next</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
-    <span class="n">x_range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">),</span> <span class="n">y_range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">),</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
-    <span class="n">initial_z</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>                                  <span class="c1"># Each pixel starts its OWN z at its own grid point</span>
-<span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">julia_counts</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"twilight_shifted"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"A Julia Set (c = </span><span class="si">{</span><span class="n">c_julia</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Re(z0)"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Im(z0)"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/4a95028a6db99b26b07d42223052c6474911103bc257e0db97a490432c9c9c40.png" src="../_images/4a95028a6db99b26b07d42223052c6474911103bc257e0db97a490432c9c9c40.png" />
-</div>
-</div>
-<p>Now design one of your own. <code class="docutils literal notranslate"><span class="pre">get_next</span></code> can be <em>any</em> function of <code class="docutils literal notranslate"><span class="pre">z</span></code> and <code class="docutils literal notranslate"><span class="pre">p</span></code>, not just powers of <code class="docutils literal notranslate"><span class="pre">z</span></code>, try changing the exponent, adding more terms, or using a completely different formula like <code class="docutils literal notranslate"><span class="pre">np.sin(z)</span> <span class="pre">+</span> <span class="pre">p</span></code>. The example below swaps in a cubic update rule, <span class="math notranslate nohighlight">\(z_{n+1} = z_n^3 + p\)</span>, to show how little needs to change:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cubic_get_next</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">z</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">p</span>      <span class="c1"># Just swap the update rule; everything else is unchanged</span>
-
-<span class="n">cubic_counts</span> <span class="o">=</span> <span class="n">escape_time_fractal</span><span class="p">(</span>
-    <span class="n">cubic_get_next</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
-    <span class="n">x_range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">),</span> <span class="n">y_range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">),</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cubic_counts</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"inferno"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"A cubic fractal: $z_{n+1} = z_n^3 + p$"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Re(p)"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Im(p)"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/e6d2e0357fe5be60563f8b9bbac7037dba96c010fc2a228e13a3ed4800c81252.png" src="../_images/e6d2e0357fe5be60563f8b9bbac7037dba96c010fc2a228e13a3ed4800c81252.png" />
+<img alt="../_images/baa50c388f7320017d10dcfae6b3270d672b68c53528eac1f755a651ecf78d1c.png" src="../_images/baa50c388f7320017d10dcfae6b3270d672b68c53528eac1f755a651ecf78d1c.png" />
 </div>
 </div>
 </section>
@@ -1519,82 +1300,7 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/212f47d631ee6e88a17af628dbc53ab098aaea4420d3f126aca804b103803492.gif" src="../_images/212f47d631ee6e88a17af628dbc53ab098aaea4420d3f126aca804b103803492.gif" />
-</div>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="practice-example-4-the-ikeda-map">
-<h1>Practice Example 4: The Ikeda Map<a class="headerlink" href="#practice-example-4-the-ikeda-map" title="Link to this heading">#</a></h1>
-<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Ikeda_map">Ikeda map</a> is a discrete-time chaotic system, originally used to model the behavior of light in a ring laser cavity. Starting from a point <span class="math notranslate nohighlight">\((x_0, y_0)\)</span>, it repeatedly applies:</p>
-<div class="math notranslate nohighlight">
-\[t_n = 0.4 - \frac{6}{1 + x_n^2 + y_n^2}\]</div>
-<div class="math notranslate nohighlight">
-\[x_{n+1} = 1 + u\left(x_n \cos(t_n) - y_n \sin(t_n)\right)\]</div>
-<div class="math notranslate nohighlight">
-\[y_{n+1} = u\left(x_n \sin(t_n) + y_n \cos(t_n)\right)\]</div>
-<p>where <span class="math notranslate nohighlight">\(u\)</span> is a fixed parameter. For <span class="math notranslate nohighlight">\(u\)</span> around 0.9, the orbit never settles down to a fixed point or a simple cycle; instead it wanders forever over a intricate, swirling curve called a <strong>strange attractor</strong>. Since there’s no formula for the whole attractor at once, we generate it by brute force: iterate the map many thousands of times from a single starting point, then scatter-plot every single point the orbit visited. The interesting shape only appears once you have enough points, a handful of iterations just looks like a few scattered dots.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ikeda_map</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">200000</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">y0</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n_iter</span><span class="p">)</span>   <span class="c1"># Pre-allocate: much faster than growing a list one point at a time</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n_iter</span><span class="p">)</span>
-    <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iter</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>                                        <span class="c1"># Each point depends on the previous one, so this must be a loop, not vectorized</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="o">-</span> <span class="mi">6</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">x</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">u</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
-        <span class="n">y</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
-
-<span class="n">x_ikeda</span><span class="p">,</span> <span class="n">y_ikeda</span> <span class="o">=</span> <span class="n">ikeda_map</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">200000</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_ikeda</span><span class="p">[</span><span class="mi">200</span><span class="p">:],</span> <span class="n">y_ikeda</span><span class="p">[</span><span class="mi">200</span><span class="p">:],</span> <span class="n">s</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"tab:blue"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># Skip the first 200 points (the transient, before it settles onto the attractor)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Ikeda map attractor ($u = 0.9$)"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"y"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">"equal"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/1ba4eca31f588a863c3d074057936ce2d374a6d38991986fcf33485a69087f20.png" src="../_images/1ba4eca31f588a863c3d074057936ce2d374a6d38991986fcf33485a69087f20.png" />
-</div>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="practice-example-5-the-gingerbread-man-map">
-<h1>Practice Example 5: The Gingerbread Man Map<a class="headerlink" href="#practice-example-5-the-gingerbread-man-map" title="Link to this heading">#</a></h1>
-<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Gingerbreadman_map">Gingerbread man map</a> is an even simpler chaotic system, with no parameter to tune at all:</p>
-<div class="math notranslate nohighlight">
-\[x_{n+1} = 1 - y_n + |x_n|\]</div>
-<div class="math notranslate nohighlight">
-\[y_{n+1} = x_n\]</div>
-<p>Despite being built from nothing but absolute value and subtraction, iterating it from almost any starting point traces out a fractal boundary that (depending on your imagination) resembles a gingerbread man, hence the name. As with the Ikeda map, we generate it by iterating the map many times and scatter-plotting every visited point.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gingerbread_man_map</span><span class="p">(</span><span class="n">n_iter</span><span class="o">=</span><span class="mi">20_000</span><span class="p">,</span> <span class="n">x0</span><span class="o">=-</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">y0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n_iter</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n_iter</span><span class="p">)</span>
-    <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iter</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">x</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>   <span class="c1"># The single absolute value is what makes this map chaotic</span>
-        <span class="n">y</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
-
-<span class="n">x_gb</span><span class="p">,</span> <span class="n">y_gb</span> <span class="o">=</span> <span class="n">gingerbread_man_map</span><span class="p">(</span><span class="n">n_iter</span><span class="o">=</span><span class="mi">20_000</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_gb</span><span class="p">,</span> <span class="n">y_gb</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"tab:green"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Gingerbread man map"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"y"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">"equal"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/2790d212689d4575fda5ff05c95be2e0a0077ecb62c68effa2644cbbaea0a849.png" src="../_images/2790d212689d4575fda5ff05c95be2e0a0077ecb62c68effa2644cbbaea0a849.png" />
+<img alt="../_images/e33efa22acbf4ec8f3bec756135bae65c5ee61ee653d012fb826156691a1bf1f.gif" src="../_images/e33efa22acbf4ec8f3bec756135bae65c5ee61ee653d012fb826156691a1bf1f.gif" />
 </div>
 </div>
 </section>
@@ -1640,28 +1346,6 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: your code for Q4 here</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="q5-exploring-the-ikeda-map-s-parameter">
-<h2>Q5: Exploring the Ikeda map’s parameter<a class="headerlink" href="#q5-exploring-the-ikeda-map-s-parameter" title="Link to this heading">#</a></h2>
-<p>Reuse the <code class="docutils literal notranslate"><span class="pre">ikeda_map</span></code> function from Practice Example 4. Using <code class="docutils literal notranslate"><span class="pre">plt.subplots(nrows=2,</span> <span class="pre">ncols=2,</span> <span class="pre">...)</span></code>, plot the attractor for four different values of <span class="math notranslate nohighlight">\(u\)</span>: <code class="docutils literal notranslate"><span class="pre">0.6</span></code>, <code class="docutils literal notranslate"><span class="pre">0.7</span></code>, <code class="docutils literal notranslate"><span class="pre">0.8</span></code>, and <code class="docutils literal notranslate"><span class="pre">0.9</span></code>, one value per panel (keep <code class="docutils literal notranslate"><span class="pre">n_iter</span></code> at 200,000 or more so each attractor is fully filled in). Give each panel a title showing its <code class="docutils literal notranslate"><span class="pre">u</span></code> value. In a short markdown cell below your plot, describe in a sentence or two how the shape of the attractor changes as <code class="docutils literal notranslate"><span class="pre">u</span></code> increases.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: your code for Q5 here</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="q6-design-your-own-fractal">
-<h2>Q6: Design your own fractal<a class="headerlink" href="#q6-design-your-own-fractal" title="Link to this heading">#</a></h2>
-<p>Reuse the <code class="docutils literal notranslate"><span class="pre">escape_time_fractal</span></code> helper from Practice Example 2. Write your own <code class="docutils literal notranslate"><span class="pre">get_next(z,</span> <span class="pre">p)</span></code> function, it doesn’t have to be a polynomial; things like <code class="docutils literal notranslate"><span class="pre">np.sin(z)</span> <span class="pre">+</span> <span class="pre">p</span></code>, <code class="docutils literal notranslate"><span class="pre">z**4</span> <span class="pre">+</span> <span class="pre">p</span></code>, or <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">z**2</span> <span class="pre">+</span> <span class="pre">p</span></code> are all worth trying. Pick your own <code class="docutils literal notranslate"><span class="pre">x_range</span></code>/<code class="docutils literal notranslate"><span class="pre">y_range</span></code> (you may need to experiment to find a window where something interesting is visible) and a colormap of your choice. Plot the result, then in a short markdown cell below, note which <code class="docutils literal notranslate"><span class="pre">get_next</span></code> you tried and briefly describe the shape it produced.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: your code for Q6 here</span>
 </pre></div>
 </div>
 </div>
@@ -1731,7 +1415,6 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-anatomy-of-a-figure">The Anatomy of a Figure</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-basic-plot-fig-ax-plt-subplots">Making a Basic Plot: <code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">ax</span> <span class="pre">=</span> <span class="pre">plt.subplots()</span></code></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-a-plot">Customizing a Plot</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#using-latex-in-labels-and-titles">Using LaTeX in Labels and Titles</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-panels-with-plt-subplots">Multiple Panels with <code class="docutils literal notranslate"><span class="pre">plt.subplots</span></code></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#density-plots-and-contour-plots">Density Plots and Contour Plots</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-colors-and-colormaps">Choosing Colors and Colormaps</a></li>
@@ -1739,17 +1422,13 @@ Successfully installed ipympl-0.10.0 ipywidgets-8.1.9 jupyterlab_widgets-3.0.17 
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-and-html-plots">Interactive and HTML Plots</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-animated-gifs">Creating Animated GIFs</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-example-1-plotting-two-functions">Practice Example 1: Plotting Two Functions</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-example-2-plotting-fractals">Practice Example 2: Plotting Fractals</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-example-2-plotting-a-fractal-the-mandelbrot-set">Practice Example 2: Plotting a Fractal (the Mandelbrot Set)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-example-3-creating-your-own-gif">Practice Example 3: Creating Your Own GIF</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-example-4-the-ikeda-map">Practice Example 4: The Ikeda Map</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-example-5-the-gingerbread-man-map">Practice Example 5: The Gingerbread Man Map</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-exercises">Practice Exercises</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q1-a-single-customized-plot">Q1: A single customized plot</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q2-a-2x3-grid-of-panels">Q2: A 2x3 grid of panels</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q3-a-contour-plot-with-a-well-chosen-colormap">Q3: A contour plot with a well-chosen colormap</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q4-your-own-animated-gif">Q4: Your own animated GIF</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q5-exploring-the-ikeda-map-s-parameter">Q5: Exploring the Ikeda map’s parameter</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q6-design-your-own-fractal">Q6: Design your own fractal</a></li>
 </ul>
 </li>
 </ul>
