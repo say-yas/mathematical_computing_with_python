@@ -7,3 +7,4 @@ chapters:
   - file: notebooks/intro_pythonII
   - file: notebooks/intro_pythonIII
   - file: notebooks/intro_pythonIV_numpy
+  - file: notebooks/intro_pythonV_matplotlib
