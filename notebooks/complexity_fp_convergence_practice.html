@@ -1,0 +1,1488 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Complexity, Floating Point &amp; Convergence: Practice Notebook &#8212; Mathematical Computing with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/complexity_fp_convergence_practice';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Introduction to Python, Part V: Plotting with Matplotlib" href="intro_pythonV_matplotlib.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Mathematical Computing with Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Mathematical Computing with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="starting_with_python.html">Using Python in Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="starting_with_github.html">Using GitHub: Repositories, Commits, Push/Pull, and Forks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonI.html">Introduction to Python, Part I</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonII.html">Introduction to Python, Part II</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIII.html">Introduction to Python, Part III</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIV_numpy.html">Introduction to Python, Part IV: NumPy</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonV_matplotlib.html">Introduction to Python, Part V: Plotting with Matplotlib</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Complexity, Floating Point &amp; Convergence: Practice Notebook</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/say-yas/mathematical_computing_with_python/blob/main/book/notebooks/complexity_fp_convergence_practice.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/notebooks/complexity_fp_convergence_practice.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fnotebooks/complexity_fp_convergence_practice.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/complexity_fp_convergence_practice.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Complexity, Floating Point & Convergence: Practice Notebook</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-work-through-the-problems">How to work through the problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warm-up-scientific-notation">Warm-up: scientific notation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-read-and-run">Step 1: read and run</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-sci-x-splits-a-number-into-mantissa-and-exponent">Step 2: <code class="docutils literal notranslate"><span class="pre">sci(x)</span></code> splits a number into mantissa and exponent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-round-sig-x-d-keeps-only-d-significant-digits">Step 3: <code class="docutils literal notranslate"><span class="pre">round_sig(x,</span> <span class="pre">d)</span></code> keeps only <span class="math notranslate nohighlight">\(d\)</span> significant digits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-the-error-of-a-toy-3-digit-computer">Step 4: the error of a toy 3-digit computer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demo-1-floating-point-surprises">Demo 1: floating point surprises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demo-2-1-1-n-n-to-e-until-floating-point-gets-in-the-way">Demo 2: <span class="math notranslate nohighlight">\((1 + 1/n)^n \to e\)</span> … until floating point gets in the way</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-big-o-by-doubling">Problem 1: Big-<span class="math notranslate nohighlight">\(O\)</span> by doubling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-guess-no-code">Step 1: guess (no code)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-doubling-factor-flops-n">Step 2: <code class="docutils literal notranslate"><span class="pre">doubling_factor(flops,</span> <span class="pre">n)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-use-it">Step 3: use it</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-machine-epsilon-and-the-gaps-between-floats">Problem 2: machine epsilon and the gaps between floats</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-machine-epsilon">Step 1: <code class="docutils literal notranslate"><span class="pre">machine_epsilon()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-the-gap-grows-with-the-number">Step 2: the gap grows with the number</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-the-order-of-addition-matters">Step 3: the order of addition matters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-catastrophic-cancellation">Problem 3: catastrophic cancellation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-two-formulas-for-the-same-function">Step 1: two formulas for the same function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-measure-the-damage">Step 2: measure the damage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-your-turn-to-fix-a-formula">Step 3: your turn to fix a formula</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-how-fast-does-a-sequence-converge">Problem 4: how fast does a sequence converge?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-iterate-g-x0-n">Step 1: <code class="docutils literal notranslate"><span class="pre">iterate(g,</span> <span class="pre">x0,</span> <span class="pre">N)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-errors-and-a-plot">Step 2: errors and a plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-the-factor-rho-of-linear-convergence">Step 3: the factor <span class="math notranslate nohighlight">\(\rho\)</span> of linear convergence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-estimate-the-order-p">Step 4: estimate the order <span class="math notranslate nohighlight">\(p\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-when-to-stop">Step 5: when to stop?</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="complexity-floating-point-convergence-practice-notebook">
+<h1>Complexity, Floating Point &amp; Convergence: Practice Notebook<a class="headerlink" href="#complexity-floating-point-convergence-practice-notebook" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="how-to-work-through-the-problems">
+<h2>How to work through the problems<a class="headerlink" href="#how-to-work-through-the-problems" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Read the goal and the <strong>pseudocode</strong> (a plain-language recipe).</p></li>
+<li><p>Write the Python yourself in the empty cell below it.</p></li>
+<li><p>Run the <strong>mini-check</strong>. If it prints <code class="docutils literal notranslate"><span class="pre">OK</span></code> (or <code class="docutils literal notranslate"><span class="pre">passed</span></code>), go on.</p></li>
+</ol>
+<p>Stuck? Open a <strong>Hint</strong>. Try first!</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>pseudocode</p></th>
+<th class="head"><p>Python</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">←</span> <span class="pre">0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">each</span> <span class="pre">a</span> <span class="pre">in</span> <span class="pre">L</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">a</span> <span class="pre">in</span> <span class="pre">L:</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">repeat</span> <span class="pre">N</span> <span class="pre">times</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k</span> <span class="pre">in</span> <span class="pre">range(N):</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">condition</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">condition:</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">append</span> <span class="pre">v</span> <span class="pre">to</span> <span class="pre">L</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">L.append(v)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">L[k]</span></code>, <code class="docutils literal notranslate"><span class="pre">last</span> <span class="pre">entry</span> <span class="pre">of</span> <span class="pre">L</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">L[k]</span></code>, <code class="docutils literal notranslate"><span class="pre">L[-1]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">abs(v)</span></code>, <code class="docutils literal notranslate"><span class="pre">log(v)</span></code>, <code class="docutils literal notranslate"><span class="pre">cos(v)</span></code>, <code class="docutils literal notranslate"><span class="pre">sqrt(v)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">abs(v)</span></code>, <code class="docutils literal notranslate"><span class="pre">np.log(v)</span></code>, <code class="docutils literal notranslate"><span class="pre">np.cos(v)</span></code>, <code class="docutils literal notranslate"><span class="pre">np.sqrt(v)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">10^k</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">10.0**k</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">an</span> <span class="pre">array</span> <span class="pre">from</span> <span class="pre">list</span> <span class="pre">L</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.array(L)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">floor(v)</span></code>, <code class="docutils literal notranslate"><span class="pre">log10(v)</span></code>, <code class="docutils literal notranslate"><span class="pre">round(v)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.floor(v)</span></code>, <code class="docutils literal notranslate"><span class="pre">np.log10(v)</span></code>, <code class="docutils literal notranslate"><span class="pre">np.round(v)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">as</span> <span class="pre">an</span> <span class="pre">integer</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int(...)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="warm-up-scientific-notation">
+<h2>Warm-up: scientific notation<a class="headerlink" href="#warm-up-scientific-notation" title="Link to this heading">#</a></h2>
+<p>Every number can be written as</p>
+<div class="math notranslate nohighlight">
+\[x = \pm\, m \times 10^{\,e}, \qquad 1 \le m &lt; 10\]</div>
+<p>with the <strong>mantissa</strong> <span class="math notranslate nohighlight">\(m\)</span> (the digits) and the <strong>exponent</strong> <span class="math notranslate nohighlight">\(e\)</span> (the size). Python writes <span class="math notranslate nohighlight">\(4.2 \times 10^{-4}\)</span> as <code class="docutils literal notranslate"><span class="pre">4.2e-4</span></code>.
+A float is exactly this idea, in base 2, with a fixed number of digits.</p>
+<section id="step-1-read-and-run">
+<h3>Step 1: read and run<a class="headerlink" href="#step-1-read-and-run" title="Link to this heading">#</a></h3>
+<p>Nothing to write. Look at how Python prints and reads scientific notation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mf">2.99792458e8</span><span class="p">)</span>                 <span class="c1"># the speed of light in m/s</span>
+<span class="nb">print</span><span class="p">(</span><span class="mf">4.2e-4</span> <span class="o">==</span> <span class="mf">0.00042</span><span class="p">)</span>            <span class="c1"># the same number, written two ways</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="mi">299792458</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>           <span class="c1"># print with 3 digits after the point</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="mf">0.000123456</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>299792458.0
+True
+2.998e+08
+1.23e-04
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-sci-x-splits-a-number-into-mantissa-and-exponent">
+<h3>Step 2: <code class="docutils literal notranslate"><span class="pre">sci(x)</span></code> splits a number into mantissa and exponent<a class="headerlink" href="#step-2-sci-x-splits-a-number-into-mantissa-and-exponent" title="Link to this heading">#</a></h3>
+<p>The exponent is “how many times 10 fits in”, which is the integer part of <span class="math notranslate nohighlight">\(\log_{10}|x|\)</span>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function sci(x):
+    e ← floor(log10(abs(x))), as an integer
+    m ← x / 10^e
+    return [m, e]
+</pre></div>
+</div>
+<details><summary><b>Hint</b></summary>
+<p>For <span class="math notranslate nohighlight">\(x = 0.00042\)</span>: <span class="math notranslate nohighlight">\(\log_{10}(0.00042) \approx -3.38\)</span>, and the floor is <span class="math notranslate nohighlight">\(-4\)</span>. Then <span class="math notranslate nohighlight">\(m = 0.00042 / 10^{-4} = 4.2\)</span>.</p>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sci</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># your code here</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mini-check</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">m_true</span><span class="p">,</span> <span class="n">e_true</span> <span class="ow">in</span> <span class="p">[[</span><span class="mf">6.02e23</span><span class="p">,</span> <span class="mf">6.02</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.00042</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1500.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]:</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">sci</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">e</span> <span class="o">==</span> <span class="n">e_true</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="n">m_true</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">e</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> x 10^</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"OK"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># mini-check</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">m_true</span><span class="p">,</span> <span class="n">e_true</span> <span class="ow">in</span> <span class="p">[[</span><span class="mf">6.02e23</span><span class="p">,</span> <span class="mf">6.02</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.00042</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1500.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]:</span>
+<span class="ne">----&gt; </span><span class="mi">3</span>     <span class="n">m</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">sci</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="k">assert</span> <span class="n">e</span> <span class="o">==</span> <span class="n">e_true</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="n">m_true</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">e</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> x 10^</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="nb">print</span><span class="p">(</span><span class="s2">"OK"</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: cannot unpack non-iterable NoneType object
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-round-sig-x-d-keeps-only-d-significant-digits">
+<h3>Step 3: <code class="docutils literal notranslate"><span class="pre">round_sig(x,</span> <span class="pre">d)</span></code> keeps only <span class="math notranslate nohighlight">\(d\)</span> significant digits<a class="headerlink" href="#step-3-round-sig-x-d-keeps-only-d-significant-digits" title="Link to this heading">#</a></h3>
+<p>This is what a computer with <span class="math notranslate nohighlight">\(d\)</span> digits has to do with every number.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function round_sig(x, d):
+    e ← floor(log10(abs(x)))
+    scale ← 10^(e - d + 1)
+    return round(x / scale) * scale
+</pre></div>
+</div>
+<details><summary><b>Hint</b></summary>
+<p>For <span class="math notranslate nohighlight">\(x = 123456\)</span> and <span class="math notranslate nohighlight">\(d = 2\)</span>: <span class="math notranslate nohighlight">\(e = 5\)</span>, scale <span class="math notranslate nohighlight">\(= 10^{4}\)</span>, <span class="math notranslate nohighlight">\(x / \text{scale} = 12.3456\)</span> rounds to <span class="math notranslate nohighlight">\(12\)</span>, and <span class="math notranslate nohighlight">\(12 \times 10^4 = 120000\)</span>.</p>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">round_sig</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+    <span class="c1"># your code here</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mini-check</span>
+<span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">round_sig</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="mf">3.14</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span>
+<span class="k">assert</span> <span class="n">round_sig</span><span class="p">(</span><span class="mf">123456.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mf">120000.0</span>
+<span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">round_sig</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.333</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"OK"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-the-error-of-a-toy-3-digit-computer">
+<h3>Step 4: the error of a toy 3-digit computer<a class="headerlink" href="#step-4-the-error-of-a-toy-3-digit-computer" title="Link to this heading">#</a></h3>
+<p>How big can the <strong>relative</strong> rounding error be when every number keeps only 3 digits?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>xs ← 10000 random numbers between 1 and 1000     (np.random.default_rng(seed=47).uniform(1, 1000, 10000))
+rel_err ← for each x in xs: abs(round_sig(x, 3) - x) / x
+print the largest value in rel_err
+</pre></div>
+</div>
+<details><summary><b>Hint</b></summary>
+<p><code class="docutils literal notranslate"><span class="pre">[abs(round_sig(x,</span> <span class="pre">3)</span> <span class="pre">-</span> <span class="pre">x)</span> <span class="pre">/</span> <span class="pre">x</span> <span class="pre">for</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">xs]</span></code> builds the list; <code class="docutils literal notranslate"><span class="pre">max(...)</span></code> gives the largest value.</p>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="demo-1-floating-point-surprises">
+<h2>Demo 1: floating point surprises<a class="headerlink" href="#demo-1-floating-point-surprises" title="Link to this heading">#</a></h2>
+<p>Nothing to write: run and read. A Python <code class="docutils literal notranslate"><span class="pre">float</span></code> uses 64 bits, so only finitely many numbers can be stored and everything else is <strong>rounded</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"0.1 + 0.2        ="</span><span class="p">,</span> <span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"0.1 + 0.2 == 0.3 :"</span><span class="p">,</span> <span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">==</span> <span class="mf">0.3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"tolerance test   :"</span><span class="p">,</span> <span class="nb">abs</span><span class="p">((</span><span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.3</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"machine epsilon for float32 ="</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span>  <span class="c1"># machine epsilon for float32</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"machine epsilon for float64 ="</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span>  <span class="c1"># machine epsilon for float64</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"machine epsilon  ="</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span>  <span class="c1"># machine epsilon for the default float type</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"largest float    ="</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>  <span class="c1"># largest representable float</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"smallest normal  ="</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">tiny</span><span class="p">)</span>  <span class="c1"># smallest normal float</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"1e16 + 1 - 1e16  ="</span><span class="p">,</span> <span class="mf">1e16</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">1e16</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"1e308 * 10       ="</span><span class="p">,</span> <span class="mf">1e308</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"inf - inf        ="</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"nan == nan       :"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Questions:</strong> why is <code class="docutils literal notranslate"><span class="pre">1e16</span> <span class="pre">+</span> <span class="pre">1</span> <span class="pre">-</span> <span class="pre">1e16</span></code> equal to <code class="docutils literal notranslate"><span class="pre">0.0</span></code>? Why does a test with a tolerance work when <code class="docutils literal notranslate"><span class="pre">==</span></code> fails?</p>
+<details><summary><b>Check your answer</b></summary>
+<p>Near <span class="math notranslate nohighlight">\(10^{16}\)</span> the gap between floats is <span class="math notranslate nohighlight">\(2\)</span>, so <span class="math notranslate nohighlight">\(10^{16} + 1\)</span> rounds back to <span class="math notranslate nohighlight">\(10^{16}\)</span>.
+<span class="math notranslate nohighlight">\(0.1 + 0.2\)</span> is off by only about <span class="math notranslate nohighlight">\(4 \times 10^{-17}\)</span>: not <em>equal</em> to <span class="math notranslate nohighlight">\(0.3\)</span>, but well within any sensible tolerance.</p>
+</details></section>
+<hr class="docutils" />
+<section id="demo-2-1-1-n-n-to-e-until-floating-point-gets-in-the-way">
+<h2>Demo 2: <span class="math notranslate nohighlight">\((1 + 1/n)^n \to e\)</span> … until floating point gets in the way<a class="headerlink" href="#demo-2-1-1-n-n-to-e-until-floating-point-gets-in-the-way" title="Link to this heading">#</a></h2>
+<p>In exact arithmetic the error <span class="math notranslate nohighlight">\(|(1+1/n)^n - e|\)</span> is <span class="math notranslate nohighlight">\(O(1/n)\)</span>: ten times bigger <span class="math notranslate nohighlight">\(n\)</span>, ten times smaller error. Watch what the computer does.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ns</span> <span class="o">=</span> <span class="mf">10.0</span> <span class="o">**</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">ns</span><span class="p">)</span> <span class="o">**</span> <span class="n">ns</span>
+<span class="n">errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">values</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">e</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">errors</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n = </span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">8.0e</span><span class="si">}</span><span class="s2">   (1 + 1/n)^n = </span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">.12f</span><span class="si">}</span><span class="s2">   error = </span><span class="si">{</span><span class="n">e</span><span class="si">:</span><span class="s2">.1e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">errors</span><span class="p">,</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"computed error"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">e</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ns</span><span class="p">),</span> <span class="s2">"--"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"e / (2n)  (what theory predicts)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"n"</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"error"</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Up to about <span class="math notranslate nohighlight">\(n = 10^8\)</span> the error follows <span class="math notranslate nohighlight">\(O(1/n)\)</span>. After that it <strong>grows</strong>: <span class="math notranslate nohighlight">\(1 + 1/n\)</span> is rounded, and raising it to a huge power magnifies that rounding error. At <span class="math notranslate nohighlight">\(n = 10^{16}\)</span>, <span class="math notranslate nohighlight">\(1 + 10^{-16}\)</span> rounds to exactly <span class="math notranslate nohighlight">\(1\)</span> and the answer is <span class="math notranslate nohighlight">\(1\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="problem-1-big-o-by-doubling">
+<h2>Problem 1: Big-<span class="math notranslate nohighlight">\(O\)</span> by doubling<a class="headerlink" href="#problem-1-big-o-by-doubling" title="Link to this heading">#</a></h2>
+<p><strong>Goal:</strong> find the growth of a loop without any theory: count its <strong>flops</strong> (floating point operations: <span class="math notranslate nohighlight">\(+, -, \times, \div\)</span>), double <span class="math notranslate nohighlight">\(n\)</span>, and see how the flop count changes.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>when <span class="math notranslate nohighlight">\(n\)</span> doubles, the flop count …</p></th>
+<th class="head"><p>Big-<span class="math notranslate nohighlight">\(O\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>grows by about 1</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(\log n)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>doubles (×2)</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>×4</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n^2)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>×8</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n^3)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Each function does some floating point work (total = total + 1.0)</span>
+<span class="c1"># and returns how many flops it performed.</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">flops_a</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">flops</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="mf">1.0</span>     <span class="c1"># 1 flop</span>
+            <span class="n">flops</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">flops</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">flops_b</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">flops</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="mf">1.0</span>         <span class="c1"># 1 flop</span>
+        <span class="n">flops</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">i</span> <span class="o">*=</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">flops</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">flops_c</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">flops</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="mf">1.0</span>         <span class="c1"># 1 flop</span>
+        <span class="n">flops</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">*</span> <span class="mf">1.0</span>         <span class="c1"># 1 flop</span>
+        <span class="n">flops</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">flops</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="step-1-guess-no-code">
+<h3>Step 1: guess (no code)<a class="headerlink" href="#step-1-guess-no-code" title="Link to this heading">#</a></h3>
+<p>Read <code class="docutils literal notranslate"><span class="pre">flops_a</span></code>, <code class="docutils literal notranslate"><span class="pre">flops_b</span></code> and <code class="docutils literal notranslate"><span class="pre">flops_c</span></code>. How many flops does each do, and what Big-<span class="math notranslate nohighlight">\(O\)</span> do you expect?</p>
+</section>
+<section id="step-2-doubling-factor-flops-n">
+<h3>Step 2: <code class="docutils literal notranslate"><span class="pre">doubling_factor(flops,</span> <span class="pre">n)</span></code><a class="headerlink" href="#step-2-doubling-factor-flops-n" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">flops</span></code> is one of the functions above; the result says how much the flop count grows when <span class="math notranslate nohighlight">\(n\)</span> doubles.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">doubling_factor</span><span class="p">(</span><span class="n">flops</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">flops</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">flops</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">doubling_factor</span><span class="p">(</span><span class="n">flops</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="c1"># your code here</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mini-check</span>
+<span class="k">assert</span> <span class="n">doubling_factor</span><span class="p">(</span><span class="n">flops_a</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="o">==</span> <span class="mf">4.0</span>
+<span class="k">assert</span> <span class="n">doubling_factor</span><span class="p">(</span><span class="n">flops_c</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="o">==</span> <span class="mf">2.0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"OK"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-use-it">
+<h3>Step 3: use it<a class="headerlink" href="#step-3-use-it" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">each</span> <span class="n">flops</span> <span class="ow">in</span> <span class="p">[</span><span class="n">flops_a</span><span class="p">,</span> <span class="n">flops_b</span><span class="p">,</span> <span class="n">flops_c</span><span class="p">]:</span>
+    <span class="nb">print</span> <span class="n">the</span> <span class="n">name</span> <span class="n">of</span> <span class="n">flops</span><span class="p">,</span> <span class="ow">and</span> <span class="n">doubling_factor</span><span class="p">(</span><span class="n">flops</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Compare with the table above and with your guesses.</p>
+<details><summary><b>Hint</b></summary>
+<p><code class="docutils literal notranslate"><span class="pre">flops.__name__</span></code> gives the name of a function as text.</p>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary><b>Check your answer</b></summary>
+<p><code class="docutils literal notranslate"><span class="pre">flops_a</span></code>: <span class="math notranslate nohighlight">\(n^2\)</span> flops, ×4, so <span class="math notranslate nohighlight">\(O(n^2)\)</span> (two nested loops). <code class="docutils literal notranslate"><span class="pre">flops_b</span></code>: the flop count goes from 10 to 11, so <span class="math notranslate nohighlight">\(O(\log n)\)</span>.
+<code class="docutils literal notranslate"><span class="pre">flops_c</span></code>: <span class="math notranslate nohighlight">\(2n\)</span> flops, ×2, so <span class="math notranslate nohighlight">\(O(n)\)</span>: two loops <strong>one after the other</strong> add up, and the constant 2 is dropped.</p>
+</details></section>
+</section>
+<hr class="docutils" />
+<section id="problem-2-machine-epsilon-and-the-gaps-between-floats">
+<h2>Problem 2: machine epsilon and the gaps between floats<a class="headerlink" href="#problem-2-machine-epsilon-and-the-gaps-between-floats" title="Link to this heading">#</a></h2>
+<p><strong>Goal:</strong> find the smallest number <span class="math notranslate nohighlight">\(\varepsilon\)</span> with <span class="math notranslate nohighlight">\(1 + \varepsilon &gt; 1\)</span> on your computer, then look at the gaps between floats elsewhere on the number line.</p>
+<section id="step-1-machine-epsilon">
+<h3>Step 1: <code class="docutils literal notranslate"><span class="pre">machine_epsilon()</span></code><a class="headerlink" href="#step-1-machine-epsilon" title="Link to this heading">#</a></h3>
+<p>Keep halving <code class="docutils literal notranslate"><span class="pre">eps</span></code> as long as adding <strong>half of it</strong> to 1 still changes the result.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function machine_epsilon():
+    eps ← 1.0
+    ncount ← 0.0
+    while 1.0 + eps / 2 &gt; 1.0:
+        eps ← eps / 2
+        ncount ← ncount +1
+    print ncount as the number of iterations to find machine epsilon
+    return eps
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">machine_epsilon</span><span class="p">():</span>
+    <span class="c1"># your code here</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mini-check</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="n">machine_epsilon</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"your epsilon :"</span><span class="p">,</span> <span class="n">eps</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"numpy's epsilon:"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">eps</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span> <span class="o">==</span> <span class="mf">2.0</span><span class="o">**-</span><span class="mi">52</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"OK"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Question:</strong> how many times did the loop halve <code class="docutils literal notranslate"><span class="pre">eps</span></code>? What does that number have to do with the 52 fraction bits?</p>
+<details><summary><b>Check your answer</b></summary>
+<p><span class="math notranslate nohighlight">\(\varepsilon = 2^{-52}\)</span>, so the loop halved 52 times: one halving per fraction bit.</p>
+</details></section>
+<section id="step-2-the-gap-grows-with-the-number">
+<h3>Step 2: the gap grows with the number<a class="headerlink" href="#step-2-the-gap-grows-with-the-number" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">np.spacing(x)</span></code> is the gap between <code class="docutils literal notranslate"><span class="pre">x</span></code> and the next float. Print a small table:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>for each x in [1.0, 1000.0, 1e8, 1e16, 1e300]:
+    gap ← np.spacing(x)
+    print x, gap, and the relative gap gap / x
+</pre></div>
+</div>
+<details><summary><b>Hint</b></summary>
+<p><code class="docutils literal notranslate"><span class="pre">f&quot;{x:.0e}&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">f&quot;{gap:.2e}&quot;</span></code> print numbers in short scientific notation.</p>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Question:</strong> the gap changes enormously. What about <code class="docutils literal notranslate"><span class="pre">gap</span> <span class="pre">/</span> <span class="pre">x</span></code>?</p>
+<details><summary><b>Check your answer</b></summary>
+<p>The relative gap always stays between <span class="math notranslate nohighlight">\(\varepsilon/2\)</span> and <span class="math notranslate nohighlight">\(\varepsilon\)</span> (about <span class="math notranslate nohighlight">\(1.1 \times 10^{-16}\)</span> to <span class="math notranslate nohighlight">\(2.2 \times 10^{-16}\)</span>).
+That is why we say a float has about <strong>16 significant digits</strong>, whatever its size.</p>
+</details></section>
+<section id="step-3-the-order-of-addition-matters">
+<h3>Step 3: the order of addition matters<a class="headerlink" href="#step-3-the-order-of-addition-matters" title="Link to this heading">#</a></h3>
+<p>Add <span class="math notranslate nohighlight">\(1.0\)</span> ten thousand times to <span class="math notranslate nohighlight">\(10^{16}\)</span>, in two different orders:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function big_first():
+    total ← 1e16
+    repeat 10000 times:
+        total ← total + 1.0
+    return total
+
+function small_first():
+    total ← 0.0
+    repeat 10000 times:
+        total ← total + 1.0
+    return total + 1e16
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">big_first</span><span class="p">():</span>
+    <span class="c1"># your code here</span>
+    <span class="k">pass</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">small_first</span><span class="p">():</span>
+    <span class="c1"># your code here</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mini-check</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"big first   :"</span><span class="p">,</span> <span class="n">big_first</span><span class="p">()</span> <span class="o">-</span> <span class="mf">1e16</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"small first :"</span><span class="p">,</span> <span class="n">small_first</span><span class="p">()</span> <span class="o">-</span> <span class="mf">1e16</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">big_first</span><span class="p">()</span> <span class="o">==</span> <span class="mf">1e16</span>
+<span class="k">assert</span> <span class="n">small_first</span><span class="p">()</span> <span class="o">==</span> <span class="mf">1e16</span> <span class="o">+</span> <span class="mi">10000</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Problem 2: passed"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary><b>Why?</b></summary>
+<p>With the big number first, every single <code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">1.0</span></code> is smaller than half the gap at <span class="math notranslate nohighlight">\(10^{16}\)</span> and is rounded away: all 10000 ones are lost.
+Adding the small numbers first lets them grow to <span class="math notranslate nohighlight">\(10^4\)</span>, which is big enough to survive. Rule: <strong>add small numbers first</strong>.</p>
+</details></section>
+</section>
+<hr class="docutils" />
+<section id="problem-3-catastrophic-cancellation">
+<h2>Problem 3: catastrophic cancellation<a class="headerlink" href="#problem-3-catastrophic-cancellation" title="Link to this heading">#</a></h2>
+<p><strong>Goal:</strong> see how subtracting two nearly equal numbers destroys accuracy, and fix it by rewriting the formula.</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \frac{1 - \cos x}{x^2} \;\to\; \frac12 \quad (x \to 0), \qquad \text{same function: } f(x) = \frac{2\sin^2(x/2)}{x^2}\]</div>
+<section id="step-1-two-formulas-for-the-same-function">
+<h3>Step 1: two formulas for the same function<a class="headerlink" href="#step-1-two-formulas-for-the-same-function" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">f_naive</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">x</span><span class="o">^</span><span class="mi">2</span>
+
+<span class="n">function</span> <span class="n">f_stable</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span> <span class="o">/</span> <span class="n">x</span><span class="o">^</span><span class="mi">2</span>
+</pre></div>
+</div>
+<details><summary><b>Hint</b></summary>
+<p>Use <code class="docutils literal notranslate"><span class="pre">np.cos</span></code> and <code class="docutils literal notranslate"><span class="pre">np.sin</span></code>, so the functions also work on whole arrays. <code class="docutils literal notranslate"><span class="pre">x^2</span></code> is <code class="docutils literal notranslate"><span class="pre">x**2</span></code>.</p>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f_naive</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># your code here</span>
+    <span class="k">pass</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">f_stable</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># your code here</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mini-check</span>
+<span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f_naive</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span> <span class="o">-</span> <span class="n">f_stable</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-14</span>      <span class="c1"># for moderate x they agree</span>
+<span class="k">assert</span> <span class="n">f_naive</span><span class="p">(</span><span class="mf">1e-8</span><span class="p">)</span> <span class="o">==</span> <span class="mf">0.0</span>                            <span class="c1"># for tiny x the naive one collapses</span>
+<span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f_stable</span><span class="p">(</span><span class="mf">1e-8</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-15</span>              <span class="c1"># the stable one gives the correct answer</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"OK"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-measure-the-damage">
+<h3>Step 2: measure the damage<a class="headerlink" href="#step-2-measure-the-damage" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>xs ← the array 10^-1, 10^-2, ..., 10^-8        (np.logspace(-1, -8, 8))
+rel_err ← abs(f_naive(xs) - f_stable(xs)) / f_stable(xs)
+print xs and rel_err side by side
+plot rel_err against xs on log-log axes
+</pre></div>
+</div>
+<details><summary><b>Hint</b></summary>
+<p>Because <code class="docutils literal notranslate"><span class="pre">f_naive</span></code> and <code class="docutils literal notranslate"><span class="pre">f_stable</span></code> use NumPy, you can pass the whole array <code class="docutils literal notranslate"><span class="pre">xs</span></code> at once: no loop needed for <code class="docutils literal notranslate"><span class="pre">rel_err</span></code>.
+To print side by side, loop with <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">x,</span> <span class="pre">r</span> <span class="pre">in</span> <span class="pre">zip(xs,</span> <span class="pre">rel_err):</span></code>.</p>
+<p>To plot a log-log axes, use</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and to invert your x-axis, use <code class="docutils literal notranslate"><span class="pre">ax.invert_xaxis()</span></code></p>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Question:</strong> roughly how many correct digits does the naive formula have at <span class="math notranslate nohighlight">\(x = 10^{-4}\)</span>? And at <span class="math notranslate nohighlight">\(x = 10^{-8}\)</span>?</p>
+<details><summary><b>Check your answer</b></summary>
+<p>At <span class="math notranslate nohighlight">\(x = 10^{-4}\)</span> the relative error is about <span class="math notranslate nohighlight">\(10^{-8}\)</span>: only about 8 of the 16 digits are left. At <span class="math notranslate nohighlight">\(10^{-8}\)</span> it is <span class="math notranslate nohighlight">\(100\%\)</span>: none.
+Why: <span class="math notranslate nohighlight">\(\cos(10^{-4}) = 0.999999995\ldots\)</span>, so <span class="math notranslate nohighlight">\(1 - \cos x\)</span> throws away the 8 leading digits, which were all 9’s.</p>
+</details></section>
+<section id="step-3-your-turn-to-fix-a-formula">
+<h3>Step 3: your turn to fix a formula<a class="headerlink" href="#step-3-your-turn-to-fix-a-formula" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(g(x) = \sqrt{x + 1} - \sqrt{x}\)</span> is small for large <span class="math notranslate nohighlight">\(x\)</span> and suffers from cancellation.
+Multiplying top and bottom by <span class="math notranslate nohighlight">\(\sqrt{x+1} + \sqrt{x}\)</span> gives the same function without subtraction:</p>
+<div class="math notranslate nohighlight">
+\[g(x) = \frac{1}{\sqrt{x + 1} + \sqrt{x}}\]</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">g_naive</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">function</span> <span class="n">g_stable</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">each</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">1e2</span><span class="p">,</span> <span class="mf">1e6</span><span class="p">,</span> <span class="mf">1e10</span><span class="p">,</span> <span class="mf">1e14</span><span class="p">]:</span>
+    <span class="nb">print</span> <span class="n">x</span><span class="p">,</span> <span class="n">g_naive</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">g_stable</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">relative</span> <span class="n">error</span> <span class="n">of</span> <span class="n">g_naive</span>
+</pre></div>
+</div>
+<p>with relative error of <span class="math notranslate nohighlight">\(g_n\)</span> and <span class="math notranslate nohighlight">\(g_s\)</span> being <span class="math notranslate nohighlight">\(\frac{|g_n-g_s|}{g_s}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">g_naive</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># your code here</span>
+    <span class="k">pass</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">g_stable</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># your code here</span>
+    <span class="k">pass</span>
+
+
+<span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mini-check</span>
+<span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">g_stable</span><span class="p">(</span><span class="mf">1e14</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5e-7</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.5e-7</span> <span class="o">&lt;</span> <span class="mf">1e-6</span>       <span class="c1"># close to 1 / (2 sqrt(x))</span>
+<span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">g_naive</span><span class="p">(</span><span class="mf">1e14</span><span class="p">)</span> <span class="o">-</span> <span class="n">g_stable</span><span class="p">(</span><span class="mf">1e14</span><span class="p">))</span> <span class="o">/</span> <span class="n">g_stable</span><span class="p">(</span><span class="mf">1e14</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-4</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Problem 3: passed"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="problem-4-how-fast-does-a-sequence-converge">
+<h2>Problem 4: how fast does a sequence converge?<a class="headerlink" href="#problem-4-how-fast-does-a-sequence-converge" title="Link to this heading">#</a></h2>
+<p><strong>Goal:</strong> generate two sequences, measure their errors <span class="math notranslate nohighlight">\(e_n = |x_n - L|\)</span>, and find out <strong>how fast</strong> they converge.</p>
+<ul class="simple">
+<li><p><strong>Fixed point iteration:</strong> <span class="math notranslate nohighlight">\(x_{n+1} = \cos(x_n)\)</span>, which converges to <span class="math notranslate nohighlight">\(L = 0.7390851332151607\ldots\)</span></p></li>
+<li><p><strong>Newton’s method for <span class="math notranslate nohighlight">\(\sqrt 2\)</span>:</strong> <span class="math notranslate nohighlight">\(x_{n+1} = \frac12\left(x_n + \frac{2}{x_n}\right)\)</span>, which converges to <span class="math notranslate nohighlight">\(L = \sqrt 2\)</span>.</p></li>
+</ul>
+<p>Both are of the form <span class="math notranslate nohighlight">\(x_{n+1} = g(x_n)\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">g_cos</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">g_newton</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="n">L_cos</span> <span class="o">=</span> <span class="mf">0.7390851332151607</span>
+<span class="n">L_newton</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="step-1-iterate-g-x0-n">
+<h3>Step 1: <code class="docutils literal notranslate"><span class="pre">iterate(g,</span> <span class="pre">x0,</span> <span class="pre">N)</span></code><a class="headerlink" href="#step-1-iterate-g-x0-n" title="Link to this heading">#</a></h3>
+<p>Return the list <span class="math notranslate nohighlight">\([x_0, x_1, \ldots, x_N]\)</span>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function iterate(g, x0, N):
+    xs ← [x0]
+    repeat N times:
+        append g(last entry of xs) to xs
+    return xs
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">iterate</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="c1"># your code here</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mini-check</span>
+<span class="k">assert</span> <span class="n">iterate</span><span class="p">(</span><span class="n">g_newton</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="p">(</span><span class="mf">1.5</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">/</span> <span class="mf">1.5</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">iterate</span><span class="p">(</span><span class="n">g_cos</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mi">11</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"OK"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-errors-and-a-plot">
+<h3>Step 2: errors and a plot<a class="headerlink" href="#step-2-errors-and-a-plot" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>e_cos    ← abs(array of iterate(g_cos, 1.0, 30) - L_cos)
+e_newton ← abs(array of iterate(g_newton, 1.0, 6) - L_newton)
+plot e_cos and e_newton with plt.semilogy (one line each, with a legend)
+</pre></div>
+</div>
+<details><summary><b>Hint</b></summary>
+<p>Turn the list into an array first, so you can subtract <span class="math notranslate nohighlight">\(L\)</span> from all entries at once: <code class="docutils literal notranslate"><span class="pre">np.abs(np.array(xs)</span> <span class="pre">-</span> <span class="pre">L)</span></code>.</p>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Question:</strong> which curve is a straight line on this plot? Which one bends down? Where does Newton stop improving, and why?</p>
+<details><summary><b>Check your answer</b></summary>
+<p>The cos iteration gives a straight line: <strong>linear</strong> convergence. Newton bends down steeply: <strong>quadratic</strong> convergence.
+Newton hits about <span class="math notranslate nohighlight">\(10^{-16}\)</span> after 5 iterations and cannot go lower: that is machine epsilon.</p>
+</details></section>
+<section id="step-3-the-factor-rho-of-linear-convergence">
+<h3>Step 3: the factor <span class="math notranslate nohighlight">\(\rho\)</span> of linear convergence<a class="headerlink" href="#step-3-the-factor-rho-of-linear-convergence" title="Link to this heading">#</a></h3>
+<p>For linear convergence <span class="math notranslate nohighlight">\(e_{n+1} \approx \rho\, e_n\)</span>. Print the ratios <span class="math notranslate nohighlight">\(e_{n+1}/e_n\)</span> of the cos iteration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span> <span class="kn">from</span><span class="w"> </span><span class="mi">10</span> <span class="n">to</span> <span class="mi">15</span><span class="p">:</span>
+    <span class="nb">print</span> <span class="n">k</span> <span class="ow">and</span> <span class="n">e_cos</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">e_cos</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary><b>Check your answer</b></summary>
+<p>The ratios settle near <span class="math notranslate nohighlight">\(\rho \approx 0.67\)</span> (theory: <span class="math notranslate nohighlight">\(|\sin L| = 0.6736\)</span>). Every iteration the error shrinks by a third,
+so one extra correct digit takes about <span class="math notranslate nohighlight">\(\log(10)/\log(1/0.67) \approx 6\)</span> iterations.</p>
+</details></section>
+<section id="step-4-estimate-the-order-p">
+<h3>Step 4: estimate the order <span class="math notranslate nohighlight">\(p\)</span><a class="headerlink" href="#step-4-estimate-the-order-p" title="Link to this heading">#</a></h3>
+<p>If <span class="math notranslate nohighlight">\(e_{n+1} \approx C\, e_n^{\,p}\)</span>, three consecutive errors give an estimate of <span class="math notranslate nohighlight">\(p\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[p \approx \frac{\log(e_{n+1}/e_n)}{\log(e_n / e_{n-1})}\]</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function estimate_order(e):
+    ps ← empty list
+    for k from 1 to (length of e) - 2:
+        append log(e[k + 1] / e[k]) / log(e[k] / e[k - 1]) to ps
+    return ps
+</pre></div>
+</div>
+<details><summary><b>Hint</b></summary>
+<p>“for k from 1 to (length of e) - 2” is <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k</span> <span class="pre">in</span> <span class="pre">range(1,</span> <span class="pre">len(e)</span> <span class="pre">-</span> <span class="pre">1):</span></code>.</p>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">estimate_order</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+    <span class="c1"># your code here</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mini-check on made-up errors: 1e-1, 1e-2, 1e-4, 1e-8 is exactly quadratic</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">estimate_order</span><span class="p">([</span><span class="mf">1e-1</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-8</span><span class="p">])</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"OK"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now apply it to the real sequences. Use only errors <strong>well above</strong> <span class="math notranslate nohighlight">\(10^{-16}\)</span> (near the floor the estimates are noise):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="n">estimate_order</span> <span class="n">of</span> <span class="n">the</span> <span class="n">first</span> <span class="mi">5</span> <span class="n">errors</span> <span class="n">of</span> <span class="n">Newton</span>   <span class="p">(</span><span class="n">e_newton</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+<span class="nb">print</span> <span class="n">estimate_order</span> <span class="n">of</span> <span class="n">e_cos</span><span class="p">[</span><span class="mi">10</span><span class="p">:</span><span class="mi">16</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary><b>Check your answer</b></summary>
+<p>Newton gives <span class="math notranslate nohighlight">\(p \approx 2\)</span> (quadratic), the cos iteration gives <span class="math notranslate nohighlight">\(p \approx 1\)</span> (linear).</p>
+</details></section>
+<section id="step-5-when-to-stop">
+<h3>Step 5: when to stop?<a class="headerlink" href="#step-5-when-to-stop" title="Link to this heading">#</a></h3>
+<p>In practice <span class="math notranslate nohighlight">\(L\)</span> is unknown, so we cannot compute the error. Instead, stop when the <strong>change per iteration</strong> becomes small, and never loop forever:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function iterate_until(g, x0, tol, max_iter):
+    x ← x0
+    repeat for k = 1, 2, ..., max_iter:
+        x_new ← g(x)
+        if abs(x_new - x) &lt; tol:
+            return [x_new, k]              (converged after k iterations)
+        x ← x_new
+    return [x, max_iter]
+</pre></div>
+</div>
+<details><summary><b>Hint</b></summary>
+<p>“repeat for k = 1, 2, …, max_iter” is <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k</span> <span class="pre">in</span> <span class="pre">range(1,</span> <span class="pre">max_iter</span> <span class="pre">+</span> <span class="pre">1):</span></code>.</p>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">iterate_until</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">):</span>
+    <span class="c1"># your code here</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mini-check</span>
+<span class="n">result_cos</span> <span class="o">=</span> <span class="n">iterate_until</span><span class="p">(</span><span class="n">g_cos</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">result_newton</span> <span class="o">=</span> <span class="n">iterate_until</span><span class="p">(</span><span class="n">g_newton</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"cos iteration: x = </span><span class="si">{</span><span class="n">result_cos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.12f</span><span class="si">}</span><span class="s2"> after </span><span class="si">{</span><span class="n">result_cos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> iterations"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Newton       : x = </span><span class="si">{</span><span class="n">result_newton</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.12f</span><span class="si">}</span><span class="s2"> after </span><span class="si">{</span><span class="n">result_newton</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> iterations"</span><span class="p">)</span>
+<span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">result_cos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">L_cos</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-9</span>
+<span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">result_newton</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">L_newton</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-15</span>
+<span class="k">assert</span> <span class="n">result_newton</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="o">&lt;</span> <span class="n">result_cos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Problem 4: passed"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Question:</strong> how many iterations did each method need for a tolerance of <span class="math notranslate nohighlight">\(10^{-10}\)</span>? What happens if you ask for <code class="docutils literal notranslate"><span class="pre">tol</span> <span class="pre">=</span> <span class="pre">1e-20</span></code>?</p>
+<details><summary><b>Check your answer</b></summary>
+<p>Newton needs 5 iterations, the cos iteration 58. With <code class="docutils literal notranslate"><span class="pre">tol</span> <span class="pre">=</span> <span class="pre">1e-20</span></code> the change per iteration can never get that small (floats near 1 are <span class="math notranslate nohighlight">\(2.2 \times 10^{-16}\)</span> apart),
+so the loop only ends because of <code class="docutils literal notranslate"><span class="pre">max_iter</span></code>. That is why a maximum number of iterations is essential.</p>
+</details></section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro_pythonV_matplotlib.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Python, Part V: Plotting with Matplotlib</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-work-through-the-problems">How to work through the problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warm-up-scientific-notation">Warm-up: scientific notation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-read-and-run">Step 1: read and run</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-sci-x-splits-a-number-into-mantissa-and-exponent">Step 2: <code class="docutils literal notranslate"><span class="pre">sci(x)</span></code> splits a number into mantissa and exponent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-round-sig-x-d-keeps-only-d-significant-digits">Step 3: <code class="docutils literal notranslate"><span class="pre">round_sig(x,</span> <span class="pre">d)</span></code> keeps only <span class="math notranslate nohighlight">\(d\)</span> significant digits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-the-error-of-a-toy-3-digit-computer">Step 4: the error of a toy 3-digit computer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demo-1-floating-point-surprises">Demo 1: floating point surprises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demo-2-1-1-n-n-to-e-until-floating-point-gets-in-the-way">Demo 2: <span class="math notranslate nohighlight">\((1 + 1/n)^n \to e\)</span> … until floating point gets in the way</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-big-o-by-doubling">Problem 1: Big-<span class="math notranslate nohighlight">\(O\)</span> by doubling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-guess-no-code">Step 1: guess (no code)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-doubling-factor-flops-n">Step 2: <code class="docutils literal notranslate"><span class="pre">doubling_factor(flops,</span> <span class="pre">n)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-use-it">Step 3: use it</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-machine-epsilon-and-the-gaps-between-floats">Problem 2: machine epsilon and the gaps between floats</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-machine-epsilon">Step 1: <code class="docutils literal notranslate"><span class="pre">machine_epsilon()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-the-gap-grows-with-the-number">Step 2: the gap grows with the number</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-the-order-of-addition-matters">Step 3: the order of addition matters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-catastrophic-cancellation">Problem 3: catastrophic cancellation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-two-formulas-for-the-same-function">Step 1: two formulas for the same function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-measure-the-damage">Step 2: measure the damage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-your-turn-to-fix-a-formula">Step 3: your turn to fix a formula</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-how-fast-does-a-sequence-converge">Problem 4: how fast does a sequence converge?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-iterate-g-x0-n">Step 1: <code class="docutils literal notranslate"><span class="pre">iterate(g,</span> <span class="pre">x0,</span> <span class="pre">N)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-errors-and-a-plot">Step 2: errors and a plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-the-factor-rho-of-linear-convergence">Step 3: the factor <span class="math notranslate nohighlight">\(\rho\)</span> of linear convergence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-estimate-the-order-p">Step 4: estimate the order <span class="math notranslate nohighlight">\(p\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-when-to-stop">Step 5: when to stop?</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sharareh Sayyad
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
