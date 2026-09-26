@@ -8,4 +8,4 @@ chapters:
   - file: notebooks/intro_pythonIII
   - file: notebooks/intro_pythonIV_numpy
   - file: notebooks/intro_pythonV_matplotlib
-  - file: notebooks/complexity_fp_convergence_practice
+  - file: notebooks/bigO_convergence.ipynb
