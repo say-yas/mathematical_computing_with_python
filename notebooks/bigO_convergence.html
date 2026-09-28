@@ -554,7 +554,6 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-asking-for-too-much">Step 3: asking for too much</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
 </ul>
@@ -571,7 +570,7 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="big-o-and-convergence-of-algorithms">
 <h1>Big-O and Convergence of Algorithms<a class="headerlink" href="#big-o-and-convergence-of-algorithms" title="Link to this heading">#</a></h1>
-<p>This chapter answers two questions about an algorithm:</p>
+<p>Wr try to answer two questions about an algorithm:</p>
 <ol class="arabic simple">
 <li><p><strong>How does its cost grow</strong> when the input gets bigger? (Big-<span class="math notranslate nohighlight">\(O\)</span>)</p></li>
 <li><p><strong>How fast does it converge</strong> to the answer, and when should it stop? (convergence)</p></li>
@@ -599,7 +598,7 @@
 <section id="big-o-what-it-tells-you">
 <h2>1. Big-<span class="math notranslate nohighlight">\(O\)</span>: what it tells you<a class="headerlink" href="#big-o-what-it-tells-you" title="Link to this heading">#</a></h2>
 <p>Big-<span class="math notranslate nohighlight">\(O\)</span> answers one question: <strong>if the input gets bigger, roughly how much more work is needed?</strong>
-It looks at large inputs and ignores constant factors, such as a faster computer.</p>
+It looks at large inputs and ignores constant factors.</p>
 <p><strong>Definition.</strong> <span class="math notranslate nohighlight">\(f = O(g)\)</span> as <span class="math notranslate nohighlight">\(x \to \infty\)</span> if there are constants <span class="math notranslate nohighlight">\(c &gt; 0\)</span> and <span class="math notranslate nohighlight">\(x_0 \ge 0\)</span> with</p>
 <div class="math notranslate nohighlight">
 \[|f(x)| \le c\, g(x) \quad \text{for all } x \ge x_0 .\]</div>
@@ -653,17 +652,12 @@ It looks at large inputs and ignores constant factors, such as a faster computer
 <td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
 <td><p>going through an array once</p></td>
 </tr>
-<tr class="row-odd"><td><p>repeat a halving loop <span class="math notranslate nohighlight">\(n\)</span> times</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">range(n):</span></code> with the halving loop inside</p></td>
-<td><p><span class="math notranslate nohighlight">\(O(n \log n)\)</span></p></td>
-<td><p>merge sort; Python’s <code class="docutils literal notranslate"><span class="pre">sorted(a)</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>two nested loops</p></td>
+<tr class="row-odd"><td><p>two nested loops</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">range(n):</span></code> / <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">j</span> <span class="pre">in</span> <span class="pre">range(n):</span></code></p></td>
 <td><p><span class="math notranslate nohighlight">\(O(n^2)\)</span></p></td>
-<td><p>bubble sort; every cell of an <span class="math notranslate nohighlight">\(n \times n\)</span> grid</p></td>
+<td><p>every cell of an <span class="math notranslate nohighlight">\(n \times n\)</span> grid</p></td>
 </tr>
-<tr class="row-odd"><td><p>try every subset</p></td>
+<tr class="row-even"><td><p>try every subset</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k</span> <span class="pre">in</span> <span class="pre">range(2**n):</span></code></p></td>
 <td><p><span class="math notranslate nohighlight">\(O(2^n)\)</span></p></td>
 <td><p>listing all subsets of a list</p></td>
@@ -699,18 +693,27 @@ It looks at large inputs and ignores constant factors, such as a faster computer
             <span class="n">total</span> <span class="o">+=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
     <span class="k">return</span> <span class="n">total</span>
 
+<span class="n">ns_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ns_max</span><span class="p">)</span>
+<span class="n">ns_pairs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">1600</span><span class="p">,</span> <span class="mi">3200</span><span class="p">,</span> <span class="mi">6400</span><span class="p">])</span>
 
-<span class="n">ns_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">])</span>
-<span class="n">ns_pairs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">1600</span><span class="p">])</span>
-<span class="n">t_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">time_function</span><span class="p">(</span><span class="n">maximum</span><span class="p">,</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns_max</span><span class="p">])</span>
-<span class="n">t_pairs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">time_function</span><span class="p">(</span><span class="n">all_pairs</span><span class="p">,</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns_pairs</span><span class="p">])</span>
+<span class="n">t_max</span> <span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns_max</span><span class="p">:</span>
+    <span class="n">t_max</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">time_function</span><span class="p">(</span><span class="n">maximum</span><span class="p">,</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
 
-<span class="n">slope_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ns_max</span><span class="p">[</span><span class="mi">2</span><span class="p">:]),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t_max</span><span class="p">[</span><span class="mi">2</span><span class="p">:]),</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>     <span class="c1"># large n only</span>
+<span class="n">t_pairs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns_pairs</span><span class="p">:</span>
+    <span class="n">t_pairs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">time_function</span><span class="p">(</span><span class="n">all_pairs</span><span class="p">,</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
+
+<span class="n">slope_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ns_max</span><span class="p">[</span><span class="mi">2</span><span class="p">:]),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t_max</span><span class="p">[</span><span class="mi">2</span><span class="p">:]),</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>     <span class="c1"># dropping the first two points for better fit</span>
 <span class="n">slope_pairs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ns_pairs</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t_pairs</span><span class="p">),</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ns_max</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"maximum (slope </span><span class="si">{</span><span class="n">slope_max</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ns_pairs</span><span class="p">,</span> <span class="n">t_pairs</span><span class="p">,</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"all_pairs (slope </span><span class="si">{</span><span class="n">slope_pairs</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="c1"># fitted lines for better visualization</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ns_max</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ns_max</span><span class="p">[</span><span class="mi">2</span><span class="p">:]),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t_max</span><span class="p">[</span><span class="mi">2</span><span class="p">:]),</span> <span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ns_max</span><span class="p">[</span><span class="mi">2</span><span class="p">:]))),</span> <span class="s2">"--"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"fit maximum (slope </span><span class="si">{</span><span class="n">slope_max</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ns_pairs</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ns_pairs</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t_pairs</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ns_pairs</span><span class="p">))),</span> <span class="s2">":"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"fit all_pairs (slope </span><span class="si">{</span><span class="n">slope_pairs</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"n"</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"time (s)"</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -719,7 +722,10 @@ It looks at large inputs and ignores constant factors, such as a faster computer
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0c5fdf00658854aa83f0ba19d5ecd68a73879b13a9ddc5cc268d3ee523464445.png" src="../_images/0c5fdf00658854aa83f0ba19d5ecd68a73879b13a9ddc5cc268d3ee523464445.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[    100     464    2154   10000   46415  215443 1000000]
+</pre></div>
+</div>
+<img alt="../_images/360940770ef5777bff2ea445a13c83223a640eb5eda07eeaa596e8fdb10333fd.png" src="../_images/360940770ef5777bff2ea445a13c83223a640eb5eda07eeaa596e8fdb10333fd.png" />
 </div>
 </div>
 <p>The slopes come out close to <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span>, which <strong>agrees</strong> with the predictions. Two things to keep in mind:</p>
@@ -732,16 +738,26 @@ It looks at large inputs and ignores constant factors, such as a faster computer
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f_trap</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">1e6</span> <span class="o">*</span> <span class="n">n</span>
 
-<span class="n">ns_small</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">1600</span><span class="p">])</span>
-<span class="n">ns_large</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1e8</span><span class="p">,</span> <span class="mf">2e8</span><span class="p">,</span> <span class="mf">4e8</span><span class="p">,</span> <span class="mf">8e8</span><span class="p">])</span>
+<span class="n">ns_small</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">1600</span><span class="p">,</span> <span class="mi">3200</span><span class="p">])</span>
+<span class="n">ns_large</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1e7</span><span class="p">,</span> <span class="mf">1e8</span><span class="p">,</span> <span class="mf">2e8</span><span class="p">,</span> <span class="mf">4e8</span><span class="p">,</span> <span class="mf">8e8</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ns_small</span><span class="p">,</span> <span class="n">f_trap</span><span class="p">(</span><span class="n">ns_small</span><span class="p">),</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"small n"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ns_large</span><span class="p">,</span> <span class="n">f_trap</span><span class="p">(</span><span class="n">ns_large</span><span class="p">),</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"large n"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"n"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"f_trap(n)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="s2">"slope for small n:"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ns_small</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">f_trap</span><span class="p">(</span><span class="n">ns_small</span><span class="p">)),</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"slope for large n:"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ns_large</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">f_trap</span><span class="p">(</span><span class="n">ns_large</span><span class="p">)),</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope for small n: 1.0005189594642414
-slope for large n: 1.995874758424686
+<img alt="../_images/ae3487156f1b5ed55b61badaa3e3503ea60284e24189980e402975dfd7e2519f.png" src="../_images/ae3487156f1b5ed55b61badaa3e3503ea60284e24189980e402975dfd7e2519f.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope for small n: 1.0008273016704985
+slope for large n: 1.9777525854559221
 </pre></div>
 </div>
 </div>
@@ -767,18 +783,20 @@ slope for large n: 1.995874758424686
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">ns_exp</span><span class="p">,</span> <span class="n">t_exp</span><span class="p">,</span> <span class="s2">"o-"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">ns_exp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">ns_exp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t_exp</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span> <span class="n">ns_exp</span><span class="p">)),</span> <span class="s2">"--"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"fit (slope </span><span class="si">{</span><span class="n">slope_exp</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"n"</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"time (s)"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"2^n loop: a straight line on semilogy"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$2^n$ loop: a straight line on semilogy"</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6974347290629975   growth factor b = e^slope: 2.0085935063792273
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6961526746848055   growth factor b = e^slope: 2.0060200303009963
 </pre></div>
 </div>
-<img alt="../_images/9c7500278fd50a57cd392e6207a4f0c0f5967a4ec4b1ee07b5f602e0a3a31fd0.png" src="../_images/9c7500278fd50a57cd392e6207a4f0c0f5967a4ec4b1ee07b5f602e0a3a31fd0.png" />
+<img alt="../_images/83bed36cf867db41d932580568a1192da177d47e1cfd785d01bd62e978c76cd0.png" src="../_images/83bed36cf867db41d932580568a1192da177d47e1cfd785d01bd62e978c76cd0.png" />
 </div>
 </div>
 </section>
@@ -843,7 +861,9 @@ slope for large n: 1.995874758424686
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
     <span class="n">eps_quadratic</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">eps_quadratic</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># C = 2, q = 2</span>
 
-<span class="n">eps_sublinear</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)]</span>       <span class="c1"># 1/k</span>
+<span class="n">eps_sublinear</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">):</span>
+    <span class="n">eps_sublinear</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">k</span><span class="p">)</span>       <span class="c1"># 1/k</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">eps_linear</span><span class="p">,</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"linear"</span><span class="p">)</span>
@@ -858,7 +878,7 @@ slope for large n: 1.995874758424686
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c7ad5fb893ec5ac0707fd87c726544a1a0ed8e278ac86cc77f5f30aba83ec24d.png" src="../_images/c7ad5fb893ec5ac0707fd87c726544a1a0ed8e278ac86cc77f5f30aba83ec24d.png" />
+<img alt="../_images/5f33f1fdf411943899d6e66660467c056ae8e04c617c3168afaab71488704e11.png" src="../_images/5f33f1fdf411943899d6e66660467c056ae8e04c617c3168afaab71488704e11.png" />
 </div>
 </div>
 </section>
@@ -884,7 +904,11 @@ slope for large n: 1.995874758424686
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>linear   : 1.0
 quadratic: 1.9999999999999998
-sublinear: 0.9466399163308074
+sublinear: nan
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2348/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
+  y = np.log(np.abs(np.diff(np.log(eps))))
 </pre></div>
 </div>
 </div>
@@ -1284,15 +1308,6 @@ Example: <code class="docutils literal notranslate"><span class="pre">iterate(g_
 <p><strong>Questions:</strong> why did the loop run all 100 iterations? What would have happened without <code class="docutils literal notranslate"><span class="pre">max_iter</span></code>? What is a sensible tolerance?</p>
 </section>
 </section>
-<hr class="docutils" />
-<section id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Big-<span class="math notranslate nohighlight">\(O\)</span></strong> says how the cost grows with <span class="math notranslate nohighlight">\(n\)</span>; drop constants and keep the fastest-growing term. <strong>Prove</strong> it with <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(x_0\)</span>; <strong>check</strong> it with timings (<code class="docutils literal notranslate"><span class="pre">loglog</span></code> slope for polynomials, <code class="docutils literal notranslate"><span class="pre">semilogy</span></code> slope for exponentials), fitting only large <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
-<li><p><strong>Convergence</strong> is about how fast <span class="math notranslate nohighlight">\(\epsilon_k \to 0\)</span>: sublinear, linear (<span class="math notranslate nohighlight">\(q = 1\)</span>, <span class="math notranslate nohighlight">\(C &lt; 1\)</span>), quadratic (<span class="math notranslate nohighlight">\(q = 2\)</span>). Plot <span class="math notranslate nohighlight">\(\epsilon_k\)</span> with <code class="docutils literal notranslate"><span class="pre">semilogy</span></code>; estimate <span class="math notranslate nohighlight">\(C\)</span> from ratios and <span class="math notranslate nohighlight">\(q\)</span> with <code class="docutils literal notranslate"><span class="pre">estimate_q</span></code>.</p></li>
-<li><p><strong>Stop</strong> when <span class="math notranslate nohighlight">\(\delta_k\)</span> is small, keep <code class="docutils literal notranslate"><span class="pre">tol</span></code> well above <span class="math notranslate nohighlight">\(10^{-16}\)</span>, and always set <code class="docutils literal notranslate"><span class="pre">max_iter</span></code>.</p></li>
-</ul>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1390,7 +1405,6 @@ Example: <code class="docutils literal notranslate"><span class="pre">iterate(g_
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-asking-for-too-much">Step 3: asking for too much</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
 </ul>
