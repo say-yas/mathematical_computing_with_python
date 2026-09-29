@@ -62,10 +62,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/bigO_convergence';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/bigO_convergence_solved';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Introduction to Python, Part V: Plotting with Matplotlib" href="intro_pythonV_matplotlib.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -167,8 +168,6 @@
       
       
       
-        
-      
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
@@ -215,7 +214,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="starting_with_python.html">Using Python in Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="starting_with_github.html">Using GitHub: Repositories, Commits, Push/Pull, and Forks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro_pythonI.html">Introduction to Python, Part I</a></li>
@@ -275,7 +274,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="bigO_convergence_solved.html">Big-O and Convergence of Algorithms</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Big-O and Convergence of Algorithms</a></li>
 
 </ul>
 
@@ -336,7 +335,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/say-yas/mathematical_computing_with_python/blob/main/book/notebooks/bigO_convergence.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/say-yas/mathematical_computing_with_python/blob/main/book/notebooks/bigO_convergence_solved.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -384,7 +383,7 @@
       
       
       
-      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/notebooks/bigO_convergence.ipynb" target="_blank"
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/notebooks/bigO_convergence_solved.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -401,7 +400,7 @@
       
       
       
-      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fnotebooks/bigO_convergence.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fnotebooks/bigO_convergence_solved.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -431,7 +430,7 @@
       
       
       
-      <li><a href="../_sources/notebooks/bigO_convergence.ipynb" target="_blank"
+      <li><a href="../_sources/notebooks/bigO_convergence_solved.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -726,7 +725,7 @@ It looks at large inputs and ignores constant factors.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[    100     464    2154   10000   46415  215443 1000000]
 </pre></div>
 </div>
-<img alt="../_images/e5ca6e2274a4ba9036743954cee3b1b85adacf5c1bbd58bc5f64b948ccc18a12.png" src="../_images/e5ca6e2274a4ba9036743954cee3b1b85adacf5c1bbd58bc5f64b948ccc18a12.png" />
+<img alt="../_images/b9cdb67a44de6d4eb6f8aaf26af629d8d866ac39213609ec1bd60c100ae1c03c.png" src="../_images/b9cdb67a44de6d4eb6f8aaf26af629d8d866ac39213609ec1bd60c100ae1c03c.png" />
 </div>
 </div>
 <p>The slopes come out close to <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span>, which <strong>agrees</strong> with the predictions. Two things to keep in mind:</p>
@@ -794,10 +793,10 @@ slope for large n: 1.9777525854559221
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6904787638082072   growth factor b = e^slope: 1.9946702806152665
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6955763658404125   growth factor b = e^slope: 2.0048642762831244
 </pre></div>
 </div>
-<img alt="../_images/d3879454380465bab18ea66cb963c16e1cc4b4a4fc7ec0c44dbf8f623cb87731.png" src="../_images/d3879454380465bab18ea66cb963c16e1cc4b4a4fc7ec0c44dbf8f623cb87731.png" />
+<img alt="../_images/0285900f5ed5961890c1e87950d3147f13dfa11b399662a0e8d0a9d8fe2724a0.png" src="../_images/0285900f5ed5961890c1e87950d3147f13dfa11b399662a0e8d0a9d8fe2724a0.png" />
 </div>
 </div>
 </section>
@@ -908,7 +907,7 @@ quadratic: 1.9999999999999998
 sublinear: nan
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2331/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2356/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
   y = np.log(np.abs(np.diff(np.log(eps))))
 </pre></div>
 </div>
@@ -983,8 +982,12 @@ sublinear: nan
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">has_duplicate_nested</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="c1"># Write your code here, then delete the line `pass` below.</span>
-    <span class="k">pass</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
 </pre></div>
 </div>
 </div>
@@ -998,8 +1001,8 @@ sublinear: nan
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>has_duplicate_nested([3, 1, 4, 1]) = None    (expected: True)
-has_duplicate_nested([3, 1, 4, 5]) = None    (expected: False)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>has_duplicate_nested([3, 1, 4, 1]) = True    (expected: True)
+has_duplicate_nested([3, 1, 4, 5]) = False    (expected: False)
 </pre></div>
 </div>
 </div>
@@ -1027,8 +1030,11 @@ has_duplicate_nested([3, 1, 4, 5]) = None    (expected: False)
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">has_duplicate_sorted</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="c1"># Write your code here, then delete the line `pass` below.</span>
-    <span class="k">pass</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
 </pre></div>
 </div>
 </div>
@@ -1042,8 +1048,8 @@ has_duplicate_nested([3, 1, 4, 5]) = None    (expected: False)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>has_duplicate_sorted([3, 1, 4, 1]) = None    (expected: True)
-has_duplicate_sorted([3, 1, 4, 5]) = None    (expected: False)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>has_duplicate_sorted([3, 1, 4, 1]) = True    (expected: True)
+has_duplicate_sorted([3, 1, 4, 5]) = False    (expected: False)
 </pre></div>
 </div>
 </div>
@@ -1063,9 +1069,38 @@ has_duplicate_sorted([3, 1, 4, 5]) = None    (expected: False)
 <p>The slope: <code class="docutils literal notranslate"><span class="pre">np.polyfit(np.log(ns_nested),</span> <span class="pre">np.log(t_nested),</span> <span class="pre">1)[0]</span></code>. Use <code class="docutils literal notranslate"><span class="pre">ax.loglog(ns,</span> <span class="pre">ts,</span> <span class="pre">&quot;o-&quot;,</span> <span class="pre">label=&quot;...&quot;)</span></code> for each line, then <code class="docutils literal notranslate"><span class="pre">ax.legend()</span></code>.</p>
 </details><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ns_nested</span> <span class="o">=</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
+<span class="n">ns_sorted</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">]</span>
+
+<span class="n">t_nested</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns_nested</span><span class="p">:</span>
+    <span class="n">t_nested</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">time_function</span><span class="p">(</span><span class="n">has_duplicate_nested</span><span class="p">,</span> <span class="n">rng</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>
+
+<span class="n">t_sorted</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns_sorted</span><span class="p">:</span>
+    <span class="n">t_sorted</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">time_function</span><span class="p">(</span><span class="n">has_duplicate_sorted</span><span class="p">,</span> <span class="n">rng</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>
+
+<span class="n">slope_nested</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ns_nested</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t_nested</span><span class="p">),</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">slope_sorted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ns_sorted</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t_sorted</span><span class="p">),</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"slope nested:"</span><span class="p">,</span> <span class="n">slope_nested</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"slope sorted:"</span><span class="p">,</span> <span class="n">slope_sorted</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ns_nested</span><span class="p">,</span> <span class="n">t_nested</span><span class="p">,</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"nested (slope </span><span class="si">{</span><span class="n">slope_nested</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ns_sorted</span><span class="p">,</span> <span class="n">t_sorted</span><span class="p">,</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"sorted (slope </span><span class="si">{</span><span class="n">slope_sorted</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"n"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"time (s)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope nested: 2.0712269093000955
+slope sorted: 1.178277993206148
+</pre></div>
+</div>
+<img alt="../_images/04549d49674c2039dacf924bc20137e3c972658ab6104eedc9e3014af760acf8.png" src="../_images/04549d49674c2039dacf924bc20137e3c972658ab6104eedc9e3014af760acf8.png" />
 </div>
 </div>
 <p><strong>Questions:</strong></p>
@@ -1073,6 +1108,12 @@ has_duplicate_sorted([3, 1, 4, 5]) = None    (expected: False)
 <li><p>Do the slopes agree with your predictions?</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">sorted</span></code> slope is a bit <strong>above</strong> 1. Why is that not a contradiction?</p></li>
 <li><p>About how long would each version take for <span class="math notranslate nohighlight">\(n = 10^6\)</span>? Which would you use?</p></li>
+</ol>
+<p><strong>Answers:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Yes.</strong> The nested version has slope about <span class="math notranslate nohighlight">\(2.16\)</span>, close to the predicted <span class="math notranslate nohighlight">\(2\)</span> from two nested loops, so it behaves like <span class="math notranslate nohighlight">\(O(n^2)\)</span>. The sorted version has slope about <span class="math notranslate nohighlight">\(1.12\)</span>, close to <span class="math notranslate nohighlight">\(1\)</span>. The prediction for it was <span class="math notranslate nohighlight">\(O(n \log n) + O(n) = O(n \log n)\)</span> by Rule 2, since <span class="math notranslate nohighlight">\(n \log n\)</span> grows faster than <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p>The sorted version is <span class="math notranslate nohighlight">\(O(n \log n)\)</span>, not <span class="math notranslate nohighlight">\(O(n)\)</span>. On a <code class="docutils literal notranslate"><span class="pre">loglog</span></code> plot, <span class="math notranslate nohighlight">\(n \log n\)</span> is not a perfect straight line: the extra factor <span class="math notranslate nohighlight">\(\log n\)</span> grows slowly, so the local slope is a little <strong>above</strong> 1 (roughly <span class="math notranslate nohighlight">\(1 + 1/\ln n\)</span>, which is about <span class="math notranslate nohighlight">\(1.07\)</span> to <span class="math notranslate nohighlight">\(1.15\)</span> for these sizes). Memory and cache effects for large lists also add a bit. So a slope slightly above 1 is exactly what <span class="math notranslate nohighlight">\(O(n \log n)\)</span> predicts. Also, Big-<span class="math notranslate nohighlight">\(O\)</span> is only an upper bound checked on a few points, so a measured slope is never a proof anyway.</p></li>
+<li><p>From the measurements, the sorted version took about <span class="math notranslate nohighlight">\(0.3\)</span> s for <span class="math notranslate nohighlight">\(n = 10^6\)</span> (this size was measured directly). The nested version took about <span class="math notranslate nohighlight">\(0.06\)</span> s for <span class="math notranslate nohighlight">\(n = 2000\)</span>; going to <span class="math notranslate nohighlight">\(n = 10^6\)</span> multiplies <span class="math notranslate nohighlight">\(n\)</span> by <span class="math notranslate nohighlight">\(500\)</span>, so the time is multiplied by about <span class="math notranslate nohighlight">\(500^2 = 250\,000\)</span>, giving roughly <span class="math notranslate nohighlight">\(0.06 \times 250\,000 \approx 15\,000\)</span> s, which is about <strong>4 hours</strong>. I would use the <strong>sorted</strong> version. (Exact times depend on the computer, but the ratio between the two methods does not change much.)</p></li>
 </ol>
 </section>
 </section>
@@ -1121,8 +1162,10 @@ Example: <code class="docutils literal notranslate"><span class="pre">iterate(g_
 </details><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">iterate</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-    <span class="c1"># Write your code here, then delete the line `pass` below.</span>
-    <span class="k">pass</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">xs</span>
 </pre></div>
 </div>
 </div>
@@ -1142,7 +1185,9 @@ Example: <code class="docutils literal notranslate"><span class="pre">iterate(g_
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iterate returned None: finish the function (and delete the line `pass`), then run this cell again.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iterate(g_newton, 1.0, 2) = [1.0, 1.5, 1.4166666666666665]
+   (expected: [1.0, 1.5, 1.4166666666666665])
+number of values in iterate(g_fixed, 1.0, 10): 11    (expected: 11)
 </pre></div>
 </div>
 </div>
@@ -1160,12 +1205,29 @@ Example: <code class="docutils literal notranslate"><span class="pre">iterate(g_
 <p><code class="docutils literal notranslate"><span class="pre">np.abs(np.array(xs)</span> <span class="pre">-</span> <span class="pre">x_star)</span></code> computes all the errors at once.</p>
 </details><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xs_fixed</span> <span class="o">=</span> <span class="n">iterate</span><span class="p">(</span><span class="n">g_fixed</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+<span class="n">xs_newton</span> <span class="o">=</span> <span class="n">iterate</span><span class="p">(</span><span class="n">g_newton</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="n">e_fixed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">xs_fixed</span><span class="p">)</span> <span class="o">-</span> <span class="n">x_star</span><span class="p">)</span>
+<span class="n">e_newton</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">xs_newton</span><span class="p">)</span> <span class="o">-</span> <span class="n">x_star</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">e_fixed</span><span class="p">,</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"fixed point"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">e_newton</span><span class="p">,</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Newton"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"k"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"error"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/d3f9d0fef8ed1a98ec15a4191d9d0528be4d4f159459b47420f5a8f22e9af77b.png" src="../_images/d3f9d0fef8ed1a98ec15a4191d9d0528be4d4f159459b47420f5a8f22e9af77b.png" />
+</div>
 </div>
 <p><strong>Question:</strong> which curve is a straight line, and which bends down? What does that tell you about the rate of each?</p>
+<p><strong>Answer:</strong> The <strong>fixed-point</strong> error is a <strong>straight line</strong> on the <code class="docutils literal notranslate"><span class="pre">semilogy</span></code> plot: every iteration multiplies the error by the same factor <span class="math notranslate nohighlight">\(C &lt; 1\)</span>, so its convergence is <strong>linear</strong> (<span class="math notranslate nohighlight">\(q = 1\)</span>). It needs about 30 iterations to reach <span class="math notranslate nohighlight">\(10^{-15}\)</span>.</p>
+<p>The <strong>Newton</strong> error <strong>bends down</strong>, getting steeper each step: the number of correct digits roughly doubles each iteration, so its convergence is <strong>quadratic</strong> (<span class="math notranslate nohighlight">\(q = 2\)</span>). It reaches the floating point floor after only 4 to 5 iterations. (After that the error is <span class="math notranslate nohighlight">\(0\)</span> or about <span class="math notranslate nohighlight">\(2 \times 10^{-16}\)</span>, so those points drop off the log plot or stay at the floor.)</p>
 </section>
 <section id="step-3-measure-c-and-q">
 <h3>Step 3: measure <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(q\)</span><a class="headerlink" href="#step-3-measure-c-and-q" title="Link to this heading">#</a></h3>
@@ -1178,12 +1240,31 @@ Example: <code class="docutils literal notranslate"><span class="pre">iterate(g_
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"k = </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">:  e_(k+1) / e_k = </span><span class="si">{</span><span class="n">e_fixed</span><span class="p">[</span><span class="n">k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">e_fixed</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"|g'(x_star)| ="</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"q fixed point:"</span><span class="p">,</span> <span class="n">estimate_q</span><span class="p">(</span><span class="n">e_fixed</span><span class="p">[:</span><span class="mi">20</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"q Newton     :"</span><span class="p">,</span> <span class="n">estimate_q</span><span class="p">(</span><span class="n">e_newton</span><span class="p">[:</span><span class="mi">5</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>k = 10:  e_(k+1) / e_k = 0.292894
+k = 11:  e_(k+1) / e_k = 0.292893
+k = 12:  e_(k+1) / e_k = 0.292893
+k = 13:  e_(k+1) / e_k = 0.292893
+k = 14:  e_(k+1) / e_k = 0.292893
+|g'(x_star)| = 0.2928932188134524
+q fixed point: 1.0067061303618703
+q Newton     : 2.0672485365879605
 </pre></div>
 </div>
 </div>
 </div>
 <p><strong>Questions:</strong> what is <span class="math notranslate nohighlight">\(C\)</span> for the fixed-point iteration? Compare it with <span class="math notranslate nohighlight">\(|g'(x_\ast)| = |1 - \sqrt 2 / 2|\)</span>. What are the two estimates of <span class="math notranslate nohighlight">\(q\)</span>?</p>
+<p><strong>Answers:</strong> The ratios settle at <span class="math notranslate nohighlight">\(C \approx 0.2929\)</span>. This matches <span class="math notranslate nohighlight">\(|g'(x_\ast)| = |1 - \sqrt 2/2| \approx 0.29289\)</span> almost exactly. This is no accident: near <span class="math notranslate nohighlight">\(x_\ast\)</span>, <span class="math notranslate nohighlight">\(\epsilon_{k+1} = |g(x_k) - g(x_\ast)| \approx |g'(x_\ast)|\,\epsilon_k\)</span>, so the linear rate constant is <span class="math notranslate nohighlight">\(|g'(x_\ast)|\)</span>. (For Newton, <span class="math notranslate nohighlight">\(g'(x_\ast) = 0\)</span>, which is why it converges faster than linearly.)</p>
+<p>The estimates of <span class="math notranslate nohighlight">\(q\)</span> are about <span class="math notranslate nohighlight">\(1.01\)</span> for the fixed-point iteration (linear, <span class="math notranslate nohighlight">\(q = 1\)</span>) and about <span class="math notranslate nohighlight">\(2.07\)</span> for Newton (quadratic, <span class="math notranslate nohighlight">\(q = 2\)</span>).</p>
 </section>
 </section>
 <hr class="docutils" />
@@ -1223,8 +1304,16 @@ Example: <code class="docutils literal notranslate"><span class="pre">iterate(g_
 </details><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">iterate_until</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">):</span>
-    <span class="c1"># Write your code here, then delete the line `pass` below.</span>
-    <span class="k">pass</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="n">deltas</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">x_new</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x_new</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">deltas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">delta</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">x_new</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">deltas</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x_new</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">,</span> <span class="n">deltas</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1243,7 +1332,9 @@ Example: <code class="docutils literal notranslate"><span class="pre">iterate(g_
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iterate_until returned None: finish the function (and delete the line `pass`), then run this cell again.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>final x         : 1.414213562373095    (expected: 1.414213562373095, which is sqrt(2))
+iterations used : 5    (expected: 5)
+number of deltas: 5    (expected: 5)
 </pre></div>
 </div>
 </div>
@@ -1258,12 +1349,26 @@ Example: <code class="docutils literal notranslate"><span class="pre">iterate(g_
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">tol</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">1e-6</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="mf">1e-14</span><span class="p">]:</span>
+    <span class="n">x_f</span><span class="p">,</span> <span class="n">k_f</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">iterate_until</span><span class="p">(</span><span class="n">g_fixed</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">x_n</span><span class="p">,</span> <span class="n">k_n</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">iterate_until</span><span class="p">(</span><span class="n">g_newton</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"tol = </span><span class="si">{</span><span class="n">tol</span><span class="si">:</span><span class="s2">.0e</span><span class="si">}</span><span class="s2">:  fixed point </span><span class="si">{</span><span class="n">k_f</span><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2"> iterations, true error </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">x_f</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x_star</span><span class="p">)</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">   |   "</span>
+          <span class="sa">f</span><span class="s2">"Newton </span><span class="si">{</span><span class="n">k_n</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2"> iterations, true error </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">x_n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x_star</span><span class="p">)</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tol = 1e-06:  fixed point  12 iterations, true error 2.72e-07   |   Newton  5 iterations, true error 2.22e-16
+tol = 1e-10:  fixed point  20 iterations, true error 1.47e-11   |   Newton  5 iterations, true error 2.22e-16
+tol = 1e-14:  fixed point  27 iterations, true error 2.89e-15   |   Newton  6 iterations, true error 2.22e-16
 </pre></div>
 </div>
 </div>
 </div>
 <p><strong>Question:</strong> each time <code class="docutils literal notranslate"><span class="pre">tol</span></code> shrinks by <span class="math notranslate nohighlight">\(10^{4}\)</span>, how many extra iterations does each method need? Is the true error below <code class="docutils literal notranslate"><span class="pre">tol</span></code>?</p>
+<p><strong>Answer:</strong> From the run: the fixed-point iteration needs <span class="math notranslate nohighlight">\(12, 20, 27\)</span> iterations, so about <strong>7 to 8 extra</strong> iterations each time <code class="docutils literal notranslate"><span class="pre">tol</span></code> shrinks by <span class="math notranslate nohighlight">\(10^4\)</span>. This fits linear convergence: each iteration gains a factor <span class="math notranslate nohighlight">\(C \approx 0.29\)</span>, and <span class="math notranslate nohighlight">\(\log(10^{-4}) / \log(0.29) \approx 7.5\)</span>.</p>
+<p>Newton needs <span class="math notranslate nohighlight">\(5, 5, 6\)</span> iterations, so <strong>0 or 1 extra</strong>. With quadratic convergence the digits double each step, so one more iteration covers a lot of extra accuracy.</p>
+<p><strong>Yes</strong>, in every case the true error is below <code class="docutils literal notranslate"><span class="pre">tol</span></code>. For the fixed-point iteration the true error is about <span class="math notranslate nohighlight">\(0.3\)</span> to <span class="math notranslate nohighlight">\(0.4\)</span> times the last <span class="math notranslate nohighlight">\(\delta_k\)</span>, because for linear convergence <span class="math notranslate nohighlight">\(\epsilon_k \approx \frac{C}{1 - C}\,\delta_k \approx 0.41\,\delta_k\)</span>. For Newton the true error is already at the floating point floor (<span class="math notranslate nohighlight">\(2.2 \times 10^{-16}\)</span>) because the last step is far more accurate than the step before it. Note that this is not guaranteed in general: if convergence were very slow (<span class="math notranslate nohighlight">\(C\)</span> close to 1), a small <span class="math notranslate nohighlight">\(\delta_k\)</span> could hide a much larger error.</p>
 </section>
 <section id="step-3-asking-for-too-much">
 <h3>Step 3: asking for too much<a class="headerlink" href="#step-3-asking-for-too-much" title="Link to this heading">#</a></h3>
@@ -1284,9 +1389,25 @@ Example: <code class="docutils literal notranslate"><span class="pre">iterate(g_
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">iterate_until</span><span class="p">(</span><span class="n">g_cuberoot4</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1e-20</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"iterations used:"</span><span class="p">,</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"last four deltas:"</span><span class="p">,</span> <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="o">-</span><span class="mi">4</span><span class="p">:])</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"k"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\delta_k$"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Newton for the cube root of 4 with tol = 1e-20"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iterations used: 100
+last four deltas: [2.220446049250313e-16, 2.220446049250313e-16, 2.220446049250313e-16, 2.220446049250313e-16]
+</pre></div>
+</div>
+<img alt="../_images/03babff1cf8d943dda89b19e72775975841128a4fc975256a618a7a5db8713bd.png" src="../_images/03babff1cf8d943dda89b19e72775975841128a4fc975256a618a7a5db8713bd.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1301,12 +1422,19 @@ Example: <code class="docutils literal notranslate"><span class="pre">iterate(g_
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No result r yet: write the code in the cell above (it should create r), then run this cell again.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iterations used            : 100    (expected: 100, it never stopped on its own)
+smallest of the last deltas: 2.220446049250313e-16    (expected: about 2.2e-16, the gap between floats)
 </pre></div>
 </div>
 </div>
 </div>
 <p><strong>Questions:</strong> why did the loop run all 100 iterations? What would have happened without <code class="docutils literal notranslate"><span class="pre">max_iter</span></code>? What is a sensible tolerance?</p>
+<p><strong>Answers:</strong></p>
+<ul class="simple">
+<li><p><strong>Why 100 iterations?</strong> Newton reaches the cube root of 4 in a few steps, but then the iterates cannot get closer in floating point. Near <span class="math notranslate nohighlight">\(4^{1/3} \approx 1.587\)</span>, neighbouring floats are about <span class="math notranslate nohighlight">\(2.2 \times 10^{-16}\)</span> apart, and because of rounding, <span class="math notranslate nohighlight">\(g\)</span> keeps jumping between two neighbouring floats instead of settling on one. So <span class="math notranslate nohighlight">\(\delta_k\)</span> stays at about <span class="math notranslate nohighlight">\(2.2 \times 10^{-16}\)</span> forever and never drops below <code class="docutils literal notranslate"><span class="pre">tol</span></code> <span class="math notranslate nohighlight">\(= 10^{-20}\)</span>. The stopping test is never true, and only <code class="docutils literal notranslate"><span class="pre">max_iter</span></code> ends the loop.</p></li>
+<li><p><strong>Without <code class="docutils literal notranslate"><span class="pre">max_iter</span></code></strong> the loop would run <strong>forever</strong> (an infinite loop), computing the same two values over and over.</p></li>
+<li><p><strong>A sensible tolerance</strong> stays well above the float spacing at the size of the solution: something like <span class="math notranslate nohighlight">\(10^{-12}\)</span> to <span class="math notranslate nohighlight">\(10^{-14}\)</span> here, or better a <strong>relative</strong> tolerance such as <span class="math notranslate nohighlight">\(\delta_k &lt; 10^{-14}\,|x_k|\)</span> (a small multiple of machine epsilon <span class="math notranslate nohighlight">\(\approx 2.2 \times 10^{-16}\)</span> times <span class="math notranslate nohighlight">\(|x|\)</span>). In practice you choose <code class="docutils literal notranslate"><span class="pre">tol</span></code> from the accuracy you actually need, and you always keep a <code class="docutils literal notranslate"><span class="pre">max_iter</span></code> as a safety net.</p></li>
+</ul>
 </section>
 </section>
 </section>
@@ -1341,6 +1469,15 @@ Example: <code class="docutils literal notranslate"><span class="pre">iterate(g_
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="intro_pythonV_matplotlib.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Python, Part V: Plotting with Matplotlib</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
