@@ -9,3 +9,4 @@ chapters:
   - file: notebooks/intro_pythonIV_numpy
   - file: notebooks/intro_pythonV_matplotlib
   - file: notebooks/bigO_convergence_solved.ipynb
+  - file: notebooks/sympy_intro.ipynb
