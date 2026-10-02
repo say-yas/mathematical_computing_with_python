@@ -1,0 +1,1555 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Limits and Convergence of Algorithms &#8212; Mathematical Computing with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/limits_convergence';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Symbolic Computation with SymPy" href="sympy_intro.html" />
+    <link rel="prev" title="Big-O and Convergence of Algorithms" href="bigO_convergence_solved.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Mathematical Computing with Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Mathematical Computing with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="starting_with_python.html">Using Python in Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="starting_with_github.html">Using GitHub: Repositories, Commits, Push/Pull, and Forks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonI.html">Introduction to Python, Part I</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonII.html">Introduction to Python, Part II</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIII.html">Introduction to Python, Part III</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIV_numpy.html">Introduction to Python, Part IV: NumPy</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonV_matplotlib.html">Introduction to Python, Part V: Plotting with Matplotlib</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="bigO_convergence_solved.html">Big-O and Convergence of Algorithms</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Limits and Convergence of Algorithms</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="sympy_intro.html">Symbolic Computation with SymPy</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/say-yas/mathematical_computing_with_python/blob/main/book/notebooks/limits_convergence.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/notebooks/limits_convergence.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fnotebooks/limits_convergence.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/limits_convergence.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Limits and Convergence of Algorithms</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Limits and Convergence of Algorithms</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-polynomial-vs-exponential-growth">1. Review: polynomial vs. exponential growth</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limits-of-sequences">2. Limits of sequences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms-as-sequences">3. Algorithms as sequences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#order-of-convergence">4. Order of convergence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-q">Measuring <span class="math notranslate nohighlight">\(q\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-if-x-ast-is-not-known">What if <span class="math notranslate nohighlight">\(x_\ast\)</span> is not known?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#activity">Activity</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-growth-detective">Problem 1: growth detective</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-two-fitting-functions">Step 1: two fitting functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-look-before-you-fit">Step 2: look before you fit</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-the-split-test">Step 3: the split test</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-where-does-it-converge">Problem 2: where does it converge?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-predict-with-pen-and-paper">Step 1: predict with pen and paper</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-try-several-starting-points">Step 2: try several starting points</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-measure-the-rate-c">Step 3: measure the rate <span class="math notranslate nohighlight">\(C\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-how-fast-and-what-if-x-ast-is-unknown">Problem 3: how fast, and what if <span class="math notranslate nohighlight">\(x_\ast\)</span> is unknown?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-classify-with-the-ratio-epsilon-k-1-epsilon-k">Step 1: classify with the ratio <span class="math notranslate nohighlight">\(\epsilon_{k+1}/\epsilon_k\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-see-it-on-the-two-plots">Step 2: see it on the two plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-pretend-you-do-not-know-x-ast">Step 3: pretend you do not know <span class="math notranslate nohighlight">\(x_\ast\)</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="limits-and-convergence-of-algorithms">
+<h1>Limits and Convergence of Algorithms<a class="headerlink" href="#limits-and-convergence-of-algorithms" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<section id="review-polynomial-vs-exponential-growth">
+<h2>1. Review: polynomial vs. exponential growth<a class="headerlink" href="#review-polynomial-vs-exponential-growth" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>polynomial <span class="math notranslate nohighlight">\(t \approx c\,n^a\)</span></p></th>
+<th class="head"><p>exponential <span class="math notranslate nohighlight">\(t \approx c\,b^{\,n}\)</span> (<span class="math notranslate nohighlight">\(b &gt; 1\)</span>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>typical code</p></td>
+<td><p><span class="math notranslate nohighlight">\(a\)</span> nested loops</p></td>
+<td><p>try every subset (<span class="math notranslate nohighlight">\(b = 2\)</span>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>take logs</p></td>
+<td><p><span class="math notranslate nohighlight">\(\log t \approx a \log n + \log c\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\log t \approx n \log b + \log c\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>straight line on</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">loglog</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">semilogy</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>slope</p></td>
+<td><p><span class="math notranslate nohighlight">\(a\)</span> (the exponent)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\log b\)</span>, so <span class="math notranslate nohighlight">\(b = e^{\text{slope}}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Run the cell and look for the straight lines.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">41</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"$n^2$"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"$n^3$"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mf">2.0</span><span class="o">**</span><span class="n">n</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"$2^n$"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"n"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s2">"log"</span><span class="p">);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">"log"</span><span class="p">);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"loglog: polynomials are straight"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">"log"</span><span class="p">);</span>                              <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"semilogy: the exponential is straight"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/93dc4f3a3b4d5712e6f828b11c8fed9e45e9a8651b488aecfef61332d7271e30.png" src="../_images/93dc4f3a3b4d5712e6f828b11c8fed9e45e9a8651b488aecfef61332d7271e30.png" />
+</div>
+</div>
+<p>To <strong>estimate</strong> the parameter, fit a line with <code class="docutils literal notranslate"><span class="pre">np.polyfit</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ns</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>        <span class="c1"># polynomial model: slope = a</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>        <span class="c1"># exponential model: b = e^slope</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">polyfit</span></code> <strong>always</strong> returns a number, even for the wrong model. <strong>The split test:</strong> fit the first half and the second half of the data separately. With the right model both halves agree; with the wrong model the value drifts.</p>
+</section>
+<hr class="docutils" />
+<section id="limits-of-sequences">
+<h2>2. Limits of sequences<a class="headerlink" href="#limits-of-sequences" title="Link to this heading">#</a></h2>
+<p>A <strong>sequence</strong> is a list of numbers <span class="math notranslate nohighlight">\(x_0, x_1, x_2, \ldots\)</span> indexed by <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p><strong>Definition.</strong> <span class="math notranslate nohighlight">\(x_k \to x_\ast\)</span> if for every tolerance <span class="math notranslate nohighlight">\(\tau &gt; 0\)</span> there is a <span class="math notranslate nohighlight">\(K\)</span> with <span class="math notranslate nohighlight">\(|x_k - x_\ast| &lt; \tau\)</span> for all <span class="math notranslate nohighlight">\(k \ge K\)</span>.</p>
+<p><strong>In words:</strong> choose any tolerance <span class="math notranslate nohighlight">\(\tau\)</span>, however small. After some index <span class="math notranslate nohighlight">\(K\)</span>, <strong>every</strong> term stays within <span class="math notranslate nohighlight">\(\tau\)</span> of <span class="math notranslate nohighlight">\(x_\ast\)</span>.</p>
+<p><strong>Example:</strong> <span class="math notranslate nohighlight">\(x_k = 1/k \to 0\)</span>. For <span class="math notranslate nohighlight">\(\tau = 0.01\)</span> we can take <span class="math notranslate nohighlight">\(K = 101\)</span>. The cell below finds the first <span class="math notranslate nohighlight">\(K\)</span> for a few tolerances: a smaller <span class="math notranslate nohighlight">\(\tau\)</span> just needs a larger <span class="math notranslate nohighlight">\(K\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">k</span>                                   <span class="c1"># the sequence 1/k, limit 0</span>
+
+<span class="k">for</span> <span class="n">tau</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">1e-1</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">]:</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">k</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tau</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>           <span class="c1"># first k with |x_k - 0| &lt; tau</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"tau = </span><span class="si">{</span><span class="n">tau</span><span class="si">:</span><span class="s2">.0e</span><span class="si">}</span><span class="s2">:  K = </span><span class="si">{</span><span class="n">K</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># two more sequences that converge</span>
+<span class="n">x_e</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">k</span><span class="p">)</span><span class="o">**</span><span class="n">k</span>                        <span class="c1"># -&gt; e</span>
+<span class="n">x_basel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">k</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>               <span class="c1"># partial sums -&gt; pi^2 / 6</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">(1+1/k)^k  at k = 10^6:"</span><span class="p">,</span> <span class="n">x_e</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"   e       ="</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">e</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"sum 1/j^2  at k = 10^6:"</span><span class="p">,</span> <span class="n">x_basel</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"   pi^2/6  ="</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tau = 1e-01:  K = 11
+tau = 1e-02:  K = 101
+tau = 1e-03:  K = 1001
+tau = 1e-04:  K = 10001
+
+(1+1/k)^k  at k = 10^6: 2.7182804690957534    e       = 2.718281828459045
+sum 1/j^2  at k = 10^6: 1.64493306684877    pi^2/6  = 1.6449340668482264
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="algorithms-as-sequences">
+<h2>3. Algorithms as sequences<a class="headerlink" href="#algorithms-as-sequences" title="Link to this heading">#</a></h2>
+<p>Many algorithms repeat one step, <span class="math notranslate nohighlight">\(x_{k+1} = g(x_k)\)</span>. Recording the output after every iteration gives a <strong>sequence</strong>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>algorithm</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(g(x)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Newton for <span class="math notranslate nohighlight">\(\sqrt 2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\tfrac12(x + 2/x)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\cos\)</span> iteration</p></td>
+<td><p><span class="math notranslate nohighlight">\(\cos x\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Where can it converge?</strong> If <span class="math notranslate nohighlight">\(x_k \to x_\ast\)</span> and <span class="math notranslate nohighlight">\(g\)</span> is continuous, taking the limit of <span class="math notranslate nohighlight">\(x_{k+1} = g(x_k)\)</span> gives <span class="math notranslate nohighlight">\(x_\ast = g(x_\ast)\)</span>: the limit is a <strong>fixed point</strong> of <span class="math notranslate nohighlight">\(g\)</span>.</p>
+<p><strong>Which fixed point does it find?</strong> Near <span class="math notranslate nohighlight">\(x_\ast\)</span>, one step multiplies the error by about <span class="math notranslate nohighlight">\(g'(x_\ast)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[x_{k+1} - x_\ast = g(x_k) - g(x_\ast) \approx g'(x_\ast)\,(x_k - x_\ast).\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(|g'(x_\ast)| &lt; 1\)</span>: the error shrinks, <span class="math notranslate nohighlight">\(x_\ast\)</span> <strong>attracts</strong>, and <span class="math notranslate nohighlight">\(C = |g'(x_\ast)|\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(|g'(x_\ast)| &gt; 1\)</span>: the error grows, <span class="math notranslate nohighlight">\(x_\ast\)</span> <strong>repels</strong>.</p></li>
+</ul>
+<p><strong>Cobweb plot.</strong> The numbers <span class="math notranslate nohighlight">\(x_0, x_1, \ldots\)</span> tell you <em>whether</em> the iteration settles; the cobweb shows <em>where</em> (where <span class="math notranslate nohighlight">\(y = g(x)\)</span> crosses <span class="math notranslate nohighlight">\(y = x\)</span>) and <em>how</em> (it spirals in, walks in, or runs away). Each iteration draws <strong>two</strong> segments:</p>
+<ol class="arabic simple">
+<li><p><strong>vertical</strong>, from the line to the curve: <span class="math notranslate nohighlight">\((x_k, x_k) \to (x_k, x_{k+1})\)</span>;</p></li>
+<li><p><strong>horizontal</strong>, back to the line: <span class="math notranslate nohighlight">\((x_k, x_{k+1}) \to (x_{k+1}, x_{k+1})\)</span>.</p></li>
+</ol>
+<p>Two helpers for the Activity: <code class="docutils literal notranslate"><span class="pre">iterate</span></code> (as you wrote it last time, plus a safety stop when the values blow up) and <code class="docutils literal notranslate"><span class="pre">cobweb</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">iterate</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">blowup</span><span class="o">=</span><span class="mf">1e8</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">'''return [x0, x1, ..., xN] with x_{k+1} = g(x_k); stops early if |x| &gt; blowup'''</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">blowup</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">xs</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cobweb</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">'''cobweb plot of N steps of x_{k+1} = g(x_k), starting from x0'''</span>
+    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">"y = g(x)"</span><span class="p">)</span>          <span class="c1"># the curve</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s2">"k"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"y = x"</span><span class="p">)</span>     <span class="c1"># the line</span>
+    <span class="n">xk</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">xnew</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">xk</span><span class="p">)</span>                                     <span class="c1"># x_{k+1} = g(x_k)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xk</span><span class="p">,</span> <span class="n">xk</span><span class="p">],</span> <span class="p">[</span><span class="n">xk</span><span class="p">,</span> <span class="n">xnew</span><span class="p">],</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>         <span class="c1"># vertical: line -&gt; curve</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xk</span><span class="p">,</span> <span class="n">xnew</span><span class="p">],</span> <span class="p">[</span><span class="n">xnew</span><span class="p">,</span> <span class="n">xnew</span><span class="p">],</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>     <span class="c1"># horizontal: curve -&gt; line</span>
+        <span class="n">xk</span> <span class="o">=</span> <span class="n">xnew</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"$x_k$"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"$x_{k+1}$"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">ax</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Example.</strong> <span class="math notranslate nohighlight">\(g(x) = \cos x\)</span> has one fixed point <span class="math notranslate nohighlight">\(x_\ast \approx 0.739\)</span>. Since <span class="math notranslate nohighlight">\(g'(x) = -\sin x\)</span>, we get <span class="math notranslate nohighlight">\(|g'(x_\ast)| = \sin(0.739) \approx 0.67 &lt; 1\)</span>: it attracts, and the error shrinks by about <span class="math notranslate nohighlight">\(0.67\)</span> per step.</p>
+<p><span class="math notranslate nohighlight">\(g(x) = x^2\)</span> has two fixed points (<span class="math notranslate nohighlight">\(x_\ast^2 = x_\ast\)</span>, so <span class="math notranslate nohighlight">\(x_\ast = 0\)</span> or <span class="math notranslate nohighlight">\(1\)</span>). With <span class="math notranslate nohighlight">\(g'(x) = 2x\)</span>: <span class="math notranslate nohighlight">\(g'(0) = 0\)</span> attracts, <span class="math notranslate nohighlight">\(g'(1) = 2\)</span> repels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+<span class="n">cobweb</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"g(x) = cos x from x0 = 0.2: spirals in"</span><span class="p">)</span>
+
+<span class="n">square</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">cobweb</span><span class="p">(</span><span class="n">square</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">cobweb</span><span class="p">(</span><span class="n">square</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"g(x) = x^2: from 0.9 to 0, from 1.05 away from 1"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4aa7b49b8fe1829f4590266bc347b254a6ce1d7a96a7d180d50c8487a3e858a5.png" src="../_images/4aa7b49b8fe1829f4590266bc347b254a6ce1d7a96a7d180d50c8487a3e858a5.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="order-of-convergence">
+<h2>4. Order of convergence<a class="headerlink" href="#order-of-convergence" title="Link to this heading">#</a></h2>
+<p>With the error <span class="math notranslate nohighlight">\(\epsilon_k = |x_k - x_\ast|\)</span>: <strong>how does one iteration shrink the error?</strong></p>
+<p><strong>Definition.</strong> The convergence has <strong>order</strong> <span class="math notranslate nohighlight">\(q \ge 1\)</span> and <strong>rate constant</strong> <span class="math notranslate nohighlight">\(C\)</span> if <span class="math notranslate nohighlight">\(\displaystyle\lim_{k\to\infty} \frac{\epsilon_{k+1}}{\epsilon_k^{\,q}} = C\)</span> with <span class="math notranslate nohighlight">\(0 &lt; C &lt; \infty\)</span>. For <span class="math notranslate nohighlight">\(q = 1\)</span>: <span class="math notranslate nohighlight">\(C &lt; 1\)</span> is <strong>linear</strong>, <span class="math notranslate nohighlight">\(C = 1\)</span> is <strong>sublinear</strong>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>name</p></th>
+<th class="head"><p>ratio <span class="math notranslate nohighlight">\(\epsilon_{k+1}/\epsilon_k\)</span></p></th>
+<th class="head"><p>on <code class="docutils literal notranslate"><span class="pre">semilogy</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>sublinear</p></td>
+<td><p><strong>not</strong> constant: creeps up to <span class="math notranslate nohighlight">\(1\)</span> (for <span class="math notranslate nohighlight">\(1/k\)</span>: <span class="math notranslate nohighlight">\(\tfrac12, \tfrac23, \tfrac34, \ldots\)</span>)</p></td>
+<td><p><strong>flattens out</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>linear</p></td>
+<td><p>constant <span class="math notranslate nohighlight">\(C &lt; 1\)</span></p></td>
+<td><p><strong>straight line</strong>, slope <span class="math notranslate nohighlight">\(\log C\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>superlinear</p></td>
+<td><p>goes to <span class="math notranslate nohighlight">\(0\)</span></p></td>
+<td><p><strong>bends down</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="measuring-q">
+<h3>Measuring <span class="math notranslate nohighlight">\(q\)</span><a class="headerlink" href="#measuring-q" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Plot <span class="math notranslate nohighlight">\(\epsilon_{k+1}\)</span> against <span class="math notranslate nohighlight">\(\epsilon_k\)</span> on <code class="docutils literal notranslate"><span class="pre">loglog</span></code> axes.</strong> From <span class="math notranslate nohighlight">\(\log \epsilon_{k+1} \approx q \log \epsilon_k + \log C\)</span>, the slope is <span class="math notranslate nohighlight">\(q\)</span>. Sublinear points hug the line <span class="math notranslate nohighlight">\(y = x\)</span>; linear points run parallel below it; superlinear points are steeper.</p></li>
+<li><p><strong>Three consecutive errors:</strong> <span class="math notranslate nohighlight">\(C\)</span> cancels in
+$<span class="math notranslate nohighlight">\(q_k = \frac{\log(\epsilon_{k+1}/\epsilon_k)}{\log(\epsilon_k/\epsilon_{k-1})}.\)</span>$</p></li>
+</ol>
+<p><strong>Floating point floor:</strong> use only errors well above <span class="math notranslate nohighlight">\(10^{-16}\)</span>, for example <span class="math notranslate nohighlight">\(\epsilon_k &gt; 10^{-14}\)</span>.</p>
+</section>
+<section id="what-if-x-ast-is-not-known">
+<h3>What if <span class="math notranslate nohighlight">\(x_\ast\)</span> is not known?<a class="headerlink" href="#what-if-x-ast-is-not-known" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Reference run:</strong> iterate much longer and use the last iterate <span class="math notranslate nohighlight">\(x_N\)</span> in place of <span class="math notranslate nohighlight">\(x_\ast\)</span>. It matches the error, except close to <span class="math notranslate nohighlight">\(N\)</span>.</p></li>
+<li><p><strong>Steps</strong> <span class="math notranslate nohighlight">\(\delta_k = |x_{k+1} - x_k|\)</span>: they run <strong>parallel</strong> to the error, so they give the same <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(q\)</span>. But parallel is not equal: for linear convergence the error is about <span class="math notranslate nohighlight">\(\frac{C}{1-C}\,\delta_k\)</span>, which is large when <span class="math notranslate nohighlight">\(C\)</span> is close to <span class="math notranslate nohighlight">\(1\)</span>.</p></li>
+</ol>
+<p>The cell below shows the three types with model sequences.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>
+<span class="n">e_sub</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">kk</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>                    <span class="c1"># sublinear</span>
+<span class="n">e_lin</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">**</span><span class="n">kk</span>                         <span class="c1"># linear, C = 0.5</span>
+<span class="n">e_sup</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">]</span>                           <span class="c1"># superlinear: e_{k+1} = 2 e_k^2</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">e_sup</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">e_sup</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">e_sup</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">e_sup</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">e_sub</span><span class="p">,</span> <span class="s2">"sublinear"</span><span class="p">),</span> <span class="p">(</span><span class="n">e_lin</span><span class="p">,</span> <span class="s2">"linear"</span><span class="p">),</span> <span class="p">(</span><span class="n">e_sup</span><span class="p">,</span> <span class="s2">"superlinear"</span><span class="p">)]:</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">e</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">loglog</span><span class="p">([</span><span class="mf">1e-14</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mf">1e-14</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">"k--"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"y = x"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"k"</span><span class="p">);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"$</span><span class="se">\\</span><span class="s2">epsilon_k$"</span><span class="p">);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"semilogy: flattens / straight / bends down"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"$</span><span class="se">\\</span><span class="s2">epsilon_k$"</span><span class="p">);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"$</span><span class="se">\\</span><span class="s2">epsilon_{k+1}$"</span><span class="p">);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"loglog of $</span><span class="se">\\</span><span class="s2">epsilon_{k+1}$ vs $</span><span class="se">\\</span><span class="s2">epsilon_k$: slope = q"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/35b23a8bec2a5ceafe25a6189ae609eca8a1f98321bbcaf615858a3afd7b2e80.png" src="../_images/35b23a8bec2a5ceafe25a6189ae609eca8a1f98321bbcaf615858a3afd7b2e80.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="activity">
+<h1>Activity<a class="headerlink" href="#activity" title="Link to this heading">#</a></h1>
+<p>Three problems, from easier to harder. Each step says <strong>what your code should do</strong>. Write the Python yourself in the empty cell, then run the <strong>check</strong> cell: it prints your results next to the <strong>expected</strong> ones. Open a <strong>Steps</strong> or <strong>Hint</strong> box only when you are stuck.</p>
+<p><strong>About <code class="docutils literal notranslate"><span class="pre">pass</span></code>.</strong> Some empty cells contain a function with only the line <code class="docutils literal notranslate"><span class="pre">pass</span></code> inside. <code class="docutils literal notranslate"><span class="pre">pass</span></code> is a placeholder that does nothing: <strong>delete it</strong> when you write your code. If a check prints <code class="docutils literal notranslate"><span class="pre">None</span></code>, the function is not finished yet.</p>
+<p><strong>Useful Python for this activity</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>you want to …</p></th>
+<th class="head"><p>Python</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>slope of <span class="math notranslate nohighlight">\(\log t\)</span> against <span class="math notranslate nohighlight">\(\log n\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.polyfit(np.log(ns),</span> <span class="pre">np.log(ts),</span> <span class="pre">1)[0]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>slope of <span class="math notranslate nohighlight">\(\log t\)</span> against <span class="math notranslate nohighlight">\(n\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.polyfit(ns,</span> <span class="pre">np.log(ts),</span> <span class="pre">1)[0]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(e^x\)</span>, <span class="math notranslate nohighlight">\(\log x\)</span>, <span class="math notranslate nohighlight">\(\lvert x \rvert\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.exp(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">np.log(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">np.abs(x)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>a list as a NumPy array</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.array(L)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>all entries except the last / the first</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">a[:-1]</span></code>, <code class="docutils literal notranslate"><span class="pre">a[1:]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>the first / second half of an array</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">a[:h]</span></code>, <code class="docutils literal notranslate"><span class="pre">a[h:]</span></code> with <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">=</span> <span class="pre">len(a)</span> <span class="pre">//</span> <span class="pre">2</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>differences of neighbours <span class="math notranslate nohighlight">\(a_{k+1} - a_k\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.diff(a)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>keep only the entries above <span class="math notranslate nohighlight">\(10^{-14}\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">a[a</span> <span class="pre">&gt;</span> <span class="pre">1e-14]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>two plots side by side</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">axes</span> <span class="pre">=</span> <span class="pre">plt.subplots(1,</span> <span class="pre">2,</span> <span class="pre">figsize=(10,</span> <span class="pre">4))</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<section id="problem-1-growth-detective">
+<h2>Problem 1: growth detective<a class="headerlink" href="#problem-1-growth-detective" title="Link to this heading">#</a></h2>
+<p><strong>Goal:</strong> three algorithms were timed for <span class="math notranslate nohighlight">\(n = 10, 12, \ldots, 40\)</span>. For each one, decide whether its time grows <strong>polynomially</strong> or <strong>exponentially</strong>, and estimate the exponent <span class="math notranslate nohighlight">\(a\)</span> or the base <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<p><strong>What you will see:</strong> the right kind of axes turns the data into a straight line, and the split test confirms the choice with numbers.</p>
+<p>Run the cell below to load the data (do not change it).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">2026</span><span class="p">)</span>
+<span class="n">ns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">0.03</span> <span class="o">*</span> <span class="n">data_rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ns</span><span class="p">)))</span>    <span class="c1"># about 3% timing noise</span>
+
+<span class="n">t_A</span> <span class="o">=</span> <span class="mf">3e-7</span> <span class="o">*</span> <span class="n">ns</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">noise</span><span class="p">()</span>
+<span class="n">t_B</span> <span class="o">=</span> <span class="mf">2e-9</span> <span class="o">*</span> <span class="mf">1.5</span><span class="o">**</span><span class="n">ns</span> <span class="o">*</span> <span class="n">noise</span><span class="p">()</span>
+<span class="n">t_C</span> <span class="o">=</span> <span class="mf">4e-10</span> <span class="o">*</span> <span class="n">ns</span><span class="o">**</span><span class="mi">4</span> <span class="o">*</span> <span class="n">noise</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="step-1-two-fitting-functions">
+<h3>Step 1: two fitting functions<a class="headerlink" href="#step-1-two-fitting-functions" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">fit_loglog(ns,</span> <span class="pre">ts)</span></code> <strong>returns</strong> the slope of <span class="math notranslate nohighlight">\(\log t\)</span> against <span class="math notranslate nohighlight">\(\log n\)</span> (the exponent <span class="math notranslate nohighlight">\(a\)</span> if <span class="math notranslate nohighlight">\(t \approx c\,n^a\)</span>).</p>
+<p><code class="docutils literal notranslate"><span class="pre">fit_semilogy(ns,</span> <span class="pre">ts)</span></code> <strong>returns</strong> <span class="math notranslate nohighlight">\(b = e^{\text{slope}}\)</span>, where the slope is that of <span class="math notranslate nohighlight">\(\log t\)</span> against <span class="math notranslate nohighlight">\(n\)</span> (the base <span class="math notranslate nohighlight">\(b\)</span> if <span class="math notranslate nohighlight">\(t \approx c\,b^{\,n}\)</span>).</p>
+<details><summary><b>Hint</b></summary>
+<p>Each function is one line; see the table of useful Python. For <code class="docutils literal notranslate"><span class="pre">fit_semilogy</span></code>, put <code class="docutils literal notranslate"><span class="pre">np.exp(...)</span></code> around the slope.</p>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fit_loglog</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">ts</span><span class="p">):</span>
+    <span class="c1"># Write your code here, then delete the line `pass` below.</span>
+    <span class="k">pass</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fit_semilogy</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">ts</span><span class="p">):</span>
+    <span class="c1"># Write your code here, then delete the line `pass` below.</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check: compare your results with the expected ones</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"fit_loglog(ns, 5 * ns**3)     ="</span><span class="p">,</span> <span class="n">fit_loglog</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="mf">5.0</span> <span class="o">*</span> <span class="n">ns</span><span class="o">**</span><span class="mi">3</span><span class="p">),</span> <span class="s2">"   (expected: 3.0, up to rounding)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"fit_semilogy(ns, 7 * 2.0**ns) ="</span><span class="p">,</span> <span class="n">fit_semilogy</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="mf">7.0</span> <span class="o">*</span> <span class="mf">2.0</span><span class="o">**</span><span class="n">ns</span><span class="p">),</span> <span class="s2">"   (expected: 2.0, up to rounding)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fit_loglog(ns, 5 * ns**3)     = None    (expected: 3.0, up to rounding)
+fit_semilogy(ns, 7 * 2.0**ns) = None    (expected: 2.0, up to rounding)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-look-before-you-fit">
+<h3>Step 2: look before you fit<a class="headerlink" href="#step-2-look-before-you-fit" title="Link to this heading">#</a></h3>
+<p>Write code that:</p>
+<ol class="arabic simple">
+<li><p>makes two plots side by side;</p></li>
+<li><p>draws <code class="docutils literal notranslate"><span class="pre">t_A</span></code>, <code class="docutils literal notranslate"><span class="pre">t_B</span></code> and <code class="docutils literal notranslate"><span class="pre">t_C</span></code> against <code class="docutils literal notranslate"><span class="pre">ns</span></code> with <code class="docutils literal notranslate"><span class="pre">loglog</span></code> in <code class="docutils literal notranslate"><span class="pre">axes[0]</span></code> and with <code class="docutils literal notranslate"><span class="pre">semilogy</span></code> in <code class="docutils literal notranslate"><span class="pre">axes[1]</span></code>, with a legend.</p></li>
+</ol>
+<details><summary><b>Hint</b></summary>
+<p><code class="docutils literal notranslate"><span class="pre">axes[0].loglog(ns,</span> <span class="pre">t_A,</span> <span class="pre">&quot;o-&quot;,</span> <span class="pre">label=&quot;A&quot;)</span></code> and <code class="docutils literal notranslate"><span class="pre">axes[1].semilogy(ns,</span> <span class="pre">t_A,</span> <span class="pre">&quot;o-&quot;,</span> <span class="pre">label=&quot;A&quot;)</span></code>; repeat for B and C, then call <code class="docutils literal notranslate"><span class="pre">legend()</span></code> on both.</p>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Question:</strong> which data sets look straight on which axes? Write down your guess for A, B and C: polynomial or exponential?</p>
+</section>
+<section id="step-3-the-split-test">
+<h3>Step 3: the split test<a class="headerlink" href="#step-3-the-split-test" title="Link to this heading">#</a></h3>
+<p><strong>Why?</strong> In Step 2 you judged “straight or not” by eye. The split test does the same with numbers: if a model is right, its parameter (<span class="math notranslate nohighlight">\(a\)</span> or <span class="math notranslate nohighlight">\(b\)</span>) is the <strong>same</strong> everywhere in the data, so fitting the <strong>first half</strong> and the <strong>second half</strong> separately gives (almost) the same value. If the model is wrong, the two halves give clearly <strong>different</strong> values.</p>
+<p>Write a function <code class="docutils literal notranslate"><span class="pre">split_test(fit,</span> <span class="pre">ns,</span> <span class="pre">ts)</span></code>.</p>
+<p><strong>Inputs</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fit</span></code>: one of your two fitting <strong>functions</strong> from Step 1, <code class="docutils literal notranslate"><span class="pre">fit_loglog</span></code> or <code class="docutils literal notranslate"><span class="pre">fit_semilogy</span></code>. Pass it by name, <strong>without parentheses</strong>: <code class="docutils literal notranslate"><span class="pre">split_test(fit_loglog,</span> <span class="pre">ns,</span> <span class="pre">t_A)</span></code>, not <code class="docutils literal notranslate"><span class="pre">split_test(fit_loglog(),</span> <span class="pre">ns,</span> <span class="pre">t_A)</span></code>. Inside <code class="docutils literal notranslate"><span class="pre">split_test</span></code>, call it like any function: <code class="docutils literal notranslate"><span class="pre">fit(some_ns,</span> <span class="pre">some_ts)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ns</span></code>, <code class="docutils literal notranslate"><span class="pre">ts</span></code>: the input sizes and the times (two arrays of the same length).</p></li>
+</ul>
+<p><strong>Returns</strong> a list of two numbers, <code class="docutils literal notranslate"><span class="pre">[first,</span> <span class="pre">second]</span></code>: <code class="docutils literal notranslate"><span class="pre">fit</span></code> applied to the first half of the data, and <code class="docutils literal notranslate"><span class="pre">fit</span></code> applied to the second half.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">split_test(fit_loglog,</span> <span class="pre">ns,</span> <span class="pre">4e-10</span> <span class="pre">*</span> <span class="pre">ns**4)</span></code> gives <code class="docutils literal notranslate"><span class="pre">[4.0,</span> <span class="pre">4.0]</span></code>, since <span class="math notranslate nohighlight">\(n^4\)</span> has exponent <span class="math notranslate nohighlight">\(4\)</span> on both halves.</p>
+<details><summary><b>Steps (open if you need them)</b></summary>
+<ol class="arabic simple">
+<li><p>compute the middle index <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">=</span> <span class="pre">len(ns)</span> <span class="pre">//</span> <span class="pre">2</span></code> (here <code class="docutils literal notranslate"><span class="pre">ns</span></code> has 16 values, so <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">=</span> <span class="pre">8</span></code>);</p></li>
+<li><p>the first half is <code class="docutils literal notranslate"><span class="pre">ns[:h]</span></code>, <code class="docutils literal notranslate"><span class="pre">ts[:h]</span></code> and the second half is <code class="docutils literal notranslate"><span class="pre">ns[h:]</span></code>, <code class="docutils literal notranslate"><span class="pre">ts[h:]</span></code>;</p></li>
+<li><p>return <code class="docutils literal notranslate"><span class="pre">[fit(ns[:h],</span> <span class="pre">ts[:h]),</span> <span class="pre">fit(ns[h:],</span> <span class="pre">ts[h:])]</span></code>.</p></li>
+</ol>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">split_test</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span> <span class="n">ns</span><span class="p">,</span> <span class="n">ts</span><span class="p">):</span>
+    <span class="c1"># Write your code here, then delete the line `pass` below.</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check: compare your results with the expected ones</span>
+<span class="n">r_semi</span> <span class="o">=</span> <span class="n">split_test</span><span class="p">(</span><span class="n">fit_semilogy</span><span class="p">,</span> <span class="n">ns</span><span class="p">,</span> <span class="mf">4e-10</span> <span class="o">*</span> <span class="n">ns</span><span class="o">**</span><span class="mf">4.0</span><span class="p">)</span>
+<span class="n">r_log</span> <span class="o">=</span> <span class="n">split_test</span><span class="p">(</span><span class="n">fit_loglog</span><span class="p">,</span> <span class="n">ns</span><span class="p">,</span> <span class="mf">4e-10</span> <span class="o">*</span> <span class="n">ns</span><span class="o">**</span><span class="mf">4.0</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">r_semi</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">r_log</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"split_test returned None: finish the function (and delete the line `pass`), then run this cell again."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"split_test(fit_semilogy, ns, 4e-10 * ns**4) ="</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">r_semi</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">"   (expected: [1.279 1.13 ]: drifts, wrong model)"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"split_test(fit_loglog,   ns, 4e-10 * ns**4) ="</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">r_log</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">"   (expected: [4. 4.]: agrees, right model)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>split_test returned None: finish the function (and delete the line `pass`), then run this cell again.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now apply the test to the three data sets <code class="docutils literal notranslate"><span class="pre">t_A</span></code>, <code class="docutils literal notranslate"><span class="pre">t_B</span></code> and <code class="docutils literal notranslate"><span class="pre">t_C</span></code>. For <strong>each</strong> of them, print <code class="docutils literal notranslate"><span class="pre">split_test</span></code> with <strong>both</strong> fitting functions, so you get <strong>six</strong> results:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>data</p></th>
+<th class="head"><p>polynomial model</p></th>
+<th class="head"><p>exponential model</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">t_A</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">split_test(fit_loglog,</span> <span class="pre">ns,</span> <span class="pre">t_A)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">split_test(fit_semilogy,</span> <span class="pre">ns,</span> <span class="pre">t_A)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">t_B</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">split_test(fit_loglog,</span> <span class="pre">ns,</span> <span class="pre">t_B)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">split_test(fit_semilogy,</span> <span class="pre">ns,</span> <span class="pre">t_B)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">t_C</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">split_test(fit_loglog,</span> <span class="pre">ns,</span> <span class="pre">t_C)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">split_test(fit_semilogy,</span> <span class="pre">ns,</span> <span class="pre">t_C)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<details><summary><b>Hint</b></summary>
+<p>A loop avoids writing six lines:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">ts</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"A"</span><span class="p">,</span> <span class="n">t_A</span><span class="p">),</span> <span class="p">(</span><span class="s2">"B"</span><span class="p">,</span> <span class="n">t_B</span><span class="p">),</span> <span class="p">(</span><span class="s2">"C"</span><span class="p">,</span> <span class="n">t_C</span><span class="p">)]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s2">"loglog a:"</span><span class="p">,</span> <span class="n">split_test</span><span class="p">(</span><span class="n">fit_loglog</span><span class="p">,</span> <span class="n">ns</span><span class="p">,</span> <span class="n">ts</span><span class="p">),</span> <span class="s2">"  semilogy b:"</span><span class="p">,</span> <span class="n">split_test</span><span class="p">(</span><span class="n">fit_semilogy</span><span class="p">,</span> <span class="n">ns</span><span class="p">,</span> <span class="n">ts</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Wrap the results in <code class="docutils literal notranslate"><span class="pre">np.round(...,</span> <span class="pre">3)</span></code> to make them easier to read.</p>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here: split_test with both fitting functions for t_A, t_B and t_C</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Questions:</strong></p>
+<ol class="arabic simple">
+<li><p>For each data set, which model agrees on both halves (up to a difference of order <span class="math notranslate nohighlight">\(10^{-2}\)</span> or <span class="math notranslate nohighlight">\(10^{-1}\)</span>, because of the timing noise)? Give the Big-<span class="math notranslate nohighlight">\(O\)</span> of A, B and C.</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="problem-2-where-does-it-converge">
+<h2>Problem 2: where does it converge?<a class="headerlink" href="#problem-2-where-does-it-converge" title="Link to this heading">#</a></h2>
+<p><strong>Goal:</strong> the iteration</p>
+<div class="math notranslate nohighlight">
+\[x_{k+1} = g(x_k), \qquad g(x) = \frac{x^2 + 2}{3}\]</div>
+<p>is one way to solve <span class="math notranslate nohighlight">\(x^2 - 3x + 2 = 0\)</span>. Find <strong>where</strong> it can converge, <strong>which</strong> starting points get there, and <strong>how fast</strong>.</p>
+<p><strong>What you will see:</strong> the equation has two solutions, but the iteration can only find one of them, and the slope <span class="math notranslate nohighlight">\(g'(x_\ast)\)</span> tells you which one and how fast.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">g2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="step-1-predict-with-pen-and-paper">
+<h3>Step 1: predict with pen and paper<a class="headerlink" href="#step-1-predict-with-pen-and-paper" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Solve <span class="math notranslate nohighlight">\(g(x_\ast) = x_\ast\)</span> to find the two <strong>fixed points</strong>.</p></li>
+<li><p>With <span class="math notranslate nohighlight">\(g'(x) = 2x/3\)</span>, compute <span class="math notranslate nohighlight">\(g'\)</span> at each fixed point. Which one <strong>attracts</strong>, which one <strong>repels</strong>?</p></li>
+<li><p>For the attracting one, what rate <span class="math notranslate nohighlight">\(C\)</span> do you predict?</p></li>
+</ol>
+<p><em>Your answers:</em></p>
+<ul class="simple">
+<li><p>fixed points:</p></li>
+<li><p><span class="math notranslate nohighlight">\(g'\)</span> at each, attracting or repelling:</p></li>
+<li><p>predicted <span class="math notranslate nohighlight">\(C\)</span>:</p></li>
+</ul>
+</section>
+<section id="step-2-try-several-starting-points">
+<h3>Step 2: try several starting points<a class="headerlink" href="#step-2-try-several-starting-points" title="Link to this heading">#</a></h3>
+<p>Write code that:</p>
+<ol class="arabic simple">
+<li><p>for each starting point in <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.5,</span> <span class="pre">1.9,</span> <span class="pre">2.0,</span> <span class="pre">2.1,</span> <span class="pre">2.5]</span></code>, runs <code class="docutils literal notranslate"><span class="pre">iterate(g2,</span> <span class="pre">x0,</span> <span class="pre">60)</span></code> and prints the starting point, how many values were computed, and the last value (if the values blow up, <code class="docutils literal notranslate"><span class="pre">iterate</span></code> stops early);</p></li>
+<li><p>draws two cobweb plots side by side: <code class="docutils literal notranslate"><span class="pre">cobweb(g2,</span> <span class="pre">1.9,</span> <span class="pre">15,</span> <span class="pre">0,</span> <span class="pre">2.6,</span> <span class="pre">ax=axes[0])</span></code> and <code class="docutils literal notranslate"><span class="pre">cobweb(g2,</span> <span class="pre">2.1,</span> <span class="pre">8,</span> <span class="pre">0,</span> <span class="pre">2.6,</span> <span class="pre">ax=axes[1])</span></code>.</p></li>
+</ol>
+<details><summary><b>Hint</b></summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x0</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]:</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">iterate</span><span class="p">(</span><span class="n">g2</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">xs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check: compare your results with the expected ones</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"iterate(g2, 1.9, 60)[-1]  ="</span><span class="p">,</span> <span class="n">iterate</span><span class="p">(</span><span class="n">g2</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">,</span> <span class="mi">60</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"   (expected: 1.00000000067..., creeping towards 1)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"iterate(g2, 2.0, 60)[-1]  ="</span><span class="p">,</span> <span class="n">iterate</span><span class="p">(</span><span class="n">g2</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">60</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"   (expected: 2.0: a fixed point never moves)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"len(iterate(g2, 2.1, 60)) ="</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">iterate</span><span class="p">(</span><span class="n">g2</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">,</span> <span class="mi">60</span><span class="p">)),</span> <span class="s2">"   (expected: 15: it blew up past 1e8)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iterate(g2, 1.9, 60)[-1]  = 1.0000000006704652    (expected: 1.00000000067..., creeping towards 1)
+iterate(g2, 2.0, 60)[-1]  = 2.0    (expected: 2.0: a fixed point never moves)
+len(iterate(g2, 2.1, 60)) = 15    (expected: 15: it blew up past 1e8)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Questions:</strong> which starting points (with <span class="math notranslate nohighlight">\(x_0 \ge 0\)</span>) end up at <span class="math notranslate nohighlight">\(1\)</span>? Why does <span class="math notranslate nohighlight">\(x_0 = 2.0\)</span> stay put while <span class="math notranslate nohighlight">\(x_0 = 2.1\)</span>, which is very close, runs away? How do the two cobweb pictures show this?</p>
+</section>
+<section id="step-3-measure-the-rate-c">
+<h3>Step 3: measure the rate <span class="math notranslate nohighlight">\(C\)</span><a class="headerlink" href="#step-3-measure-the-rate-c" title="Link to this heading">#</a></h3>
+<p>Write code that:</p>
+<ol class="arabic simple">
+<li><p>runs <code class="docutils literal notranslate"><span class="pre">iterate(g2,</span> <span class="pre">0.0,</span> <span class="pre">60)</span></code>, turns it into a NumPy array, and computes the errors <span class="math notranslate nohighlight">\(\epsilon_k = |x_k - 1|\)</span> (call them <code class="docutils literal notranslate"><span class="pre">e2</span></code>);</p></li>
+<li><p>prints the ratios <span class="math notranslate nohighlight">\(\epsilon_{k+1}/\epsilon_k\)</span> for <span class="math notranslate nohighlight">\(k = 20, \ldots, 24\)</span>;</p></li>
+<li><p>plots <code class="docutils literal notranslate"><span class="pre">e2</span></code> with <code class="docutils literal notranslate"><span class="pre">semilogy</span></code> against <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+</ol>
+<details><summary><b>Hint</b></summary>
+<p><code class="docutils literal notranslate"><span class="pre">e2[21:26]</span> <span class="pre">/</span> <span class="pre">e2[20:25]</span></code> gives the five ratios at once.</p>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here: replace None by your array of errors |x_k - 1|</span>
+<span class="n">e2</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check: compare your results with the expected ones</span>
+<span class="k">if</span> <span class="n">e2</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"e2 is still None: write the code in the cell above, then run this cell again."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"e2[21:26] / e2[20:25] ="</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">e2</span><span class="p">[</span><span class="mi">21</span><span class="p">:</span><span class="mi">26</span><span class="p">]</span> <span class="o">/</span> <span class="n">e2</span><span class="p">[</span><span class="mi">20</span><span class="p">:</span><span class="mi">25</span><span class="p">],</span> <span class="mi">4</span><span class="p">),</span> <span class="s2">"   (expected: about 0.6666 each)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>e2 is still None: write the code in the cell above, then run this cell again.
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Questions:</strong></p>
+<ol class="arabic simple">
+<li><p>Do the ratios match your predicted <span class="math notranslate nohighlight">\(C = |g'(1)|\)</span>? Is the <code class="docutils literal notranslate"><span class="pre">semilogy</span></code> plot a straight line? What type of convergence is this?</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="problem-3-how-fast-and-what-if-x-ast-is-unknown">
+<h2>Problem 3: how fast, and what if <span class="math notranslate nohighlight">\(x_\ast\)</span> is unknown?<a class="headerlink" href="#problem-3-how-fast-and-what-if-x-ast-is-unknown" title="Link to this heading">#</a></h2>
+<p><strong>Goal:</strong> four sequences converge. Classify each one as sublinear, linear or superlinear, measure its order <span class="math notranslate nohighlight">\(q\)</span>, and then estimate the error <strong>without</strong> knowing the answer.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>sequence</p></th>
+<th class="head"><p>limit <span class="math notranslate nohighlight">\(x_\ast\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>e-seq:</strong> <span class="math notranslate nohighlight">\(x_k = (1 + 1/k)^k\)</span>, <span class="math notranslate nohighlight">\(k = 1, 2, \ldots\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(e\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>slow:</strong> <span class="math notranslate nohighlight">\(x_{k+1} = x_k - 0.035\,(x_k^2 - 2)\)</span>, <span class="math notranslate nohighlight">\(x_0 = 1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\sqrt 2\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>fast:</strong> <span class="math notranslate nohighlight">\(x_{k+1} = x_k - 0.25\,(x_k^2 - 2)\)</span>, <span class="math notranslate nohighlight">\(x_0 = 1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\sqrt 2\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Newton:</strong> <span class="math notranslate nohighlight">\(x_{k+1} = \tfrac12(x_k + 2/x_k)\)</span>, <span class="math notranslate nohighlight">\(x_0 = 1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\sqrt 2\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>What you will see:</strong> the ratio <span class="math notranslate nohighlight">\(\epsilon_{k+1}/\epsilon_k\)</span> tells the three types apart, the <code class="docutils literal notranslate"><span class="pre">loglog</span></code> plot of <span class="math notranslate nohighlight">\(\epsilon_{k+1}\)</span> vs. <span class="math notranslate nohighlight">\(\epsilon_k\)</span> gives the order, and the steps <span class="math notranslate nohighlight">\(\delta_k\)</span> reveal the rate even when <span class="math notranslate nohighlight">\(x_\ast\)</span> is unknown.</p>
+<p>Run the cell below to compute the four error sequences (do not change it).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kk_e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">61</span><span class="p">)</span>
+<span class="n">eps_e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">kk_e</span><span class="p">)</span><span class="o">**</span><span class="n">kk_e</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">e</span><span class="p">)</span>
+
+<span class="n">g_slow</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">-</span> <span class="mf">0.035</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">g_fast</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">-</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">g_newton</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="n">eps_slow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">iterate</span><span class="p">(</span><span class="n">g_slow</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">60</span><span class="p">))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">eps_fast</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">iterate</span><span class="p">(</span><span class="n">g_fast</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">40</span><span class="p">))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">eps_newton</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">iterate</span><span class="p">(</span><span class="n">g_newton</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">eps_fast</span> <span class="o">=</span> <span class="n">eps_fast</span><span class="p">[</span><span class="n">eps_fast</span> <span class="o">&gt;</span> <span class="mf">1e-14</span><span class="p">]</span>        <span class="c1"># keep only errors above the floating point floor</span>
+<span class="n">eps_newton</span> <span class="o">=</span> <span class="n">eps_newton</span><span class="p">[</span><span class="n">eps_newton</span> <span class="o">&gt;</span> <span class="mf">1e-14</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="step-1-classify-with-the-ratio-epsilon-k-1-epsilon-k">
+<h3>Step 1: classify with the ratio <span class="math notranslate nohighlight">\(\epsilon_{k+1}/\epsilon_k\)</span><a class="headerlink" href="#step-1-classify-with-the-ratio-epsilon-k-1-epsilon-k" title="Link to this heading">#</a></h3>
+<p>Write a function <code class="docutils literal notranslate"><span class="pre">ratios(eps)</span></code>.</p>
+<p><strong>Input:</strong> <code class="docutils literal notranslate"><span class="pre">eps</span></code>, a NumPy array of errors <span class="math notranslate nohighlight">\(\epsilon_0, \epsilon_1, \ldots\)</span></p>
+<p><strong>Returns</strong> the array of ratios <span class="math notranslate nohighlight">\(\epsilon_1/\epsilon_0,\ \epsilon_2/\epsilon_1,\ \ldots\)</span></p>
+<p>Then print <code class="docutils literal notranslate"><span class="pre">np.round(ratios(eps),</span> <span class="pre">3)</span></code> for each of the four sequences and classify each sequence with the table from Section 4: does the ratio creep up to <span class="math notranslate nohighlight">\(1\)</span>, stay at a constant <span class="math notranslate nohighlight">\(C &lt; 1\)</span>, or go to <span class="math notranslate nohighlight">\(0\)</span>?</p>
+<details><summary><b>Hint</b></summary>
+<p>One line: divide “all but the first” by “all but the last” (see the table of useful Python).</p>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ratios</span><span class="p">(</span><span class="n">eps</span><span class="p">):</span>
+    <span class="c1"># Write your code here, then delete the line `pass` below.</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here: print the ratios of the four sequences</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check: compare your results with the expected ones</span>
+<span class="n">r_e</span><span class="p">,</span> <span class="n">r_slow</span><span class="p">,</span> <span class="n">r_fast</span><span class="p">,</span> <span class="n">r_newton</span> <span class="o">=</span> <span class="n">ratios</span><span class="p">(</span><span class="n">eps_e</span><span class="p">),</span> <span class="n">ratios</span><span class="p">(</span><span class="n">eps_slow</span><span class="p">),</span> <span class="n">ratios</span><span class="p">(</span><span class="n">eps_fast</span><span class="p">),</span> <span class="n">ratios</span><span class="p">(</span><span class="n">eps_newton</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">r_e</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">r_slow</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">r_fast</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">r_newton</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"ratios returned None: finish the function (and delete the line `pass`), then run this cell again."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"e-seq, a few ratios :"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">r_e</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">58</span><span class="p">]],</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">"   (expected: [0.652 0.916 0.969 0.984]: creeps up to 1)"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"slow, a few ratios  :"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">r_slow</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">58</span><span class="p">]],</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">"   (expected: [0.916 0.907 0.902 0.901]: constant, about 0.90)"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"fast, a few ratios  :"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">r_fast</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">19</span><span class="p">]],</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">"   (expected: [0.396 0.293 0.293]: constant, about 0.29)"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Newton, all ratios  :"</span><span class="p">,</span> <span class="n">r_newton</span><span class="p">,</span> <span class="s2">"   (expected: 0.21, 0.029, 0.00087, 7.5e-07: goes to 0)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ratios returned None: finish the function (and delete the line `pass`), then run this cell again.
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Questions:</strong></p>
+<ol class="arabic simple">
+<li><p>Classify the four sequences. For the linear ones, what is <span class="math notranslate nohighlight">\(C\)</span>?</p></li>
+<li><p>For slow and fast, <span class="math notranslate nohighlight">\(g'(x) = 1 - 2 \cdot 0.035\,x\)</span> and <span class="math notranslate nohighlight">\(1 - 2 \cdot 0.25\,x\)</span>. Compute <span class="math notranslate nohighlight">\(|g'(\sqrt 2)|\)</span> for each and compare with the ratios.</p></li>
+</ol>
+</section>
+<section id="step-2-see-it-on-the-two-plots">
+<h3>Step 2: see it on the two plots<a class="headerlink" href="#step-2-see-it-on-the-two-plots" title="Link to this heading">#</a></h3>
+<p>Make <strong>one figure with two panels</strong> side by side, <code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">axes</span> <span class="pre">=</span> <span class="pre">plt.subplots(1,</span> <span class="pre">2,</span> <span class="pre">figsize=(11,</span> <span class="pre">4.5))</span></code>. <strong>Each</strong> of the four error arrays <code class="docutils literal notranslate"><span class="pre">eps_e</span></code>, <code class="docutils literal notranslate"><span class="pre">eps_slow</span></code>, <code class="docutils literal notranslate"><span class="pre">eps_fast</span></code>, <code class="docutils literal notranslate"><span class="pre">eps_newton</span></code> gets <strong>one curve in each panel</strong>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>panel</p></th>
+<th class="head"><p>what to plot for each <code class="docutils literal notranslate"><span class="pre">eps</span></code></p></th>
+<th class="head"><p>Python for one <code class="docutils literal notranslate"><span class="pre">eps</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>left, <code class="docutils literal notranslate"><span class="pre">axes[0]</span></code></p></td>
+<td><p>the errors against <span class="math notranslate nohighlight">\(k\)</span> on <code class="docutils literal notranslate"><span class="pre">semilogy</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">axes[0].semilogy(eps,</span> <span class="pre">&quot;o-&quot;,</span> <span class="pre">ms=3,</span> <span class="pre">label=name)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>right, <code class="docutils literal notranslate"><span class="pre">axes[1]</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\epsilon_{k+1}\)</span> against <span class="math notranslate nohighlight">\(\epsilon_k\)</span> on <code class="docutils literal notranslate"><span class="pre">loglog</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">axes[1].loglog(eps[:-1],</span> <span class="pre">eps[1:],</span> <span class="pre">&quot;o-&quot;,</span> <span class="pre">ms=3,</span> <span class="pre">label=name)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In the right panel, also draw the dashed reference line <span class="math notranslate nohighlight">\(y = x\)</span> once: <code class="docutils literal notranslate"><span class="pre">axes[1].loglog([1e-14,</span> <span class="pre">1],</span> <span class="pre">[1e-14,</span> <span class="pre">1],</span> <span class="pre">&quot;k--&quot;,</span> <span class="pre">label=&quot;y</span> <span class="pre">=</span> <span class="pre">x&quot;)</span></code>. Label the axes and add a legend to both panels.</p>
+<details><summary><b>Steps (open if you need them)</b></summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">eps</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"e-seq"</span><span class="p">,</span> <span class="n">eps_e</span><span class="p">),</span> <span class="p">(</span><span class="s2">"slow"</span><span class="p">,</span> <span class="n">eps_slow</span><span class="p">),</span> <span class="p">(</span><span class="s2">"fast"</span><span class="p">,</span> <span class="n">eps_fast</span><span class="p">),</span> <span class="p">(</span><span class="s2">"Newton"</span><span class="p">,</span> <span class="n">eps_newton</span><span class="p">)]:</span>
+    <span class="c1"># left panel: one line for eps against k (semilogy)</span>
+    <span class="c1"># right panel: one line for eps[1:] against eps[:-1] (loglog)</span>
+    <span class="o">...</span>
+<span class="c1"># right panel: the dashed line y = x</span>
+<span class="c1"># axis labels: "k" and "error" on the left; "eps_k" and "eps_(k+1)" on the right</span>
+<span class="c1"># legends on both panels, then plt.show()</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here: one figure, two panels, four curves in each panel</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now write <code class="docutils literal notranslate"><span class="pre">order_estimates(eps)</span></code>.</p>
+<p><strong>Input:</strong> <code class="docutils literal notranslate"><span class="pre">eps</span></code>, a NumPy array of errors.</p>
+<p><strong>Returns</strong> the array of estimates <span class="math notranslate nohighlight">\(q_k = \dfrac{\log(\epsilon_{k+1}/\epsilon_k)}{\log(\epsilon_k/\epsilon_{k-1})}\)</span>, one for each <span class="math notranslate nohighlight">\(k = 1, \ldots, \text{len(eps)} - 2\)</span>.</p>
+<p>Then print <code class="docutils literal notranslate"><span class="pre">np.round(order_estimates(eps_fast),</span> <span class="pre">3)</span></code> and <code class="docutils literal notranslate"><span class="pre">np.round(order_estimates(eps_newton),</span> <span class="pre">3)</span></code>.</p>
+<details><summary><b>Steps (open if you need them)</b></summary>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">=</span> <span class="pre">np.log(ratios(eps))</span></code> gives all the <span class="math notranslate nohighlight">\(\log(\epsilon_{k+1}/\epsilon_k)\)</span>;</p></li>
+<li><p>return <code class="docutils literal notranslate"><span class="pre">r[1:]</span> <span class="pre">/</span> <span class="pre">r[:-1]</span></code>: each log-ratio divided by the one before it.</p></li>
+</ol>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">order_estimates</span><span class="p">(</span><span class="n">eps</span><span class="p">):</span>
+    <span class="c1"># Write your code here, then delete the line `pass` below.</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here: print order_estimates for eps_fast and eps_newton</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check: compare your results with the expected ones</span>
+<span class="k">if</span> <span class="n">ratios</span><span class="p">(</span><span class="n">eps_newton</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"ratios returned None: finish `ratios` in Step 1 first, then run this cell again."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">q_lin</span> <span class="o">=</span> <span class="n">order_estimates</span><span class="p">(</span><span class="mf">0.5</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+    <span class="n">q_quad</span> <span class="o">=</span> <span class="n">order_estimates</span><span class="p">(</span><span class="mf">10.0</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="mf">2.0</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">))))</span>
+    <span class="n">q_newton</span> <span class="o">=</span> <span class="n">order_estimates</span><span class="p">(</span><span class="n">eps_newton</span><span class="p">)</span>
+    <span class="n">q_fast</span> <span class="o">=</span> <span class="n">order_estimates</span><span class="p">(</span><span class="n">eps_fast</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">q_lin</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">q_quad</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">q_newton</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">q_fast</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"order_estimates returned None: finish the function (and delete the line `pass`), then run this cell again."</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"test, linear    :"</span><span class="p">,</span> <span class="n">q_lin</span><span class="p">,</span> <span class="s2">"   (expected: [1. 1. 1. 1.])"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"test, quadratic :"</span><span class="p">,</span> <span class="n">q_quad</span><span class="p">,</span> <span class="s2">"   (expected: [2. 2. 2.])"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Newton          :"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">q_newton</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">"   (expected: [2.258 1.984 2.   ])"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"fast, last three:"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">q_fast</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">"   (expected: about [1. 1. 1.])"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ratios returned None: finish `ratios` in Step 1 first, then run this cell again.
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Questions:</strong></p>
+<ol class="arabic simple">
+<li><p>On <code class="docutils literal notranslate"><span class="pre">semilogy</span></code>, which curve flattens, which are straight lines, which bends down? Does that match Step 1?</p></li>
+<li><p>On the <code class="docutils literal notranslate"><span class="pre">loglog</span></code> plot, which points hug <span class="math notranslate nohighlight">\(y = x\)</span>, which run parallel below it, and which are steeper? Why is slow closer to <span class="math notranslate nohighlight">\(y = x\)</span> than fast?</p></li>
+<li><p>What order <span class="math notranslate nohighlight">\(q\)</span> do you read off for fast and Newton? Why are the first <span class="math notranslate nohighlight">\(q_k\)</span> less reliable than the last ones?</p></li>
+</ol>
+</section>
+<section id="step-3-pretend-you-do-not-know-x-ast">
+<h3>Step 3: pretend you do not know <span class="math notranslate nohighlight">\(x_\ast\)</span><a class="headerlink" href="#step-3-pretend-you-do-not-know-x-ast" title="Link to this heading">#</a></h3>
+<p>For the <strong>slow</strong> sequence, forget that the answer is <span class="math notranslate nohighlight">\(\sqrt 2\)</span>. Write code that:</p>
+<ol class="arabic simple">
+<li><p>runs <code class="docutils literal notranslate"><span class="pre">xs_slow</span> <span class="pre">=</span> <span class="pre">np.array(iterate(g_slow,</span> <span class="pre">1.0,</span> <span class="pre">300))</span></code> and computes the steps <code class="docutils literal notranslate"><span class="pre">d_slow</span> <span class="pre">=</span> <span class="pre">np.abs(np.diff(xs_slow))</span></code> (<span class="math notranslate nohighlight">\(\delta_k = |x_{k+1} - x_k|\)</span>);</p></li>
+<li><p>estimates <span class="math notranslate nohighlight">\(C\)</span> <strong>from the steps alone</strong>: print <code class="docutils literal notranslate"><span class="pre">ratios(d_slow)[100]</span></code>;</p></li>
+<li><p>computes the true errors <code class="docutils literal notranslate"><span class="pre">e_slow</span> <span class="pre">=</span> <span class="pre">np.abs(xs_slow</span> <span class="pre">-</span> <span class="pre">np.sqrt(2))</span></code> (for checking only) and plots <code class="docutils literal notranslate"><span class="pre">e_slow</span></code> and <code class="docutils literal notranslate"><span class="pre">d_slow</span></code> with <code class="docutils literal notranslate"><span class="pre">semilogy</span></code> on one figure, with a legend;</p></li>
+<li><p><strong>stopping test:</strong> finds the first <span class="math notranslate nohighlight">\(k\)</span> with <span class="math notranslate nohighlight">\(\delta_k &lt; 10^{-8}\)</span> (<code class="docutils literal notranslate"><span class="pre">k_stop</span> <span class="pre">=</span> <span class="pre">np.argmax(d_slow</span> <span class="pre">&lt;</span> <span class="pre">1e-8)</span></code>) and prints the step <code class="docutils literal notranslate"><span class="pre">d_slow[k_stop]</span></code> and the true error there, <code class="docutils literal notranslate"><span class="pre">e_slow[k_stop</span> <span class="pre">+</span> <span class="pre">1]</span></code>.</p></li>
+</ol>
+<details><summary><b>Hint</b></summary>
+<p><code class="docutils literal notranslate"><span class="pre">np.argmax(d_slow</span> <span class="pre">&lt;</span> <span class="pre">1e-8)</span></code> gives the index of the first <code class="docutils literal notranslate"><span class="pre">True</span></code> in the array <code class="docutils literal notranslate"><span class="pre">d_slow</span> <span class="pre">&lt;</span> <span class="pre">1e-8</span></code>.</p>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here: replace each None</span>
+<span class="n">xs_slow</span> <span class="o">=</span> <span class="kc">None</span>     <span class="c1"># 1. the iterates, as a NumPy array</span>
+<span class="n">d_slow</span> <span class="o">=</span> <span class="kc">None</span>      <span class="c1"># 1. the steps delta_k</span>
+<span class="n">e_slow</span> <span class="o">=</span> <span class="kc">None</span>      <span class="c1"># 3. the true errors (for checking only)</span>
+<span class="n">k_stop</span> <span class="o">=</span> <span class="kc">None</span>      <span class="c1"># 4. the first k with delta_k &lt; 1e-8</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check: compare your results with the expected ones</span>
+<span class="k">if</span> <span class="n">d_slow</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">e_slow</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">k_stop</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"d_slow, e_slow or k_stop is still None: write the code in the cell above, then run this cell again."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">r_steps</span> <span class="o">=</span> <span class="n">ratios</span><span class="p">(</span><span class="n">d_slow</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">r_steps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"ratios returned None: finish `ratios` in Step 1 first, then run this cell again."</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"C from the steps:"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">r_steps</span><span class="p">[</span><span class="mi">100</span><span class="p">]),</span> <span class="mi">4</span><span class="p">),</span> <span class="s2">"   (expected: 0.901)"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"k_stop          :"</span><span class="p">,</span> <span class="n">k_stop</span><span class="p">,</span> <span class="s2">"   (expected: 148)"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"true error / step at the stop:"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">e_slow</span><span class="p">[</span><span class="n">k_stop</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">d_slow</span><span class="p">[</span><span class="n">k_stop</span><span class="p">]),</span> <span class="mi">2</span><span class="p">),</span> <span class="s2">"   (expected: about 9.1)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d_slow, e_slow or k_stop is still None: write the code in the cell above, then run this cell again.
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Questions:</strong></p>
+<ol class="arabic simple">
+<li><p>Are the two curves parallel? What does that mean for measuring <span class="math notranslate nohighlight">\(C\)</span> (and <span class="math notranslate nohighlight">\(q\)</span>) without knowing <span class="math notranslate nohighlight">\(x_\ast\)</span>?</p></li>
+<li><p>The iteration stopped because the step was below <span class="math notranslate nohighlight">\(10^{-8}\)</span>, but the true error is about <strong>9 times</strong> larger. Compare with <span class="math notranslate nohighlight">\(\frac{C}{1-C}\)</span> for your <span class="math notranslate nohighlight">\(C\)</span> from the steps. How could you choose the tolerance to get a true error below <span class="math notranslate nohighlight">\(10^{-8}\)</span>?</p></li>
+<li><p>For the fast sequence (<span class="math notranslate nohighlight">\(C \approx 0.29\)</span>), would the error be larger or smaller than the step? Why?</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="bigO_convergence_solved.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Big-O and Convergence of Algorithms</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="sympy_intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Symbolic Computation with SymPy</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Limits and Convergence of Algorithms</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-polynomial-vs-exponential-growth">1. Review: polynomial vs. exponential growth</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limits-of-sequences">2. Limits of sequences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms-as-sequences">3. Algorithms as sequences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#order-of-convergence">4. Order of convergence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-q">Measuring <span class="math notranslate nohighlight">\(q\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-if-x-ast-is-not-known">What if <span class="math notranslate nohighlight">\(x_\ast\)</span> is not known?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#activity">Activity</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-growth-detective">Problem 1: growth detective</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-two-fitting-functions">Step 1: two fitting functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-look-before-you-fit">Step 2: look before you fit</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-the-split-test">Step 3: the split test</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-where-does-it-converge">Problem 2: where does it converge?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-predict-with-pen-and-paper">Step 1: predict with pen and paper</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-try-several-starting-points">Step 2: try several starting points</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-measure-the-rate-c">Step 3: measure the rate <span class="math notranslate nohighlight">\(C\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-how-fast-and-what-if-x-ast-is-unknown">Problem 3: how fast, and what if <span class="math notranslate nohighlight">\(x_\ast\)</span> is unknown?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-classify-with-the-ratio-epsilon-k-1-epsilon-k">Step 1: classify with the ratio <span class="math notranslate nohighlight">\(\epsilon_{k+1}/\epsilon_k\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-see-it-on-the-two-plots">Step 2: see it on the two plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-pretend-you-do-not-know-x-ast">Step 3: pretend you do not know <span class="math notranslate nohighlight">\(x_\ast\)</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sharareh Sayyad
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
