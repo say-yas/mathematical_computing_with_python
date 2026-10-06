@@ -1,0 +1,1535 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Root Finding I: Bracketing Methods (solutions) &#8212; Mathematical Computing with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/bracketing_methods_solutions';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Symbolic Computation with SymPy" href="sympy_intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Mathematical Computing with Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Mathematical Computing with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="starting_with_python.html">Using Python in Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="starting_with_github.html">Using GitHub: Repositories, Commits, Push/Pull, and Forks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonI.html">Introduction to Python, Part I</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonII.html">Introduction to Python, Part II</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIII.html">Introduction to Python, Part III</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIV_numpy.html">Introduction to Python, Part IV: NumPy</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonV_matplotlib.html">Introduction to Python, Part V: Plotting with Matplotlib</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="bigO_convergence_solved.html">Big-O and Convergence of Algorithms</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="limits_convergence.html">Limits and Convergence of Algorithms</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="sympy_intro.html">Symbolic Computation with SymPy</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Root Finding I: Bracketing Methods (solutions)</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/say-yas/mathematical_computing_with_python/blob/main/book/notebooks/bracketing_methods_solutions.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/notebooks/bracketing_methods_solutions.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fnotebooks/bracketing_methods_solutions.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/bracketing_methods_solutions.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Root Finding I: Bracketing Methods (solutions)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Root Finding I: Bracketing Methods (solutions)</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-root-finding-problem-and-brackets">1. The root-finding problem and brackets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bisection-method">2. The bisection method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-false-position-method">3. The false position method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-do-we-stop">4. When do we stop?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-the-methods-plot-the-error-on-a-log-scale">5. Comparing the methods: plot the error on a log scale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">6. Summary</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#activity">Activity</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-exact-roots-with-solveset-numerical-roots-with-bisection">Problem 1: exact roots with <code class="docutils literal notranslate"><span class="pre">solveset</span></code>, numerical roots with bisection</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-solveset-on-each-bracket">Step 1: <code class="docutils literal notranslate"><span class="pre">solveset</span></code> on each bracket</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-bisection-on-the-same-brackets">Step 2: bisection on the same brackets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-the-illinois-method-and-the-race">Problem 2: the Illinois method and the race</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-implement-illinois">Step 1: implement <code class="docutils literal notranslate"><span class="pre">illinois</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-the-race-steps-to-reach-an-error-of-10-6">Step 2: the race, steps to reach an error of <span class="math notranslate nohighlight">\(10^{-6}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-look-at-the-errors">Step 3: look at the errors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="root-finding-i-bracketing-methods-solutions">
+<h1>Root Finding I: Bracketing Methods (solutions)<a class="headerlink" href="#root-finding-i-bracketing-methods-solutions" title="Link to this heading">#</a></h1>
+<p><strong>Contents:</strong> 1. the root-finding problem and brackets · 2. bisection · 3. false position · 4. when to stop · 5. comparing the methods · 6. summary · <strong>Activity</strong> (2 problems)</p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">numpy</span></code> for the numerical methods, <code class="docutils literal notranslate"><span class="pre">sympy</span></code> for exact answers to check them against, and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> for the error plots. This notebook goes with the slides <em>Root Finding I: Bracketing Methods</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Math</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"sympy"</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span> <span class="s2">"| numpy"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Math</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named 'sympy'
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<section id="the-root-finding-problem-and-brackets">
+<h2>1. The root-finding problem and brackets<a class="headerlink" href="#the-root-finding-problem-and-brackets" title="Link to this heading">#</a></h2>
+<p>A <strong>root</strong> (or zero) of <span class="math notranslate nohighlight">\(f\)</span> is a number <span class="math notranslate nohighlight">\(r\)</span> with <span class="math notranslate nohighlight">\(f(r) = 0\)</span>. Any equation can be written this way: <span class="math notranslate nohighlight">\(x^2 = 2\)</span> becomes <span class="math notranslate nohighlight">\(f(x) = x^2 - 2 = 0\)</span>, and <span class="math notranslate nohighlight">\(\cos x = x\)</span> becomes <span class="math notranslate nohighlight">\(f(x) = \cos x - x = 0\)</span>. Most equations have <strong>no formula</strong> for the root, so we compute a sequence <span class="math notranslate nohighlight">\(c_1, c_2, \ldots \to r\)</span> and stop when it is close enough.</p>
+<p><strong>Intermediate Value Theorem.</strong> If <span class="math notranslate nohighlight">\(f\)</span> is <strong>continuous</strong> on <span class="math notranslate nohighlight">\([a, b]\)</span> and <span class="math notranslate nohighlight">\(f(a)\)</span>, <span class="math notranslate nohighlight">\(f(b)\)</span> have <strong>opposite signs</strong>, then <span class="math notranslate nohighlight">\(f\)</span> has at least one root in <span class="math notranslate nohighlight">\((a, b)\)</span>. Such an interval is called a <strong>bracket</strong>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>term</p></th>
+<th class="head"><p>meaning</p></th>
+<th class="head"><p>in code</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>bracket <span class="math notranslate nohighlight">\([a, b]\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(f\)</span> continuous, <span class="math notranslate nohighlight">\(f(a)\)</span> and <span class="math notranslate nohighlight">\(f(b)\)</span> of opposite sign</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.sign(f(a))</span> <span class="pre">!=</span> <span class="pre">np.sign(f(b))</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>error <span class="math notranslate nohighlight">\(e_n\)</span></p></td>
+<td><p>distance to the root, <span class="math notranslate nohighlight">\(\lvert c_n - r\rvert\)</span> (needs the root!)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">abs(c</span> <span class="pre">-</span> <span class="pre">r)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>residual</p></td>
+<td><p>how far <span class="math notranslate nohighlight">\(f\)</span> is from <span class="math notranslate nohighlight">\(0\)</span>, <span class="math notranslate nohighlight">\(\lvert f(c_n)\rvert\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">abs(f(c))</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>function evaluation</p></td>
+<td><p>one call of <code class="docutils literal notranslate"><span class="pre">f</span></code>; usually the expensive part</p></td>
+<td><p>we count cost in these</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>What can go wrong.</strong> Both conditions of the theorem matter, so <strong>plot <span class="math notranslate nohighlight">\(f\)</span> first</strong>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>example</p></th>
+<th class="head"><p>sign change?</p></th>
+<th class="head"><p>root?</p></th>
+<th class="head"><p>what happens</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\((x-1)^2\)</span> on <span class="math notranslate nohighlight">\([0, 2]\)</span></p></td>
+<td><p>no</p></td>
+<td><p>yes, <span class="math notranslate nohighlight">\(x = 1\)</span></p></td>
+<td><p>no bracket: bracketing methods cannot find this root</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(1/x\)</span> on <span class="math notranslate nohighlight">\([-1, 2]\)</span></p></td>
+<td><p>yes</p></td>
+<td><p>no</p></td>
+<td><p><span class="math notranslate nohighlight">\(f\)</span> is not continuous; bisection “converges” to the jump at <span class="math notranslate nohighlight">\(0\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\sin(\pi x)\)</span> on <span class="math notranslate nohighlight">\([\tfrac12, \tfrac72]\)</span></p></td>
+<td><p>yes</p></td>
+<td><p>three: <span class="math notranslate nohighlight">\(1, 2, 3\)</span></p></td>
+<td><p>the method finds <strong>one</strong> of them</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Finding brackets on a grid.</strong> Evaluate <span class="math notranslate nohighlight">\(f\)</span> at <span class="math notranslate nohighlight">\(N + 1\)</span> equally spaced points and keep every sub-interval where the sign changes. The function below does this; we use it again in the activity. (If a grid point hits a root exactly, its sign is <span class="math notranslate nohighlight">\(0\)</span> and both neighbouring sub-intervals are reported; with a “random” <span class="math notranslate nohighlight">\(N\)</span> this rarely happens.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">find_brackets</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="c1"># Return the list of sub-intervals [x_i, x_{i+1}] of [a, b] where f changes sign.</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="nb">float</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">f_sin</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">f_touch</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"sin(pi x) on [0.5, 3.5]:"</span><span class="p">,</span> <span class="p">[(</span><span class="nb">round</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">find_brackets</span><span class="p">(</span><span class="n">f_sin</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"(x - 1)^2 on [0, 2]    :"</span><span class="p">,</span> <span class="n">find_brackets</span><span class="p">(</span><span class="n">f_touch</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="s2">"  &lt;- a root, but no sign change"</span><span class="p">)</span>
+
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">f_sin</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">"$\sin(\pi x)$"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">f_touch</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="s2">"--"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">"$(x-1)^2$ (touches, no sign change)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"k"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"$x$"</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">"upper left"</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sin(pi x) on [0.5, 3.5]: [(0.929, 1.357), (1.786, 2.214), (2.643, 3.071)]
+(x - 1)^2 on [0, 2]    : []   &lt;- a root, but no sign change
+</pre></div>
+</div>
+<img alt="../_images/abe46e14dd1bb16deb9b68e9ba4bff2f248199c30c23164545616037712bc211.png" src="../_images/abe46e14dd1bb16deb9b68e9ba4bff2f248199c30c23164545616037712bc211.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="the-bisection-method">
+<h2>2. The bisection method<a class="headerlink" href="#the-bisection-method" title="Link to this heading">#</a></h2>
+<p>Start with a bracket <span class="math notranslate nohighlight">\([a, b]\)</span> and repeat:</p>
+<ol class="arabic simple">
+<li><p>take the midpoint <span class="math notranslate nohighlight">\(c = a + \dfrac{b - a}{2}\)</span>;</p></li>
+<li><p>if <span class="math notranslate nohighlight">\(f(a)\)</span> and <span class="math notranslate nohighlight">\(f(c)\)</span> have the <strong>same</strong> sign, the root is in <span class="math notranslate nohighlight">\([c, b]\)</span>: set <span class="math notranslate nohighlight">\(a \leftarrow c\)</span>;</p></li>
+<li><p>otherwise it is in <span class="math notranslate nohighlight">\([a, c]\)</span>: set <span class="math notranslate nohighlight">\(b \leftarrow c\)</span>.</p></li>
+</ol>
+<p>After every step <span class="math notranslate nohighlight">\([a, b]\)</span> is <strong>still a bracket</strong> and <strong>half as wide</strong>, so the midpoint <span class="math notranslate nohighlight">\(c_n\)</span> of step <span class="math notranslate nohighlight">\(n\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[|c_n - r| \le \frac{b - a}{2^{\,n}}, \qquad \text{and} \qquad \frac{b-a}{2^{\,n}} \le \text{tol} \iff n \ge \log_2 \frac{b - a}{\text{tol}}.\]</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>property</p></th>
+<th class="head"><p>bisection</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>rate</p></td>
+<td><p>linear, <span class="math notranslate nohighlight">\(\rho = \tfrac12\)</span>: one bit per step, one decimal digit every <span class="math notranslate nohighlight">\(\log_2 10 \approx 3.3\)</span> steps</p></td>
+</tr>
+<tr class="row-odd"><td><p>cost for tolerance tol</p></td>
+<td><p><span class="math notranslate nohighlight">\(n = \log_2(b-a) + \log_2(1/\text{tol})\)</span> steps, so <span class="math notranslate nohighlight">\(O(\log(1/\text{tol}))\)</span> function evaluations</p></td>
+</tr>
+<tr class="row-even"><td><p>error bound</p></td>
+<td><p>known <strong>before</strong> we start, for every continuous <span class="math notranslate nohighlight">\(f\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Floating point details in the code below:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">(b</span> <span class="pre">-</span> <span class="pre">a)/2</span></code> instead of <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">+</span> <span class="pre">b)/2</span></code>: always lands inside <span class="math notranslate nohighlight">\([a, b]\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.sign(fc)</span> <span class="pre">==</span> <span class="pre">np.sign(fa)</span></code> instead of <code class="docutils literal notranslate"><span class="pre">fa</span> <span class="pre">*</span> <span class="pre">fc</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>: the product can underflow to <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
+<li><p>We keep <code class="docutils literal notranslate"><span class="pre">fa</span></code>, so each step needs only <strong>one</strong> new evaluation of <span class="math notranslate nohighlight">\(f\)</span>.</p></li>
+</ul>
+<p><strong>Why we do not test <code class="docutils literal notranslate"><span class="pre">fc</span> <span class="pre">==</span> <span class="pre">0</span></code>.</strong> <span class="math notranslate nohighlight">\(f(c)\)</span> is itself rounded, so an exact zero almost never happens: the test is too strong to be useful. If it does happen nothing breaks: <span class="math notranslate nohighlight">\(\operatorname{sign}(0) = 0 \ne \operatorname{sign}(f(a))\)</span>, so we keep <span class="math notranslate nohighlight">\([a, c]\)</span>, which still contains the root <span class="math notranslate nohighlight">\(c\)</span>. Testing <span class="math notranslate nohighlight">\(|f(c)| &lt; \text{tol}\)</span> instead measures the <strong>residual</strong>, not the <strong>error</strong> (see Section 4). Bisection gives a true error bound for free, so we stop when <span class="math notranslate nohighlight">\((b - a)/2 &lt; \text{tol}\)</span>.</p>
+<p>The function is the one from the slides, except that it also returns the list <code class="docutils literal notranslate"><span class="pre">hist</span></code> of all midpoints, so we can plot the errors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bisection</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
+    <span class="n">fa</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"[a, b] is not a bracket: f(a) and f(b) have the same sign"</span><span class="p">)</span>
+    <span class="n">hist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxit</span><span class="p">):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>          <span class="c1"># midpoint</span>
+        <span class="n">fc</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>                    <span class="c1"># the only new f-evaluation</span>
+        <span class="n">hist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>        <span class="c1"># error bound |c - r| &lt;= (b - a)/2 &lt; tol</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fa</span><span class="p">):</span>
+            <span class="n">a</span><span class="p">,</span> <span class="n">fa</span> <span class="o">=</span> <span class="n">c</span><span class="p">,</span> <span class="n">fc</span>            <span class="c1"># root in [c, b]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">c</span>                    <span class="c1"># root in [a, c]</span>
+    <span class="k">return</span> <span class="n">c</span><span class="p">,</span> <span class="n">hist</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">f_sq</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span>
+
+<span class="n">c</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">bisection</span><span class="p">(</span><span class="n">f_sq</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'n'</span><span class="si">:</span><span class="s2">&gt;3</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'c_n'</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'|c_n - sqrt2|'</span><span class="si">:</span><span class="s2">&gt;14</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'bound 2^-n'</span><span class="si">:</span><span class="s2">&gt;11</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">cn</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">hist</span><span class="p">[:</span><span class="mi">8</span><span class="p">],</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;3</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">cn</span><span class="si">:</span><span class="s2">12.8f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">cn</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="si">:</span><span class="s2">14.2e</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="mf">2.0</span><span class="o">**-</span><span class="n">n</span><span class="si">:</span><span class="s2">11.2e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">steps used: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span><span class="si">}</span><span class="s2">,  predicted: ceil(log2(1/1e-6)) = </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">)))</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"final c = </span><span class="si">{</span><span class="n">c</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2">,  error = </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="si">:</span><span class="s2">.1e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  n          c_n  |c_n - sqrt2|  bound 2^-n
+  1   1.50000000       8.58e-02    5.00e-01
+  2   1.25000000       1.64e-01    2.50e-01
+  3   1.37500000       3.92e-02    1.25e-01
+  4   1.43750000       2.33e-02    6.25e-02
+  5   1.40625000       7.96e-03    3.12e-02
+  6   1.42187500       7.66e-03    1.56e-02
+  7   1.41406250       1.51e-04    7.81e-03
+  8   1.41796875       3.76e-03    3.91e-03
+
+steps used: 20,  predicted: ceil(log2(1/1e-6)) = 20
+final c = 1.4142141342,  error = 5.7e-07
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="the-false-position-method">
+<h2>3. The false position method<a class="headerlink" href="#the-false-position-method" title="Link to this heading">#</a></h2>
+<p>Bisection ignores the <strong>values</strong> of <span class="math notranslate nohighlight">\(f\)</span>: only their signs are used. False position replaces <span class="math notranslate nohighlight">\(f\)</span> by the <strong>secant line</strong> through <span class="math notranslate nohighlight">\((a, f(a))\)</span> and <span class="math notranslate nohighlight">\((b, f(b))\)</span> and takes its zero:</p>
+<div class="math notranslate nohighlight">
+\[c = b - f(b)\,\frac{b - a}{f(b) - f(a)} = \frac{a\,f(b) - b\,f(a)}{f(b) - f(a)}.\]</div>
+<p>Then it keeps the half with the sign change, exactly as bisection does, so <span class="math notranslate nohighlight">\([a, b]\)</span> is <strong>still a bracket</strong>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>property</p></th>
+<th class="head"><p>false position</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>rate</p></td>
+<td><p>linear, but <span class="math notranslate nohighlight">\(\rho\)</span> depends on <span class="math notranslate nohighlight">\(f\)</span> (often much better than <span class="math notranslate nohighlight">\(\tfrac12\)</span>, sometimes much worse)</p></td>
+</tr>
+<tr class="row-odd"><td><p>error bound in advance</p></td>
+<td><p>no</p></td>
+</tr>
+<tr class="row-even"><td><p>bracket width <span class="math notranslate nohighlight">\(\to 0\)</span></p></td>
+<td><p><strong>not always</strong>: one endpoint can get stuck</p></td>
+</tr>
+<tr class="row-odd"><td><p>stopping test</p></td>
+<td><p>the bracket width may never get small, so we stop when the <strong>step</strong> <span class="math notranslate nohighlight">\(\lvert c_n - c_{n-1}\rvert\)</span> is below tol</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Compared with <code class="docutils literal notranslate"><span class="pre">bisection</span></code>, only the line that computes <code class="docutils literal notranslate"><span class="pre">c</span></code> changes, and we now also keep <code class="docutils literal notranslate"><span class="pre">fb</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">false_position</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
+    <span class="n">fa</span><span class="p">,</span> <span class="n">fb</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fb</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"[a, b] is not a bracket: f(a) and f(b) have the same sign"</span><span class="p">)</span>
+    <span class="n">hist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">c_old</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxit</span><span class="p">):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">fb</span> <span class="o">*</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">fb</span> <span class="o">-</span> <span class="n">fa</span><span class="p">)</span>   <span class="c1"># zero of the secant line</span>
+        <span class="n">fc</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="n">hist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">c_old</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>            <span class="c1"># step size test</span>
+            <span class="k">break</span>
+        <span class="n">c_old</span> <span class="o">=</span> <span class="n">c</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fa</span><span class="p">):</span>
+            <span class="n">a</span><span class="p">,</span> <span class="n">fa</span> <span class="o">=</span> <span class="n">c</span><span class="p">,</span> <span class="n">fc</span>                   <span class="c1"># root in [c, b]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">b</span><span class="p">,</span> <span class="n">fb</span> <span class="o">=</span> <span class="n">c</span><span class="p">,</span> <span class="n">fc</span>                   <span class="c1"># root in [a, c]</span>
+    <span class="k">return</span> <span class="n">c</span><span class="p">,</span> <span class="n">hist</span>
+
+<span class="n">c</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">false_position</span><span class="p">(</span><span class="n">f_sq</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'n'</span><span class="si">:</span><span class="s2">&gt;3</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'c_n'</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'|c_n - sqrt2|'</span><span class="si">:</span><span class="s2">&gt;14</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'ratio e_n/e_(n-1)'</span><span class="si">:</span><span class="s2">&gt;18</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">cn</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="k">for</span> <span class="n">cn</span> <span class="ow">in</span> <span class="n">hist</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">hist</span><span class="p">))):</span>
+    <span class="n">ratio</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">e</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">e</span><span class="p">[</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">18.3f</span><span class="si">}</span><span class="s2">"</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">""</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">:</span><span class="s2">&gt;3</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">hist</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="si">:</span><span class="s2">12.8f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">e</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="si">:</span><span class="s2">14.2e</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">ratio</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">The right endpoint b = 2 is never replaced: the bracket shrinks to [sqrt2, 2], not to a point."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  n          c_n  |c_n - sqrt2|  ratio e_n/e_(n-1)
+  1   1.33333333       8.09e-02 
+  2   1.40000000       1.42e-02              0.176
+  3   1.41176471       2.45e-03              0.172
+  4   1.41379310       4.20e-04              0.172
+  5   1.41414141       7.21e-05              0.172
+  6   1.41420118       1.24e-05              0.172
+  7   1.41421144       2.12e-06              0.172
+  8   1.41421320       3.64e-07              0.172
+
+The right endpoint b = 2 is never replaced: the bracket shrinks to [sqrt2, 2], not to a point.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="when-do-we-stop">
+<h2>4. When do we stop?<a class="headerlink" href="#when-do-we-stop" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>test</p></th>
+<th class="head"><p>formula</p></th>
+<th class="head"><p>good</p></th>
+<th class="head"><p>bad</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>bracket width</p></td>
+<td><p><span class="math notranslate nohighlight">\((b - a)/2 &lt; \text{tol}\)</span></p></td>
+<td><p>a <strong>true error bound</strong> for bisection</p></td>
+<td><p>may never trigger for false position</p></td>
+</tr>
+<tr class="row-odd"><td><p>step size</p></td>
+<td><p><span class="math notranslate nohighlight">\(\lvert c_n - c_{n-1}\rvert &lt; \text{tol}\)</span></p></td>
+<td><p>works for every method</p></td>
+<td><p>not a guarantee</p></td>
+</tr>
+<tr class="row-even"><td><p>residual</p></td>
+<td><p><span class="math notranslate nohighlight">\(\lvert f(c_n)\rvert &lt; \text{tol}_f\)</span></p></td>
+<td><p>cheap</p></td>
+<td><p>depends on the <strong>scale</strong> of <span class="math notranslate nohighlight">\(f\)</span>; small residual <span class="math notranslate nohighlight">\(\ne\)</span> small error</p></td>
+</tr>
+<tr class="row-odd"><td><p>exact zero</p></td>
+<td><p><span class="math notranslate nohighlight">\(f(c_n) = 0\)</span></p></td>
+<td><p></p></td>
+<td><p>almost never happens in floating point</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Always</strong> add a maximum number of iterations, and keep tol well above machine epsilon times <span class="math notranslate nohighlight">\(|r|\)</span>: below <span class="math notranslate nohighlight">\(\approx 10^{-16}|r|\)</span> there are no floats left between <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<p>The cell below shows why the residual is a poor stopping test: a flat function has a tiny residual far from its root, and a steep one has a large residual very close to it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">flat</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">10</span>          <span class="c1"># root r = 1, very flat</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">steep</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">1e10</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>       <span class="c1"># root r = 1, very steep</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"flat : c = 1.1,      error = </span><span class="si">{</span><span class="mf">0.1</span><span class="si">:</span><span class="s2">.0e</span><span class="si">}</span><span class="s2">,  residual |f(c)| = </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">flat</span><span class="p">(</span><span class="mf">1.1</span><span class="p">))</span><span class="si">:</span><span class="s2">.0e</span><span class="si">}</span><span class="s2">   &lt;- 'converged' by the residual test"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"steep: c = 1 + 1e-8, error = </span><span class="si">{</span><span class="mf">1e-8</span><span class="si">:</span><span class="s2">.0e</span><span class="si">}</span><span class="s2">,  residual |f(c)| = </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">steep</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1e-8</span><span class="p">))</span><span class="si">:</span><span class="s2">.0e</span><span class="si">}</span><span class="s2">   &lt;- 'not converged'"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">floating point floor: np.spacing(1.0) ="</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">spacing</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>flat : c = 1.1,      error = 1e-01,  residual |f(c)| = 1e-10   &lt;- 'converged' by the residual test
+steep: c = 1 + 1e-8, error = 1e-08,  residual |f(c)| = 1e+02   &lt;- 'not converged'
+
+floating point floor: np.spacing(1.0) = 2.220446049250313e-16
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="comparing-the-methods-plot-the-error-on-a-log-scale">
+<h2>5. Comparing the methods: plot the error on a log scale<a class="headerlink" href="#comparing-the-methods-plot-the-error-on-a-log-scale" title="Link to this heading">#</a></h2>
+<p>As in the convergence lecture, plot <span class="math notranslate nohighlight">\(e_n = |c_n - r|\)</span> with <code class="docutils literal notranslate"><span class="pre">plt.semilogy</span></code>: a <strong>straight line</strong> means linear convergence, and its slope gives <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
+<p>Two test problems with known roots: <span class="math notranslate nohighlight">\(x^2 - 2\)</span> on <span class="math notranslate nohighlight">\([1, 2]\)</span> (<span class="math notranslate nohighlight">\(r = \sqrt2\)</span>) and <span class="math notranslate nohighlight">\(x^{10} - 1\)</span> on <span class="math notranslate nohighlight">\([0, 1.3]\)</span> (<span class="math notranslate nohighlight">\(r = 1\)</span>). On the second one, false position is <strong>much slower</strong> than bisection: <span class="math notranslate nohighlight">\(f\)</span> is flat on the left and steep on the right, so every secant line crosses the axis far to the left of <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(b = 1.3\)</span> is never replaced.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f_ten</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">t</span><span class="o">**</span><span class="mi">10</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="n">problems</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"$x^2 - 2$ on $[1, 2]$"</span><span class="p">,</span> <span class="n">f_sq</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)),</span>
+            <span class="p">(</span><span class="s2">"$x^</span><span class="si">{10}</span><span class="s2"> - 1$ on $[0, 1.3]$"</span><span class="p">,</span> <span class="n">f_ten</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">problems</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">method</span><span class="p">,</span> <span class="n">style</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">bisection</span><span class="p">,</span> <span class="s2">"o-"</span><span class="p">),</span> <span class="p">(</span><span class="n">false_position</span><span class="p">,</span> <span class="s2">"s-"</span><span class="p">)]:</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">method</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span> <span class="o">-</span> <span class="n">r</span><span class="p">),</span> <span class="mf">1e-17</span><span class="p">)</span>     <span class="c1"># avoid log(0)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">err</span><span class="p">,</span> <span class="n">style</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">method</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"gray"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"machine epsilon"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"$n$"</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$|c_n - r|$"</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/dd8173fcc24d183a1a778807cee39e747d0252b158cc05a84e1f5f2b294bfd8c.png" src="../_images/dd8173fcc24d183a1a778807cee39e747d0252b158cc05a84e1f5f2b294bfd8c.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2>6. Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>bisection</p></th>
+<th class="head"><p>false position</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>new point <span class="math notranslate nohighlight">\(c\)</span></p></td>
+<td><p>midpoint <span class="math notranslate nohighlight">\(a + (b-a)/2\)</span></p></td>
+<td><p>zero of the secant line <span class="math notranslate nohighlight">\(\dfrac{a f(b) - b f(a)}{f(b) - f(a)}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>needs a bracket / always converges</p></td>
+<td><p>yes / yes</p></td>
+<td><p>yes / yes</p></td>
+</tr>
+<tr class="row-even"><td><p>rate</p></td>
+<td><p>linear, <span class="math notranslate nohighlight">\(\rho = \tfrac12\)</span></p></td>
+<td><p>linear, <span class="math notranslate nohighlight">\(\rho\)</span> depends on <span class="math notranslate nohighlight">\(f\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>error bound in advance</p></td>
+<td><p><span class="math notranslate nohighlight">\((b - a)/2^n\)</span></p></td>
+<td><p>none</p></td>
+</tr>
+<tr class="row-even"><td><p>bracket width <span class="math notranslate nohighlight">\(\to 0\)</span></p></td>
+<td><p>yes</p></td>
+<td><p>not always (stuck endpoint)</p></td>
+</tr>
+<tr class="row-odd"><td><p>natural stopping test</p></td>
+<td><p><span class="math notranslate nohighlight">\((b - a)/2 &lt; \text{tol}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\lvert c_n - c_{n-1}\rvert &lt; \text{tol}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(f\)</span>-evaluations per step</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>The Illinois method</strong> (last slide) fixes the stuck endpoint of false position with one extra rule: if the same endpoint is kept in <strong>two steps in a row</strong>, halve its stored function value before the next secant step. Halving changes the <em>size</em> of <span class="math notranslate nohighlight">\(f(b)\)</span>, not its <em>sign</em>, so <span class="math notranslate nohighlight">\([a, b]\)</span> stays a bracket. You implement it in Problem 2.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="activity">
+<h1>Activity<a class="headerlink" href="#activity" title="Link to this heading">#</a></h1>
+<p>Two problems. <strong>Problem 1</strong> finds the same roots twice, exactly with SymPy’s <code class="docutils literal notranslate"><span class="pre">solveset</span></code> and numerically with <code class="docutils literal notranslate"><span class="pre">bisection</span></code>. <strong>Problem 2</strong> asks you to implement the <strong>Illinois method</strong> and race it against bisection and false position. Each step says <strong>what your code should do</strong>. Write the code in the empty cell, then run the <strong>check</strong> cell: it prints your results next to the <strong>expected</strong> ones. Open a <strong>Hint</strong> box only when you are stuck.</p>
+<p><strong>About <code class="docutils literal notranslate"><span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">pass</span></code>:</strong> replace <code class="docutils literal notranslate"><span class="pre">None</span></code> by your answer, and delete <code class="docutils literal notranslate"><span class="pre">pass</span></code> once you write the body of a function.</p>
+<p><strong>Useful commands for this activity</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>you want to …</p></th>
+<th class="head"><p>command</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>all roots of <span class="math notranslate nohighlight">\(e = 0\)</span> in <span class="math notranslate nohighlight">\([a, b]\)</span>, exactly</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.solveset(e,</span> <span class="pre">x,</span> <span class="pre">domain=sp.Interval(a,</span> <span class="pre">b))</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>add to a list / list of lists</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">L</span> <span class="pre">=</span> <span class="pre">[]</span></code>, <code class="docutils literal notranslate"><span class="pre">L.append(v)</span></code>; <code class="docutils literal notranslate"><span class="pre">M[k][j]</span></code> is entry <code class="docutils literal notranslate"><span class="pre">j</span></code> of row <code class="docutils literal notranslate"><span class="pre">k</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>the methods</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bisection(f,</span> <span class="pre">a,</span> <span class="pre">b,</span> <span class="pre">tol,</span> <span class="pre">maxit)</span></code>, <code class="docutils literal notranslate"><span class="pre">false_position(...)</span></code>, your <code class="docutils literal notranslate"><span class="pre">illinois(...)</span></code>: each returns <code class="docutils literal notranslate"><span class="pre">(c,</span> <span class="pre">hist)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>bracket test</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.sign(fa)</span> <span class="pre">==</span> <span class="pre">np.sign(fb)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<section id="problem-1-exact-roots-with-solveset-numerical-roots-with-bisection">
+<h2>Problem 1: exact roots with <code class="docutils literal notranslate"><span class="pre">solveset</span></code>, numerical roots with bisection<a class="headerlink" href="#problem-1-exact-roots-with-solveset-numerical-roots-with-bisection" title="Link to this heading">#</a></h2>
+<p><strong>Goal:</strong> use the bracket as the <strong>domain</strong> of <code class="docutils literal notranslate"><span class="pre">sp.solveset</span></code>, so SymPy returns exactly the roots inside <span class="math notranslate nohighlight">\([a, b]\)</span>; then run <code class="docutils literal notranslate"><span class="pre">bisection</span></code> on the same brackets and check its error and its number of steps against the theory.</p>
+<p><strong>What you will see:</strong> SymPy finds <span class="math notranslate nohighlight">\(\sqrt2\)</span>, <span class="math notranslate nohighlight">\(1\)</span> and a cubic formula exactly, but for <span class="math notranslate nohighlight">\(\cos x = x\)</span> it can only say “the set of <span class="math notranslate nohighlight">\(x\)</span> in <span class="math notranslate nohighlight">\([0, 1]\)</span> with <span class="math notranslate nohighlight">\(\cos x - x = 0\)</span>”: that is why we need numerical methods. Bisection needs exactly the number of steps the formula <span class="math notranslate nohighlight">\(\lceil \log_2((b-a)/\text{tol}) \rceil\)</span> predicts, whatever the function.</p>
+<p>Run the cell below to create the test problems (do not change it). Problem number <code class="docutils literal notranslate"><span class="pre">k</span></code> (counting from <span class="math notranslate nohighlight">\(0\)</span>) is stored in position <code class="docutils literal notranslate"><span class="pre">k</span></code> of five lists: its name <code class="docutils literal notranslate"><span class="pre">names[k]</span></code>, its expression <code class="docutils literal notranslate"><span class="pre">exprs[k]</span></code>, its bracket <code class="docutils literal notranslate"><span class="pre">a_list[k]</span></code>, <code class="docutils literal notranslate"><span class="pre">b_list[k]</span></code> (exact numbers, for SymPy), and its NumPy function <code class="docutils literal notranslate"><span class="pre">funcs[k]</span></code>, ready for <code class="docutils literal notranslate"><span class="pre">bisection</span></code> (use it with <code class="docutils literal notranslate"><span class="pre">float(a_list[k])</span></code>, <code class="docutils literal notranslate"><span class="pre">float(b_list[k])</span></code>). The list <code class="docutils literal notranslate"><span class="pre">r_ref</span></code> holds an accurate value of each root, computed by SymPy with extra digits; we use it to measure errors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">'x'</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">names</span>  <span class="o">=</span> <span class="p">[</span><span class="s2">"x^2 - 2"</span><span class="p">,</span> <span class="s2">"x^10 - 1"</span><span class="p">,</span> <span class="s2">"x^3 - x - 2"</span><span class="p">,</span> <span class="s2">"cos x - x"</span><span class="p">]</span>
+<span class="n">exprs</span>  <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">10</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">a_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">b_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">funcs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">r_ref</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">exprs</span><span class="p">)):</span>
+    <span class="n">funcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">exprs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="s1">'numpy'</span><span class="p">))</span>
+    <span class="n">r_ref</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">nsolve</span><span class="p">(</span><span class="n">exprs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">b_list</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="n">solver</span><span class="o">=</span><span class="s1">'bisect'</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"reference roots:"</span><span class="p">,</span> <span class="n">r_ref</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>reference roots: [1.4142135623730951, 1.0, 1.5213797068045676, 0.7390851332151607]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="step-1-solveset-on-each-bracket">
+<h3>Step 1: <code class="docutils literal notranslate"><span class="pre">solveset</span></code> on each bracket<a class="headerlink" href="#step-1-solveset-on-each-bracket" title="Link to this heading">#</a></h3>
+<p>Write code that:</p>
+<ol class="arabic simple">
+<li><p>builds a list <code class="docutils literal notranslate"><span class="pre">exact1</span></code> with one entry per test problem: entry <code class="docutils literal notranslate"><span class="pre">k</span></code> is <code class="docutils literal notranslate"><span class="pre">sp.solveset(exprs[k],</span> <span class="pre">x,</span> <span class="pre">domain=sp.Interval(a_list[k],</span> <span class="pre">b_list[k]))</span></code>;</p></li>
+<li><p>displays each name together with its solution set.</p></li>
+</ol>
+<details><summary><b>Hint</b></summary>
+<ul class="simple">
+<li><p>Before the loop, start with an empty list: <code class="docutils literal notranslate"><span class="pre">exact1</span> <span class="pre">=</span> <span class="pre">[]</span></code>.</p></li>
+<li><p>Loop over the problem numbers with <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k</span> <span class="pre">in</span> <span class="pre">range(len(exprs)):</span></code>.</p></li>
+<li><p>Inside the loop: make the interval from <code class="docutils literal notranslate"><span class="pre">a_list[k]</span></code> and <code class="docutils literal notranslate"><span class="pre">b_list[k]</span></code> with <code class="docutils literal notranslate"><span class="pre">sp.Interval</span></code>, call <code class="docutils literal notranslate"><span class="pre">sp.solveset</span></code> with the expression of problem <code class="docutils literal notranslate"><span class="pre">k</span></code> and <code class="docutils literal notranslate"><span class="pre">domain=</span></code> that interval, and <code class="docutils literal notranslate"><span class="pre">append</span></code> the result to <code class="docutils literal notranslate"><span class="pre">exact1</span></code>.</p></li>
+<li><p>To show the results, loop again over <code class="docutils literal notranslate"><span class="pre">k</span></code> and use <code class="docutils literal notranslate"><span class="pre">print(names[k])</span></code> and <code class="docutils literal notranslate"><span class="pre">display(...)</span></code>.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">exact1</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">exprs</span><span class="p">)):</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solveset</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">domain</span><span class="o">=...</span><span class="p">)</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exact1</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">exprs</span><span class="p">)):</span>
+    <span class="n">exact1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">solveset</span><span class="p">(</span><span class="n">exprs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="n">sp</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">b_list</span><span class="p">[</span><span class="n">k</span><span class="p">])))</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">exact1</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="s2">":"</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">exact1</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x^2 - 2 :
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \left\{\sqrt{2}\right\}\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x^10 - 1 :
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \left\{1\right\}\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x^3 - x - 2 :
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \left\{\frac{1}{3 \sqrt[3]{\frac{\sqrt{78}}{9} + 1}} + \sqrt[3]{\frac{\sqrt{78}}{9} + 1}\right\}\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cos x - x :
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \left\{x\; \middle|\; x \in \left[0, 1\right] \wedge - x + \cos{\left(x \right)} = 0 \right\}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check: compare your results with the expected ones</span>
+<span class="k">if</span> <span class="n">exact1</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"exact1 is still None: write the code in the cell above, then run this cell again."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"x^2 - 2     :"</span><span class="p">,</span> <span class="n">exact1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"   (expected: {sqrt(2)})"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"x^10 - 1    :"</span><span class="p">,</span> <span class="n">exact1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"   (expected: </span><span class="si">{1}</span><span class="s2">; the root -1 is outside the bracket)"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"x^3 - x - 2 :"</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">exact1</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">"   (expected: FiniteSet, one root given by a cube-root formula)"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"cos x - x   :"</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">exact1</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">"   (expected: ConditionSet, SymPy cannot solve it exactly)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x^2 - 2     : {sqrt(2)}    (expected: {sqrt(2)})
+x^10 - 1    : {1}    (expected: {1}; the root -1 is outside the bracket)
+x^3 - x - 2 : FiniteSet    (expected: FiniteSet, one root given by a cube-root formula)
+cos x - x   : ConditionSet    (expected: ConditionSet, SymPy cannot solve it exactly)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-bisection-on-the-same-brackets">
+<h3>Step 2: bisection on the same brackets<a class="headerlink" href="#step-2-bisection-on-the-same-brackets" title="Link to this heading">#</a></h3>
+<p>With <code class="docutils literal notranslate"><span class="pre">tol</span> <span class="pre">=</span> <span class="pre">1e-10</span></code>, write code that, for every test problem <code class="docutils literal notranslate"><span class="pre">k</span></code>,</p>
+<ol class="arabic simple">
+<li><p>runs <code class="docutils literal notranslate"><span class="pre">c,</span> <span class="pre">hist</span> <span class="pre">=</span> <span class="pre">bisection(funcs[k],</span> <span class="pre">a,</span> <span class="pre">b,</span> <span class="pre">tol=tol)</span></code> with <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">float(a_list[k])</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">float(b_list[k])</span></code>;</p></li>
+<li><p>appends to the list <code class="docutils literal notranslate"><span class="pre">steps1</span></code> the number of steps <code class="docutils literal notranslate"><span class="pre">len(hist)</span></code>, and to the list <code class="docutils literal notranslate"><span class="pre">err1</span></code> the error <code class="docutils literal notranslate"><span class="pre">abs(c</span> <span class="pre">-</span> <span class="pre">r_ref[k])</span></code>;</p></li>
+<li><p>prints one line per problem with these two numbers.</p></li>
+</ol>
+<p>The check cell compares your number of steps with the prediction <span class="math notranslate nohighlight">\(\lceil \log_2((b-a)/\text{tol}) \rceil\)</span>.</p>
+<details><summary><b>Hint</b></summary>
+<ul class="simple">
+<li><p>Same pattern as Step 1, but with <strong>two</strong> empty lists before the loop.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">funcs[k]</span></code> is a NumPy function, so pass it the end points as floats: <code class="docutils literal notranslate"><span class="pre">float(a_list[k])</span></code>, <code class="docutils literal notranslate"><span class="pre">float(b_list[k])</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bisection</span></code> returns <strong>two</strong> things, so receive them as <code class="docutils literal notranslate"><span class="pre">c,</span> <span class="pre">hist</span> <span class="pre">=</span> <span class="pre">bisection(...)</span></code>. Do not forget <code class="docutils literal notranslate"><span class="pre">tol=tol</span></code>.</p></li>
+<li><p>The number of steps is the <strong>length</strong> of <code class="docutils literal notranslate"><span class="pre">hist</span></code>; the error compares <code class="docutils literal notranslate"><span class="pre">c</span></code> with the reference root of the <strong>same</strong> problem <code class="docutils literal notranslate"><span class="pre">k</span></code>.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">steps1</span><span class="p">,</span> <span class="n">err1</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">funcs</span><span class="p">)):</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span> <span class="o">...</span>
+    <span class="n">c</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">bisection</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+    <span class="n">steps1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+    <span class="n">err1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-10</span>
+<span class="n">steps1</span><span class="p">,</span> <span class="n">err1</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">funcs</span><span class="p">)):</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">b_list</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="n">c</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">bisection</span><span class="p">(</span><span class="n">funcs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">)</span>
+    <span class="n">steps1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hist</span><span class="p">))</span>
+    <span class="n">err1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">r_ref</span><span class="p">[</span><span class="n">k</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="s2">": steps ="</span><span class="p">,</span> <span class="n">steps1</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="s2">", error ="</span><span class="p">,</span> <span class="n">err1</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x^2 - 2 : steps = 34 , error = 4.705502654189786e-11
+x^10 - 1 : steps = 34 , error = 5.238676159535771e-11
+x^3 - x - 2 : steps = 34 , error = 5.2692739060944405e-11
+cos x - x : steps = 34 , error = 3.051980890234063e-11
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check: compare your results with the expected ones</span>
+<span class="k">if</span> <span class="n">steps1</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">err1</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Something is still None: write the code in the cell above, then run this cell again."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">steps1</span><span class="p">)):</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">b_list</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="n">predicted</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">((</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1e-10</span><span class="p">)))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">: steps = </span><span class="si">{</span><span class="n">steps1</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">}</span><span class="s2">, predicted = </span><span class="si">{</span><span class="n">predicted</span><span class="si">}</span><span class="s2">, error = </span><span class="si">{</span><span class="n">err1</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">:</span><span class="s2">.1e</span><span class="si">}</span><span class="s2">   (expected: 34, 34, error below 1e-10)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     x^2 - 2: steps = 34, predicted = 34, error = 4.7e-11   (expected: 34, 34, error below 1e-10)
+    x^10 - 1: steps = 34, predicted = 34, error = 5.2e-11   (expected: 34, 34, error below 1e-10)
+ x^3 - x - 2: steps = 34, predicted = 34, error = 5.3e-11   (expected: 34, 34, error below 1e-10)
+   cos x - x: steps = 34, predicted = 34, error = 3.1e-11   (expected: 34, 34, error below 1e-10)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Questions:</strong></p>
+<ol class="arabic simple">
+<li><p>Why did we write the bracket of <span class="math notranslate nohighlight">\(x^{10} - 1\)</span> as <code class="docutils literal notranslate"><span class="pre">sp.Rational(13,</span> <span class="pre">10)</span></code> and not <code class="docutils literal notranslate"><span class="pre">1.3</span></code>? Try <code class="docutils literal notranslate"><span class="pre">sp.Interval(0,</span> <span class="pre">1.3)</span></code> and look at the type of the end point.</p></li>
+<li><p>The four functions are very different, yet bisection takes the same number of steps for all of them. Why?</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="problem-2-the-illinois-method-and-the-race">
+<h2>Problem 2: the Illinois method and the race<a class="headerlink" href="#problem-2-the-illinois-method-and-the-race" title="Link to this heading">#</a></h2>
+<p><strong>Goal:</strong> implement the Illinois method and compare <code class="docutils literal notranslate"><span class="pre">bisection</span></code>, <code class="docutils literal notranslate"><span class="pre">false_position</span></code> and your <code class="docutils literal notranslate"><span class="pre">illinois</span></code> on the four test problems of Problem 1, using the reference roots <code class="docutils literal notranslate"><span class="pre">r_ref</span></code> to measure the true errors.</p>
+<p><strong>What you will see:</strong> one extra rule turns the slow, stuck false position into a method that needs only a handful of steps. False position is fast on some problems and very slow on <span class="math notranslate nohighlight">\(x^{10} - 1\)</span>; Illinois is never slow; bisection is never fast, but always predictable.</p>
+<section id="step-1-implement-illinois">
+<h3>Step 1: implement <code class="docutils literal notranslate"><span class="pre">illinois</span></code><a class="headerlink" href="#step-1-implement-illinois" title="Link to this heading">#</a></h3>
+<p>Write a function <code class="docutils literal notranslate"><span class="pre">illinois(f,</span> <span class="pre">a,</span> <span class="pre">b,</span> <span class="pre">tol=1e-12,</span> <span class="pre">maxit=200)</span></code> with the same inputs and outputs as <code class="docutils literal notranslate"><span class="pre">false_position</span></code>: it <strong>returns</strong> <code class="docutils literal notranslate"><span class="pre">(c,</span> <span class="pre">hist)</span></code>, the last point and the list of all points <span class="math notranslate nohighlight">\(c_1, c_2, \ldots\)</span></p>
+<p><strong>Algorithm.</strong> Copy <code class="docutils literal notranslate"><span class="pre">false_position</span></code> from Section 3 and add a variable <code class="docutils literal notranslate"><span class="pre">side</span> <span class="pre">=</span> <span class="pre">0</span></code> before the loop: it remembers which endpoint was replaced in the previous step. Then change only the end of the loop:</p>
+<ol class="arabic simple">
+<li><p>if <span class="math notranslate nohighlight">\(f(c)\)</span> has the sign of <span class="math notranslate nohighlight">\(f(a)\)</span>: replace <span class="math notranslate nohighlight">\(a\)</span> (<code class="docutils literal notranslate"><span class="pre">a,</span> <span class="pre">fa</span> <span class="pre">=</span> <span class="pre">c,</span> <span class="pre">fc</span></code>); if <code class="docutils literal notranslate"><span class="pre">side</span> <span class="pre">==</span> <span class="pre">+1</span></code> (we also replaced <span class="math notranslate nohighlight">\(a\)</span> last time, so <span class="math notranslate nohighlight">\(b\)</span> is kept twice), halve <code class="docutils literal notranslate"><span class="pre">fb</span></code>; set <code class="docutils literal notranslate"><span class="pre">side</span> <span class="pre">=</span> <span class="pre">+1</span></code>;</p></li>
+<li><p>otherwise: replace <span class="math notranslate nohighlight">\(b\)</span> (<code class="docutils literal notranslate"><span class="pre">b,</span> <span class="pre">fb</span> <span class="pre">=</span> <span class="pre">c,</span> <span class="pre">fc</span></code>); if <code class="docutils literal notranslate"><span class="pre">side</span> <span class="pre">==</span> <span class="pre">-1</span></code>, halve <code class="docutils literal notranslate"><span class="pre">fa</span></code>; set <code class="docutils literal notranslate"><span class="pre">side</span> <span class="pre">=</span> <span class="pre">-1</span></code>.</p></li>
+</ol>
+<details><summary><b>Hint</b></summary>
+<ul class="simple">
+<li><p>Everything in <code class="docutils literal notranslate"><span class="pre">false_position</span></code> up to and including the line <code class="docutils literal notranslate"><span class="pre">c_old</span> <span class="pre">=</span> <span class="pre">c</span></code> stays <strong>unchanged</strong>; only the <code class="docutils literal notranslate"><span class="pre">if</span></code>/<code class="docutils literal notranslate"><span class="pre">else</span></code> at the end of the loop gets new lines.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">side</span> <span class="pre">=</span> <span class="pre">0</span></code> goes <strong>before</strong> the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, next to <code class="docutils literal notranslate"><span class="pre">c_old</span> <span class="pre">=</span> <span class="pre">np.inf</span></code>, so that it is remembered from one step to the next.</p></li>
+<li><p>In each branch, first replace the endpoint, then <strong>test</strong> <code class="docutils literal notranslate"><span class="pre">side</span></code> (it still holds the value from the previous step), and only then <strong>update</strong> <code class="docutils literal notranslate"><span class="pre">side</span></code>. If you update it first, the test always succeeds.</p></li>
+<li><p>You halve the stored value of the endpoint that was <strong>kept</strong>, never the one you just replaced.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">else</span></code> branch is the mirror image of the <code class="docutils literal notranslate"><span class="pre">if</span></code> branch: swap the roles of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>, and of <code class="docutils literal notranslate"><span class="pre">+1</span></code> and <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fa</span><span class="p">):</span>   <span class="c1"># a is replaced by c</span>
+            <span class="n">a</span><span class="p">,</span> <span class="n">fa</span> <span class="o">=</span> <span class="n">c</span><span class="p">,</span> <span class="n">fc</span>
+            <span class="k">if</span> <span class="n">side</span> <span class="o">==</span> <span class="o">...</span><span class="p">:</span>              <span class="c1"># a was also replaced in the previous step, so b is kept twice</span>
+                <span class="o">...</span>                      <span class="c1"># halve the stored value f(b)</span>
+            <span class="n">side</span> <span class="o">=</span> <span class="o">...</span>
+        <span class="k">else</span><span class="p">:</span>                            <span class="c1"># b is replaced by c</span>
+            <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Debugging:</strong> if the check shows different first four points, add <code class="docutils literal notranslate"><span class="pre">print(n,</span> <span class="pre">a,</span> <span class="pre">b,</span> <span class="pre">side)</span></code> inside the loop and follow the first few steps on <span class="math notranslate nohighlight">\(x^2 - 2\)</span> by hand.</p>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">illinois</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
+    <span class="n">fa</span><span class="p">,</span> <span class="n">fb</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fb</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"[a, b] is not a bracket: f(a) and f(b) have the same sign"</span><span class="p">)</span>
+    <span class="n">hist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">c_old</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="n">side</span> <span class="o">=</span> <span class="mi">0</span>                                <span class="c1"># which endpoint was replaced last: +1 = a, -1 = b</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxit</span><span class="p">):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">fb</span> <span class="o">*</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">fb</span> <span class="o">-</span> <span class="n">fa</span><span class="p">)</span>    <span class="c1"># zero of the secant line</span>
+        <span class="n">fc</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="n">hist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">c_old</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">c_old</span> <span class="o">=</span> <span class="n">c</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fa</span><span class="p">):</span>
+            <span class="n">a</span><span class="p">,</span> <span class="n">fa</span> <span class="o">=</span> <span class="n">c</span><span class="p">,</span> <span class="n">fc</span>
+            <span class="k">if</span> <span class="n">side</span> <span class="o">==</span> <span class="o">+</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">fb</span> <span class="o">=</span> <span class="n">fb</span> <span class="o">/</span> <span class="mi">2</span>                 <span class="c1"># b kept twice in a row</span>
+            <span class="n">side</span> <span class="o">=</span> <span class="o">+</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">b</span><span class="p">,</span> <span class="n">fb</span> <span class="o">=</span> <span class="n">c</span><span class="p">,</span> <span class="n">fc</span>
+            <span class="k">if</span> <span class="n">side</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">fa</span> <span class="o">=</span> <span class="n">fa</span> <span class="o">/</span> <span class="mi">2</span>                 <span class="c1"># a kept twice in a row</span>
+            <span class="n">side</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">c</span><span class="p">,</span> <span class="n">hist</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check: compare your results with the expected ones (f_sq(t) = t**2 - 2 is defined in Section 2)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">illinois</span><span class="p">(</span><span class="n">f_sq</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">out</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"illinois returned None: finish the function (and delete the line `pass`), then run this cell again."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">c</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">out</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"c          ="</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="s2">"   (expected: 1.414213562373095 or ...0951)"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"steps      ="</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">hist</span><span class="p">),</span> <span class="s2">"   (expected: about 8; false position needs 17 with the same tol)"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"first four ="</span><span class="p">,</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">hist</span><span class="p">[:</span><span class="mi">4</span><span class="p">]],</span> <span class="s2">"   (expected: [1.333333, 1.4, 1.423077, 1.414169])"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c          = 1.414213562373095    (expected: 1.414213562373095 or ...0951)
+steps      = 8    (expected: about 8; false position needs 17 with the same tol)
+first four = [1.333333, 1.4, 1.423077, 1.414169]    (expected: [1.333333, 1.4, 1.423077, 1.414169])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-the-race-steps-to-reach-an-error-of-10-6">
+<h3>Step 2: the race, steps to reach an error of <span class="math notranslate nohighlight">\(10^{-6}\)</span><a class="headerlink" href="#step-2-the-race-steps-to-reach-an-error-of-10-6" title="Link to this heading">#</a></h3>
+<p>Run the next cell (do not change it). It collects the three methods, and their names, in two lists: in Python a function can be stored in a list like any other value, and <code class="docutils literal notranslate"><span class="pre">methods[j](f,</span> <span class="pre">a,</span> <span class="pre">b)</span></code> calls method number <code class="docutils literal notranslate"><span class="pre">j</span></code>. It also defines <code class="docutils literal notranslate"><span class="pre">steps_to(hist,</span> <span class="pre">r,</span> <span class="pre">tol)</span></code>, which returns the first <span class="math notranslate nohighlight">\(n\)</span> (counting from <span class="math notranslate nohighlight">\(1\)</span>) with <span class="math notranslate nohighlight">\(|c_n - r| &lt; \text{tol}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="n">bisection</span><span class="p">,</span> <span class="n">false_position</span><span class="p">,</span> <span class="n">illinois</span><span class="p">]</span>
+<span class="n">method_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"bisection"</span><span class="p">,</span> <span class="s2">"false position"</span><span class="p">,</span> <span class="s2">"Illinois"</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">steps_to</span><span class="p">(</span><span class="n">hist</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">tol</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hist</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">hist</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">-</span> <span class="n">r</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Build a list of lists <code class="docutils literal notranslate"><span class="pre">steps3</span></code>: entry <code class="docutils literal notranslate"><span class="pre">steps3[k]</span></code> is the list <code class="docutils literal notranslate"><span class="pre">[steps</span> <span class="pre">for</span> <span class="pre">bisection,</span> <span class="pre">steps</span> <span class="pre">for</span> <span class="pre">false</span> <span class="pre">position,</span> <span class="pre">steps</span> <span class="pre">for</span> <span class="pre">Illinois]</span></code> for test problem <code class="docutils literal notranslate"><span class="pre">k</span></code>, where each number is <code class="docutils literal notranslate"><span class="pre">steps_to(hist,</span> <span class="pre">r_ref[k],</span> <span class="pre">1e-6)</span></code> and <code class="docutils literal notranslate"><span class="pre">hist</span></code> comes from running the method on <code class="docutils literal notranslate"><span class="pre">funcs[k]</span></code>, <code class="docutils literal notranslate"><span class="pre">float(a_list[k])</span></code>, <code class="docutils literal notranslate"><span class="pre">float(b_list[k])</span></code> with <code class="docutils literal notranslate"><span class="pre">tol=1e-14,</span> <span class="pre">maxit=500</span></code>. Print one line per problem.</p>
+<details><summary><b>Hint</b></summary>
+<ul class="simple">
+<li><p>You need <strong>two</strong> loops, one inside the other: the outer loop over the problems <code class="docutils literal notranslate"><span class="pre">k</span></code>, the inner loop over the methods <code class="docutils literal notranslate"><span class="pre">j</span></code>.</p></li>
+<li><p>Before the inner loop, start an empty list <code class="docutils literal notranslate"><span class="pre">row</span> <span class="pre">=</span> <span class="pre">[]</span></code>; after the inner loop, append the whole <code class="docutils literal notranslate"><span class="pre">row</span></code> to <code class="docutils literal notranslate"><span class="pre">steps3</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">methods[j]</span></code> is a function: call it like <code class="docutils literal notranslate"><span class="pre">bisection</span></code>, with <code class="docutils literal notranslate"><span class="pre">funcs[k]</span></code>, the float end points, <code class="docutils literal notranslate"><span class="pre">tol=1e-14</span></code> and <code class="docutils literal notranslate"><span class="pre">maxit=500</span></code>. It returns <code class="docutils literal notranslate"><span class="pre">c,</span> <span class="pre">hist</span></code>.</p></li>
+<li><p>Each entry of <code class="docutils literal notranslate"><span class="pre">row</span></code> is <code class="docutils literal notranslate"><span class="pre">steps_to(...)</span></code> applied to that <code class="docutils literal notranslate"><span class="pre">hist</span></code>, the reference root of problem <code class="docutils literal notranslate"><span class="pre">k</span></code>, and the tolerance <code class="docutils literal notranslate"><span class="pre">1e-6</span></code>.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">steps3</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">funcs</span><span class="p">)):</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">b_list</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">methods</span><span class="p">)):</span>
+        <span class="o">...</span>
+        <span class="o">...</span>
+    <span class="n">steps3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">row</span><span class="p">)</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">steps3</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">funcs</span><span class="p">)):</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">b_list</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">methods</span><span class="p">)):</span>
+        <span class="n">c</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">methods</span><span class="p">[</span><span class="n">j</span><span class="p">](</span><span class="n">funcs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+        <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">steps_to</span><span class="p">(</span><span class="n">hist</span><span class="p">,</span> <span class="n">r_ref</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="mf">1e-6</span><span class="p">))</span>
+    <span class="n">steps3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">row</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x^2 - 2 [19, 8, 5]
+x^10 - 1 [20, 61, 13]
+x^3 - x - 2 [19, 11, 7]
+cos x - x [19, 5, 5]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check: compare your results with the expected ones</span>
+<span class="k">if</span> <span class="n">steps3</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"steps3 is still None: write the code in the cell above, then run this cell again."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span> <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">expected</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">: [bisection, false position, Illinois] = </span><span class="si">{</span><span class="n">steps3</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">}</span><span class="s2">   (expected: </span><span class="si">{</span><span class="n">expected</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     x^2 - 2: [bisection, false position, Illinois] = [19, 8, 5]   (expected: [19, 8, 5])
+    x^10 - 1: [bisection, false position, Illinois] = [20, 61, 13]   (expected: [20, 61, 13])
+ x^3 - x - 2: [bisection, false position, Illinois] = [19, 11, 7]   (expected: [19, 11, 7])
+   cos x - x: [bisection, false position, Illinois] = [19, 5, 5]   (expected: [19, 5, 5])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-look-at-the-errors">
+<h3>Step 3: look at the errors<a class="headerlink" href="#step-3-look-at-the-errors" title="Link to this heading">#</a></h3>
+<p>Run the cell below (do not change it): it plots the error <span class="math notranslate nohighlight">\(|c_n - r|\)</span> of the three methods on the four test problems with <code class="docutils literal notranslate"><span class="pre">semilogy</span></code>, using your <code class="docutils literal notranslate"><span class="pre">illinois</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">illinois</span><span class="p">(</span><span class="n">f_sq</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"illinois returned None: finish Step 1 first, then run this cell again."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">funcs</span><span class="p">)):</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">b_list</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">methods</span><span class="p">)):</span>
+            <span class="n">c</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">methods</span><span class="p">[</span><span class="n">j</span><span class="p">](</span><span class="n">funcs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+            <span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span> <span class="o">-</span> <span class="n">r_ref</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="mf">1e-17</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">err</span><span class="p">,</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">method_names</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"gray"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"machine epsilon"</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">70</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"$</span><span class="si">{</span><span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">exprs</span><span class="p">[</span><span class="n">k</span><span class="p">])</span><span class="si">}</span><span class="s2">$"</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"$n$"</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$|c_n - r|$"</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/433ebea1678bd6368743884e250a10494f239b39cf269d2004e6e114ae5b47d6.png" src="../_images/433ebea1678bd6368743884e250a10494f239b39cf269d2004e6e114ae5b47d6.png" />
+</div>
+</div>
+<p><strong>Questions:</strong></p>
+<ol class="arabic simple">
+<li><p>Halving <code class="docutils literal notranslate"><span class="pre">fb</span></code> changes the secant line. Why does <span class="math notranslate nohighlight">\([a, b]\)</span> still contain a root afterwards?</p></li>
+<li><p>The bisection and false position curves are (roughly) straight lines; the Illinois curve bends down. What does that say about the rates (look back at the convergence lecture)?</p></li>
+<li><p>You need the root of a new function and know nothing about it except a bracket. Which method would you choose, and why?</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="sympy_intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Symbolic Computation with SymPy</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Root Finding I: Bracketing Methods (solutions)</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-root-finding-problem-and-brackets">1. The root-finding problem and brackets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bisection-method">2. The bisection method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-false-position-method">3. The false position method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-do-we-stop">4. When do we stop?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-the-methods-plot-the-error-on-a-log-scale">5. Comparing the methods: plot the error on a log scale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">6. Summary</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#activity">Activity</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-exact-roots-with-solveset-numerical-roots-with-bisection">Problem 1: exact roots with <code class="docutils literal notranslate"><span class="pre">solveset</span></code>, numerical roots with bisection</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-solveset-on-each-bracket">Step 1: <code class="docutils literal notranslate"><span class="pre">solveset</span></code> on each bracket</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-bisection-on-the-same-brackets">Step 2: bisection on the same brackets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-the-illinois-method-and-the-race">Problem 2: the Illinois method and the race</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-implement-illinois">Step 1: implement <code class="docutils literal notranslate"><span class="pre">illinois</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-the-race-steps-to-reach-an-error-of-10-6">Step 2: the race, steps to reach an error of <span class="math notranslate nohighlight">\(10^{-6}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-look-at-the-errors">Step 3: look at the errors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sharareh Sayyad
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
