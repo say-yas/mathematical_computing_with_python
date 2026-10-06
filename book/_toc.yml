@@ -11,3 +11,4 @@ chapters:
   - file: notebooks/bigO_convergence_solved.ipynb
   - file: notebooks/limits_convergence.ipynb
   - file: notebooks/sympy_intro.ipynb
+  - file: notebooks/bracketing_methods_solutions.ipynb
