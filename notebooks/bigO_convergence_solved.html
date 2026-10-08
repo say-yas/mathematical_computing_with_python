@@ -283,6 +283,8 @@
 
 <li class="toctree-l1"><a class="reference internal" href="bracketing_methods_solutions.html">Root Finding I: Bracketing Methods (solutions)</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="newton_method.html">Root Finding II: Newton’s Method</a></li>
+
 </ul>
 
     </div>
@@ -732,7 +734,7 @@ It looks at large inputs and ignores constant factors.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[    100     464    2154   10000   46415  215443 1000000]
 </pre></div>
 </div>
-<img alt="../_images/3d4380150a6aae780875da0c2db64f9c61dbfbcff4f37b6a2f0ab590e6da3ce5.png" src="../_images/3d4380150a6aae780875da0c2db64f9c61dbfbcff4f37b6a2f0ab590e6da3ce5.png" />
+<img alt="../_images/05e6a7f0ea34e64181ebe85f49111c9cf4cee020315816d39be5293af6d3476d.png" src="../_images/05e6a7f0ea34e64181ebe85f49111c9cf4cee020315816d39be5293af6d3476d.png" />
 </div>
 </div>
 <p>The slopes come out close to <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span>, which <strong>agrees</strong> with the predictions. Two things to keep in mind:</p>
@@ -763,8 +765,8 @@ It looks at large inputs and ignores constant factors.</p>
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/ae3487156f1b5ed55b61badaa3e3503ea60284e24189980e402975dfd7e2519f.png" src="../_images/ae3487156f1b5ed55b61badaa3e3503ea60284e24189980e402975dfd7e2519f.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope for small n: 1.0008273016704985
-slope for large n: 1.9777525854559221
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope for small n: 1.0008273016704996
+slope for large n: 1.9777525854559215
 </pre></div>
 </div>
 </div>
@@ -800,10 +802,10 @@ slope for large n: 1.9777525854559221
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6952441310147189   growth factor b = e^slope: 2.00419830118594
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6939290590389433   growth factor b = e^slope: 2.0015643684513127
 </pre></div>
 </div>
-<img alt="../_images/21a40502cb03df040965805964d9f493a731912021ab67515d7e54243d08d537.png" src="../_images/21a40502cb03df040965805964d9f493a731912021ab67515d7e54243d08d537.png" />
+<img alt="../_images/211386706752604aa69bfec96d50da46ee7034e95382a03113f12e8f6e3f39a4.png" src="../_images/211386706752604aa69bfec96d50da46ee7034e95382a03113f12e8f6e3f39a4.png" />
 </div>
 </div>
 </section>
@@ -914,7 +916,7 @@ quadratic: 1.9999999999999998
 sublinear: nan
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2415/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2187/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
   y = np.log(np.abs(np.diff(np.log(eps))))
 </pre></div>
 </div>
@@ -1103,11 +1105,11 @@ has_duplicate_sorted([3, 1, 4, 5]) = False    (expected: False)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope nested: 2.1133842028686294
-slope sorted: 1.1519474392011468
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope nested: 2.1382469750913566
+slope sorted: 1.1635657522339606
 </pre></div>
 </div>
-<img alt="../_images/5be81149dcc6ecbbaa0aa3d792ce6c91df5010f2148271b0009b7abd3218c25e.png" src="../_images/5be81149dcc6ecbbaa0aa3d792ce6c91df5010f2148271b0009b7abd3218c25e.png" />
+<img alt="../_images/b3b509fc40cc589c0ae61cdfc5977a871ff5dc6addbe1aa125f6098d5958d53d.png" src="../_images/b3b509fc40cc589c0ae61cdfc5977a871ff5dc6addbe1aa125f6098d5958d53d.png" />
 </div>
 </div>
 <p><strong>Questions:</strong></p>
@@ -1264,7 +1266,7 @@ k = 13:  e_(k+1) / e_k = 0.292893
 k = 14:  e_(k+1) / e_k = 0.292893
 |g'(x_star)| = 0.2928932188134524
 q fixed point: 1.0067061303618703
-q Newton     : 2.0672485365879605
+q Newton     : 2.067248536587961
 </pre></div>
 </div>
 </div>

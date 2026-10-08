@@ -1,0 +1,1743 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Root Finding II: Newton’s Method &#8212; Mathematical Computing with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/newton_method';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Root Finding I: Bracketing Methods (solutions)" href="bracketing_methods_solutions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Mathematical Computing with Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Mathematical Computing with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="starting_with_python.html">Using Python in Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="starting_with_github.html">Using GitHub: Repositories, Commits, Push/Pull, and Forks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonI.html">Introduction to Python, Part I</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonII.html">Introduction to Python, Part II</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIII.html">Introduction to Python, Part III</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIV_numpy.html">Introduction to Python, Part IV: NumPy</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonV_matplotlib.html">Introduction to Python, Part V: Plotting with Matplotlib</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="bigO_convergence_solved.html">Big-O and Convergence of Algorithms</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="limits_convergence.html">Limits and Convergence of Algorithms</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="sympy_intro.html">Symbolic Computation with SymPy</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="bracketing_methods_solutions.html">Root Finding I: Bracketing Methods (solutions)</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Root Finding II: Newton’s Method</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/say-yas/mathematical_computing_with_python/blob/main/book/notebooks/newton_method.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/notebooks/newton_method.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fnotebooks/newton_method.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/newton_method.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Root Finding II: Newton’s Method</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Root Finding II: Newton’s Method</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-idea-follow-the-tangent-line">1. The idea: follow the tangent line</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-s-method-in-python">2. Newton’s method in Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratic-convergence">3. Quadratic convergence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-can-go-wrong">4. What can go wrong</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-roots-newton-slows-down-to-linear">5. Multiple roots: Newton slows down to linear</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#safeguarded-newton-newton-with-a-bracket">6. Safeguarded Newton: Newton with a bracket</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-without-derivatives">7. Newton without derivatives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-do-we-stop">8. When do we stop?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">9. Summary</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#activity">Activity</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-newton-with-sympy-derivatives">Problem 1: Newton with SymPy derivatives</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-derivatives-with-sympy">Step 1: derivatives with SymPy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-newton-from-the-midpoint-of-each-bracket">Step 2: Newton from the midpoint of each bracket</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-the-constant-c-of-quadratic-convergence">Step 3: the constant <span class="math notranslate nohighlight">\(C\)</span> of quadratic convergence</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-the-secant-method-and-the-race">Problem 2: the secant method and the race</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-the-secant-function-given">Step 1: the <code class="docutils literal notranslate"><span class="pre">secant</span></code> function (given)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-the-race-steps-to-reach-an-error-of-10-6">Step 2: the race, steps to reach an error of <span class="math notranslate nohighlight">\(10^{-6}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-look-at-the-errors">Step 3: look at the errors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="root-finding-ii-newton-s-method">
+<h1>Root Finding II: Newton’s Method<a class="headerlink" href="#root-finding-ii-newton-s-method" title="Link to this heading">#</a></h1>
+<p><strong>Contents:</strong> 1. the idea: tangent lines · 2. Newton’s method in Python · 3. quadratic convergence · 4. what can go wrong · 5. multiple roots · 6. safeguarded Newton · 7. Newton without derivatives · 8. when to stop · 9. summary · <strong>Activity</strong> (2 problems)</p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">numpy</span></code> for the numerical methods, <code class="docutils literal notranslate"><span class="pre">sympy</span></code> for exact derivatives and reference roots, and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> for the plots. This notebook goes with the slides <em>Root Finding II: Newton’s Method</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Math</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"sympy"</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span> <span class="s2">"| numpy"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Math</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named 'sympy'
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<section id="the-idea-follow-the-tangent-line">
+<h2>1. The idea: follow the tangent line<a class="headerlink" href="#the-idea-follow-the-tangent-line" title="Link to this heading">#</a></h2>
+<p>Bracketing methods only need a sign change, but they converge <strong>linearly</strong>. Newton’s method also uses the <strong>derivative</strong> <span class="math notranslate nohighlight">\(f'(x)\)</span>. Near the current guess <span class="math notranslate nohighlight">\(x_n\)</span>, replace <span class="math notranslate nohighlight">\(f\)</span> by its <strong>tangent line</strong></p>
+<div class="math notranslate nohighlight">
+\[\ell(x) = f(x_n) + f'(x_n)\,(x - x_n),\]</div>
+<p>and take the zero of <span class="math notranslate nohighlight">\(\ell\)</span> as the next guess:</p>
+<div class="math notranslate nohighlight">
+\[\boxed{\,x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}\,}\]</div>
+<p>The same formula comes from Taylor’s theorem: <span class="math notranslate nohighlight">\(f(x) = f(x_n) + f'(x_n)(x - x_n) + \tfrac12 f''(\xi)(x - x_n)^2\)</span>. Dropping the quadratic term leaves the tangent line, and the neglected term is <span class="math notranslate nohighlight">\(O\big((x - x_n)^2\big)\)</span>, which is why the method is so fast once <span class="math notranslate nohighlight">\(x_n\)</span> is close to the root.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>false position</p></th>
+<th class="head"><p>Newton</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>model of <span class="math notranslate nohighlight">\(f\)</span></p></td>
+<td><p><strong>secant</strong> line through two bracket points</p></td>
+<td><p><strong>tangent</strong> line at one point</p></td>
+</tr>
+<tr class="row-odd"><td><p>needs</p></td>
+<td><p>a bracket <span class="math notranslate nohighlight">\([a, b]\)</span></p></td>
+<td><p>a starting guess <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(f'\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>keeps a bracket</p></td>
+<td><p>yes</p></td>
+<td><p><strong>no</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The cell below draws the first two Newton steps for <span class="math notranslate nohighlight">\(f(x) = x^2 - 2\)</span> from <span class="math notranslate nohighlight">\(x_0 = 1\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f_sq</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">df_sq</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">t</span>
+
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.65</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">f_sq</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="s2">"k"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"$x^2 - 2$"</span><span class="p">)</span>
+<span class="n">xn</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"royalblue"</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"orange"</span><span class="p">)]:</span>
+    <span class="n">x_next</span> <span class="o">=</span> <span class="n">xn</span> <span class="o">-</span> <span class="n">f_sq</span><span class="p">(</span><span class="n">xn</span><span class="p">)</span> <span class="o">/</span> <span class="n">df_sq</span><span class="p">(</span><span class="n">xn</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">f_sq</span><span class="p">(</span><span class="n">xn</span><span class="p">)</span> <span class="o">+</span> <span class="n">df_sq</span><span class="p">(</span><span class="n">xn</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">xs</span> <span class="o">-</span> <span class="n">xn</span><span class="p">),</span> <span class="s2">"--"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"tangent at $x_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">$ = </span><span class="si">{</span><span class="n">xn</span><span class="si">:</span><span class="s2">.4g</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xn</span><span class="p">],</span> <span class="p">[</span><span class="n">f_sq</span><span class="p">(</span><span class="n">xn</span><span class="p">)],</span> <span class="s2">"o"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"k"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_next</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"o"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x_next</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">f_sq</span><span class="p">(</span><span class="n">x_next</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">"gray"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">":"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"x_</span><span class="si">{</span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">x_next</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2">,  error = </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">x_next</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="si">:</span><span class="s2">.1e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">xn</span> <span class="o">=</span> <span class="n">x_next</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"k"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"$x$"</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">"upper left"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_1 = 1.5000000000,  error = 8.6e-02
+x_2 = 1.4166666667,  error = 2.5e-03
+</pre></div>
+</div>
+<img alt="../_images/cd31dc7256f8ba213f126ad9628f9eeee58d5e8b2e1519679355589a46937d0b.png" src="../_images/cd31dc7256f8ba213f126ad9628f9eeee58d5e8b2e1519679355589a46937d0b.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="newton-s-method-in-python">
+<h2>2. Newton’s method in Python<a class="headerlink" href="#newton-s-method-in-python" title="Link to this heading">#</a></h2>
+<p>The function returns the list <code class="docutils literal notranslate"><span class="pre">hist</span></code> of all iterates <span class="math notranslate nohighlight">\(x_1, x_2, \ldots\)</span>, and it stops if it lands <strong>exactly</strong> on a root.</p>
+<p><strong>Details in the code below:</strong></p>
+<ul class="simple">
+<li><p><strong>Two evaluations per step:</strong> one of <span class="math notranslate nohighlight">\(f\)</span> and one of <span class="math notranslate nohighlight">\(f'\)</span>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">fx</span> <span class="pre">==</span> <span class="pre">0</span></code>:</strong> in bisection we did not need this test. Here we do: at a double root both <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(f'\)</span> vanish, and the step <span class="math notranslate nohighlight">\(0/0\)</span> would stop the method with an error even though <span class="math notranslate nohighlight">\(x\)</span> is the root (Section 5).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">dfx</span> <span class="pre">==</span> <span class="pre">0</span></code>:</strong> a horizontal tangent never crosses the axis, so the step is undefined.</p></li>
+<li><p><strong>Raise, don’t return:</strong> bisection always returns a good answer. Newton <strong>may not converge</strong>, so reaching <code class="docutils literal notranslate"><span class="pre">maxit</span></code> is an <strong>error</strong>, not a result.</p></li>
+<li><p><strong>Step-size test</strong> <span class="math notranslate nohighlight">\(|x_{n+1} - x_n| &lt; \text{tol}\)</span>: there is no bracket, so there is no error bound; Section 8 shows why the step is a good error estimate for Newton.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="n">hist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxit</span><span class="p">):</span>
+        <span class="n">fx</span><span class="p">,</span> <span class="n">dfx</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>        <span class="c1"># two evaluations per step</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span>                  <span class="c1"># landed very close to a root</span>
+            <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">hist</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dfx</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span>         <span class="c1"># derivative is effectively zero</span>
+            <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"f'(x) = 0 at x = </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">: the tangent is horizontal"</span><span class="p">)</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="n">fx</span> <span class="o">/</span> <span class="n">dfx</span>                <span class="c1"># Newton step</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">dx</span>
+        <span class="n">hist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dx</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>            <span class="c1"># step-size test</span>
+            <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">hist</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"no convergence in </span><span class="si">{</span><span class="n">maxit</span><span class="si">}</span><span class="s2"> steps (last x = </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+
+<span class="n">x_star</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="n">f_sq</span><span class="p">,</span> <span class="n">df_sq</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">xn</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="k">for</span> <span class="n">xn</span> <span class="ow">in</span> <span class="n">hist</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'n'</span><span class="si">:</span><span class="s2">&gt;3</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'x_n'</span><span class="si">:</span><span class="s2">&gt;20</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'|x_n - sqrt2|'</span><span class="si">:</span><span class="s2">&gt;14</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'e_n / e_(n-1)^2'</span><span class="si">:</span><span class="s2">&gt;16</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hist</span><span class="p">)):</span>
+    <span class="n">ratio</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">e</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">e</span><span class="p">[</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="si">:</span><span class="s2">16.3f</span><span class="si">}</span><span class="s2">"</span> <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">e</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">e</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">1e-15</span> <span class="k">else</span> <span class="s2">""</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">:</span><span class="s2">&gt;3</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">hist</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="si">:</span><span class="s2">20.16f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">e</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="si">:</span><span class="s2">14.2e</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">ratio</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">1/(2 sqrt2) = </span><span class="si">{</span><span class="mi">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  n                  x_n  |x_n - sqrt2|  e_n / e_(n-1)^2
+  1   1.5000000000000000       8.58e-02 
+  2   1.4166666666666667       2.45e-03            0.333
+  3   1.4142156862745099       2.12e-06            0.353
+  4   1.4142135623746899       1.59e-12            0.354
+  5   1.4142135623730951       0.00e+00 
+
+1/(2 sqrt2) = 0.354
+</pre></div>
+</div>
+</div>
+</div>
+<p>The number of correct digits goes <span class="math notranslate nohighlight">\(2, 6, 12, 16\)</span>: it <strong>doubles</strong> every step until machine precision. The ratio <span class="math notranslate nohighlight">\(e_n / e_{n-1}^2\)</span> settles to a constant; Section 3 explains where <span class="math notranslate nohighlight">\(1/(2\sqrt2) \approx 0.354\)</span> comes from.</p>
+<p><strong>Getting <span class="math notranslate nohighlight">\(f'\)</span> with SymPy.</strong> Writing <span class="math notranslate nohighlight">\(f'\)</span> by hand is error-prone. SymPy differentiates the expression exactly with <code class="docutils literal notranslate"><span class="pre">sp.diff</span></code>, and <code class="docutils literal notranslate"><span class="pre">sp.lambdify</span></code> turns both expressions into NumPy functions that <code class="docutils literal notranslate"><span class="pre">newton</span></code> can use.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">'x'</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">expr</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span>
+<span class="n">dexpr</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s2">"f(x) = "</span> <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">", \qquad f'(x) = "</span> <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">dexpr</span><span class="p">)))</span>
+
+<span class="n">f_cos</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="s1">'numpy'</span><span class="p">)</span>
+<span class="n">df_cos</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dexpr</span><span class="p">,</span> <span class="s1">'numpy'</span><span class="p">)</span>
+<span class="n">r_cos</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="n">f_cos</span><span class="p">,</span> <span class="n">df_cos</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"root of cos x - x: </span><span class="si">{</span><span class="n">r_cos</span><span class="si">:</span><span class="s2">.15f</span><span class="si">}</span><span class="s2">  after </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span><span class="si">}</span><span class="s2"> steps"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle f(x) = - x + \cos{\left(x \right)}, \qquad f'(x) = - \sin{\left(x \right)} - 1\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>root of cos x - x: 0.739085133215161  after 4 steps
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="quadratic-convergence">
+<h2>3. Quadratic convergence<a class="headerlink" href="#quadratic-convergence" title="Link to this heading">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(e_n = x_n - r\)</span>. Taylor’s theorem around <span class="math notranslate nohighlight">\(x_n\)</span>, evaluated at the root, gives</p>
+<div class="math notranslate nohighlight">
+\[0 = f(r) = f(x_n) - f'(x_n)\,e_n + \tfrac12 f''(\xi_n)\,e_n^2 .\]</div>
+<p>Divide by <span class="math notranslate nohighlight">\(f'(x_n)\)</span> and use the Newton formula:</p>
+<div class="math notranslate nohighlight">
+\[e_{n+1} = \frac{f''(\xi_n)}{2f'(x_n)}\,e_n^2 \qquad\Longrightarrow\qquad e_{n+1} \approx C\,e_n^2, \quad C = \frac{f''(r)}{2f'(r)}.\]</div>
+<p>For <span class="math notranslate nohighlight">\(x^2 - 2\)</span>: <span class="math notranslate nohighlight">\(f'' = 2\)</span> and <span class="math notranslate nohighlight">\(f'(\sqrt2) = 2\sqrt2\)</span>, so <span class="math notranslate nohighlight">\(C = 1/(2\sqrt2)\)</span>: exactly the ratio in the table of Section 2.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>order <span class="math notranslate nohighlight">\(p\)</span> in <span class="math notranslate nohighlight">\(\lvert e_{n+1}\rvert \approx C\,\lvert e_n\rvert^p\)</span></p></th>
+<th class="head"><p>method</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(p = 1\)</span> (linear)</p></td>
+<td><p>bisection, false position</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(p \approx 1.618\)</span></p></td>
+<td><p>secant (Section 7)</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(p = 2\)</span> (quadratic)</p></td>
+<td><p>Newton</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Theorem (local convergence).</strong> If <span class="math notranslate nohighlight">\(f\)</span> is twice continuously differentiable near <span class="math notranslate nohighlight">\(r\)</span>, <span class="math notranslate nohighlight">\(f(r) = 0\)</span> and <span class="math notranslate nohighlight">\(f'(r) \neq 0\)</span>, there is a <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that Newton converges quadratically for every <span class="math notranslate nohighlight">\(x_0\)</span> with <span class="math notranslate nohighlight">\(|x_0 - r| &lt; \delta\)</span>. The theorem does <strong>not</strong> say how small <span class="math notranslate nohighlight">\(\delta\)</span> is: Newton is a <strong>local</strong> method.</p>
+<p>To compare with the bracketing methods we copy <code class="docutils literal notranslate"><span class="pre">bisection</span></code> and <code class="docutils literal notranslate"><span class="pre">false_position</span></code> from the previous notebook (unchanged). On a <code class="docutils literal notranslate"><span class="pre">semilogy</span></code> plot, linear convergence is a straight line; Newton’s curve <strong>bends down</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bisection</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
+    <span class="n">fa</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"[a, b] is not a bracket: f(a) and f(b) have the same sign"</span><span class="p">)</span>
+    <span class="n">hist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxit</span><span class="p">):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">fc</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="n">hist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fa</span><span class="p">):</span>
+            <span class="n">a</span><span class="p">,</span> <span class="n">fa</span> <span class="o">=</span> <span class="n">c</span><span class="p">,</span> <span class="n">fc</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">c</span>
+    <span class="k">return</span> <span class="n">c</span><span class="p">,</span> <span class="n">hist</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">false_position</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
+    <span class="n">fa</span><span class="p">,</span> <span class="n">fb</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fb</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"[a, b] is not a bracket: f(a) and f(b) have the same sign"</span><span class="p">)</span>
+    <span class="n">hist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">c_old</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxit</span><span class="p">):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">fb</span> <span class="o">*</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">fb</span> <span class="o">-</span> <span class="n">fa</span><span class="p">)</span>
+        <span class="n">fc</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="n">hist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">c_old</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">c_old</span> <span class="o">=</span> <span class="n">c</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fa</span><span class="p">):</span>
+            <span class="n">a</span><span class="p">,</span> <span class="n">fa</span> <span class="o">=</span> <span class="n">c</span><span class="p">,</span> <span class="n">fc</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">b</span><span class="p">,</span> <span class="n">fb</span> <span class="o">=</span> <span class="n">c</span><span class="p">,</span> <span class="n">fc</span>
+    <span class="k">return</span> <span class="n">c</span><span class="p">,</span> <span class="n">hist</span>
+
+<span class="n">runs</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"bisection"</span><span class="p">,</span> <span class="n">bisection</span><span class="p">(</span><span class="n">f_sq</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"o-"</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"false position"</span><span class="p">,</span> <span class="n">false_position</span><span class="p">(</span><span class="n">f_sq</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"s-"</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"Newton"</span><span class="p">,</span> <span class="n">newton</span><span class="p">(</span><span class="n">f_sq</span><span class="p">,</span> <span class="n">df_sq</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"D-"</span><span class="p">)]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">hist</span><span class="p">,</span> <span class="n">style</span> <span class="ow">in</span> <span class="n">runs</span><span class="p">:</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)),</span> <span class="mf">1e-17</span><span class="p">)</span>     <span class="c1"># avoid log(0)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">err</span><span class="p">,</span> <span class="n">style</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"gray"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"machine epsilon"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"$x^2 - 2$"</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"$n$"</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$|x_n - r|$"</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/74a773624c899922bb7c241fe9ce49dc7c5d011a1866be118b70cccefc8618ee.png" src="../_images/74a773624c899922bb7c241fe9ce49dc7c5d011a1866be118b70cccefc8618ee.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="what-can-go-wrong">
+<h2>4. What can go wrong<a class="headerlink" href="#what-can-go-wrong" title="Link to this heading">#</a></h2>
+<p>Newton only uses <strong>local</strong> information. Far from the root the tangent can point anywhere.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>example</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(x_0\)</span></p></th>
+<th class="head"><p>what happens</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x^{10} - 1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.5\)</span></p></td>
+<td><p><strong>overshoot</strong>: <span class="math notranslate nohighlight">\(f'(x_0) \approx 0.02\)</span>, so the first step jumps to <span class="math notranslate nohighlight">\(x_1 \approx 51.6\)</span>; dozens of steps to crawl back</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(x^3 - 2x + 2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
+<td><p><strong>cycling</strong>: <span class="math notranslate nohighlight">\(0, 1, 0, 1, \ldots\)</span> forever; the real root <span class="math notranslate nohighlight">\(r \approx -1.769\)</span> is never reached</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\arctan x\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1.5\)</span></p></td>
+<td><p><strong>divergence</strong>: each step overshoots more; from <span class="math notranslate nohighlight">\(x_0 = 1.3\)</span> it converges to <span class="math notranslate nohighlight">\(0\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>To <strong>watch</strong> a run that may not converge, <code class="docutils literal notranslate"><span class="pre">newton</span></code> is not useful: it raises an error and we lose the iterates. The helper <code class="docutils literal notranslate"><span class="pre">newton_steps</span></code> below just takes a fixed number of steps, with no stopping test.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">newton_steps</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">nsteps</span><span class="p">):</span>
+    <span class="c1"># Return [x_1, ..., x_nsteps] without any stopping test.</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">xn</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsteps</span><span class="p">):</span>
+        <span class="n">xn</span> <span class="o">=</span> <span class="n">xn</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">xn</span><span class="p">)</span> <span class="o">/</span> <span class="n">df</span><span class="p">(</span><span class="n">xn</span><span class="p">)</span>
+        <span class="n">xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xn</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">xs</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">f_ten</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">t</span><span class="o">**</span><span class="mi">10</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">df_ten</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">t</span><span class="o">**</span><span class="mi">9</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">f_cyc</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">t</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="mi">2</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">df_cyc</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">df_atan</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">x_star</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="n">f_ten</span><span class="p">,</span> <span class="n">df_ten</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"x^10 - 1,   x0 = 0.5: x1 = </span><span class="si">{</span><span class="n">hist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, converged to </span><span class="si">{</span><span class="n">x_star</span><span class="si">}</span><span class="s2"> after </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span><span class="si">}</span><span class="s2"> steps"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"x^3-2x+2,   x0 = 0  :"</span><span class="p">,</span> <span class="n">newton_steps</span><span class="p">(</span><span class="n">f_cyc</span><span class="p">,</span> <span class="n">df_cyc</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"arctan x,   x0 = 1.5:"</span><span class="p">,</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">newton_steps</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">,</span> <span class="n">df_atan</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"arctan x,   x0 = 1.3:"</span><span class="p">,</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">newton_steps</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">,</span> <span class="n">df_atan</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">newton</span><span class="p">(</span><span class="n">f_cyc</span><span class="p">,</span> <span class="n">df_cyc</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">newton on x^3 - 2x + 2 from x0 = 0 -&gt;"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x^10 - 1,   x0 = 0.5: x1 = 51.65, converged to 1.0 after 43 steps
+x^3-2x+2,   x0 = 0  : [1.0, 0.0, 1.0, 0.0, 1.0, 0.0]
+arctan x,   x0 = 1.5: [-1.69, 2.32, -5.11, 32.3, -1575.32, 3894976.01]
+arctan x,   x0 = 1.3: [-1.161621, 0.858896, -0.374241, 0.034019, -2.6e-05, 0.0]
+
+newton on x^3 - 2x + 2 from x0 = 0 -&gt; no convergence in 30 steps (last x = 0.0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cases</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"overshoot: $x^</span><span class="si">{10}</span><span class="s2"> - 1$"</span><span class="p">,</span> <span class="n">f_ten</span><span class="p">,</span> <span class="n">df_ten</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.4</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">)),</span>
+         <span class="p">(</span><span class="s2">"cycling: $x^3 - 2x + 2$"</span><span class="p">,</span> <span class="n">f_cyc</span><span class="p">,</span> <span class="n">df_cyc</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mf">2.1</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mf">2.3</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">)),</span>
+         <span class="p">(</span><span class="sa">r</span><span class="s2">"divergence: $\arctan x$"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">,</span> <span class="n">df_atan</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mf">2.7</span><span class="p">,</span> <span class="mf">2.9</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.7</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">))]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">nsteps</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">cases</span><span class="p">):</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">xlim</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">xn</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsteps</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">xn</span><span class="p">)</span> <span class="o">+</span> <span class="n">df</span><span class="p">(</span><span class="n">xn</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">xs</span> <span class="o">-</span> <span class="n">xn</span><span class="p">),</span> <span class="s2">"--"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="sa">f</span><span class="s2">"C</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xn</span><span class="p">],</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">xn</span><span class="p">)],</span> <span class="s2">"ko"</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">xn</span> <span class="o">=</span> <span class="n">xn</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">xn</span><span class="p">)</span> <span class="o">/</span> <span class="n">df</span><span class="p">(</span><span class="n">xn</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xn</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"o"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="sa">f</span><span class="s2">"C</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"k"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$x_1 \approx 51.6 \rightarrow$"</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">1.58</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.75</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s2">"right"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"C0"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/95efa6e12e9504ec7d018368e4ffb08d96b8de24f8a3babdcf913ec0a848dca0.png" src="../_images/95efa6e12e9504ec7d018368e4ffb08d96b8de24f8a3babdcf913ec0a848dca0.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="multiple-roots-newton-slows-down-to-linear">
+<h2>5. Multiple roots: Newton slows down to linear<a class="headerlink" href="#multiple-roots-newton-slows-down-to-linear" title="Link to this heading">#</a></h2>
+<p><span class="math notranslate nohighlight">\(f(x) = (x - 1)^2 (x + 1)\)</span> has a <strong>double root</strong> at <span class="math notranslate nohighlight">\(r = 1\)</span>: <span class="math notranslate nohighlight">\(f(1) = f'(1) = 0\)</span>. It touches the axis without a sign change, so no bracket exists. Newton still converges, but the theorem of Section 3 does not apply (<span class="math notranslate nohighlight">\(f'(r) = 0\)</span>).</p>
+<p>If <span class="math notranslate nohighlight">\(f(x) = (x - r)^m h(x)\)</span> with <span class="math notranslate nohighlight">\(h(r) \neq 0\)</span> (a root of <strong>multiplicity</strong> <span class="math notranslate nohighlight">\(m\)</span>), then</p>
+<div class="math notranslate nohighlight">
+\[e_{n+1} \approx \Big(1 - \frac1m\Big)\,e_n :\]</div>
+<p>linear, with <span class="math notranslate nohighlight">\(\rho = 1 - \tfrac1m\)</span> (<span class="math notranslate nohighlight">\(\rho = \tfrac12\)</span> for a double root, no better than bisection). If <span class="math notranslate nohighlight">\(m\)</span> is known, the <strong>modified Newton</strong> step</p>
+<div class="math notranslate nohighlight">
+\[x_{n+1} = x_n - m\,\frac{f(x_n)}{f'(x_n)}\]</div>
+<p>is quadratic again. We get it from <code class="docutils literal notranslate"><span class="pre">newton</span></code> without changing the code: pass <span class="math notranslate nohighlight">\(f'/m\)</span> instead of <span class="math notranslate nohighlight">\(f'\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f_dbl</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">df_dbl</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">df_dbl_over_2</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>              <span class="c1"># f'/m with m = 2: newton then takes the modified step</span>
+    <span class="k">return</span> <span class="n">df_dbl</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="n">x_star</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="n">f_dbl</span><span class="p">,</span> <span class="n">df_dbl</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">hist</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Newton         : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span><span class="si">}</span><span class="s2"> steps, ratios e_n/e_(n-1) ="</span><span class="p">,</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">/</span> <span class="n">e</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)])</span>
+
+<span class="n">x_star</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="n">f_dbl</span><span class="p">,</span> <span class="n">df_dbl_over_2</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"modified Newton: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span><span class="si">}</span><span class="s2"> steps, errors ="</span><span class="p">,</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">.1e</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">hist</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Newton         : 21 steps, ratios e_n/e_(n-1) = [0.55, 0.532, 0.519, 0.51, 0.505, 0.503]
+modified Newton: 4 steps, errors = ['1.4e-01', '4.6e-03', '5.3e-06', '7.0e-12']
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="safeguarded-newton-newton-with-a-bracket">
+<h2>6. Safeguarded Newton: Newton with a bracket<a class="headerlink" href="#safeguarded-newton-newton-with-a-bracket" title="Link to this heading">#</a></h2>
+<p>Bracketing methods are reliable; Newton is fast. <strong>Safeguarded Newton</strong> keeps both:</p>
+<ol class="arabic simple">
+<li><p>keep a bracket <span class="math notranslate nohighlight">\([a, b]\)</span> at all times, updated with the sign of <span class="math notranslate nohighlight">\(f(x)\)</span> exactly as in bisection;</p></li>
+<li><p>take the Newton step if it lands <strong>inside</strong> <span class="math notranslate nohighlight">\([a, b]\)</span>;</p></li>
+<li><p>otherwise (or if <span class="math notranslate nohighlight">\(f'(x) = 0\)</span>) take a <strong>bisection</strong> step.</p></li>
+</ol>
+<p>It is <strong>guaranteed</strong> to converge, like bisection, and near the root Newton steps always land inside, so it is <strong>quadratic</strong>. The function is the one from the slides, with the list <code class="docutils literal notranslate"><span class="pre">hist</span></code> added.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">safe_newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">fa</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"[a, b] is not a bracket: f(a) and f(b) have the same sign"</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">hist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxit</span><span class="p">):</span>
+        <span class="n">fx</span><span class="p">,</span> <span class="n">dfx</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">fa</span><span class="p">):</span>
+            <span class="n">a</span><span class="p">,</span> <span class="n">fa</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">fx</span>                  <span class="c1"># root in [x, b]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">x</span>                          <span class="c1"># root in [a, x]</span>
+        <span class="k">if</span> <span class="n">dfx</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">xnew</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">fx</span> <span class="o">/</span> <span class="n">dfx</span>            <span class="c1"># try Newton</span>
+        <span class="k">if</span> <span class="n">dfx</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="ow">not</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;=</span> <span class="n">xnew</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">):</span>
+            <span class="n">xnew</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>         <span class="c1"># fall back to bisection</span>
+        <span class="n">hist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xnew</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">xnew</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">xnew</span><span class="p">,</span> <span class="n">hist</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">xnew</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">hist</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">steps_to</span><span class="p">(</span><span class="n">hist</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">tol</span><span class="p">):</span>
+    <span class="c1"># first n (counting from 1) with |x_n - r| &lt; tol, or None</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hist</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">hist</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">-</span> <span class="n">r</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"bisection on [0, 1.3]"</span><span class="p">,</span> <span class="n">bisection</span><span class="p">(</span><span class="n">f_ten</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">)[</span><span class="mi">1</span><span class="p">]),</span>
+           <span class="p">(</span><span class="s2">"false position on [0, 1.3]"</span><span class="p">,</span> <span class="n">false_position</span><span class="p">(</span><span class="n">f_ten</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">500</span><span class="p">)[</span><span class="mi">1</span><span class="p">]),</span>
+           <span class="p">(</span><span class="s2">"Newton from x0 = 0.65"</span><span class="p">,</span> <span class="n">newton</span><span class="p">(</span><span class="n">f_ten</span><span class="p">,</span> <span class="n">df_ten</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">)[</span><span class="mi">1</span><span class="p">]),</span>
+           <span class="p">(</span><span class="s2">"safeguarded Newton on [0, 1.3]"</span><span class="p">,</span> <span class="n">safe_newton</span><span class="p">(</span><span class="n">f_ten</span><span class="p">,</span> <span class="n">df_ten</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">)[</span><span class="mi">1</span><span class="p">])]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"x^10 - 1, steps to reach an error of 1e-6:"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">hist</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&gt;31</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">steps_to</span><span class="p">(</span><span class="n">hist</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">safeguarded Newton iterates:"</span><span class="p">,</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">1</span><span class="p">][:</span><span class="mi">4</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"plain Newton from the midpoint 0.65 first jumps to"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">newton_steps</span><span class="p">(</span><span class="n">f_ten</span><span class="p">,</span> <span class="n">df_ten</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x^10 - 1, steps to reach an error of 1e-6:
+            bisection on [0, 1.3]: 20
+       false position on [0, 1.3]: 61
+            Newton from x0 = 0.65: 21
+   safeguarded Newton on [0, 1.3]: 4
+
+safeguarded Newton iterates: [0.975, 1.00309098, 1.00004251, 1.00000001]
+plain Newton from the midpoint 0.65 first jumps to 5.41
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first safeguarded step is a bisection step: the Newton step from <span class="math notranslate nohighlight">\(0.65\)</span> would land at <span class="math notranslate nohighlight">\(5.4\)</span>, outside the bracket <span class="math notranslate nohighlight">\([0.65, 1.3]\)</span>. After that, every Newton step lands inside and three steps finish the job.</p>
+</section>
+<hr class="docutils" />
+<section id="newton-without-derivatives">
+<h2>7. Newton without derivatives<a class="headerlink" href="#newton-without-derivatives" title="Link to this heading">#</a></h2>
+<p>Newton’s idea only needs <strong>a slope</strong> at <span class="math notranslate nohighlight">\(x_n\)</span>. If <span class="math notranslate nohighlight">\(f'\)</span> is unknown or expensive, approximate it.</p>
+<p><strong>Option 1: finite-difference Newton.</strong></p>
+<div class="math notranslate nohighlight">
+\[f'(x_n) \approx \frac{f(x_n + h) - f(x_n)}{h}, \qquad h \approx \sqrt{\varepsilon_{\text{mach}}}\,|x_n| \approx 10^{-8}|x_n| .\]</div>
+<p>Still <strong>two evaluations</strong> per step. If <span class="math notranslate nohighlight">\(h\)</span> is too large the slope is inaccurate (<span class="math notranslate nohighlight">\(O(h)\)</span> error) and convergence is no longer quadratic; if <span class="math notranslate nohighlight">\(h\)</span> is too small, rounding in <span class="math notranslate nohighlight">\(f(x_n + h) - f(x_n)\)</span> ruins the slope.</p>
+<p><strong>Option 2: the secant method.</strong> We already know <span class="math notranslate nohighlight">\(f(x_{n-1})\)</span>, so we can use the slope through the last <strong>two</strong> iterates for free:</p>
+<div class="math notranslate nohighlight">
+\[f'(x_n) \approx \frac{f(x_n) - f(x_{n-1})}{x_n - x_{n-1}} \qquad\Longrightarrow\qquad x_{n+1} = x_n - f(x_n)\,\frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})}.\]</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>finite-difference Newton</p></th>
+<th class="head"><p>secant</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>start</p></td>
+<td><p><span class="math notranslate nohighlight">\(x_0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(x_1\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>evaluations per step</p></td>
+<td><p>2</p></td>
+<td><p><strong>1</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>order <span class="math notranslate nohighlight">\(p\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\approx 2\)</span> (if <span class="math notranslate nohighlight">\(h \approx 10^{-8}\)</span>)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1 + \sqrt5}{2} \approx 1.618\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>bracket / guarantee</p></td>
+<td><p>no / no</p></td>
+<td><p>no / no</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The secant formula is the false position formula, but it always keeps the <strong>two newest</strong> points instead of a bracket. The function <code class="docutils literal notranslate"><span class="pre">secant</span></code> is given in Problem 2 (the same code as on the slides, with the list <code class="docutils literal notranslate"><span class="pre">hist</span></code> added). The cell below tries finite-difference Newton with three choices of <span class="math notranslate nohighlight">\(h\)</span>; <span class="math notranslate nohighlight">\(f'\)</span> is never used.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fd_newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">nsteps</span><span class="p">):</span>
+    <span class="c1"># Newton with a forward-difference slope; nsteps steps, no stopping test.</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">xn</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsteps</span><span class="p">):</span>
+        <span class="n">slope</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">xn</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">xn</span><span class="p">))</span> <span class="o">/</span> <span class="n">h</span>
+        <span class="n">xn</span> <span class="o">=</span> <span class="n">xn</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">xn</span><span class="p">)</span> <span class="o">/</span> <span class="n">slope</span>
+        <span class="n">xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xn</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">xs</span>
+
+<span class="n">hs</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-8</span><span class="p">,</span> <span class="mf">1e-15</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'n'</span><span class="si">:</span><span class="s2">&gt;3</span><span class="si">}</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'h = '</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">format</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="s1">'.0e'</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;14</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hs</span><span class="p">))</span>
+<span class="n">runs</span> <span class="o">=</span> <span class="p">[</span><span class="n">fd_newton</span><span class="p">(</span><span class="n">f_sq</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hs</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">:</span><span class="s2">&gt;3</span><span class="si">}</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">run</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="si">:</span><span class="s2">14.1e</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">runs</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  n     h = 1e-03     h = 1e-08     h = 1e-15
+  1       8.6e-02       8.6e-02       3.6e-02
+  2       2.5e-03       2.5e-03       2.8e-03
+  3       3.0e-06       2.1e-06       2.5e-04
+  4       1.1e-09       1.6e-12       2.3e-05
+  5       3.8e-13       2.2e-16       2.1e-06
+  6       0.0e+00       0.0e+00       1.9e-07
+</pre></div>
+</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(h = 10^{-8}\)</span> reproduces exact Newton; <span class="math notranslate nohighlight">\(h = 10^{-3}\)</span> is still fast but no longer doubles the digits; <span class="math notranslate nohighlight">\(h = 10^{-15}\)</span> stalls well above machine precision because the slope is computed from two almost equal numbers.</p>
+</section>
+<hr class="docutils" />
+<section id="when-do-we-stop">
+<h2>8. When do we stop?<a class="headerlink" href="#when-do-we-stop" title="Link to this heading">#</a></h2>
+<p>Without a bracket there is no guaranteed error bound. But quadratic convergence makes the <strong>step size</strong> a very good error estimate:</p>
+<div class="math notranslate nohighlight">
+\[x_{n+1} - x_n = e_{n+1} - e_n \approx -e_n \quad\text{since } |e_{n+1}| \ll |e_n| .\]</div>
+<p>So <span class="math notranslate nohighlight">\(|x_{n+1} - x_n| \approx |e_n|\)</span>, and the new iterate <span class="math notranslate nohighlight">\(x_{n+1}\)</span> is far more accurate than that.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>test</p></th>
+<th class="head"><p>for Newton</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>step size <span class="math notranslate nohighlight">\(\lvert x_{n+1} - x_n\rvert &lt; \text{tol}\)</span> (or <span class="math notranslate nohighlight">\(\text{tol}\cdot\lvert x_{n+1}\rvert\)</span>, relative)</p></td>
+<td><p>the natural choice: estimates the error of <span class="math notranslate nohighlight">\(x_n\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>residual <span class="math notranslate nohighlight">\(\lvert f(x_n)\rvert\)</span></p></td>
+<td><p>a useful <strong>extra</strong> check that we found a root, not just a small step (see Problem 2)</p></td>
+</tr>
+<tr class="row-even"><td><p>maximum number of iterations</p></td>
+<td><p><strong>always</strong>; raise an error if it is reached</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The cell below compares the step with the true errors for <span class="math notranslate nohighlight">\(x^2 - 2\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_star</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="n">f_sq</span><span class="p">,</span> <span class="n">df_sq</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">+</span> <span class="n">hist</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'n'</span><span class="si">:</span><span class="s2">&gt;3</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'step |x_n - x_(n-1)|'</span><span class="si">:</span><span class="s2">&gt;21</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'error of x_(n-1)'</span><span class="si">:</span><span class="s2">&gt;17</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'error of x_n'</span><span class="si">:</span><span class="s2">&gt;13</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;3</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">xs</span><span class="p">[</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span><span class="si">:</span><span class="s2">21.2e</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="si">:</span><span class="s2">17.2e</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="si">:</span><span class="s2">13.2e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  n  step |x_n - x_(n-1)|  error of x_(n-1)  error of x_n
+  1              5.00e-01          4.14e-01      8.58e-02
+  2              8.33e-02          8.58e-02      2.45e-03
+  3              2.45e-03          2.45e-03      2.12e-06
+  4              2.12e-06          2.12e-06      1.59e-12
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2>9. Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>bisection</p></th>
+<th class="head"><p>false position</p></th>
+<th class="head"><p>Newton</p></th>
+<th class="head"><p>secant</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>needs</p></td>
+<td><p>bracket</p></td>
+<td><p>bracket</p></td>
+<td><p><span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(f'\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(x_1\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>always converges</p></td>
+<td><p>yes</p></td>
+<td><p>yes</p></td>
+<td><p><strong>no</strong> (local)</p></td>
+<td><p><strong>no</strong> (local)</p></td>
+</tr>
+<tr class="row-even"><td><p>order <span class="math notranslate nohighlight">\(p\)</span></p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p><strong>2</strong></p></td>
+<td><p>1.618</p></td>
+</tr>
+<tr class="row-odd"><td><p>evaluations per step</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>2 (<span class="math notranslate nohighlight">\(f\)</span>, <span class="math notranslate nohighlight">\(f'\)</span>)</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>order per evaluation</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p><span class="math notranslate nohighlight">\(\sqrt2 \approx 1.41\)</span></p></td>
+<td><p><strong>1.618</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>double roots</p></td>
+<td><p>no</p></td>
+<td><p>no</p></td>
+<td><p>yes, linear</p></td>
+<td><p>yes, linear</p></td>
+</tr>
+<tr class="row-even"><td><p>natural stopping test</p></td>
+<td><p><span class="math notranslate nohighlight">\((b-a)/2 &lt; \text{tol}\)</span></p></td>
+<td><p>step size</p></td>
+<td><p>step size</p></td>
+<td><p>step size</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Rule of thumb:</strong> reliability from brackets, speed from Newton; in practice, combine them (safeguarded Newton). Next session: the same methods in <code class="docutils literal notranslate"><span class="pre">scipy.optimize</span></code> (<code class="docutils literal notranslate"><span class="pre">newton</span></code>, <code class="docutils literal notranslate"><span class="pre">brentq</span></code>, <code class="docutils literal notranslate"><span class="pre">root_scalar</span></code>).</p>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="activity">
+<h1>Activity<a class="headerlink" href="#activity" title="Link to this heading">#</a></h1>
+<p>Two problems. <strong>Problem 1</strong> uses SymPy to get exact derivatives, runs Newton on the test problems from the previous notebook, and checks the quadratic convergence constant <span class="math notranslate nohighlight">\(C = f''(r)/(2f'(r))\)</span>. <strong>Problem 2</strong> gives you the <strong>secant method</strong> as a ready-made function <code class="docutils literal notranslate"><span class="pre">secant</span></code>, and asks you to race it against Newton and safeguarded Newton, counting <strong>function evaluations</strong>. Each step says <strong>what your code should do</strong>. Write the code in the empty cell, then run the <strong>check</strong> cell: it prints your results next to the <strong>expected</strong> ones. Open a <strong>Hint</strong> box only when you are stuck.</p>
+<p><strong>About <code class="docutils literal notranslate"><span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">pass</span></code>:</strong> replace <code class="docutils literal notranslate"><span class="pre">None</span></code> by your answer, and delete <code class="docutils literal notranslate"><span class="pre">pass</span></code> once you write the body of a function.</p>
+<p><strong>Useful commands for this activity</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>you want to …</p></th>
+<th class="head"><p>command</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>derivative of an expression <span class="math notranslate nohighlight">\(e\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.diff(e,</span> <span class="pre">x)</span></code>; second derivative <code class="docutils literal notranslate"><span class="pre">sp.diff(e,</span> <span class="pre">x,</span> <span class="pre">2)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>turn an expression into a NumPy function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.lambdify(x,</span> <span class="pre">e,</span> <span class="pre">'numpy')</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>substitute a number into an expression</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">e.subs(x,</span> <span class="pre">value)</span></code>, then <code class="docutils literal notranslate"><span class="pre">float(...)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>add to a list / list of lists</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">L</span> <span class="pre">=</span> <span class="pre">[]</span></code>, <code class="docutils literal notranslate"><span class="pre">L.append(v)</span></code>; <code class="docutils literal notranslate"><span class="pre">M[k][j]</span></code> is entry <code class="docutils literal notranslate"><span class="pre">j</span></code> of row <code class="docutils literal notranslate"><span class="pre">k</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>the methods</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">newton(f,</span> <span class="pre">df,</span> <span class="pre">x0,</span> <span class="pre">tol,</span> <span class="pre">maxit)</span></code>, <code class="docutils literal notranslate"><span class="pre">safe_newton(f,</span> <span class="pre">df,</span> <span class="pre">a,</span> <span class="pre">b,</span> <span class="pre">tol,</span> <span class="pre">maxit)</span></code>, the given <code class="docutils literal notranslate"><span class="pre">secant(f,</span> <span class="pre">x0,</span> <span class="pre">x1,</span> <span class="pre">tol,</span> <span class="pre">maxit)</span></code> (Problem 2): each returns <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">hist)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>steps to reach an error tol</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">steps_to(hist,</span> <span class="pre">r,</span> <span class="pre">tol)</span></code> (Section 6)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<section id="problem-1-newton-with-sympy-derivatives">
+<h2>Problem 1: Newton with SymPy derivatives<a class="headerlink" href="#problem-1-newton-with-sympy-derivatives" title="Link to this heading">#</a></h2>
+<p><strong>Goal:</strong> let SymPy compute <span class="math notranslate nohighlight">\(f'\)</span> exactly, run <code class="docutils literal notranslate"><span class="pre">newton</span></code> on the four test problems of the previous notebook, and check that the error really behaves like <span class="math notranslate nohighlight">\(e_{n+1} \approx C\,e_n^2\)</span>.</p>
+<p><strong>What you will see:</strong> Newton needs 4 steps where bisection needed 34, except on <span class="math notranslate nohighlight">\(x^{10} - 1\)</span>, where a bad first step costs 22 steps. The observed ratios <span class="math notranslate nohighlight">\(e_n / e_{n-1}^2\)</span> approach the constant <span class="math notranslate nohighlight">\(|f''(r)/(2f'(r))|\)</span> predicted by the theory.</p>
+<p>Run the cell below to create the test problems (do not change it). It is the same setup as in the previous notebook: problem number <code class="docutils literal notranslate"><span class="pre">k</span></code> has the name <code class="docutils literal notranslate"><span class="pre">names[k]</span></code>, the expression <code class="docutils literal notranslate"><span class="pre">exprs[k]</span></code>, the bracket <code class="docutils literal notranslate"><span class="pre">a_list[k]</span></code>, <code class="docutils literal notranslate"><span class="pre">b_list[k]</span></code>, the NumPy function <code class="docutils literal notranslate"><span class="pre">funcs[k]</span></code>, and an accurate reference root <code class="docutils literal notranslate"><span class="pre">r_ref[k]</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">'x'</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">names</span>  <span class="o">=</span> <span class="p">[</span><span class="s2">"x^2 - 2"</span><span class="p">,</span> <span class="s2">"x^10 - 1"</span><span class="p">,</span> <span class="s2">"x^3 - x - 2"</span><span class="p">,</span> <span class="s2">"cos x - x"</span><span class="p">]</span>
+<span class="n">exprs</span>  <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">10</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">a_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">b_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">funcs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">r_ref</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">exprs</span><span class="p">)):</span>
+    <span class="n">funcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">exprs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="s1">'numpy'</span><span class="p">))</span>
+    <span class="n">r_ref</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">nsolve</span><span class="p">(</span><span class="n">exprs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">b_list</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="n">solver</span><span class="o">=</span><span class="s1">'bisect'</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"reference roots:"</span><span class="p">,</span> <span class="n">r_ref</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>reference roots: [1.4142135623730951, 1.0, 1.5213797068045676, 0.7390851332151607]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="step-1-derivatives-with-sympy">
+<h3>Step 1: derivatives with SymPy<a class="headerlink" href="#step-1-derivatives-with-sympy" title="Link to this heading">#</a></h3>
+<p>Write code that:</p>
+<ol class="arabic simple">
+<li><p>builds a list <code class="docutils literal notranslate"><span class="pre">dexprs</span></code> with one entry per test problem: entry <code class="docutils literal notranslate"><span class="pre">k</span></code> is the derivative of <code class="docutils literal notranslate"><span class="pre">exprs[k]</span></code> with respect to <code class="docutils literal notranslate"><span class="pre">x</span></code>;</p></li>
+<li><p>builds a list <code class="docutils literal notranslate"><span class="pre">dfuncs</span></code>: entry <code class="docutils literal notranslate"><span class="pre">k</span></code> is <code class="docutils literal notranslate"><span class="pre">dexprs[k]</span></code> turned into a NumPy function with <code class="docutils literal notranslate"><span class="pre">sp.lambdify</span></code>;</p></li>
+<li><p>displays each name together with its derivative.</p></li>
+</ol>
+<details><summary><b>Hint</b></summary>
+<ul class="simple">
+<li><p>Start with two empty lists before the loop: <code class="docutils literal notranslate"><span class="pre">dexprs,</span> <span class="pre">dfuncs</span> <span class="pre">=</span> <span class="pre">[],</span> <span class="pre">[]</span></code>.</p></li>
+<li><p>Loop over the problem numbers with <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k</span> <span class="pre">in</span> <span class="pre">range(len(exprs)):</span></code>.</p></li>
+<li><p>Inside the loop: compute the derivative with <code class="docutils literal notranslate"><span class="pre">sp.diff</span></code>, append it to <code class="docutils literal notranslate"><span class="pre">dexprs</span></code>, then <code class="docutils literal notranslate"><span class="pre">append</span></code> its <code class="docutils literal notranslate"><span class="pre">lambdify</span></code> version to <code class="docutils literal notranslate"><span class="pre">dfuncs</span></code>. Use the <strong>same</strong> arguments as the setup cell uses for <code class="docutils literal notranslate"><span class="pre">funcs</span></code>.</p></li>
+<li><p>To show the results, use <code class="docutils literal notranslate"><span class="pre">print(names[k])</span></code> and <code class="docutils literal notranslate"><span class="pre">display(dexprs[k])</span></code>.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dexprs</span><span class="p">,</span> <span class="n">dfuncs</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">exprs</span><span class="p">)):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here: replace each None</span>
+<span class="n">dexprs</span><span class="p">,</span> <span class="n">dfuncs</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check: compare your results with the expected ones</span>
+<span class="k">if</span> <span class="n">dexprs</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">dfuncs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Something is still None: write the code in the cell above, then run this cell again."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"2*x"</span><span class="p">,</span> <span class="s2">"10*x**9"</span><span class="p">,</span> <span class="s2">"3*x**2 - 1"</span><span class="p">,</span> <span class="s2">"-sin(x) - 1"</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">expected</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">: f' = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">dexprs</span><span class="p">[</span><span class="n">k</span><span class="p">])</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2">  f'(1) = </span><span class="si">{</span><span class="n">dfuncs</span><span class="p">[</span><span class="n">k</span><span class="p">](</span><span class="mf">1.0</span><span class="p">)</span><span class="si">:</span><span class="s2">9.5f</span><span class="si">}</span><span class="s2">   (expected: </span><span class="si">{</span><span class="n">expected</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Something is still None: write the code in the cell above, then run this cell again.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-newton-from-the-midpoint-of-each-bracket">
+<h3>Step 2: Newton from the midpoint of each bracket<a class="headerlink" href="#step-2-newton-from-the-midpoint-of-each-bracket" title="Link to this heading">#</a></h3>
+<p>With <code class="docutils literal notranslate"><span class="pre">tol</span> <span class="pre">=</span> <span class="pre">1e-10</span></code>, write code that, for every test problem <code class="docutils literal notranslate"><span class="pre">k</span></code>,</p>
+<ol class="arabic simple">
+<li><p>sets the starting guess to the midpoint of the bracket: <code class="docutils literal notranslate"><span class="pre">x0</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">(b</span> <span class="pre">-</span> <span class="pre">a)/2</span></code> with <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">float(a_list[k])</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">float(b_list[k])</span></code>;</p></li>
+<li><p>runs <code class="docutils literal notranslate"><span class="pre">xk,</span> <span class="pre">hist</span> <span class="pre">=</span> <span class="pre">newton(funcs[k],</span> <span class="pre">dfuncs[k],</span> <span class="pre">x0,</span> <span class="pre">tol=tol)</span></code>;</p></li>
+<li><p>appends to the list <code class="docutils literal notranslate"><span class="pre">steps2</span></code> the number of steps <code class="docutils literal notranslate"><span class="pre">len(hist)</span></code>, and to the list <code class="docutils literal notranslate"><span class="pre">err2</span></code> the error <code class="docutils literal notranslate"><span class="pre">abs(xk</span> <span class="pre">-</span> <span class="pre">r_ref[k])</span></code>;</p></li>
+<li><p>prints one line per problem with these two numbers.</p></li>
+</ol>
+<p>The check cell compares your number of steps with the 34 steps bisection needs for the same tolerance.</p>
+<details><summary><b>Hint</b></summary>
+<ul class="simple">
+<li><p>Same pattern as Step 2 of Problem 1 in the previous notebook: <strong>two</strong> empty lists before the loop.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">newton</span></code> needs <strong>both</strong> <code class="docutils literal notranslate"><span class="pre">funcs[k]</span></code> and <code class="docutils literal notranslate"><span class="pre">dfuncs[k]</span></code>, then the starting guess.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">newton</span></code> returns <strong>two</strong> things: <code class="docutils literal notranslate"><span class="pre">xk,</span> <span class="pre">hist</span> <span class="pre">=</span> <span class="pre">newton(...)</span></code>. Do not forget <code class="docutils literal notranslate"><span class="pre">tol=tol</span></code>.</p></li>
+<li><p>Call the result <code class="docutils literal notranslate"><span class="pre">xk</span></code>, not <code class="docutils literal notranslate"><span class="pre">x</span></code>: the name <code class="docutils literal notranslate"><span class="pre">x</span></code> is the SymPy symbol, and we still need it in Step 3.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-10</span>
+<span class="n">steps2</span><span class="p">,</span> <span class="n">err2</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">funcs</span><span class="p">)):</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">b_list</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="o">...</span>
+    <span class="n">xk</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here: replace each None</span>
+<span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-10</span>
+<span class="n">steps2</span><span class="p">,</span> <span class="n">err2</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check: compare your results with the expected ones</span>
+<span class="k">if</span> <span class="n">steps2</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">err2</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Something is still None: write the code in the cell above, then run this cell again."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="s2">"3 or 4"</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">steps2</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">: steps = </span><span class="si">{</span><span class="n">steps2</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;2</span><span class="si">}</span><span class="s2"> (expected: </span><span class="si">{</span><span class="n">expected</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;2</span><span class="si">}</span><span class="s2">; bisection: 34), error = </span><span class="si">{</span><span class="n">err2</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">:</span><span class="s2">.1e</span><span class="si">}</span><span class="s2"> (expected: below 1e-10)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Something is still None: write the code in the cell above, then run this cell again.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-the-constant-c-of-quadratic-convergence">
+<h3>Step 3: the constant <span class="math notranslate nohighlight">\(C\)</span> of quadratic convergence<a class="headerlink" href="#step-3-the-constant-c-of-quadratic-convergence" title="Link to this heading">#</a></h3>
+<p>Section 3 predicts <span class="math notranslate nohighlight">\(|e_{n+1}| \approx C\,|e_n|^2\)</span> with <span class="math notranslate nohighlight">\(C = \left|\dfrac{f''(r)}{2f'(r)}\right|\)</span>. Write code that builds a list <code class="docutils literal notranslate"><span class="pre">C_theory</span></code>: entry <code class="docutils literal notranslate"><span class="pre">k</span></code> is this number for test problem <code class="docutils literal notranslate"><span class="pre">k</span></code>, computed <strong>exactly</strong> with SymPy and then evaluated at the reference root <code class="docutils literal notranslate"><span class="pre">r_ref[k]</span></code>.</p>
+<p>The check cell runs Newton again and prints your <span class="math notranslate nohighlight">\(C\)</span> next to the <strong>observed</strong> ratios <span class="math notranslate nohighlight">\(e_n / e_{n-1}^2\)</span>.</p>
+<details><summary><b>Hint</b></summary>
+<ul class="simple">
+<li><p>The second derivative is <code class="docutils literal notranslate"><span class="pre">sp.diff(exprs[k],</span> <span class="pre">x,</span> <span class="pre">2)</span></code>; you already have the first one in <code class="docutils literal notranslate"><span class="pre">dexprs[k]</span></code>.</p></li>
+<li><p>Build the expression <code class="docutils literal notranslate"><span class="pre">f''</span> <span class="pre">/</span> <span class="pre">(2</span> <span class="pre">f')</span></code>, substitute the root with <code class="docutils literal notranslate"><span class="pre">.subs(x,</span> <span class="pre">r_ref[k])</span></code>, and convert with <code class="docutils literal notranslate"><span class="pre">float(...)</span></code>. Take <code class="docutils literal notranslate"><span class="pre">abs(...)</span></code> at the end.</p></li>
+<li><p>If you get an error about <code class="docutils literal notranslate"><span class="pre">x</span></code>, check that you did not overwrite the symbol <code class="docutils literal notranslate"><span class="pre">x</span></code> in Step 2 (run the setup cell of Problem 1 again).</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">C_theory</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">exprs</span><span class="p">)):</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+    <span class="n">C_theory</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="o">...</span><span class="p">)))</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here: replace None</span>
+<span class="n">C_theory</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check: compare your results with the expected ones</span>
+<span class="k">if</span> <span class="n">C_theory</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"C_theory is still None: write the code in the cell above, then run this cell again."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.354</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">0.768</span><span class="p">,</span> <span class="mf">0.221</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">C_theory</span><span class="p">)):</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">b_list</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="n">xk</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="n">funcs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">dfuncs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">a</span> <span class="o">+</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">)</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="n">r_ref</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">hist</span><span class="p">]</span>
+        <span class="n">ratios</span> <span class="o">=</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">/</span> <span class="n">e</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">))</span> <span class="k">if</span> <span class="n">e</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">1e-7</span> <span class="ow">and</span> <span class="n">e</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">: C = </span><span class="si">{</span><span class="n">C_theory</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> (expected: </span><span class="si">{</span><span class="n">expected</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">}</span><span class="s2">), observed ratios: </span><span class="si">{</span><span class="n">ratios</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C_theory is still None: write the code in the cell above, then run this cell again.
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Questions:</strong></p>
+<ol class="arabic simple">
+<li><p>For <span class="math notranslate nohighlight">\(x^{10} - 1\)</span> the observed ratios only approach <span class="math notranslate nohighlight">\(C = 4.5\)</span> at the very end. Why does the theory describe only the last few steps?</p></li>
+<li><p>A large <span class="math notranslate nohighlight">\(C\)</span> means a slower start of the quadratic phase. Which feature of <span class="math notranslate nohighlight">\(f\)</span> near the root makes <span class="math notranslate nohighlight">\(C\)</span> large?</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="problem-2-the-secant-method-and-the-race">
+<h2>Problem 2: the secant method and the race<a class="headerlink" href="#problem-2-the-secant-method-and-the-race" title="Link to this heading">#</a></h2>
+<p><strong>Goal:</strong> use the given secant function and compare <code class="docutils literal notranslate"><span class="pre">newton</span></code>, <code class="docutils literal notranslate"><span class="pre">secant</span></code> and <code class="docutils literal notranslate"><span class="pre">safe_newton</span></code> on the four test problems, counting both <strong>steps</strong> and <strong>function evaluations</strong>.</p>
+<p><strong>What you will see:</strong> the secant method needs a few more steps than Newton, but fewer function evaluations, because it never evaluates <span class="math notranslate nohighlight">\(f'\)</span>. On <span class="math notranslate nohighlight">\(x^{10} - 1\)</span> it “converges” to a point that is not a root at all: without a bracket, a small step does not prove anything.</p>
+<section id="step-1-the-secant-function-given">
+<h3>Step 1: the <code class="docutils literal notranslate"><span class="pre">secant</span></code> function (given)<a class="headerlink" href="#step-1-the-secant-function-given" title="Link to this heading">#</a></h3>
+<p>The function <code class="docutils literal notranslate"><span class="pre">secant(f,</span> <span class="pre">x0,</span> <span class="pre">x1,</span> <span class="pre">tol=1e-12,</span> <span class="pre">maxit=50)</span></code> is <strong>given</strong>: it is the code from the slides, with the list <code class="docutils literal notranslate"><span class="pre">hist</span></code> added. It has the same outputs as <code class="docutils literal notranslate"><span class="pre">newton</span></code>: it <strong>returns</strong> <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">hist)</span></code>, the last iterate and the list of all new iterates <span class="math notranslate nohighlight">\(x_2, x_3, \ldots\)</span> Run the cell below (do not change it), then run the test cell after it.</p>
+<p><strong>How it works.</strong> Before the loop it evaluates <code class="docutils literal notranslate"><span class="pre">f0,</span> <span class="pre">f1</span> <span class="pre">=</span> <span class="pre">f(x0),</span> <span class="pre">f(x1)</span></code> and starts <code class="docutils literal notranslate"><span class="pre">hist</span> <span class="pre">=</span> <span class="pre">[]</span></code>. In each step it</p>
+<ol class="arabic simple">
+<li><p>raises a <code class="docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code> if <code class="docutils literal notranslate"><span class="pre">f1</span> <span class="pre">==</span> <span class="pre">f0</span></code> (the secant line is horizontal);</p></li>
+<li><p>computes the step <code class="docutils literal notranslate"><span class="pre">dx</span> <span class="pre">=</span> <span class="pre">f1</span> <span class="pre">*</span> <span class="pre">(x1</span> <span class="pre">-</span> <span class="pre">x0)</span> <span class="pre">/</span> <span class="pre">(f1</span> <span class="pre">-</span> <span class="pre">f0)</span></code>: Newton’s step with <span class="math notranslate nohighlight">\(f'(x_1)\)</span> replaced by the secant slope;</p></li>
+<li><p><strong>shifts</strong>: the old newest point becomes the older point, <code class="docutils literal notranslate"><span class="pre">x0,</span> <span class="pre">f0</span> <span class="pre">=</span> <span class="pre">x1,</span> <span class="pre">f1</span></code>;</p></li>
+<li><p>computes the new point <code class="docutils literal notranslate"><span class="pre">x1</span> <span class="pre">=</span> <span class="pre">x1</span> <span class="pre">-</span> <span class="pre">dx</span></code>, its value <code class="docutils literal notranslate"><span class="pre">f1</span> <span class="pre">=</span> <span class="pre">f(x1)</span></code> (the <strong>only</strong> new evaluation), and appends <code class="docutils literal notranslate"><span class="pre">x1</span></code> to <code class="docutils literal notranslate"><span class="pre">hist</span></code>;</p></li>
+<li><p>returns <code class="docutils literal notranslate"><span class="pre">x1,</span> <span class="pre">hist</span></code> if <code class="docutils literal notranslate"><span class="pre">abs(dx)</span> <span class="pre">&lt;</span> <span class="pre">tol</span></code>.</p></li>
+</ol>
+<p>After the loop it raises a <code class="docutils literal notranslate"><span class="pre">RuntimeError</span></code>, exactly as <code class="docutils literal notranslate"><span class="pre">newton</span></code> does.</p>
+<p><strong>Read the code:</strong> the order inside the loop matters. <code class="docutils literal notranslate"><span class="pre">dx</span></code> is computed with the <strong>old</strong> <code class="docutils literal notranslate"><span class="pre">x0</span></code>, <code class="docutils literal notranslate"><span class="pre">x1</span></code>; after the shift in step 3, <code class="docutils literal notranslate"><span class="pre">x0</span></code> holds the old <code class="docutils literal notranslate"><span class="pre">x1</span></code>, so <code class="docutils literal notranslate"><span class="pre">x1</span> <span class="pre">-</span> <span class="pre">dx</span></code> in step 4 still uses the right value. <code class="docutils literal notranslate"><span class="pre">f</span></code> is never called on <code class="docutils literal notranslate"><span class="pre">x0</span></code> inside the loop: its value is kept in <code class="docutils literal notranslate"><span class="pre">f0</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">secant</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+    <span class="c1"># given: run this cell, do not change it</span>
+    <span class="n">f0</span><span class="p">,</span> <span class="n">f1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">),</span> <span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+    <span class="n">hist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxit</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">f1</span> <span class="o">==</span> <span class="n">f0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">"f(x1) = f(x0): the secant line is horizontal"</span><span class="p">)</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="n">f1</span> <span class="o">*</span> <span class="p">(</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">f1</span> <span class="o">-</span> <span class="n">f0</span><span class="p">)</span>  <span class="c1"># secant step</span>
+        <span class="n">x0</span><span class="p">,</span> <span class="n">f0</span> <span class="o">=</span> <span class="n">x1</span><span class="p">,</span> <span class="n">f1</span>                  <span class="c1"># shift: drop the oldest point</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">-</span> <span class="n">dx</span>
+        <span class="n">f1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>                       <span class="c1"># the only new evaluation</span>
+        <span class="n">hist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dx</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">x1</span><span class="p">,</span> <span class="n">hist</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"no convergence in </span><span class="si">{</span><span class="n">maxit</span><span class="si">}</span><span class="s2"> steps (last x = </span><span class="si">{</span><span class="n">x1</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># test: run the given secant on x^2 - 2 from x0 = 1, x1 = 2 (f_sq(t) = t**2 - 2 is defined in Section 1)</span>
+<span class="n">xs_</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">secant</span><span class="p">(</span><span class="n">f_sq</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"x          ="</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">xs_</span><span class="p">),</span> <span class="s2">"   (expected: 1.4142135623730951 or ...095)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"steps      ="</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">hist</span><span class="p">),</span> <span class="s2">"   (expected: 7)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"first four ="</span><span class="p">,</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">hist</span><span class="p">[:</span><span class="mi">4</span><span class="p">]],</span> <span class="s2">"   (expected: [1.333333, 1.4, 1.414634, 1.414211])"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x          = 1.4142135623730951    (expected: 1.4142135623730951 or ...095)
+steps      = 7    (expected: 7)
+first four = [1.333333, 1.4, 1.414634, 1.414211]    (expected: [1.333333, 1.4, 1.414634, 1.414211])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-the-race-steps-to-reach-an-error-of-10-6">
+<h3>Step 2: the race, steps to reach an error of <span class="math notranslate nohighlight">\(10^{-6}\)</span><a class="headerlink" href="#step-2-the-race-steps-to-reach-an-error-of-10-6" title="Link to this heading">#</a></h3>
+<p>The three methods need different inputs, so they cannot share one loop as in the previous notebook. For every test problem <code class="docutils literal notranslate"><span class="pre">k</span></code>, with <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">float(a_list[k])</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">float(b_list[k])</span></code>, <code class="docutils literal notranslate"><span class="pre">tol=1e-14</span></code> and <code class="docutils literal notranslate"><span class="pre">maxit=100</span></code>, run</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">newton</span></code> on <code class="docutils literal notranslate"><span class="pre">funcs[k]</span></code>, <code class="docutils literal notranslate"><span class="pre">dfuncs[k]</span></code> from <code class="docutils literal notranslate"><span class="pre">x0</span> <span class="pre">=</span> <span class="pre">b</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">secant</span></code> on <code class="docutils literal notranslate"><span class="pre">funcs[k]</span></code> from <code class="docutils literal notranslate"><span class="pre">x0</span> <span class="pre">=</span> <span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">x1</span> <span class="pre">=</span> <span class="pre">b</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">safe_newton</span></code> on <code class="docutils literal notranslate"><span class="pre">funcs[k]</span></code>, <code class="docutils literal notranslate"><span class="pre">dfuncs[k]</span></code> on the bracket <code class="docutils literal notranslate"><span class="pre">[a,</span> <span class="pre">b]</span></code>.</p></li>
+</ul>
+<p>Build a list of lists <code class="docutils literal notranslate"><span class="pre">steps3</span></code>: entry <code class="docutils literal notranslate"><span class="pre">steps3[k]</span></code> is <code class="docutils literal notranslate"><span class="pre">[steps</span> <span class="pre">for</span> <span class="pre">Newton,</span> <span class="pre">steps</span> <span class="pre">for</span> <span class="pre">secant,</span> <span class="pre">steps</span> <span class="pre">for</span> <span class="pre">safeguarded</span> <span class="pre">Newton]</span></code>, where each number is <code class="docutils literal notranslate"><span class="pre">steps_to(hist,</span> <span class="pre">r_ref[k],</span> <span class="pre">1e-6)</span></code>. Print one line per problem.</p>
+<details><summary><b>Hint</b></summary>
+<ul class="simple">
+<li><p>One loop over the problems <code class="docutils literal notranslate"><span class="pre">k</span></code>. Inside, start <code class="docutils literal notranslate"><span class="pre">row</span> <span class="pre">=</span> <span class="pre">[]</span></code>, run the three methods one after the other, and append <code class="docutils literal notranslate"><span class="pre">steps_to(...)</span></code> of each <code class="docutils literal notranslate"><span class="pre">hist</span></code> to <code class="docutils literal notranslate"><span class="pre">row</span></code>; then append <code class="docutils literal notranslate"><span class="pre">row</span></code> to <code class="docutils literal notranslate"><span class="pre">steps3</span></code>.</p></li>
+<li><p>Every method returns <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">hist)</span></code>; you only need <code class="docutils literal notranslate"><span class="pre">hist</span></code>, so you can write <code class="docutils literal notranslate"><span class="pre">_,</span> <span class="pre">hist</span> <span class="pre">=</span> <span class="pre">newton(...)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">steps_to</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code> if the method never gets within <code class="docutils literal notranslate"><span class="pre">1e-6</span></code> of the root. That is a result, not a bug.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">steps3</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">funcs</span><span class="p">)):</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">b_list</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">steps_to</span><span class="p">(</span><span class="n">hist</span><span class="p">,</span> <span class="n">r_ref</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="mf">1e-6</span><span class="p">))</span>
+    <span class="o">...</span>
+    <span class="n">steps3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">row</span><span class="p">)</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here: replace None</span>
+<span class="n">steps3</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check: compare your results with the expected ones, then count function evaluations</span>
+<span class="k">if</span> <span class="n">steps3</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"steps3 is still None: write the code in the cell above, then run this cell again."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">expected</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">: [Newton, secant, safeguarded] = </span><span class="si">{</span><span class="n">steps3</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">}</span><span class="s2">   (expected: </span><span class="si">{</span><span class="n">expected</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+
+    <span class="c1"># evaluations of f or f': Newton 2 per step; secant 2 to start + 1 per step;</span>
+    <span class="c1"># safeguarded Newton 2 to start (f(a), f(b)) + 2 per step</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">function evaluations to reach an error of 1e-6:"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">steps3</span><span class="p">)):</span>
+        <span class="n">n_new</span><span class="p">,</span> <span class="n">n_sec</span><span class="p">,</span> <span class="n">n_safe</span> <span class="o">=</span> <span class="n">steps3</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="n">evals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_new</span> <span class="k">if</span> <span class="n">n_new</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">n_sec</span> <span class="k">if</span> <span class="n">n_sec</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n_safe</span> <span class="k">if</span> <span class="n">n_safe</span> <span class="k">else</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">: [Newton, secant, safeguarded] = </span><span class="si">{</span><span class="n">evals</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>steps3 is still None: write the code in the cell above, then run this cell again.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-look-at-the-errors">
+<h3>Step 3: look at the errors<a class="headerlink" href="#step-3-look-at-the-errors" title="Link to this heading">#</a></h3>
+<p>Run the cell below (do not change it): it plots the error of the three methods on the four test problems against the number of <strong>function evaluations</strong>, using the given <code class="docutils literal notranslate"><span class="pre">secant</span></code>, and prints the residual <span class="math notranslate nohighlight">\(|f(x)|\)</span> where each method stopped.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">funcs</span><span class="p">)):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">b_list</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="n">runs</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"Newton"</span><span class="p">,</span> <span class="n">newton</span><span class="p">(</span><span class="n">funcs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">dfuncs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"secant"</span><span class="p">,</span> <span class="n">secant</span><span class="p">(</span><span class="n">funcs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"safeguarded Newton"</span><span class="p">,</span> <span class="n">safe_newton</span><span class="p">(</span><span class="n">funcs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">dfuncs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">xk</span><span class="p">,</span> <span class="n">hist</span><span class="p">),</span> <span class="n">start</span><span class="p">,</span> <span class="n">per_step</span> <span class="ow">in</span> <span class="n">runs</span><span class="p">:</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span> <span class="o">-</span> <span class="n">r_ref</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="mf">1e-17</span><span class="p">)</span>
+        <span class="n">evals</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">per_step</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">evals</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&gt;18</span><span class="si">}</span><span class="s2">: stopped at x = </span><span class="si">{</span><span class="n">xk</span><span class="si">:</span><span class="s2">.6g</span><span class="si">}</span><span class="s2">, residual |f(x)| = </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">funcs</span><span class="p">[</span><span class="n">k</span><span class="p">](</span><span class="n">xk</span><span class="p">))</span><span class="si">:</span><span class="s2">.1e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"gray"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"machine epsilon"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">1e-17</span><span class="p">,</span> <span class="mf">1e3</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"$</span><span class="si">{</span><span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">exprs</span><span class="p">[</span><span class="n">k</span><span class="p">])</span><span class="si">}</span><span class="s2">$"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"function evaluations"</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$|x_n - r|$"</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>secant returned None: finish Step 1 first, then run this cell again.
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Questions:</strong></p>
+<ol class="arabic simple">
+<li><p>The first two secant points for <span class="math notranslate nohighlight">\(x^2 - 2\)</span> from <span class="math notranslate nohighlight">\(x_0 = 1\)</span>, <span class="math notranslate nohighlight">\(x_1 = 2\)</span> are the same as those of false position on <span class="math notranslate nohighlight">\([1, 2]\)</span>. Why? From which point on do the two methods differ?</p></li>
+<li><p>On <span class="math notranslate nohighlight">\(x^{10} - 1\)</span> the secant method stops at <span class="math notranslate nohighlight">\(x \approx 0.18\)</span>, far from the root <span class="math notranslate nohighlight">\(1\)</span>. Look at its iterates: why is the last step tiny, and which check from Section 8 would have caught the problem?</p></li>
+<li><p>Per <strong>step</strong>, Newton is faster than secant; per <strong>function evaluation</strong>, secant often wins. When would you still choose Newton?</p></li>
+<li><p>You need the root of a new function and know only a bracket and a formula for <span class="math notranslate nohighlight">\(f'\)</span>. Which of the three methods would you choose, and why?</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="bracketing_methods_solutions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Root Finding I: Bracketing Methods (solutions)</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Root Finding II: Newton’s Method</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-idea-follow-the-tangent-line">1. The idea: follow the tangent line</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-s-method-in-python">2. Newton’s method in Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratic-convergence">3. Quadratic convergence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-can-go-wrong">4. What can go wrong</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-roots-newton-slows-down-to-linear">5. Multiple roots: Newton slows down to linear</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#safeguarded-newton-newton-with-a-bracket">6. Safeguarded Newton: Newton with a bracket</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-without-derivatives">7. Newton without derivatives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-do-we-stop">8. When do we stop?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">9. Summary</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#activity">Activity</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-newton-with-sympy-derivatives">Problem 1: Newton with SymPy derivatives</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-derivatives-with-sympy">Step 1: derivatives with SymPy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-newton-from-the-midpoint-of-each-bracket">Step 2: Newton from the midpoint of each bracket</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-the-constant-c-of-quadratic-convergence">Step 3: the constant <span class="math notranslate nohighlight">\(C\)</span> of quadratic convergence</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-the-secant-method-and-the-race">Problem 2: the secant method and the race</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-the-secant-function-given">Step 1: the <code class="docutils literal notranslate"><span class="pre">secant</span></code> function (given)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-the-race-steps-to-reach-an-error-of-10-6">Step 2: the race, steps to reach an error of <span class="math notranslate nohighlight">\(10^{-6}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-look-at-the-errors">Step 3: look at the errors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sharareh Sayyad
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
