@@ -12,3 +12,4 @@ chapters:
   - file: notebooks/limits_convergence.ipynb
   - file: notebooks/sympy_intro.ipynb
   - file: notebooks/bracketing_methods_solutions.ipynb
+  - file: notebooks/newton_method.ipynb
