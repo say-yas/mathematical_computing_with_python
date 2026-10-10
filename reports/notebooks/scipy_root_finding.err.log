@@ -18,24 +18,18 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# mini-check
-for x, m_true, e_true in [[6.02e23, 6.02, 23], [0.00042, 4.2, -4], [-1500.0, -1.5, 3]]:
-    m, e = sci(x)
-    assert e == e_true and abs(m - m_true) < 1e-12, [x, m, e]
-    print(f"{x} = {m} x 10^{e}")
-print("OK")
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import root_scalar
 ------------------
 
 
 [31m---------------------------------------------------------------------------[39m
-[31mTypeError[39m                                 Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[4][39m[32m, line 3[39m
-[32m      1[39m [38;5;66;03m# mini-check[39;00m
-[32m      2[39m [38;5;28;01mfor[39;00m x, m_true, e_true [38;5;28;01min[39;00m [[[32m6.02e23[39m, [32m6.02[39m, [32m23[39m], [[32m0.00042[39m, [32m4.2[39m, -[32m4[39m], [-[32m1500.0[39m, -[32m1.5[39m, [32m3[39m]]:
-[32m----> [39m[32m3[39m     m, e = sci(x)
-[32m      4[39m     [38;5;28;01massert[39;00m e == e_true [38;5;28;01mand[39;00m abs(m - m_true) < [32m1e-12[39m, [x, m, e]
-[32m      5[39m     print([33mf"{x} = {m} x 10^{e}"[39m)
-[32m      6[39m print([33m"OK"[39m)
+[31mModuleNotFoundError[39m                       Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 3[39m
+[32m      1[39m [38;5;28;01mimport[39;00m numpy [38;5;28;01mas[39;00m np
+[32m      2[39m [38;5;28;01mimport[39;00m matplotlib.pyplot [38;5;28;01mas[39;00m plt
+[32m----> [39m[32m3[39m [38;5;28;01mfrom[39;00m scipy.optimize [38;5;28;01mimport[39;00m root_scalar
 
-[31mTypeError[39m: cannot unpack non-iterable NoneType object
+[31mModuleNotFoundError[39m: No module named 'scipy'
 

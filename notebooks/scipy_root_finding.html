@@ -1,0 +1,1004 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Root finding with scipy.optimize.root_scalar &#8212; Mathematical Computing with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/scipy_root_finding';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Root Finding II: Newton’s Method" href="newton_method.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Mathematical Computing with Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Mathematical Computing with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="starting_with_python.html">Using Python in Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="starting_with_github.html">Using GitHub: Repositories, Commits, Push/Pull, and Forks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonI.html">Introduction to Python, Part I</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonII.html">Introduction to Python, Part II</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIII.html">Introduction to Python, Part III</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIV_numpy.html">Introduction to Python, Part IV: NumPy</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonV_matplotlib.html">Introduction to Python, Part V: Plotting with Matplotlib</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="bigO_convergence_solved.html">Big-O and Convergence of Algorithms</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="limits_convergence.html">Limits and Convergence of Algorithms</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="sympy_intro.html">Symbolic Computation with SymPy</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="bracketing_methods_solutions.html">Root Finding I: Bracketing Methods (solutions)</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="newton_method.html">Root Finding II: Newton’s Method</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Root finding with <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root_scalar</span></code></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/say-yas/mathematical_computing_with_python/blob/main/book/notebooks/scipy_root_finding.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/notebooks/scipy_root_finding.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fnotebooks/scipy_root_finding.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/scipy_root_finding.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Root finding with scipy.optimize.root_scalar</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-bracketing-methods-on-f-x-x-10-1-bracket-0-1-3">Example 1: bracketing methods on <span class="math notranslate nohighlight">\(f(x) = x^{10} - 1\)</span>, bracket <span class="math notranslate nohighlight">\([0, 1.3]\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-open-methods-on-f-x-cos-x-x-start-x-0-1">Example 2: open methods on <span class="math notranslate nohighlight">\(f(x) = \cos x - x\)</span>, start <span class="math notranslate nohighlight">\(x_0 = 1\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-a-complex-root-f-z-z-2-1">Example 3: a complex root, <span class="math notranslate nohighlight">\(f(z) = z^2 + 1\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="root-finding-with-scipy-optimize-root-scalar">
+<h1>Root finding with <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root_scalar</span></code><a class="headerlink" href="#root-finding-with-scipy-optimize-root-scalar" title="Link to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">root_scalar(f,</span> <span class="pre">method=...,</span> <span class="pre">...)</span></code> solves <span class="math notranslate nohighlight">\(f(x) = 0\)</span> for a scalar <span class="math notranslate nohighlight">\(f\)</span>. The method is chosen by what you can provide.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>need</p></th>
+<th class="head"><p>method</p></th>
+<th class="head"><p>guaranteed?</p></th>
+<th class="head"><p>order</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>bracket <span class="math notranslate nohighlight">\([a,b]\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bisect</span></code></p></td>
+<td><p>yes</p></td>
+<td><p>1, linear</p></td>
+</tr>
+<tr class="row-odd"><td><p>bracket <span class="math notranslate nohighlight">\([a,b]\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">brentq</span></code>, <code class="docutils literal notranslate"><span class="pre">brenth</span></code></p></td>
+<td><p>yes</p></td>
+<td><p>between 1 and 1.62</p></td>
+</tr>
+<tr class="row-even"><td><p>bracket <span class="math notranslate nohighlight">\([a,b]\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ridder</span></code></p></td>
+<td><p>yes</p></td>
+<td><p>2.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>bracket <span class="math notranslate nohighlight">\([a,b]\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">toms748</span></code></p></td>
+<td><p>yes</p></td>
+<td><p>2.7</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(x_1\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">secant</span></code></p></td>
+<td><p>no</p></td>
+<td><p>1.62</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(f'\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">newton</span></code></p></td>
+<td><p>no</p></td>
+<td><p>2.0</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(f'\)</span>, <span class="math notranslate nohighlight">\(f''\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">halley</span></code></p></td>
+<td><p>no</p></td>
+<td><p>3.0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Table adapted from the SciPy documentation, <em>Optimization and root finding → Root finding → Scalar functions</em>:
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize">https://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize</a></p>
+<ul class="simple">
+<li><p><strong>Bracketing</strong> methods always converge. Bisection gains one bit per step; the others converge faster.</p></li>
+<li><p><strong>Derivative-based</strong> methods (built on Newton) are fast only if <span class="math notranslate nohighlight">\(x_0\)</span> is close to the root. They also work for complex <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+<li><p>The orders are for a simple root (<span class="math notranslate nohighlight">\(f'(r) \neq 0\)</span>) and describe the final steps, close to the root.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">root_scalar</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">root_scalar</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named 'scipy'
+</pre></div>
+</div>
+</div>
+</div>
+<section id="example-1-bracketing-methods-on-f-x-x-10-1-bracket-0-1-3">
+<h2>Example 1: bracketing methods on <span class="math notranslate nohighlight">\(f(x) = x^{10} - 1\)</span>, bracket <span class="math notranslate nohighlight">\([0, 1.3]\)</span><a class="headerlink" href="#example-1-bracketing-methods-on-f-x-x-10-1-bracket-0-1-3" title="Link to this heading">#</a></h2>
+<p>In class, false position needed 61 steps here and plain Newton jumped to <span class="math notranslate nohighlight">\(x_1 \approx 5.4\)</span>.
+Every bracketing method is guaranteed to converge.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">10</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"bisect"</span><span class="p">,</span> <span class="n">bracket</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">],</span> <span class="n">xtol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"root       ="</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"iterations ="</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">iterations</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"converged  ="</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">converged</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>root       = 1.0000000000002272
+iterations = 41
+converged  = True
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result is a <code class="docutils literal notranslate"><span class="pre">RootResults</span></code> object. The fields you will use most:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sol.root</span></code>: the approximate root</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sol.iterations</span></code>: number of steps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sol.converged</span></code>: <code class="docutils literal notranslate"><span class="pre">True</span></code> if the stopping test was met. <strong>Always check it</strong>: a failed run still returns a <code class="docutils literal notranslate"><span class="pre">root</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"bisect"</span><span class="p">,</span> <span class="s2">"brentq"</span><span class="p">,</span> <span class="s2">"brenth"</span><span class="p">,</span> <span class="s2">"ridder"</span><span class="p">,</span> <span class="s2">"toms748"</span><span class="p">]:</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">bracket</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">],</span> <span class="n">xtol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">m</span><span class="si">:</span><span class="s2">8s</span><span class="si">}</span><span class="s2"> root = </span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">root</span><span class="si">:</span><span class="s2">.15f</span><span class="si">}</span><span class="s2">   iterations = </span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">iterations</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">   converged = </span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">converged</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bisect   root = 1.000000000000227   iterations = 41   converged = True
+brentq   root = 0.999999999999847   iterations =  9   converged = True
+brenth   root = 1.000000000000001   iterations =  9   converged = True
+ridder   root = 1.000000000000500   iterations =  6   converged = True
+toms748  root = 1.000000000000000   iterations =  6   converged = True
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">bisect</span></code> is the slowest; its step count follows <span class="math notranslate nohighlight">\(\log_2\frac{b-a}{\text{tol}}\)</span> from class.</p></li>
+<li><p>The others combine fast interpolation steps with safe steps inside the bracket.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">brentq</span></code> is the default when you pass only <code class="docutils literal notranslate"><span class="pre">bracket=</span></code>: a good first choice whenever <span class="math notranslate nohighlight">\(f\)</span> changes sign.</p></li>
+</ul>
+</section>
+<section id="example-2-open-methods-on-f-x-cos-x-x-start-x-0-1">
+<h2>Example 2: open methods on <span class="math notranslate nohighlight">\(f(x) = \cos x - x\)</span>, start <span class="math notranslate nohighlight">\(x_0 = 1\)</span><a class="headerlink" href="#example-2-open-methods-on-f-x-cos-x-x-start-x-0-1" title="Link to this heading">#</a></h2>
+<p>No bracket: these methods need starting points, and Newton and Halley need derivatives.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span>   <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span>
+<span class="n">dg</span>  <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">d2g</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">s1</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"secant"</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"newton"</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">dg</span><span class="p">)</span>
+<span class="n">s3</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"halley"</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">dg</span><span class="p">,</span> <span class="n">fprime2</span><span class="o">=</span><span class="n">d2g</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">s3</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">method</span><span class="si">:</span><span class="s2">8s</span><span class="si">}</span><span class="s2"> root = </span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">root</span><span class="si">:</span><span class="s2">.15f</span><span class="si">}</span><span class="s2">   iterations = </span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">iterations</span><span class="si">}</span><span class="s2">   converged = </span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">converged</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>secant   root = 0.739085133215160   iterations = 5   converged = True
+newton   root = 0.739085133215161   iterations = 4   converged = True
+halley   root = 0.739085133215161   iterations = 3   converged = True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Higher order means fewer iterations: Halley &lt; Newton &lt; secant.</p>
+<p>A derivative-based method can fail. From <span class="math notranslate nohighlight">\(x_0 = 0\)</span>, Newton on <span class="math notranslate nohighlight">\(x^3 - 2x + 2\)</span> cycles <span class="math notranslate nohighlight">\(0, 1, 0, 1, \ldots\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h</span>  <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="n">dh</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"newton"</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">dh</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"root ="</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">"  converged ="</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">converged</span><span class="p">,</span> <span class="s2">"  flag ="</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">flag</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"f(root) ="</span><span class="p">,</span> <span class="n">h</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">root</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>root = 0.0   converged = False   flag = convergence error
+f(root) = 2.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-3-a-complex-root-f-z-z-2-1">
+<h2>Example 3: a complex root, <span class="math notranslate nohighlight">\(f(z) = z^2 + 1\)</span><a class="headerlink" href="#example-3-a-complex-root-f-z-z-2-1" title="Link to this heading">#</a></h2>
+<p><span class="math notranslate nohighlight">\(z^2 + 1\)</span> has no real root, so there is no sign change and no bracket. Its roots are <span class="math notranslate nohighlight">\(\pm i\)</span>.
+<code class="docutils literal notranslate"><span class="pre">secant</span></code>, <code class="docutils literal notranslate"><span class="pre">newton</span></code> and <code class="docutils literal notranslate"><span class="pre">halley</span></code> also work for complex <span class="math notranslate nohighlight">\(z\)</span>: give a <strong>complex</strong> starting point (Python writes <span class="math notranslate nohighlight">\(i\)</span> as <code class="docutils literal notranslate"><span class="pre">1j</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span>  <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">df</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">z</span>
+
+<span class="k">for</span> <span class="n">z0</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span> <span class="o">+</span><span class="mi">1</span><span class="n">j</span> <span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="n">j</span><span class="p">]:</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"newton"</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">z0</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"x0 = </span><span class="si">{</span><span class="n">z0</span><span class="si">}</span><span class="s2">:  root = </span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">root</span><span class="si">:</span><span class="s2">.12f</span><span class="si">}</span><span class="s2">   iterations = </span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">iterations</span><span class="si">}</span><span class="s2">   converged = </span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">converged</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"secant"</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mf">0.5</span><span class="n">j</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"secant:          root = </span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">root</span><span class="si">:</span><span class="s2">.12f</span><span class="si">}</span><span class="s2">   iterations = </span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">iterations</span><span class="si">}</span><span class="s2">   converged = </span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">converged</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x0 = (1+0.5j):  root = 0.000000000000+1.000000000000j   iterations = 7   converged = True
+x0 = (1-1j):  root = 0.000000000000-1.000000000000j   iterations = 6   converged = True
+secant:          root = -0.000000000000+1.000000000000j   iterations = 8   converged = True
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>The starting point decides which root is found: above the real axis gives <span class="math notranslate nohighlight">\(+i\)</span>, below gives <span class="math notranslate nohighlight">\(-i\)</span>.</p></li>
+<li><p>With a <strong>real</strong> start, every Newton step stays real, so a complex root can never be reached. From <span class="math notranslate nohighlight">\(x_0 = 1\)</span> the next iterate is <span class="math notranslate nohighlight">\(0\)</span>, where <span class="math notranslate nohighlight">\(f'(0) = 0\)</span>:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sol</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"newton"</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"root ="</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">"  converged ="</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">converged</span><span class="p">,</span> <span class="s2">"  flag ="</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">flag</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>root = 0.0   converged = False   flag = convergence error
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p><strong>Syntax for each method</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>method</p></th>
+<th class="head"><p>call</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bisect</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">root_scalar(f,</span> <span class="pre">method=&quot;bisect&quot;,</span> <span class="pre">bracket=[a,</span> <span class="pre">b])</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">brentq</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">root_scalar(f,</span> <span class="pre">method=&quot;brentq&quot;,</span> <span class="pre">bracket=[a,</span> <span class="pre">b])</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">brenth</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">root_scalar(f,</span> <span class="pre">method=&quot;brenth&quot;,</span> <span class="pre">bracket=[a,</span> <span class="pre">b])</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ridder</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">root_scalar(f,</span> <span class="pre">method=&quot;ridder&quot;,</span> <span class="pre">bracket=[a,</span> <span class="pre">b])</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">toms748</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">root_scalar(f,</span> <span class="pre">method=&quot;toms748&quot;,</span> <span class="pre">bracket=[a,</span> <span class="pre">b])</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">secant</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">root_scalar(f,</span> <span class="pre">method=&quot;secant&quot;,</span> <span class="pre">x0=x0,</span> <span class="pre">x1=x1)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">newton</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">root_scalar(f,</span> <span class="pre">method=&quot;newton&quot;,</span> <span class="pre">x0=x0,</span> <span class="pre">fprime=df)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">halley</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">root_scalar(f,</span> <span class="pre">method=&quot;halley&quot;,</span> <span class="pre">x0=x0,</span> <span class="pre">fprime=df,</span> <span class="pre">fprime2=d2f)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>complex root</p></td>
+<td><p>same as <code class="docutils literal notranslate"><span class="pre">secant</span></code> / <code class="docutils literal notranslate"><span class="pre">newton</span></code> / <code class="docutils literal notranslate"><span class="pre">halley</span></code>, with a complex start, e.g. <code class="docutils literal notranslate"><span class="pre">x0=1+1j</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br><br></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>optional argument</p></th>
+<th class="head"><p>meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xtol</span></code>, <code class="docutils literal notranslate"><span class="pre">rtol</span></code></p></td>
+<td><p>absolute and relative tolerance on <span class="math notranslate nohighlight">\(x\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">maxiter</span></code></p></td>
+<td><p>maximum number of iterations</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br><br></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>result field</p></th>
+<th class="head"><p>meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sol.root</span></code></p></td>
+<td><p>approximate root</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sol.iterations</span></code></p></td>
+<td><p>number of iterations</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sol.converged</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the stopping test was met</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sol.flag</span></code></p></td>
+<td><p>reason for stopping</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br><br></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>plotting</p></th>
+<th class="head"><p>call</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>create a figure and axes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">ax</span> <span class="pre">=</span> <span class="pre">plt.subplots()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>horizontal line <span class="math notranslate nohighlight">\(y = c\)</span> (e.g. the <span class="math notranslate nohighlight">\(x\)</span>-axis, <span class="math notranslate nohighlight">\(c = 0\)</span>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ax.axhline(c,</span> <span class="pre">color=&quot;k&quot;,</span> <span class="pre">lw=0.8)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>vertical line <span class="math notranslate nohighlight">\(x = c\)</span> (e.g. mark a root or bracket end)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ax.axvline(c,</span> <span class="pre">color=&quot;r&quot;,</span> <span class="pre">ls=&quot;--&quot;)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Exercise 1.</strong> <span class="math notranslate nohighlight">\(f(x) = x^3 - 6x^2 + 11x - 6.1\)</span> has three real roots.
+Plot <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\([0, 4]\)</span>, choose a bracket for each root, and find all three with <code class="docutils literal notranslate"><span class="pre">bisect</span></code>, <code class="docutils literal notranslate"><span class="pre">brentq</span></code> and <code class="docutils literal notranslate"><span class="pre">toms748</span></code>.
+Make a table of iterations per method. Which method needs the fewest iterations?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exercise 1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise 2.</strong> <span class="math notranslate nohighlight">\(f(x) = \arctan x\)</span> has the root <span class="math notranslate nohighlight">\(r = 0\)</span>.</p>
+<p>(a) Run <code class="docutils literal notranslate"><span class="pre">newton</span></code> and <code class="docutils literal notranslate"><span class="pre">halley</span></code> from <span class="math notranslate nohighlight">\(x_0 = 1.3\)</span> and from <span class="math notranslate nohighlight">\(x_0 = 1.5\)</span>. Report <code class="docutils literal notranslate"><span class="pre">root</span></code>, <code class="docutils literal notranslate"><span class="pre">converged</span></code> and <code class="docutils literal notranslate"><span class="pre">flag</span></code> for each.</p>
+<p>(b) Explain the difference between the two starting points.</p>
+<p>(c) Find the root reliably with a bracketing method. What bracket did you use, and why is it valid?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exercise 2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="newton_method.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Root Finding II: Newton’s Method</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-bracketing-methods-on-f-x-x-10-1-bracket-0-1-3">Example 1: bracketing methods on <span class="math notranslate nohighlight">\(f(x) = x^{10} - 1\)</span>, bracket <span class="math notranslate nohighlight">\([0, 1.3]\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-open-methods-on-f-x-cos-x-x-start-x-0-1">Example 2: open methods on <span class="math notranslate nohighlight">\(f(x) = \cos x - x\)</span>, start <span class="math notranslate nohighlight">\(x_0 = 1\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-a-complex-root-f-z-z-2-1">Example 3: a complex root, <span class="math notranslate nohighlight">\(f(z) = z^2 + 1\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sharareh Sayyad
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

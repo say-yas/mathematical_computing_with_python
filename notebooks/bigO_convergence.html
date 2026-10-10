@@ -285,6 +285,7 @@
 
 <li class="toctree-l1"><a class="reference internal" href="newton_method.html">Root Finding II: Newton’s Method</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="scipy_root_finding.html">Root finding with <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root_scalar</span></code></a></li>
 </ul>
 
     </div>
@@ -734,7 +735,7 @@ It looks at large inputs and ignores constant factors.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[    100     464    2154   10000   46415  215443 1000000]
 </pre></div>
 </div>
-<img alt="../_images/06bb763d5db02ab45f6daddf802c60a79afe055bb440dcca056cd30d5fe259c1.png" src="../_images/06bb763d5db02ab45f6daddf802c60a79afe055bb440dcca056cd30d5fe259c1.png" />
+<img alt="../_images/aa968ba925a60417747dc387ed421a1995e0f028e145f1495d26c1de2ea980bb.png" src="../_images/aa968ba925a60417747dc387ed421a1995e0f028e145f1495d26c1de2ea980bb.png" />
 </div>
 </div>
 <p>The slopes come out close to <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span>, which <strong>agrees</strong> with the predictions. Two things to keep in mind:</p>
@@ -765,8 +766,8 @@ It looks at large inputs and ignores constant factors.</p>
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/ae3487156f1b5ed55b61badaa3e3503ea60284e24189980e402975dfd7e2519f.png" src="../_images/ae3487156f1b5ed55b61badaa3e3503ea60284e24189980e402975dfd7e2519f.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope for small n: 1.0008273016704996
-slope for large n: 1.9777525854559215
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope for small n: 1.0008273016704985
+slope for large n: 1.9777525854559221
 </pre></div>
 </div>
 </div>
@@ -802,10 +803,10 @@ slope for large n: 1.9777525854559215
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6898138371321172   growth factor b = e^slope: 1.9933444119872419
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.7022211001734335   growth factor b = e^slope: 2.0182304248468905
 </pre></div>
 </div>
-<img alt="../_images/1dffe64dc45bd557c106cfc5a501acc63f9e0201aa95363e1be54a23a78e56a9.png" src="../_images/1dffe64dc45bd557c106cfc5a501acc63f9e0201aa95363e1be54a23a78e56a9.png" />
+<img alt="../_images/8881263bfdf2448e7b3df19e482c0aef0ab8cf7e77415c235effd1621d313533.png" src="../_images/8881263bfdf2448e7b3df19e482c0aef0ab8cf7e77415c235effd1621d313533.png" />
 </div>
 </div>
 </section>
@@ -916,7 +917,7 @@ quadratic: 1.9999999999999998
 sublinear: nan
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2162/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2385/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
   y = np.log(np.abs(np.diff(np.log(eps))))
 </pre></div>
 </div>
