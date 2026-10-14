@@ -1,0 +1,1038 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Interpolation with scipy.interpolate (1-D) &#8212; Mathematical Computing with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/scipy_interpolation';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Interpolation with scipy.interpolate (2-D)" href="scipy_interpolation_2d.html" />
+    <link rel="prev" title="Root finding with scipy.optimize.root_scalar" href="scipy_root_finding.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Mathematical Computing with Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Mathematical Computing with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="starting_with_python.html">Using Python in Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="starting_with_github.html">Using GitHub: Repositories, Commits, Push/Pull, and Forks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonI.html">Introduction to Python, Part I</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonII.html">Introduction to Python, Part II</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIII.html">Introduction to Python, Part III</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIV_numpy.html">Introduction to Python, Part IV: NumPy</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonV_matplotlib.html">Introduction to Python, Part V: Plotting with Matplotlib</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="bigO_convergence_solved.html">Big-O and Convergence of Algorithms</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="limits_convergence.html">Limits and Convergence of Algorithms</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="sympy_intro.html">Symbolic Computation with SymPy</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="bracketing_methods_solutions.html">Root Finding I: Bracketing Methods (solutions)</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="newton_method.html">Root Finding II: Newton’s Method</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="scipy_root_finding.html">Root finding with <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root_scalar</span></code></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Interpolation with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code> (1-D)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scipy_interpolation_2d.html">Interpolation with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code> (2-D)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/say-yas/mathematical_computing_with_python/blob/main/book/notebooks/scipy_interpolation.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/notebooks/scipy_interpolation.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fnotebooks/scipy_interpolation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/scipy_interpolation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Interpolation with scipy.interpolate (1-D)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-the-running-example-from-class">Example 1: the running example from class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-akima-vs-makima-on-flat-data">Example 2: Akima vs makima on flat data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-accuracy-on-a-smooth-function">Example 3: accuracy on a smooth function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="interpolation-with-scipy-interpolate-1-d">
+<h1>Interpolation with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code> (1-D)<a class="headerlink" href="#interpolation-with-scipy-interpolate-1-d" title="Link to this heading">#</a></h1>
+<p>Given data <span class="math notranslate nohighlight">\((x_i, y_i)\)</span>, build a function <span class="math notranslate nohighlight">\(p\)</span> with <span class="math notranslate nohighlight">\(p(x_i) = y_i\)</span> and evaluate it <strong>between</strong> the data points.
+Every method below is used the same way: <strong>build once</strong>, then <strong>evaluate</strong> at as many new points as you like.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>method</p></th>
+<th class="head"><p>call</p></th>
+<th class="head"><p>continuous</p></th>
+<th class="head"><p>local?</p></th>
+<th class="head"><p>overshoot?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>linear</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.interp(xnew,</span> <span class="pre">x,</span> <span class="pre">y)</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(p\)</span></p></td>
+<td><p>yes</p></td>
+<td><p>never</p></td>
+</tr>
+<tr class="row-odd"><td><p>cubic spline</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">si.CubicSpline(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(p, p', p''\)</span></p></td>
+<td><p>no</p></td>
+<td><p>can overshoot</p></td>
+</tr>
+<tr class="row-even"><td><p>Akima</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">si.Akima1DInterpolator(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(p, p'\)</span></p></td>
+<td><p>yes</p></td>
+<td><p>small, sometimes</p></td>
+</tr>
+<tr class="row-odd"><td><p>modified Akima</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">si.Akima1DInterpolator(x,</span> <span class="pre">y,</span> <span class="pre">method=&quot;makima&quot;)</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(p, p'\)</span></p></td>
+<td><p>yes</p></td>
+<td><p>small, rarely</p></td>
+</tr>
+<tr class="row-even"><td><p>PCHIP</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">si.PchipInterpolator(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(p, p'\)</span></p></td>
+<td><p>yes</p></td>
+<td><p>never between monotone data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>More details: SciPy User Guide, <em>Interpolation → 1-D interpolation</em>:
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/tutorial/interpolate/1D.html#tutorial-interpolate-1dsection">https://docs.scipy.org/doc/scipy/tutorial/interpolate/1D.html#tutorial-interpolate-1dsection</a></p>
+<ul class="simple">
+<li><p><strong>Linear</strong>: straight lines between neighbours. Simple and safe, but has corners.</p></li>
+<li><p><strong>Cubic spline</strong>: the smoothest piecewise cubic. All slopes are solved together, so one data point affects the whole curve.</p></li>
+<li><p><strong>Akima, makima, PCHIP</strong>: piecewise cubics whose slopes are chosen <strong>locally</strong> from nearby data. They give up continuity of <span class="math notranslate nohighlight">\(p''\)</span> to avoid wiggles.</p></li>
+<li><p>The <span class="math notranslate nohighlight">\(x\)</span> values must be <strong>increasing</strong>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">si</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">si</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named 'scipy'
+</pre></div>
+</div>
+</div>
+</div>
+<section id="example-1-the-running-example-from-class">
+<h2>Example 1: the running example from class<a class="headerlink" href="#example-1-the-running-example-from-class" title="Link to this heading">#</a></h2>
+<p>Seven points that rise and then level off. We build all five interpolants and evaluate them on a fine grid.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">6.</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">])</span>
+
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"linear"</span><span class="p">,</span> <span class="s2">"cubic spline"</span><span class="p">,</span> <span class="s2">"Akima"</span><span class="p">,</span> <span class="s2">"makima"</span><span class="p">,</span> <span class="s2">"PCHIP"</span><span class="p">]</span>
+<span class="n">methods</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="k">lambda</span> <span class="n">xn</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">xn</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span>
+    <span class="n">si</span><span class="o">.</span><span class="n">CubicSpline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span>
+    <span class="n">si</span><span class="o">.</span><span class="n">Akima1DInterpolator</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span>
+    <span class="n">si</span><span class="o">.</span><span class="n">Akima1DInterpolator</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"makima"</span><span class="p">),</span>
+    <span class="n">si</span><span class="o">.</span><span class="n">PchipInterpolator</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">xnew</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">601</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">methods</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xnew</span><span class="p">,</span> <span class="n">p</span><span class="p">(</span><span class="n">xnew</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">"ko"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"data"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x"</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"y"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/7d472d7f619cca380c2ab9d6604559ee78035931822f548a83b1a5624074e225.png" src="../_images/7d472d7f619cca380c2ab9d6604559ee78035931822f548a83b1a5624074e225.png" />
+</div>
+</div>
+<p>All five curves pass through the data. To compare them we check two things on the fine grid:</p>
+<ul class="simple">
+<li><p><strong>range</strong>: do the values stay inside <span class="math notranslate nohighlight">\([\min y, \max y] = [0, 2.1]\)</span>?</p></li>
+<li><p><strong>monotone</strong>: the data never decrease, so does the curve also never decrease?</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'method'</span><span class="si">:</span><span class="s2">13s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'min'</span><span class="si">:</span><span class="s2">&gt;8s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'max'</span><span class="si">:</span><span class="s2">&gt;8s</span><span class="si">}</span><span class="s2">  never decreases?"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">methods</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">p</span><span class="p">(</span><span class="n">xnew</span><span class="p">)</span>
+    <span class="n">increasing</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mf">1e-12</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">13s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">8.4f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">8.4f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">increasing</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>method             min      max  never decreases?
+linear          0.0000   2.1000  True
+cubic spline    0.0000   2.1000  False
+Akima           0.0000   2.1000  False
+makima          0.0000   2.1000  False
+PCHIP           0.0000   2.1000  True
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Linear and PCHIP keep the shape of the data: they stay in range and never decrease.</p></li>
+<li><p>The cubic spline is the smoothest, but it <strong>goes down</strong> in places although the data only go up.</p></li>
+<li><p>Akima and makima stay in range, but dip very slightly (by less than 0.01) between <span class="math notranslate nohighlight">\(x = 4\)</span> and <span class="math notranslate nohighlight">\(x = 5\)</span>, where the data are flat.
+To see it, add <code class="docutils literal notranslate"><span class="pre">ax.set_xlim(3.5,</span> <span class="pre">5.5);</span> <span class="pre">ax.set_ylim(1.95,</span> <span class="pre">2.05)</span></code> to the plot.</p></li>
+</ul>
+</section>
+<section id="example-2-akima-vs-makima-on-flat-data">
+<h2>Example 2: Akima vs makima on flat data<a class="headerlink" href="#example-2-akima-vs-makima-on-flat-data" title="Link to this heading">#</a></h2>
+<p>The original Akima method has a known weakness: when the data are <strong>flat on both sides</strong> of a node, it can overshoot.
+<code class="docutils literal notranslate"><span class="pre">method=&quot;makima&quot;</span></code> (modified Akima) changes the slope weights to fix this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mf">7.</span><span class="p">])</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">3.</span><span class="p">])</span>
+<span class="n">xnew2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">601</span><span class="p">)</span>
+
+<span class="n">akima</span>  <span class="o">=</span> <span class="n">si</span><span class="o">.</span><span class="n">Akima1DInterpolator</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+<span class="n">makima</span> <span class="o">=</span> <span class="n">si</span><span class="o">.</span><span class="n">Akima1DInterpolator</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"makima"</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xnew2</span><span class="p">,</span> <span class="n">akima</span><span class="p">(</span><span class="n">xnew2</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Akima"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xnew2</span><span class="p">,</span> <span class="n">makima</span><span class="p">(</span><span class="n">xnew2</span><span class="p">),</span> <span class="s2">"--"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"makima"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="s2">"ko"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"data"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"Akima"</span><span class="p">,</span> <span class="n">akima</span><span class="p">),</span> <span class="p">(</span><span class="s2">"makima"</span><span class="p">,</span> <span class="n">makima</span><span class="p">)]:</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">p</span><span class="p">(</span><span class="n">xnew2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">7s</span><span class="si">}</span><span class="s2"> min = </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">   max = </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1abc18160bf655657a8cd79941490a37e6a52a5da0f164dabdfa0dee0590fce4.png" src="../_images/1abc18160bf655657a8cd79941490a37e6a52a5da0f164dabdfa0dee0590fce4.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akima   min = 0.9259   max = 3.0741
+makima  min = 1.0000   max = 3.0000
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Akima dips below 1 and rises above 3, outside the data range.</p></li>
+<li><p>makima stays in <span class="math notranslate nohighlight">\([1, 3]\)</span>. <strong>If you use Akima, prefer <code class="docutils literal notranslate"><span class="pre">method=&quot;makima&quot;</span></code>.</strong></p></li>
+</ul>
+</section>
+<section id="example-3-accuracy-on-a-smooth-function">
+<h2>Example 3: accuracy on a smooth function<a class="headerlink" href="#example-3-accuracy-on-a-smooth-function" title="Link to this heading">#</a></h2>
+<p>When the data come from a <strong>smooth</strong> function, we can measure the error. Sample <span class="math notranslate nohighlight">\(f(x) = \sin x\)</span> on <span class="math notranslate nohighlight">\([0, 2\pi]\)</span> with <span class="math notranslate nohighlight">\(n\)</span> equally spaced points
+and compute the maximum error <span class="math notranslate nohighlight">\(\max |p(x) - f(x)|\)</span> on a fine grid.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span>
+<span class="n">xf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">2001</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'n'</span><span class="si">:</span><span class="s2">&gt;4s</span><span class="si">}</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&gt;14s</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">41</span><span class="p">]:</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">ys</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">interps</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="k">lambda</span> <span class="n">xn</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">xn</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">),</span>
+        <span class="n">si</span><span class="o">.</span><span class="n">CubicSpline</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">),</span>
+        <span class="n">si</span><span class="o">.</span><span class="n">Akima1DInterpolator</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">),</span>
+        <span class="n">si</span><span class="o">.</span><span class="n">Akima1DInterpolator</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"makima"</span><span class="p">),</span>
+        <span class="n">si</span><span class="o">.</span><span class="n">PchipInterpolator</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="n">errs</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="n">xf</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">xf</span><span class="p">)))</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">interps</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">e</span><span class="si">:</span><span class="s2">14.2e</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">errs</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   n        linear  cubic spline         Akima        makima         PCHIP
+   6      1.82e-01      6.48e-02      7.21e-02      7.29e-02      1.12e-01
+  11      4.89e-02      2.65e-03      1.55e-02      1.32e-02      4.89e-02
+  21      1.22e-02      8.75e-05      1.98e-03      3.39e-03      3.62e-03
+  41      3.07e-03      2.77e-06      2.48e-04      8.97e-04      9.11e-04
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>For smooth data the <strong>cubic spline is the most accurate</strong>, and its error falls fastest as <span class="math notranslate nohighlight">\(n\)</span> grows.</p></li>
+<li><p>Linear is the least accurate: doubling the points cuts its error by about 4, as in class (<span class="math notranslate nohighlight">\(O(h^2)\)</span>).</p></li>
+<li><p>There is a trade-off: the smoothest method is the most accurate on smooth data, while the local methods are safer on data with jumps or flat parts.</p></li>
+</ul>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p><strong>Syntax for each method</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>method</p></th>
+<th class="head"><p>build</p></th>
+<th class="head"><p>evaluate</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>linear</p></td>
+<td><p>(none)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.interp(xnew,</span> <span class="pre">x,</span> <span class="pre">y)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>cubic spline</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">=</span> <span class="pre">si.CubicSpline(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">p(xnew)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Akima</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">=</span> <span class="pre">si.Akima1DInterpolator(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">p(xnew)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>modified Akima</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">=</span> <span class="pre">si.Akima1DInterpolator(x,</span> <span class="pre">y,</span> <span class="pre">method=&quot;makima&quot;)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">p(xnew)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>PCHIP</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">=</span> <span class="pre">si.PchipInterpolator(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">p(xnew)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br><br></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>useful extra</p></th>
+<th class="head"><p>call</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(n\)</span> equally spaced points on <span class="math notranslate nohighlight">\([a, b]\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.linspace(a,</span> <span class="pre">b,</span> <span class="pre">n)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>sample a function at those points</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">xs</span> <span class="pre">=</span> <span class="pre">np.linspace(a,</span> <span class="pre">b,</span> <span class="pre">n);</span> <span class="pre">ys</span> <span class="pre">=</span> <span class="pre">f(xs)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>first derivative <span class="math notranslate nohighlight">\(p'\)</span> (not for <code class="docutils literal notranslate"><span class="pre">np.interp</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">p(xnew,</span> <span class="pre">1)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>natural end conditions, <span class="math notranslate nohighlight">\(p'' = 0\)</span> at both ends</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">si.CubicSpline(x,</span> <span class="pre">y,</span> <span class="pre">bc_type=&quot;natural&quot;)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>one polynomial of degree <span class="math notranslate nohighlight">\(n\)</span> through <span class="math notranslate nohighlight">\(n+1\)</span> points</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">coef</span> <span class="pre">=</span> <span class="pre">np.polyfit(x,</span> <span class="pre">y,</span> <span class="pre">n)</span></code>, then <code class="docutils literal notranslate"><span class="pre">np.polyval(coef,</span> <span class="pre">xnew)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>copy an array, then change element <code class="docutils literal notranslate"><span class="pre">i</span></code> to value <code class="docutils literal notranslate"><span class="pre">v</span></code> (indices start at 0)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">c2</span> <span class="pre">=</span> <span class="pre">c.copy();</span> <span class="pre">c2[i]</span> <span class="pre">=</span> <span class="pre">v</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br><br></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>checking a curve <code class="docutils literal notranslate"><span class="pre">v</span> <span class="pre">=</span> <span class="pre">p(xnew)</span></code></p></th>
+<th class="head"><p>call</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>smallest and largest value</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">v.min()</span></code>, <code class="docutils literal notranslate"><span class="pre">v.max()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>maximum error against a known <span class="math notranslate nohighlight">\(f\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.max(np.abs(v</span> <span class="pre">-</span> <span class="pre">f(xnew)))</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>never decreasing?</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.all(np.diff(v)</span> <span class="pre">&gt;=</span> <span class="pre">0)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br><br></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>plotting</p></th>
+<th class="head"><p>call</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>create a figure and axes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">ax</span> <span class="pre">=</span> <span class="pre">plt.subplots()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>plot a curve with a label</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ax.plot(xnew,</span> <span class="pre">v,</span> <span class="pre">label=&quot;PCHIP&quot;)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>plot the data points</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ax.plot(x,</span> <span class="pre">y,</span> <span class="pre">&quot;ko&quot;)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>horizontal line <span class="math notranslate nohighlight">\(y = c\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ax.axhline(c,</span> <span class="pre">color=&quot;k&quot;,</span> <span class="pre">lw=0.8)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>show the legend</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ax.legend()</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Exercise 1.</strong> The Runge function <span class="math notranslate nohighlight">\(f(x) = \dfrac{1}{1 + 25x^2}\)</span> on <span class="math notranslate nohighlight">\([-1, 1]\)</span>.</p>
+<p>(a) Sample <span class="math notranslate nohighlight">\(f\)</span> at 11 equally spaced points. Interpolate with all five methods.
+Evaluate the fitted curves on a <strong>finer mesh</strong> of 601 points, <code class="docutils literal notranslate"><span class="pre">xnew</span> <span class="pre">=</span> <span class="pre">np.linspace(-1,</span> <span class="pre">1,</span> <span class="pre">601)</span></code>, and plot them together with <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<p>(b) Print the maximum error <span class="math notranslate nohighlight">\(\max|p(x) - f(x)|\)</span> for each method. Which method is the most accurate?</p>
+<p>(c) Compare with <strong>one polynomial of degree 10</strong> through the same 11 points (Idea 2 from class):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">coef</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>   <span class="c1"># the 11 coefficients, highest power first</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coef</span><span class="p">,</span> <span class="n">xnew</span><span class="p">)</span>      <span class="c1"># evaluate the polynomial at xnew</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">np.polyfit(x,</span> <span class="pre">y,</span> <span class="pre">deg)</span></code> finds the polynomial of degree <code class="docutils literal notranslate"><span class="pre">deg</span></code> closest to the data.
+With 11 points and degree 10 there are exactly as many coefficients as points, so the polynomial passes <strong>through every point</strong>: it is the interpolating polynomial.</p>
+<p>Print its maximum error and plot it with the other methods. How do the piecewise methods compare, and why?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exercise 1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise 2.</strong> A drug concentration <span class="math notranslate nohighlight">\(c\)</span> (mg/L) is measured in the blood at times <span class="math notranslate nohighlight">\(t\)</span> (hours):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">24.</span><span class="p">])</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>(a) Interpolate with all five methods. Evaluate the fitted curves on a <strong>finer mesh</strong> of 601 points, <code class="docutils literal notranslate"><span class="pre">tnew</span> <span class="pre">=</span> <span class="pre">np.linspace(0,</span> <span class="pre">24,</span> <span class="pre">601)</span></code>, and plot them together with the data.</p>
+<p>(b) For each method, print the <strong>maximum of the fitted curve</strong>, <code class="docutils literal notranslate"><span class="pre">p(tnew).max()</span></code> (for linear: <code class="docutils literal notranslate"><span class="pre">np.interp(tnew,</span> <span class="pre">t,</span> <span class="pre">c).max()</span></code>).
+The highest measurement is 10 mg/L. Which methods predict a higher peak? Is that believable?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exercise 2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="scipy_root_finding.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Root finding with <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root_scalar</span></code></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="scipy_interpolation_2d.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Interpolation with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code> (2-D)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-the-running-example-from-class">Example 1: the running example from class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-akima-vs-makima-on-flat-data">Example 2: Akima vs makima on flat data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-accuracy-on-a-smooth-function">Example 3: accuracy on a smooth function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sharareh Sayyad
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

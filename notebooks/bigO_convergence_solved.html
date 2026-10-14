@@ -286,6 +286,8 @@
 <li class="toctree-l1"><a class="reference internal" href="newton_method.html">Root Finding II: Newton’s Method</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="scipy_root_finding.html">Root finding with <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root_scalar</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="scipy_interpolation.html">Interpolation with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code> (1-D)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scipy_interpolation_2d.html">Interpolation with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code> (2-D)</a></li>
 </ul>
 
     </div>
@@ -735,7 +737,7 @@ It looks at large inputs and ignores constant factors.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[    100     464    2154   10000   46415  215443 1000000]
 </pre></div>
 </div>
-<img alt="../_images/f9988e87a6334c95d6184cc8f32e25e57fb6d3c228d19abb8b5b650b5ff25d30.png" src="../_images/f9988e87a6334c95d6184cc8f32e25e57fb6d3c228d19abb8b5b650b5ff25d30.png" />
+<img alt="../_images/c35b000e61e3248c35c8844613adef007f464f088c3624668c427844ab829f33.png" src="../_images/c35b000e61e3248c35c8844613adef007f464f088c3624668c427844ab829f33.png" />
 </div>
 </div>
 <p>The slopes come out close to <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span>, which <strong>agrees</strong> with the predictions. Two things to keep in mind:</p>
@@ -803,10 +805,10 @@ slope for large n: 1.9777525854559221
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6970305528312315   growth factor b = e^slope: 2.0077818446629054
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.7011271674819981   growth factor b = e^slope: 2.0160238237628834
 </pre></div>
 </div>
-<img alt="../_images/75bfdbd6472a1beaa98eff2d4e776c664272480d21038af86fd87301f7ec6986.png" src="../_images/75bfdbd6472a1beaa98eff2d4e776c664272480d21038af86fd87301f7ec6986.png" />
+<img alt="../_images/ffe9e18d5b05ad7dcb5ec2b0be4532d8981410db170b8591d27cd6aa3f59650a.png" src="../_images/ffe9e18d5b05ad7dcb5ec2b0be4532d8981410db170b8591d27cd6aa3f59650a.png" />
 </div>
 </div>
 </section>
@@ -917,7 +919,7 @@ quadratic: 1.9999999999999998
 sublinear: nan
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2410/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2489/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
   y = np.log(np.abs(np.diff(np.log(eps))))
 </pre></div>
 </div>
@@ -1106,11 +1108,11 @@ has_duplicate_sorted([3, 1, 4, 5]) = False    (expected: False)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope nested: 2.066542862223698
-slope sorted: 1.1987891413154774
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope nested: 2.0710511492814128
+slope sorted: 1.1729249379753113
 </pre></div>
 </div>
-<img alt="../_images/44b43b45073bf77d865311c4aff57e65b30770924c299eefb56fdf87c9f4ca1f.png" src="../_images/44b43b45073bf77d865311c4aff57e65b30770924c299eefb56fdf87c9f4ca1f.png" />
+<img alt="../_images/a25aa157ea986e7660694629929fede64250fbd45c6777978b46ce37f4a176c5.png" src="../_images/a25aa157ea986e7660694629929fede64250fbd45c6777978b46ce37f4a176c5.png" />
 </div>
 </div>
 <p><strong>Questions:</strong></p>
