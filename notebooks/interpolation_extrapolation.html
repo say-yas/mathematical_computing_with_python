@@ -619,18 +619,6 @@ There is no data there, so each method simply continues the formula it uses at t
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">si</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named 'scipy'
-</pre></div>
-</div>
-</div>
 </div>
 <section id="part-a-extrapolation-in-1-d">
 <h2>Part A. Extrapolation in 1-D<a class="headerlink" href="#part-a-extrapolation-in-1-d" title="Link to this heading">#</a></h2>
@@ -667,7 +655,7 @@ Akima and Makima need <code class="docutils literal notranslate"><span class="pr
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7a66775a69f8b3874ec2f04022c17e17fff5ec2dc7b226fb7aaaeb1de783095a.png" src="../_images/7a66775a69f8b3874ec2f04022c17e17fff5ec2dc7b226fb7aaaeb1de783095a.png" />
+<img alt="../_images/b939a6d14948b01b5bb54a6c7a5d6ac58579da1d055a32a6218d2a17c63608c8.png" src="../_images/b939a6d14948b01b5bb54a6c7a5d6ac58579da1d055a32a6218d2a17c63608c8.png" />
 </div>
 </div>
 <p>The values at a few points outside the data:</p>
@@ -761,7 +749,7 @@ CubicSpline, extrapolate=False: [nan nan]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6742cfba13944fd6ef93b2fd54fd391c20be5e374b38310e504f5d1629f75c6b.png" src="../_images/6742cfba13944fd6ef93b2fd54fd391c20be5e374b38310e504f5d1629f75c6b.png" />
+<img alt="../_images/d5bf37d96b8f1c79a6147d76f99bce3c933dabc47d4dbcb391958978d3215000.png" src="../_images/d5bf37d96b8f1c79a6147d76f99bce3c933dabc47d4dbcb391958978d3215000.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> distance past π        linear  cubic spline         PCHIP         Akima        Makima
              0.1      1.47e-03      2.75e-04      4.77e-03      5.50e-03      4.02e-03
              0.5      1.24e-02      4.71e-03      6.97e-02      1.06e-01      5.39e-02
@@ -856,7 +844,7 @@ There is no grid, so <code class="docutils literal notranslate"><span class="pre
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b7ca30d1d64434285d4bb351e848c8013f3cd3238f59e4b447ba3c461bf178a5.png" src="../_images/b7ca30d1d64434285d4bb351e848c8013f3cd3238f59e4b447ba3c461bf178a5.png" />
+<img alt="../_images/7460829e765e355e33916cb298b635d93f4ffe9f1c3a37aa8c34f839dd761258.png" src="../_images/7460829e765e355e33916cb298b635d93f4ffe9f1c3a37aa8c34f839dd761258.png" />
 </div>
 </div>
 <p>The white areas in the <code class="docutils literal notranslate"><span class="pre">griddata</span></code> pictures are <code class="docutils literal notranslate"><span class="pre">nan</span></code>: those points lie <strong>outside</strong> the triangles, so <code class="docutils literal notranslate"><span class="pre">griddata</span></code> refuses to answer. RBF fills the whole square.</p>

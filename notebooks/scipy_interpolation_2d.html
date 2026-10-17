@@ -660,18 +660,6 @@ As in 1-D, every method is used the same way: <strong>build once</strong>, then 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">si</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named 'scipy'
-</pre></div>
-</div>
-</div>
 </div>
 <section id="grids-in-numpy-meshgrid">
 <h2>Grids in NumPy: <code class="docutils literal notranslate"><span class="pre">meshgrid</span></code><a class="headerlink" href="#grids-in-numpy-meshgrid" title="Link to this heading">#</a></h2>
@@ -734,7 +722,7 @@ The surface rises in both directions and levels off. We build the four grid inte
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9639114f99c52e7320444137d4e004ba2bce94de5a89071b05ad67b74e07b92a.png" src="../_images/9639114f99c52e7320444137d4e004ba2bce94de5a89071b05ad67b74e07b92a.png" />
+<img alt="../_images/9baa486933f1242fdd09daea3aa727bc0d9458d5f72c2115bf97f25c79658f16.png" src="../_images/9baa486933f1242fdd09daea3aa727bc0d9458d5f72c2115bf97f25c79658f16.png" />
 </div>
 </div>
 <p>On a picture of the whole surface the smooth methods look almost the same. A <strong>slice</strong> at a fixed <span class="math notranslate nohighlight">\(y\)</span> shows the differences more clearly: it is a 1-D curve, like last class.
@@ -754,7 +742,7 @@ We cut at <span class="math notranslate nohighlight">\(y = 4.5\)</span>, between
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/abd409317f808c26318d42ef5d0e2ec1a1b426a3eba78b528200c209fb80301d.png" src="../_images/abd409317f808c26318d42ef5d0e2ec1a1b426a3eba78b528200c209fb80301d.png" />
+<img alt="../_images/5d80a5af297b998996ad404145db150f8b80303e9ae02b4a0acbc4e6d096971f.png" src="../_images/5d80a5af297b998996ad404145db150f8b80303e9ae02b4a0acbc4e6d096971f.png" />
 </div>
 </div>
 <p>As in 1-D we check two things on the fine mesh:</p>
@@ -777,7 +765,9 @@ We cut at <span class="math notranslate nohighlight">\(y = 4.5\)</span>, between
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>method         min      max  never decreases?
 linear      0.0000   4.2000  True
 cubic       0.0000   4.2000  False
-PCHIP       0.0000   4.2000  True
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PCHIP       0.0000   4.2000  True
 </pre></div>
 </div>
 </div>
@@ -818,10 +808,12 @@ Smooth methods have to bend through this jump, and that is where overshoot appea
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/da3353739dc3c64f087ebf9e53b5ca106e72253322979d4e7d1a4a528b5398aa.png" src="../_images/da3353739dc3c64f087ebf9e53b5ca106e72253322979d4e7d1a4a528b5398aa.png" />
+<img alt="../_images/57f035d003259e70229465af036bf4714a37930990412fd267aa02c40d1e264a.png" src="../_images/57f035d003259e70229465af036bf4714a37930990412fd267aa02c40d1e264a.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>linear  min = 0.0000   max = 1.0000
 cubic   min = -0.3125   max = 1.3220
-pchip   min = 0.0000   max = 1.0000
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pchip   min = 0.0000   max = 1.0000
 </pre></div>
 </div>
 </div>
@@ -849,7 +841,7 @@ pchip   min = 0.0000   max = 1.0000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/42946f6a30dcf5576c0a18c8aba61d88e3936df7caf76d91c10aa7308c2c82db.png" src="../_images/42946f6a30dcf5576c0a18c8aba61d88e3936df7caf76d91c10aa7308c2c82db.png" />
+<img alt="../_images/5550ecba68ccf903d1de9c93b6afeb37becb8e681eb4d728dc1d1081740f1679.png" src="../_images/5550ecba68ccf903d1de9c93b6afeb37becb8e681eb4d728dc1d1081740f1679.png" />
 </div>
 </div>
 </section>
@@ -879,10 +871,18 @@ pchip   min = 0.0000   max = 1.0000
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   n      linear       cubic       PCHIP
-   6    3.31e-01    7.15e-02    2.74e-01
-  11    9.10e-02    3.50e-03    6.23e-02
-  21    2.39e-02    2.60e-04    7.17e-03
-  41    5.88e-03    3.59e-05    1.78e-03
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   6    3.31e-01    7.15e-02    2.74e-01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  11    9.10e-02    3.50e-03    6.23e-02
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  21    2.39e-02    2.60e-04    7.17e-03
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  41    5.88e-03    3.59e-05    1.78e-03
 </pre></div>
 </div>
 </div>
@@ -929,7 +929,7 @@ There is no grid, so <code class="docutils literal notranslate"><span class="pre
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b7ca30d1d64434285d4bb351e848c8013f3cd3238f59e4b447ba3c461bf178a5.png" src="../_images/b7ca30d1d64434285d4bb351e848c8013f3cd3238f59e4b447ba3c461bf178a5.png" />
+<img alt="../_images/7460829e765e355e33916cb298b635d93f4ffe9f1c3a37aa8c34f839dd761258.png" src="../_images/7460829e765e355e33916cb298b635d93f4ffe9f1c3a37aa8c34f839dd761258.png" />
 </div>
 </div>
 <p>The white areas in the <code class="docutils literal notranslate"><span class="pre">griddata</span></code> pictures are <code class="docutils literal notranslate"><span class="pre">nan</span></code>: those points lie <strong>outside</strong> the triangles, so <code class="docutils literal notranslate"><span class="pre">griddata</span></code> refuses to answer. RBF fills the whole square.</p>

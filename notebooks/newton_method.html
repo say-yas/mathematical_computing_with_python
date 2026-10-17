@@ -599,15 +599,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Math</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named 'sympy'
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sympy 1.14.0 | numpy 2.4.6
 </pre></div>
 </div>
 </div>
@@ -677,7 +669,7 @@
 x_2 = 1.4166666667,  error = 2.5e-03
 </pre></div>
 </div>
-<img alt="../_images/cd31dc7256f8ba213f126ad9628f9eeee58d5e8b2e1519679355589a46937d0b.png" src="../_images/cd31dc7256f8ba213f126ad9628f9eeee58d5e8b2e1519679355589a46937d0b.png" />
+<img alt="../_images/7ae442325fae815a6ccf5078ed10b07c918baa6e53e091b430f89acf9166dce8.png" src="../_images/7ae442325fae815a6ccf5078ed10b07c918baa6e53e091b430f89acf9166dce8.png" />
 </div>
 </div>
 </section>
@@ -843,7 +835,7 @@ x_2 = 1.4166666667,  error = 2.5e-03
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/74a773624c899922bb7c241fe9ce49dc7c5d011a1866be118b70cccefc8618ee.png" src="../_images/74a773624c899922bb7c241fe9ce49dc7c5d011a1866be118b70cccefc8618ee.png" />
+<img alt="../_images/f8dce42b4bb4252cb4a26a4c0d3b7477b182c72198a82bf959903a8d641d8c2f.png" src="../_images/f8dce42b4bb4252cb4a26a4c0d3b7477b182c72198a82bf959903a8d641d8c2f.png" />
 </div>
 </div>
 </section>
@@ -950,7 +942,7 @@ newton on x^3 - 2x + 2 from x0 = 0 -&gt; no convergence in 30 steps (last x = 0.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/95efa6e12e9504ec7d018368e4ffb08d96b8de24f8a3babdcf913ec0a848dca0.png" src="../_images/95efa6e12e9504ec7d018368e4ffb08d96b8de24f8a3babdcf913ec0a848dca0.png" />
+<img alt="../_images/5464b855ad2cc69f72842e898d6361a2824f815a6a172f9f582eee36177bef3f.png" src="../_images/5464b855ad2cc69f72842e898d6361a2824f815a6a172f9f582eee36177bef3f.png" />
 </div>
 </div>
 </section>
@@ -1605,9 +1597,22 @@ first four = [1.333333, 1.4, 1.414634, 1.414211]    (expected: [1.333333, 1.4, 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>secant returned None: finish Step 1 first, then run this cell again.
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">23</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">funcs</span><span class="p">)):</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">b_list</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+<span class="ne">----&gt; </span><span class="mi">5</span>     <span class="n">runs</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"Newton"</span><span class="p">,</span> <span class="n">newton</span><span class="p">(</span><span class="n">funcs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">dfuncs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>             <span class="p">(</span><span class="s2">"secant"</span><span class="p">,</span> <span class="n">secant</span><span class="p">(</span><span class="n">funcs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>             <span class="p">(</span><span class="s2">"safeguarded Newton"</span><span class="p">,</span> <span class="n">safe_newton</span><span class="p">(</span><span class="n">funcs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">dfuncs</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">xk</span><span class="p">,</span> <span class="n">hist</span><span class="p">),</span> <span class="n">start</span><span class="p">,</span> <span class="n">per_step</span> <span class="ow">in</span> <span class="n">runs</span><span class="p">:</span>
+
+<span class="ne">TypeError</span>: 'NoneType' object is not subscriptable
 </pre></div>
 </div>
+<img alt="../_images/f7adb932d4d2ace8e3c95e1f6817a681a6320ca12f8c54e9c50933ddf6a9f1cd.png" src="../_images/f7adb932d4d2ace8e3c95e1f6817a681a6320ca12f8c54e9c50933ddf6a9f1cd.png" />
 </div>
 </div>
 <p><strong>Questions:</strong></p>

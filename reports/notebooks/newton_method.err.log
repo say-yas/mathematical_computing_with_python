@@ -18,22 +18,37 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import sympy as sp
-import numpy as np
-import matplotlib.pyplot as plt
-from IPython.display import display, Math
-
-print("sympy", sp.__version__, "| numpy", np.__version__)
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+for k in range(len(funcs)):
+    ax = axes.flat[k]
+    a, b = float(a_list[k]), float(b_list[k])
+    runs = [("Newton", newton(funcs[k], dfuncs[k], b, tol=1e-14, maxit=100), 0, 2),
+            ("secant", secant(funcs[k], a, b, tol=1e-14, maxit=100), 2, 1),
+            ("safeguarded Newton", safe_newton(funcs[k], dfuncs[k], a, b, tol=1e-14, maxit=100), 2, 2)]
+    for name, (xk, hist), start, per_step in runs:
+        err = np.maximum(np.abs(np.array(hist) - r_ref[k]), 1e-17)
+        evals = start + per_step * np.arange(1, len(err) + 1)
+        ax.semilogy(evals, err, "o-", ms=3, label=name)
+        print(f"{names[k]:>12}, {name:>18}: stopped at x = {xk:.6g}, residual |f(x)| = {abs(funcs[k](xk)):.1e}")
+    ax.axhline(np.finfo(float).eps, color="gray", ls="--", lw=1, label="machine epsilon")
+    ax.set_ylim(1e-17, 1e3); ax.set_title(f"${sp.latex(exprs[k])}$")
+    ax.set_xlabel("function evaluations"); ax.set_ylabel(r"$|x_n - r|$"); ax.legend()
+plt.tight_layout()
+plt.show()
 ------------------
 
 
 [31m---------------------------------------------------------------------------[39m
-[31mModuleNotFoundError[39m                       Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 1[39m
-[32m----> [39m[32m1[39m [38;5;28;01mimport[39;00m sympy [38;5;28;01mas[39;00m sp
-[32m      2[39m [38;5;28;01mimport[39;00m numpy [38;5;28;01mas[39;00m np
-[32m      3[39m [38;5;28;01mimport[39;00m matplotlib.pyplot [38;5;28;01mas[39;00m plt
-[32m      4[39m [38;5;28;01mfrom[39;00m IPython.display [38;5;28;01mimport[39;00m display, Math
+[31mTypeError[39m                                 Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[23][39m[32m, line 5[39m
+[32m      1[39m fig, axes = plt.subplots([32m2[39m, [32m2[39m, figsize=([32m12[39m, [32m8[39m))
+[32m      2[39m [38;5;28;01mfor[39;00m k [38;5;28;01min[39;00m range(len(funcs)):
+[32m      3[39m     ax = axes.flat[k]
+[32m      4[39m     a, b = float(a_list[k]), float(b_list[k])
+[32m----> [39m[32m5[39m     runs = [("Newton", newton(funcs[k], dfuncs[k], b, tol=1e-14, maxit=100), 0, 2),
+[32m      6[39m             ([33m"secant"[39m, secant(funcs[k], a, b, tol=[32m1e-14[39m, maxit=[32m100[39m), [32m2[39m, [32m1[39m),
+[32m      7[39m             ("safeguarded Newton", safe_newton(funcs[k], dfuncs[k], a, b, tol=1e-14, maxit=100), 2, 2)]
+[32m      8[39m     [38;5;28;01mfor[39;00m name, (xk, hist), start, per_step [38;5;28;01min[39;00m runs:
 
-[31mModuleNotFoundError[39m: No module named 'sympy'
+[31mTypeError[39m: 'NoneType' object is not subscriptable
 
