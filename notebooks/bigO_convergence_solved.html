@@ -215,9 +215,13 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="starting_with_python.html">Using Python in Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="starting_with_github.html">Using GitHub: Repositories, Commits, Push/Pull, and Forks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Python</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="intro_pythonI.html">Introduction to Python, Part I</a></li>
 
 
@@ -275,17 +279,26 @@
 
 
 
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Convergence and Symbolic Math</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Big-O and Convergence of Algorithms</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="limits_convergence.html">Limits and Convergence of Algorithms</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="sympy_intro.html">Symbolic Computation with SymPy</a></li>
 
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Root Finding</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="bracketing_methods_solutions.html">Root Finding I: Bracketing Methods (solutions)</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="newton_method.html">Root Finding II: Newton’s Method</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="scipy_root_finding.html">Root finding with <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root_scalar</span></code></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interpolation</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="scipy_interpolation.html">Interpolation with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code> (1-D)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scipy_interpolation_2d.html">Interpolation with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code> (2-D)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolation_extrapolation.html">Extrapolation (1-D) and scattered data (2-D) with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code></a></li>
@@ -738,7 +751,7 @@ It looks at large inputs and ignores constant factors.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[    100     464    2154   10000   46415  215443 1000000]
 </pre></div>
 </div>
-<img alt="../_images/9eeef96509d43848ab71e5698a1e54f407d386980554b8ef64269dac786f04a6.png" src="../_images/9eeef96509d43848ab71e5698a1e54f407d386980554b8ef64269dac786f04a6.png" />
+<img alt="../_images/d6b5f4c1d14e226f552971dea7a75ea69b0ad8b395600870e0b446937dcd6331.png" src="../_images/d6b5f4c1d14e226f552971dea7a75ea69b0ad8b395600870e0b446937dcd6331.png" />
 </div>
 </div>
 <p>The slopes come out close to <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span>, which <strong>agrees</strong> with the predictions. Two things to keep in mind:</p>
@@ -769,8 +782,8 @@ It looks at large inputs and ignores constant factors.</p>
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/ae3487156f1b5ed55b61badaa3e3503ea60284e24189980e402975dfd7e2519f.png" src="../_images/ae3487156f1b5ed55b61badaa3e3503ea60284e24189980e402975dfd7e2519f.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope for small n: 1.0008273016704985
-slope for large n: 1.9777525854559221
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope for small n: 1.0008273016704996
+slope for large n: 1.9777525854559215
 </pre></div>
 </div>
 </div>
@@ -806,10 +819,10 @@ slope for large n: 1.9777525854559221
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6972327169693188   growth factor b = e^slope: 2.008187787181126
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6856365612293771   growth factor b = e^slope: 1.9850350297831794
 </pre></div>
 </div>
-<img alt="../_images/ef6eba4e0e93aae8e6ae77a7f6d6010e715a50dae35cc47ab27764b253b9b0af.png" src="../_images/ef6eba4e0e93aae8e6ae77a7f6d6010e715a50dae35cc47ab27764b253b9b0af.png" />
+<img alt="../_images/24fa6090f4ce66667fc169799c425d4148ec45f8bab6078fc8615966e1fa6a5c.png" src="../_images/24fa6090f4ce66667fc169799c425d4148ec45f8bab6078fc8615966e1fa6a5c.png" />
 </div>
 </div>
 </section>
@@ -920,7 +933,7 @@ quadratic: 1.9999999999999998
 sublinear: nan
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2408/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2179/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
   y = np.log(np.abs(np.diff(np.log(eps))))
 </pre></div>
 </div>
@@ -1109,11 +1122,11 @@ has_duplicate_sorted([3, 1, 4, 5]) = False    (expected: False)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope nested: 2.0708409304277247
-slope sorted: 1.1745125872436584
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope nested: 2.151217335089819
+slope sorted: 1.2210832587573115
 </pre></div>
 </div>
-<img alt="../_images/dafa98702838cb48be504062c81983a709c9e0cc5bc8a30385e2efeadd345fdf.png" src="../_images/dafa98702838cb48be504062c81983a709c9e0cc5bc8a30385e2efeadd345fdf.png" />
+<img alt="../_images/6c5b801ffa30eb4352160b8236d963108fa0575bcd09bf6c687f752500762218.png" src="../_images/6c5b801ffa30eb4352160b8236d963108fa0575bcd09bf6c687f752500762218.png" />
 </div>
 </div>
 <p><strong>Questions:</strong></p>
@@ -1270,7 +1283,7 @@ k = 13:  e_(k+1) / e_k = 0.292893
 k = 14:  e_(k+1) / e_k = 0.292893
 |g'(x_star)| = 0.2928932188134524
 q fixed point: 1.0067061303618703
-q Newton     : 2.0672485365879605
+q Newton     : 2.067248536587961
 </pre></div>
 </div>
 </div>
