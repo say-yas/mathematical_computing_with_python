@@ -1,0 +1,12 @@
+.collapsible-caption {
+  cursor: pointer;
+  user-select: none;
+}
+.collapsible-caption::after {
+  content: "▾";
+  float: right;
+  transition: transform 0.2s;
+}
+.collapsible-caption.collapsed::after {
+  transform: rotate(-90deg);
+}
