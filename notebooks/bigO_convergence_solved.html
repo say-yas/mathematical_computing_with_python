@@ -37,6 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/collapsible-captions.css" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -64,6 +65,7 @@
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/bigO_convergence_solved';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/collapsible-captions.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Limits and Convergence of Algorithms" href="limits_convergence.html" />
@@ -751,7 +753,7 @@ It looks at large inputs and ignores constant factors.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[    100     464    2154   10000   46415  215443 1000000]
 </pre></div>
 </div>
-<img alt="../_images/d6b5f4c1d14e226f552971dea7a75ea69b0ad8b395600870e0b446937dcd6331.png" src="../_images/d6b5f4c1d14e226f552971dea7a75ea69b0ad8b395600870e0b446937dcd6331.png" />
+<img alt="../_images/b7a5ecced95a9ed0bde900660a0e6f9529b19a7dfbd5897d4bce7babd1102e30.png" src="../_images/b7a5ecced95a9ed0bde900660a0e6f9529b19a7dfbd5897d4bce7babd1102e30.png" />
 </div>
 </div>
 <p>The slopes come out close to <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span>, which <strong>agrees</strong> with the predictions. Two things to keep in mind:</p>
@@ -819,10 +821,10 @@ slope for large n: 1.9777525854559215
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6856365612293771   growth factor b = e^slope: 1.9850350297831794
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6940479723941749   growth factor b = e^slope: 2.0018023953380846
 </pre></div>
 </div>
-<img alt="../_images/24fa6090f4ce66667fc169799c425d4148ec45f8bab6078fc8615966e1fa6a5c.png" src="../_images/24fa6090f4ce66667fc169799c425d4148ec45f8bab6078fc8615966e1fa6a5c.png" />
+<img alt="../_images/f9e049a0b12102c6a912a5f97b128b9e89c44da2368d6379d776e1b658e65a9f.png" src="../_images/f9e049a0b12102c6a912a5f97b128b9e89c44da2368d6379d776e1b658e65a9f.png" />
 </div>
 </div>
 </section>
@@ -933,7 +935,7 @@ quadratic: 1.9999999999999998
 sublinear: nan
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2179/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2175/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
   y = np.log(np.abs(np.diff(np.log(eps))))
 </pre></div>
 </div>
@@ -1122,11 +1124,11 @@ has_duplicate_sorted([3, 1, 4, 5]) = False    (expected: False)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope nested: 2.151217335089819
-slope sorted: 1.2210832587573115
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope nested: 2.0352183843253475
+slope sorted: 1.1618335864770266
 </pre></div>
 </div>
-<img alt="../_images/6c5b801ffa30eb4352160b8236d963108fa0575bcd09bf6c687f752500762218.png" src="../_images/6c5b801ffa30eb4352160b8236d963108fa0575bcd09bf6c687f752500762218.png" />
+<img alt="../_images/e67641547a5bd385e49a76e14378519a0d82a0dd8b0359bd45543c29f18b2b0b.png" src="../_images/e67641547a5bd385e49a76e14378519a0d82a0dd8b0359bd45543c29f18b2b0b.png" />
 </div>
 </div>
 <p><strong>Questions:</strong></p>
