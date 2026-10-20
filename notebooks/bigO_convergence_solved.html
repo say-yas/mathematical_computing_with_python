@@ -305,6 +305,10 @@
 <li class="toctree-l1"><a class="reference internal" href="scipy_interpolation_2d.html">Interpolation with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code> (2-D)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolation_extrapolation.html">Extrapolation (1-D) and scattered data (2-D) with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code></a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Differentiation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="symbolic_finite_differences.html">Derivatives on the computer: symbolic differentiation and finite differences</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -753,7 +757,7 @@ It looks at large inputs and ignores constant factors.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[    100     464    2154   10000   46415  215443 1000000]
 </pre></div>
 </div>
-<img alt="../_images/0097bb7f36dfbebce5e4b722ab9e153c6c9e76dd82de70fa3b657879260431bf.png" src="../_images/0097bb7f36dfbebce5e4b722ab9e153c6c9e76dd82de70fa3b657879260431bf.png" />
+<img alt="../_images/187dbc75ba4eb7b3239d3a32d169a175b322af1d7bb8765c3f73b239d74672c3.png" src="../_images/187dbc75ba4eb7b3239d3a32d169a175b322af1d7bb8765c3f73b239d74672c3.png" />
 </div>
 </div>
 <p>The slopes come out close to <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span>, which <strong>agrees</strong> with the predictions. Two things to keep in mind:</p>
@@ -821,10 +825,10 @@ slope for large n: 1.9777525854559221
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.7014076892244615   growth factor b = e^slope: 2.016589441609116
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6958816239473875   growth factor b = e^slope: 2.005476370775494
 </pre></div>
 </div>
-<img alt="../_images/b973c4b095f079cbdeea651df61efc4df6faadc78f4a9d89c9b79304233c0304.png" src="../_images/b973c4b095f079cbdeea651df61efc4df6faadc78f4a9d89c9b79304233c0304.png" />
+<img alt="../_images/694ca20de3cbc669f996037e873963d30009bb8db9f2afb2ea7155d2db969637.png" src="../_images/694ca20de3cbc669f996037e873963d30009bb8db9f2afb2ea7155d2db969637.png" />
 </div>
 </div>
 </section>
@@ -935,7 +939,7 @@ quadratic: 1.9999999999999998
 sublinear: nan
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2421/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2480/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
   y = np.log(np.abs(np.diff(np.log(eps))))
 </pre></div>
 </div>
@@ -1124,11 +1128,11 @@ has_duplicate_sorted([3, 1, 4, 5]) = False    (expected: False)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope nested: 2.063127521106607
-slope sorted: 1.1565392252771656
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope nested: 2.1153020163306717
+slope sorted: 1.194903004715861
 </pre></div>
 </div>
-<img alt="../_images/47aadbdebe90005874770d08782fefc2fa55041a4d515f81ac5c681f2e677d4e.png" src="../_images/47aadbdebe90005874770d08782fefc2fa55041a4d515f81ac5c681f2e677d4e.png" />
+<img alt="../_images/732810f7029d3d53b7a1968c39b35416e4d4ea566215b181865eadffc99d1975.png" src="../_images/732810f7029d3d53b7a1968c39b35416e4d4ea566215b181865eadffc99d1975.png" />
 </div>
 </div>
 <p><strong>Questions:</strong></p>

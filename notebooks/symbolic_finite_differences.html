@@ -1,0 +1,1231 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Derivatives on the computer: symbolic differentiation and finite differences &#8212; Mathematical Computing with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/collapsible-captions.css?v=a2f12b8d" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/symbolic_finite_differences';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/collapsible-captions.js?v=a30ef615"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Extrapolation (1-D) and scattered data (2-D) with scipy.interpolate" href="interpolation_extrapolation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Mathematical Computing with Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Mathematical Computing with Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="starting_with_python.html">Using Python in Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="starting_with_github.html">Using GitHub: Repositories, Commits, Push/Pull, and Forks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonI.html">Introduction to Python, Part I</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonII.html">Introduction to Python, Part II</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIII.html">Introduction to Python, Part III</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIV_numpy.html">Introduction to Python, Part IV: NumPy</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonV_matplotlib.html">Introduction to Python, Part V: Plotting with Matplotlib</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Convergence and Symbolic Math</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bigO_convergence_solved.html">Big-O and Convergence of Algorithms</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="limits_convergence.html">Limits and Convergence of Algorithms</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="sympy_intro.html">Symbolic Computation with SymPy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Root Finding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bracketing_methods_solutions.html">Root Finding I: Bracketing Methods (solutions)</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="newton_method.html">Root Finding II: Newton’s Method</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="scipy_root_finding.html">Root finding with <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root_scalar</span></code></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interpolation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="scipy_interpolation.html">Interpolation with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code> (1-D)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scipy_interpolation_2d.html">Interpolation with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code> (2-D)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolation_extrapolation.html">Extrapolation (1-D) and scattered data (2-D) with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Differentiation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Derivatives on the computer: symbolic differentiation and finite differences</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/say-yas/mathematical_computing_with_python/blob/main/book/notebooks/symbolic_finite_differences.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/notebooks/symbolic_finite_differences.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fnotebooks/symbolic_finite_differences.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/symbolic_finite_differences.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Derivatives on the computer: symbolic differentiation and finite differences</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-symbolic-differentiation-sympy">Part A. Symbolic differentiation (SymPy)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-declare-the-symbol-and-the-function">Step 1: declare the symbol and the function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-differentiate">Step 2: differentiate</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b-finite-differences">Part B. Finite differences</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-the-function-as-a-numpy-function">Step 1: the function as a NumPy function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-forward-difference">Step 2: forward difference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-backward-difference">Step 3: backward difference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-central-difference">Step 4: central difference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-5-point-fourth-order-central-difference">Step 5: 5-point (fourth-order) central difference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-summary-and-a-list-to-loop-over">Step 6: summary, and a list to loop over</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-the-error-at-x-0-1-for-several-step-sizes">Example 1: the error at <span class="math notranslate nohighlight">\(x_0 = 1\)</span> for several step sizes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-error-against-h-on-a-log-log-plot">Example 2: error against <span class="math notranslate nohighlight">\(h\)</span> on a log-log plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-the-derivative-on-a-whole-interval">Example 3: the derivative on a whole interval</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-at-x-0-1">Comparison at <span class="math notranslate nohighlight">\(x_0 = 1\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="derivatives-on-the-computer-symbolic-differentiation-and-finite-differences">
+<h1>Derivatives on the computer: symbolic differentiation and finite differences<a class="headerlink" href="#derivatives-on-the-computer-symbolic-differentiation-and-finite-differences" title="Link to this heading">#</a></h1>
+<p>Given a function <span class="math notranslate nohighlight">\(f\)</span>, we want <span class="math notranslate nohighlight">\(f'(x)\)</span>. We look at two ways to get it on a computer:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>approach</p></th>
+<th class="head"><p>idea</p></th>
+<th class="head"><p>result</p></th>
+<th class="head"><p>Python</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>symbolic</strong></p></td>
+<td><p>apply the rules of calculus to a <strong>formula</strong></p></td>
+<td><p>a formula for <span class="math notranslate nohighlight">\(f'\)</span>, exact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sympy.diff</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>finite differences</strong></p></td>
+<td><p>evaluate <span class="math notranslate nohighlight">\(f\)</span> at nearby points, take a <strong>difference quotient</strong></p></td>
+<td><p>a number, with an error</p></td>
+<td><p>forward, backward, central, 5-point formulas</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>We use the <strong>same function</strong> in both parts:
+$<span class="math notranslate nohighlight">\( f(x) = x^2 \sin x \; e^{-x/2}, \qquad x_0 = 1. \)</span>$</p>
+<p>The first cell loads the packages. Run it first, then run the notebook from top to bottom: each part defines what it needs just before using it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="part-a-symbolic-differentiation-sympy">
+<h2>Part A. Symbolic differentiation (SymPy)<a class="headerlink" href="#part-a-symbolic-differentiation-sympy" title="Link to this heading">#</a></h2>
+<p>SymPy works with <strong>expressions</strong>, not numbers. <code class="docutils literal notranslate"><span class="pre">sp.diff(f,</span> <span class="pre">x)</span></code> applies the product, quotient and chain rules and returns a new expression.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>task</p></th>
+<th class="head"><p>call</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>declare a symbol</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">sp.symbols(&quot;x&quot;)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>first, <span class="math notranslate nohighlight">\(n\)</span>-th derivative</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.diff(f,</span> <span class="pre">x)</span></code>, <code class="docutils literal notranslate"><span class="pre">sp.diff(f,</span> <span class="pre">x,</span> <span class="pre">n)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>simplify</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.simplify(expr)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>value at a point</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">expr.subs(x,</span> <span class="pre">1)</span></code>, then <code class="docutils literal notranslate"><span class="pre">float(...)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>turn into a NumPy function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fp</span> <span class="pre">=</span> <span class="pre">sp.lambdify(x,</span> <span class="pre">expr,</span> <span class="pre">&quot;numpy&quot;)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="step-1-declare-the-symbol-and-the-function">
+<h3>Step 1: declare the symbol and the function<a class="headerlink" href="#step-1-declare-the-symbol-and-the-function" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">x</span></code> is not a number but a <strong>symbol</strong>. Any formula built from it with SymPy functions (<code class="docutils literal notranslate"><span class="pre">sp.sin</span></code>, <code class="docutils literal notranslate"><span class="pre">sp.exp</span></code>, …) is a SymPy <strong>expression</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>
+<span class="n">f_sym</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">f_sym</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle x^{2} e^{- \frac{x}{2}} \sin{\left(x \right)}\]</div>
+</div>
+</div>
+</section>
+<section id="step-2-differentiate">
+<h3>Step 2: differentiate<a class="headerlink" href="#step-2-differentiate" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_sym</span>  <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f_sym</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>        <span class="c1"># f'</span>
+<span class="n">d2f_sym</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f_sym</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>     <span class="c1"># f''</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"f'  ="</span><span class="p">,</span> <span class="n">df_sym</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"f'' ="</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">d2f_sym</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"f'(1) exact  :"</span><span class="p">,</span> <span class="n">df_sym</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"f'(1) numeric:"</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">df_sym</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f'  = -x**2*exp(-x/2)*sin(x)/2 + x**2*exp(-x/2)*cos(x) + 2*x*exp(-x/2)*sin(x)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f'' = (-3*x**2*sin(x)/4 - x**2*cos(x) - 2*x*sin(x) + 4*x*cos(x) + 2*sin(x))*exp(-x/2)
+
+f'(1) exact  : exp(-1/2)*cos(1) + 3*exp(-1/2)*sin(1)/2
+f'(1) numeric: 1.093276841339319
+</pre></div>
+</div>
+</div>
+</div>
+<p>To plot, or to evaluate at many points, turn the expressions into NumPy functions with <code class="docutils literal notranslate"><span class="pre">lambdify</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f_np</span>   <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_sym</span><span class="p">,</span>   <span class="s2">"numpy"</span><span class="p">)</span>
+<span class="n">df_np</span>  <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df_sym</span><span class="p">,</span>  <span class="s2">"numpy"</span><span class="p">)</span>
+<span class="n">d2f_np</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d2f_sym</span><span class="p">,</span> <span class="s2">"numpy"</span><span class="p">)</span>
+
+<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">f_np</span><span class="p">(</span><span class="n">xx</span><span class="p">),</span>   <span class="n">label</span><span class="o">=</span><span class="s2">"f(x)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">df_np</span><span class="p">(</span><span class="n">xx</span><span class="p">),</span>  <span class="n">label</span><span class="o">=</span><span class="s2">"f'(x)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">d2f_np</span><span class="p">(</span><span class="n">xx</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">"f''(x)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"0.6"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x"</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">exact</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">df_sym</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>     <span class="c1"># exact f'(1): the reference for Part B</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a101a61b449ede29f46d50f2c24c50f87776d85fa383204bf45abd1a3fc2c33b.png" src="../_images/a101a61b449ede29f46d50f2c24c50f87776d85fa383204bf45abd1a3fc2c33b.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Symbolic differentiation gives an <strong>exact formula</strong>.</p></li>
+<li><p>It needs a <strong>formula</strong> for <span class="math notranslate nohighlight">\(f\)</span>.</p></li>
+<li><p>We use it below as the <strong>exact reference</strong> for the finite differences.</p></li>
+</ul>
+</section>
+</section>
+<section id="part-b-finite-differences">
+<h2>Part B. Finite differences<a class="headerlink" href="#part-b-finite-differences" title="Link to this heading">#</a></h2>
+<p>Now we forget the formula and only <strong>evaluate</strong> <span class="math notranslate nohighlight">\(f\)</span> at a few points. All formulas below come from Taylor’s theorem:
+$<span class="math notranslate nohighlight">\( f(x \pm h) = f(x) \pm h f'(x) + \tfrac{h^2}{2} f''(x) \pm \tfrac{h^3}{6} f'''(x) + \dots \)</span>$</p>
+<section id="step-1-the-function-as-a-numpy-function">
+<h3>Step 1: the function as a NumPy function<a class="headerlink" href="#step-1-the-function-as-a-numpy-function" title="Link to this heading">#</a></h3>
+<p>For finite differences we need a function that takes numbers (or NumPy arrays) and returns numbers. It is the same <span class="math notranslate nohighlight">\(f\)</span>, written with <code class="docutils literal notranslate"><span class="pre">np.sin</span></code> and <code class="docutils literal notranslate"><span class="pre">np.exp</span></code> instead of <code class="docutils literal notranslate"><span class="pre">sp.sin</span></code> and <code class="docutils literal notranslate"><span class="pre">sp.exp</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"f(1) ="</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f(1) = 0.5103779515445728
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-forward-difference">
+<h3>Step 2: forward difference<a class="headerlink" href="#step-2-forward-difference" title="Link to this heading">#</a></h3>
+<p>Keep the first two terms of <span class="math notranslate nohighlight">\(f(x+h) = f(x) + h f'(x) + \tfrac{h^2}{2} f''(x) + \dots\)</span> and solve for <span class="math notranslate nohighlight">\(f'(x)\)</span>:
+$<span class="math notranslate nohighlight">\( f'(x) \approx \frac{f(x+h) - f(x)}{h}, \qquad \text{error} \approx \frac{h}{2} f''(x) = O(h). \)</span>$</p>
+<p>Each formula is a function of <code class="docutils literal notranslate"><span class="pre">f</span></code>, the point <code class="docutils literal notranslate"><span class="pre">x</span></code> and the step <code class="docutils literal notranslate"><span class="pre">h</span></code>; we check it at <span class="math notranslate nohighlight">\(x = 1\)</span> with <span class="math notranslate nohighlight">\(h = 0.1\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">h</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"forward, h = 0.1:"</span><span class="p">,</span> <span class="n">forward</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="s2">"   error:"</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">forward</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">-</span> <span class="n">exact</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>forward, h = 0.1: 1.117821685059659    error: 0.024544843720339937
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-backward-difference">
+<h3>Step 3: backward difference<a class="headerlink" href="#step-3-backward-difference" title="Link to this heading">#</a></h3>
+<p>The same with <span class="math notranslate nohighlight">\(f(x-h) = f(x) - h f'(x) + \tfrac{h^2}{2} f''(x) - \dots\)</span>:
+$<span class="math notranslate nohighlight">\( f'(x) \approx \frac{f(x) - f(x-h)}{h}, \qquad \text{error} \approx -\frac{h}{2} f''(x) = O(h). \)</span>$</p>
+<p>About the same size of error as forward, but with the <strong>opposite sign</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">backward</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">h</span><span class="p">))</span> <span class="o">/</span> <span class="n">h</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"backward, h = 0.1:"</span><span class="p">,</span> <span class="n">backward</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="s2">"   error:"</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">backward</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">-</span> <span class="n">exact</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>backward, h = 0.1: 1.0580620704846455    error: 0.035214770854673505
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-central-difference">
+<h3>Step 4: central difference<a class="headerlink" href="#step-4-central-difference" title="Link to this heading">#</a></h3>
+<p>Subtract the two Taylor series: the <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(f''\)</span> terms cancel,
+$<span class="math notranslate nohighlight">\( f(x+h) - f(x-h) = 2h f'(x) + \tfrac{h^3}{3} f'''(x) + \dots \)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\( f'(x) \approx \frac{f(x+h) - f(x-h)}{2h}, \qquad \text{error} \approx \frac{h^2}{6} f'''(x) = O(h^2). \)</span>$</p>
+<p>It is the <strong>average</strong> of forward and backward: their errors cancel.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">central</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">h</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"central, h = 0.1:"</span><span class="p">,</span> <span class="n">central</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="s2">"   error:"</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">central</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">-</span> <span class="n">exact</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>central, h = 0.1: 1.0879418777721521    error: 0.005334963567166895
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-5-5-point-fourth-order-central-difference">
+<h3>Step 5: 5-point (fourth-order) central difference<a class="headerlink" href="#step-5-5-point-fourth-order-central-difference" title="Link to this heading">#</a></h3>
+<p>Combine central differences with steps <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(2h\)</span> so that the <span class="math notranslate nohighlight">\(h^2\)</span> error terms cancel too:
+$<span class="math notranslate nohighlight">\( f'(x) \approx \frac{-f(x+2h) + 8f(x+h) - 8f(x-h) + f(x-2h)}{12h}, \qquad \text{error} = O(h^4). \)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">five_point</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="p">)</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="mi">8</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">12</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"5-point, h = 0.1:"</span><span class="p">,</span> <span class="n">five_point</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="s2">"   error:"</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">five_point</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">-</span> <span class="n">exact</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5-point, h = 0.1: 1.0932301850886785    error: 4.665625064048662e-05
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-6-summary-and-a-list-to-loop-over">
+<h3>Step 6: summary, and a list to loop over<a class="headerlink" href="#step-6-summary-and-a-list-to-loop-over" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>name</p></th>
+<th class="head"><p>formula</p></th>
+<th class="head"><p>error</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>forward</p></td>
+<td><p><span class="math notranslate nohighlight">\(\dfrac{f(x+h) - f(x)}{h}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(h)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>backward</p></td>
+<td><p><span class="math notranslate nohighlight">\(\dfrac{f(x) - f(x-h)}{h}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(h)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>central</p></td>
+<td><p><span class="math notranslate nohighlight">\(\dfrac{f(x+h) - f(x-h)}{2h}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(h^2)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>5-point</p></td>
+<td><p><span class="math notranslate nohighlight">\(\dfrac{-f(x+2h) + 8f(x+h) - 8f(x-h) + f(x-2h)}{12h}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(h^4)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span class="math notranslate nohighlight">\(O(h^p)\)</span> means: halve <span class="math notranslate nohighlight">\(h\)</span> and the error is divided by <span class="math notranslate nohighlight">\(2^p\)</span>.</p>
+<p>In Python a function is an object like any other, so we can put the four functions in a <strong>list</strong> and loop over them, with a second list holding their names.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fd_names</span>   <span class="o">=</span> <span class="p">[</span><span class="s2">"forward"</span><span class="p">,</span> <span class="s2">"backward"</span><span class="p">,</span> <span class="s2">"central"</span><span class="p">,</span> <span class="s2">"5-point"</span><span class="p">]</span>
+<span class="n">fd_methods</span> <span class="o">=</span> <span class="p">[</span><span class="n">forward</span><span class="p">,</span> <span class="n">backward</span><span class="p">,</span> <span class="n">central</span><span class="p">,</span> <span class="n">five_point</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">D</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fd_names</span><span class="p">,</span> <span class="n">fd_methods</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">9s</span><span class="si">}</span><span class="s2">  h = 0.1:  error = </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">D</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">exact</span><span class="p">)</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>forward    h = 0.1:  error = 2.45e-02
+backward   h = 0.1:  error = 3.52e-02
+central    h = 0.1:  error = 5.33e-03
+5-point    h = 0.1:  error = 4.67e-05
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-1-the-error-at-x-0-1-for-several-step-sizes">
+<h3>Example 1: the error at <span class="math notranslate nohighlight">\(x_0 = 1\)</span> for several step sizes<a class="headerlink" href="#example-1-the-error-at-x-0-1-for-several-step-sizes" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"exact f'(1) = </span><span class="si">{</span><span class="n">exact</span><span class="si">:</span><span class="s2">.15f</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'h'</span><span class="si">:</span><span class="s2">&gt;8s</span><span class="si">}</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&gt;12s</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">fd_names</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">1e-1</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="mf">1e-8</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">h</span><span class="si">:</span><span class="s2">8.0e</span><span class="si">}</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">D</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">exact</span><span class="p">)</span><span class="si">:</span><span class="s2">12.2e</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">D</span> <span class="ow">in</span> <span class="n">fd_methods</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>exact f'(1) = 1.093276841339319
+
+       h     forward    backward     central     5-point
+   1e-01    2.45e-02    3.52e-02    5.33e-03    4.67e-05
+   1e-02    2.95e-03    3.06e-03    5.35e-05    4.68e-09
+   1e-03    3.00e-04    3.01e-04    5.35e-07    5.76e-13
+   1e-04    3.00e-05    3.00e-05    5.35e-09    2.29e-13
+   1e-06    3.00e-07    3.00e-07    4.12e-12    2.36e-11
+   1e-08    5.49e-09    5.61e-09    5.96e-11    1.91e-09
+   1e-10    2.61e-07    2.61e-07    2.61e-07    4.46e-07
+   1e-12    7.08e-05    1.51e-04    4.02e-05    4.02e-05
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-2-error-against-h-on-a-log-log-plot">
+<h3>Example 2: error against <span class="math notranslate nohighlight">\(h\)</span> on a log-log plot<a class="headerlink" href="#example-2-error-against-h-on-a-log-log-plot" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">151</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">D</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fd_names</span><span class="p">,</span> <span class="n">fd_methods</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">hs</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">D</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">hs</span><span class="p">)</span> <span class="o">-</span> <span class="n">exact</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1e-20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">hs</span><span class="p">,</span> <span class="mf">2.2e-16</span> <span class="o">/</span> <span class="n">hs</span><span class="p">,</span> <span class="s2">"k:"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"round-off  ε/h"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"step h"</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"|error|"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">1e-16</span><span class="p">,</span> <span class="mf">1e1</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ec2a507bdb10ba0a01a2c42c50008faffd66b24906cddaa73a2b6b8341f7f7e0.png" src="../_images/ec2a507bdb10ba0a01a2c42c50008faffd66b24906cddaa73a2b6b8341f7f7e0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p><strong>Right side (large <span class="math notranslate nohighlight">\(h\)</span>): truncation error.</strong> It falls with slope 1 (forward, backward), 2 (central) and 4 (5-point). Forward and backward are equally good; central and 5-point are much better.</p></li>
+<li><p><strong>Left side (small <span class="math notranslate nohighlight">\(h\)</span>): round-off error.</strong> <span class="math notranslate nohighlight">\(f(x+h)\)</span> and <span class="math notranslate nohighlight">\(f(x)\)</span> are almost equal, so their difference loses digits; dividing by a tiny <span class="math notranslate nohighlight">\(h\)</span> makes it worse. This error grows like <span class="math notranslate nohighlight">\(\varepsilon / h\)</span>, <span class="math notranslate nohighlight">\(\varepsilon \approx 2.2\times10^{-16}\)</span>.</p></li>
+<li><p><strong>Together:</strong> as <span class="math notranslate nohighlight">\(h\)</span> gets smaller, the error first goes <strong>down</strong> (less truncation error) and then goes <strong>up</strong> again (more round-off error). Each curve is V-shaped, so each formula has a <strong>best step size</strong> <span class="math notranslate nohighlight">\(h\)</span> at the bottom of its V. Making <span class="math notranslate nohighlight">\(h\)</span> smaller than that only makes the result worse.</p></li>
+<li><p>Read off from the plot above (<span class="math notranslate nohighlight">\(f\)</span> at <span class="math notranslate nohighlight">\(x_0 = 1\)</span>):</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>formula</p></th>
+<th class="head"><p>best <span class="math notranslate nohighlight">\(h\)</span></p></th>
+<th class="head"><p>best error</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>forward, backward</p></td>
+<td><p><span class="math notranslate nohighlight">\(\approx 10^{-8}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\approx 10^{-8}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>central</p></td>
+<td><p><span class="math notranslate nohighlight">\(\approx 10^{-5}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\approx 10^{-11}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>5-point</p></td>
+<td><p><span class="math notranslate nohighlight">\(\approx 10^{-3}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\approx 10^{-13}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="example-3-the-derivative-on-a-whole-interval">
+<h3>Example 3: the derivative on a whole interval<a class="headerlink" href="#example-3-the-derivative-on-a-whole-interval" title="Link to this heading">#</a></h3>
+<p>The formulas work with NumPy arrays, so we can compute <span class="math notranslate nohighlight">\(f'\)</span> at many points at once.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="mf">0.3</span>                                      <span class="c1"># a large h, to make the differences visible</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">df_np</span><span class="p">(</span><span class="n">xx</span><span class="p">),</span> <span class="s2">"k--"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"exact f'"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">D</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fd_names</span><span class="p">,</span> <span class="n">fd_methods</span><span class="p">):</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">D</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">xx</span><span class="p">,</span> <span class="n">h</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">D</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">xx</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">df_np</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span> <span class="o">+</span> <span class="mf">1e-20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"f'(x) with h = </span><span class="si">{</span><span class="n">h</span><span class="si">}</span><span class="s2">"</span><span class="p">);</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"|error|"</span><span class="p">);</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axs</span><span class="p">:</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6cfbec5a9cbd9c3c50279d98050fff147918c4bfb8df322c74b342e1fbdb52f6.png" src="../_images/6cfbec5a9cbd9c3c50279d98050fff147918c4bfb8df322c74b342e1fbdb52f6.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>With <span class="math notranslate nohighlight">\(h = 0.3\)</span> forward and backward are visibly shifted (to opposite sides), central is close, 5-point is on top of the exact curve.</p></li>
+<li><p>Finite differences only need <strong>values</strong> of <span class="math notranslate nohighlight">\(f\)</span>, not a formula. But they are never exact, and you must choose <span class="math notranslate nohighlight">\(h\)</span>.</p></li>
+</ul>
+</section>
+</section>
+<section id="comparison-at-x-0-1">
+<h2>Comparison at <span class="math notranslate nohighlight">\(x_0 = 1\)</span><a class="headerlink" href="#comparison-at-x-0-1" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">names</span>  <span class="o">=</span> <span class="p">[</span><span class="s2">"symbolic (SymPy)"</span><span class="p">,</span> <span class="s2">"forward,  h=1e-8"</span><span class="p">,</span> <span class="s2">"backward, h=1e-8"</span><span class="p">,</span> <span class="s2">"central,  h=1e-5"</span><span class="p">,</span>
+          <span class="s2">"5-point,  h=1e-3"</span><span class="p">]</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">exact</span><span class="p">,</span> <span class="n">forward</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1e-8</span><span class="p">),</span> <span class="n">backward</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1e-8</span><span class="p">),</span> <span class="n">central</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">),</span>
+          <span class="n">five_point</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">)]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'method'</span><span class="si">:</span><span class="s2">18s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'derivative'</span><span class="si">:</span><span class="s2">&gt;20s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'error'</span><span class="si">:</span><span class="s2">&gt;10s</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">18s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">20.15f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">exact</span><span class="p">)</span><span class="si">:</span><span class="s2">10.1e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>method                       derivative      error
+symbolic (SymPy)      1.093276841339319    0.0e+00
+forward,  h=1e-8      1.093276846830804    5.5e-09
+backward, h=1e-8      1.093276835728574    5.6e-09
+central,  h=1e-5      1.093276841285240    5.4e-11
+5-point,  h=1e-3      1.093276841338743    5.8e-13
+</pre></div>
+</div>
+</div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>symbolic (SymPy)</p></th>
+<th class="head"><p>finite differences</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>needs</p></td>
+<td><p>a formula</p></td>
+<td><p>values of <span class="math notranslate nohighlight">\(f\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>result</p></td>
+<td><p>exact formula</p></td>
+<td><p>approximate number</p></td>
+</tr>
+<tr class="row-even"><td><p>choose a step <span class="math notranslate nohighlight">\(h\)</span>?</p></td>
+<td><p>no</p></td>
+<td><p><strong>yes</strong>: too large = truncation error, too small = round-off</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>Use a <strong>central difference</strong> to check a derivative you computed in another way (by hand or with SymPy).</p></li>
+</ul>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p>In each exercise use <strong>both</strong> approaches. Write each function twice (a SymPy expression and a NumPy function), as in Parts A and B.</p>
+<p><strong>Syntax</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>task</p></th>
+<th class="head"><p>call</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>symbol, derivative, <span class="math notranslate nohighlight">\(n\)</span>-th derivative</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">sp.symbols(&quot;x&quot;)</span></code>, <code class="docutils literal notranslate"><span class="pre">sp.diff(f,</span> <span class="pre">x)</span></code>, <code class="docutils literal notranslate"><span class="pre">sp.diff(f,</span> <span class="pre">x,</span> <span class="pre">n)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>zero of an expression near a guess</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.nsolve(expr,</span> <span class="pre">x,</span> <span class="pre">x0)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>expression <span class="math notranslate nohighlight">\(\to\)</span> NumPy function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.lambdify(x,</span> <span class="pre">expr,</span> <span class="pre">&quot;numpy&quot;)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>finite differences</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">forward(f,</span> <span class="pre">x,</span> <span class="pre">h)</span></code>, <code class="docutils literal notranslate"><span class="pre">backward(f,</span> <span class="pre">x,</span> <span class="pre">h)</span></code>, <code class="docutils literal notranslate"><span class="pre">central(f,</span> <span class="pre">x,</span> <span class="pre">h)</span></code>, <code class="docutils literal notranslate"><span class="pre">five_point(f,</span> <span class="pre">x,</span> <span class="pre">h)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\ln u\)</span></p></td>
+<td><p>SymPy: <code class="docutils literal notranslate"><span class="pre">sp.log(u)</span></code>; NumPy: <code class="docutils literal notranslate"><span class="pre">np.log(u)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\sqrt{u}\)</span></p></td>
+<td><p>SymPy: <code class="docutils literal notranslate"><span class="pre">sp.sqrt(u)</span></code>; NumPy: <code class="docutils literal notranslate"><span class="pre">np.sqrt(u)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\cos u\)</span></p></td>
+<td><p>SymPy: <code class="docutils literal notranslate"><span class="pre">sp.cos(u)</span></code>; NumPy: <code class="docutils literal notranslate"><span class="pre">np.cos(u)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>log-log plot</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ax.loglog(h,</span> <span class="pre">err)</span></code>; values <code class="docutils literal notranslate"><span class="pre">np.logspace(a,</span> <span class="pre">b,</span> <span class="pre">n)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Exercise 1.</strong> Let
+$<span class="math notranslate nohighlight">\( f(x) = \frac{\ln(1 + x^2)}{1 + x}. \)</span>$</p>
+<p>(a) <strong>Symbolic.</strong> Compute <span class="math notranslate nohighlight">\(f'\)</span> and <span class="math notranslate nohighlight">\(f''\)</span> with SymPy. Plot <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(f'\)</span> on <span class="math notranslate nohighlight">\([0, 5]\)</span> (use <code class="docutils literal notranslate"><span class="pre">lambdify</span></code>). Find the maximum of <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\([0, 5]\)</span> by solving <span class="math notranslate nohighlight">\(f'(x) = 0\)</span> with <code class="docutils literal notranslate"><span class="pre">sp.nsolve</span></code> (start from a guess read off the plot), and check that <span class="math notranslate nohighlight">\(f'' &lt; 0\)</span> there.</p>
+<p>(b) <strong>Finite differences.</strong> At <span class="math notranslate nohighlight">\(x = 1\)</span>, compute the forward, backward, central and 5-point approximations of <span class="math notranslate nohighlight">\(f'(1)\)</span> for <span class="math notranslate nohighlight">\(h = 10^{-1}, 10^{-2}, \dots, 10^{-15}\)</span>. Plot the four errors against <span class="math notranslate nohighlight">\(h\)</span> on a log-log plot (use the exact value from (a)). Read off the best <span class="math notranslate nohighlight">\(h\)</span> and the smallest error for each formula.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exercise 1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise 2.</strong> Let
+$<span class="math notranslate nohighlight">\( f(x) = \sqrt{1 + x^2}\,\cos(3x) \quad \text{on } [-2, 2]. \)</span>$</p>
+<p>(a) <strong>Symbolic.</strong> Compute <span class="math notranslate nohighlight">\(f'\)</span> with SymPy and turn it into a NumPy function with <code class="docutils literal notranslate"><span class="pre">lambdify</span></code>.</p>
+<p>(b) <strong>Finite differences.</strong> On 200 points of <span class="math notranslate nohighlight">\([-2, 2]\)</span> compute <span class="math notranslate nohighlight">\(f'\)</span> with the four formulas, once with <span class="math notranslate nohighlight">\(h = 0.1\)</span> and once with <span class="math notranslate nohighlight">\(h = 10^{-3}\)</span>. Plot the errors against <span class="math notranslate nohighlight">\(x\)</span> (log scale on the <span class="math notranslate nohighlight">\(y\)</span>-axis), using (a) as the exact derivative. Which formula is best, and by how much does each error drop when <span class="math notranslate nohighlight">\(h\)</span> goes from <span class="math notranslate nohighlight">\(0.1\)</span> to <span class="math notranslate nohighlight">\(10^{-3}\)</span>? Does this agree with the orders <span class="math notranslate nohighlight">\(O(h)\)</span>, <span class="math notranslate nohighlight">\(O(h^2)\)</span>, <span class="math notranslate nohighlight">\(O(h^4)\)</span>?</p>
+<p>(c) <strong>Best step size.</strong> At <span class="math notranslate nohighlight">\(x = 0.5\)</span>, compute the error of the central and the 5-point formulas for <span class="math notranslate nohighlight">\(h = 10^{-1}, 10^{-2}, \dots, 10^{-15}\)</span> and plot both against <span class="math notranslate nohighlight">\(h\)</span> on a log-log plot. Read off the best <span class="math notranslate nohighlight">\(h\)</span> and the smallest error for each, and compare with the table in Part B.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exercise 2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="interpolation_extrapolation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Extrapolation (1-D) and scattered data (2-D) with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code></p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-symbolic-differentiation-sympy">Part A. Symbolic differentiation (SymPy)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-declare-the-symbol-and-the-function">Step 1: declare the symbol and the function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-differentiate">Step 2: differentiate</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b-finite-differences">Part B. Finite differences</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-the-function-as-a-numpy-function">Step 1: the function as a NumPy function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-forward-difference">Step 2: forward difference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-backward-difference">Step 3: backward difference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-central-difference">Step 4: central difference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-5-point-fourth-order-central-difference">Step 5: 5-point (fourth-order) central difference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-summary-and-a-list-to-loop-over">Step 6: summary, and a list to loop over</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-the-error-at-x-0-1-for-several-step-sizes">Example 1: the error at <span class="math notranslate nohighlight">\(x_0 = 1\)</span> for several step sizes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-error-against-h-on-a-log-log-plot">Example 2: error against <span class="math notranslate nohighlight">\(h\)</span> on a log-log plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-the-derivative-on-a-whole-interval">Example 3: the derivative on a whole interval</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-at-x-0-1">Comparison at <span class="math notranslate nohighlight">\(x_0 = 1\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sharareh Sayyad
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -305,6 +305,10 @@
 <li class="toctree-l1"><a class="reference internal" href="scipy_interpolation_2d.html">Interpolation with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code> (2-D)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolation_extrapolation.html">Extrapolation (1-D) and scattered data (2-D) with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code></a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Differentiation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="symbolic_finite_differences.html">Derivatives on the computer: symbolic differentiation and finite differences</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -743,7 +747,9 @@ as a list       : [a0, a1, a2]
 expand          : x**3 + 3*x**2 + 3*x + 1
 factor          : x*(x - 1)*(x + 1)
 simplify        : 1
-cancel / apart  : x + 1   |   -1/(x + 1) + 1/x
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cancel / apart  : x + 1   |   -1/(x + 1) + 1/x
 collect         : x**2*(y + 1) + x*(3*y + 1)
 subs            : 23   |   -x*(x - 1) + (x + sin(x))**2
 </pre></div>
@@ -1342,7 +1348,7 @@ sin(x)/x two-sided: 1    (1+1/x)^x at oo: E
 <img alt="../_images/f6bb57d8f89842e506ec11e782740507a356e52590af3f40ce3526e34e9db10c.png" src="../_images/f6bb57d8f89842e506ec11e782740507a356e52590af3f40ce3526e34e9db10c.png" />
 <img alt="../_images/ea5d114f1575c3cbb62484e2bd3fe7da05345c734288d7b7fdb13cf6966a5e55.png" src="../_images/ea5d114f1575c3cbb62484e2bd3fe7da05345c734288d7b7fdb13cf6966a5e55.png" />
 <img alt="../_images/f6bb57d8f89842e506ec11e782740507a356e52590af3f40ce3526e34e9db10c.png" src="../_images/f6bb57d8f89842e506ec11e782740507a356e52590af3f40ce3526e34e9db10c.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>subs in a loop: 1.2048 s,   lambdify: 0.000083 s,   same values: True
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>subs in a loop: 1.2366 s,   lambdify: 0.000098 s,   same values: True
 F2(0.5, [0, 1, 2]) = [ 0.47942554  0.25903472 -0.19951142]
 constant lambdified on an array: 3   -&gt; use np.full_like: [3. 3. 3. 3.]
 Matrix -&gt; NumPy:
