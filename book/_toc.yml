@@ -35,3 +35,8 @@ parts:
   - caption: Differentiation
     chapters:
       - file: notebooks/symbolic_finite_differences
+      - file: notebooks/finite_differences
+      
+  - caption: Solving ODEs
+    chapters:
+      - file: notebooks/ivp_with_sympy
