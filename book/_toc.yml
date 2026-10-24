@@ -35,7 +35,7 @@ parts:
   - caption: Differentiation
     chapters:
       - file: notebooks/symbolic_finite_differences
-      - file: notebooks/finite_differences
+      - file: notebooks/derivatives_from_data
       
   - caption: Solving ODEs
     chapters:
