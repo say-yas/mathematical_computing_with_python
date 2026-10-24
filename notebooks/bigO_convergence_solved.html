@@ -308,6 +308,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Differentiation</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="symbolic_finite_differences.html">Derivatives on the computer: symbolic differentiation and finite differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="derivatives_from_data.html">Derivatives from data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Solving ODEs</span></p>
 <ul class="nav bd-sidenav">
@@ -761,7 +762,7 @@ It looks at large inputs and ignores constant factors.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[    100     464    2154   10000   46415  215443 1000000]
 </pre></div>
 </div>
-<img alt="../_images/0b0f184d0ed739b22aa25e682fefcd97347bdf4f08e43c61d80e617e5aeaeae6.png" src="../_images/0b0f184d0ed739b22aa25e682fefcd97347bdf4f08e43c61d80e617e5aeaeae6.png" />
+<img alt="../_images/ab07bc79ef98e1eac0f7403b4f041933c6e9a1396a8efc45d1bffeac47bb2925.png" src="../_images/ab07bc79ef98e1eac0f7403b4f041933c6e9a1396a8efc45d1bffeac47bb2925.png" />
 </div>
 </div>
 <p>The slopes come out close to <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span>, which <strong>agrees</strong> with the predictions. Two things to keep in mind:</p>
@@ -792,8 +793,8 @@ It looks at large inputs and ignores constant factors.</p>
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/ae3487156f1b5ed55b61badaa3e3503ea60284e24189980e402975dfd7e2519f.png" src="../_images/ae3487156f1b5ed55b61badaa3e3503ea60284e24189980e402975dfd7e2519f.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope for small n: 1.0008273016704985
-slope for large n: 1.9777525854559221
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope for small n: 1.0008273016704996
+slope for large n: 1.9777525854559215
 </pre></div>
 </div>
 </div>
@@ -829,10 +830,10 @@ slope for large n: 1.9777525854559221
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6765734359429831   growth factor b = e^slope: 1.9671256885019195
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.697602303111016   growth factor b = e^slope: 2.008930122727209
 </pre></div>
 </div>
-<img alt="../_images/5e7dbd5fbb0b502da72ca1c9c141ca1338cdd1a46f70a64e2956025aec2d8ebe.png" src="../_images/5e7dbd5fbb0b502da72ca1c9c141ca1338cdd1a46f70a64e2956025aec2d8ebe.png" />
+<img alt="../_images/1a4a585e327ebbc83d03b7befea44b272184dc515f7f707a69ce5e1182003d13.png" src="../_images/1a4a585e327ebbc83d03b7befea44b272184dc515f7f707a69ce5e1182003d13.png" />
 </div>
 </div>
 </section>
@@ -943,7 +944,7 @@ quadratic: 1.9999999999999998
 sublinear: nan
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2442/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2174/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
   y = np.log(np.abs(np.diff(np.log(eps))))
 </pre></div>
 </div>
@@ -1132,11 +1133,11 @@ has_duplicate_sorted([3, 1, 4, 5]) = False    (expected: False)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope nested: 2.0441081526261815
-slope sorted: 1.202277635580656
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope nested: 2.0432495257801193
+slope sorted: 1.1198287055005545
 </pre></div>
 </div>
-<img alt="../_images/170c0b40e25e87fd12537eeaae0ad77805ff511dba823dd659d8d95083f0c70a.png" src="../_images/170c0b40e25e87fd12537eeaae0ad77805ff511dba823dd659d8d95083f0c70a.png" />
+<img alt="../_images/9fa7a7633cdff0303e90c4d2468e516097e2ff7413168ac6ce55322c4eb683e5.png" src="../_images/9fa7a7633cdff0303e90c4d2468e516097e2ff7413168ac6ce55322c4eb683e5.png" />
 </div>
 </div>
 <p><strong>Questions:</strong></p>
@@ -1293,7 +1294,7 @@ k = 13:  e_(k+1) / e_k = 0.292893
 k = 14:  e_(k+1) / e_k = 0.292893
 |g'(x_star)| = 0.2928932188134524
 q fixed point: 1.0067061303618703
-q Newton     : 2.0672485365879605
+q Newton     : 2.067248536587961
 </pre></div>
 </div>
 </div>

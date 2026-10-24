@@ -308,6 +308,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Differentiation</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="symbolic_finite_differences.html">Derivatives on the computer: symbolic differentiation and finite differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="derivatives_from_data.html">Derivatives from data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Solving ODEs</span></p>
 <ul class="nav bd-sidenav">
@@ -761,7 +762,7 @@ It looks at large inputs and ignores constant factors.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[    100     464    2154   10000   46415  215443 1000000]
 </pre></div>
 </div>
-<img alt="../_images/e8e6d47a79584bb74fc54e085931cfb2e24671b4dc4c51c135a58a5e35ff97d8.png" src="../_images/e8e6d47a79584bb74fc54e085931cfb2e24671b4dc4c51c135a58a5e35ff97d8.png" />
+<img alt="../_images/fba32bd8a7f2c3c35bcf5705df2215aa531a71b1ab9777170258d0f87502fb56.png" src="../_images/fba32bd8a7f2c3c35bcf5705df2215aa531a71b1ab9777170258d0f87502fb56.png" />
 </div>
 </div>
 <p>The slopes come out close to <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span>, which <strong>agrees</strong> with the predictions. Two things to keep in mind:</p>
@@ -792,8 +793,8 @@ It looks at large inputs and ignores constant factors.</p>
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/ae3487156f1b5ed55b61badaa3e3503ea60284e24189980e402975dfd7e2519f.png" src="../_images/ae3487156f1b5ed55b61badaa3e3503ea60284e24189980e402975dfd7e2519f.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope for small n: 1.0008273016704985
-slope for large n: 1.9777525854559221
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope for small n: 1.0008273016704996
+slope for large n: 1.9777525854559215
 </pre></div>
 </div>
 </div>
@@ -829,10 +830,10 @@ slope for large n: 1.9777525854559221
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.7010010734700961   growth factor b = e^slope: 2.0157696312572684
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.7040650067844874   growth factor b = e^slope: 2.021955286362908
 </pre></div>
 </div>
-<img alt="../_images/a26621b5cad99404df851edf8ce85bb51d5d4229d5ed5249160ca13d81b6aa92.png" src="../_images/a26621b5cad99404df851edf8ce85bb51d5d4229d5ed5249160ca13d81b6aa92.png" />
+<img alt="../_images/68ea72d299cd55e64c50b633c8bf5911d74588546fc6f7a66b8b8d12891d408a.png" src="../_images/68ea72d299cd55e64c50b633c8bf5911d74588546fc6f7a66b8b8d12891d408a.png" />
 </div>
 </div>
 </section>
@@ -943,7 +944,7 @@ quadratic: 1.9999999999999998
 sublinear: nan
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2416/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2149/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
   y = np.log(np.abs(np.diff(np.log(eps))))
 </pre></div>
 </div>

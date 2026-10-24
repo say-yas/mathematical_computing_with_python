@@ -68,7 +68,7 @@
     <script src="../_static/collapsible-captions.js?v=a30ef615"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Initial value problems with SymPy" href="ivp_with_sympy.html" />
+    <link rel="next" title="Derivatives from data" href="derivatives_from_data.html" />
     <link rel="prev" title="Extrapolation (1-D) and scattered data (2-D) with scipy.interpolate" href="interpolation_extrapolation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -308,6 +308,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Differentiation</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Derivatives on the computer: symbolic differentiation and finite differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="derivatives_from_data.html">Derivatives from data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Solving ODEs</span></p>
 <ul class="nav bd-sidenav">
@@ -681,9 +682,7 @@ $<span class="math notranslate nohighlight">\( f(x) = x^2 \sin x \; e^{-x/2}, \q
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f'  = -x**2*exp(-x/2)*sin(x)/2 + x**2*exp(-x/2)*cos(x) + 2*x*exp(-x/2)*sin(x)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f'' = (-3*x**2*sin(x)/4 - x**2*cos(x) - 2*x*sin(x) + 4*x*cos(x) + 2*sin(x))*exp(-x/2)
+f'' = (-3*x**2*sin(x)/4 - x**2*cos(x) - 2*x*sin(x) + 4*x*cos(x) + 2*sin(x))*exp(-x/2)
 
 f'(1) exact  : exp(-1/2)*cos(1) + 3*exp(-1/2)*sin(1)/2
 f'(1) numeric: 1.093276841339319
@@ -900,10 +899,10 @@ central    h = 0.1:  error = 5.33e-03
    1e-02    2.95e-03    3.06e-03    5.35e-05    4.68e-09
    1e-03    3.00e-04    3.01e-04    5.35e-07    5.76e-13
    1e-04    3.00e-05    3.00e-05    5.35e-09    2.29e-13
-   1e-06    3.00e-07    3.00e-07    4.12e-12    2.36e-11
+   1e-06    3.00e-07    3.00e-07    4.12e-12    1.44e-11
    1e-08    5.49e-09    5.61e-09    5.96e-11    1.91e-09
    1e-10    2.61e-07    2.61e-07    2.61e-07    4.46e-07
-   1e-12    7.08e-05    1.51e-04    4.02e-05    4.02e-05
+   1e-12    7.08e-05    4.02e-05    1.53e-05    3.38e-05
 </pre></div>
 </div>
 </div>
@@ -925,7 +924,7 @@ central    h = 0.1:  error = 5.33e-03
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ec2a507bdb10ba0a01a2c42c50008faffd66b24906cddaa73a2b6b8341f7f7e0.png" src="../_images/ec2a507bdb10ba0a01a2c42c50008faffd66b24906cddaa73a2b6b8341f7f7e0.png" />
+<img alt="../_images/dbc82d1c5fbfe16eab1931b1cc63afa2ba6a21c0a1bb41d760b34738bfe1964d.png" src="../_images/dbc82d1c5fbfe16eab1931b1cc63afa2ba6a21c0a1bb41d760b34738bfe1964d.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1143,11 +1142,11 @@ $<span class="math notranslate nohighlight">\( f(x) = \sqrt{1 + x^2}\,\cos(3x) \
       </div>
     </a>
     <a class="right-next"
-       href="ivp_with_sympy.html"
+       href="derivatives_from_data.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Initial value problems with SymPy</p>
+        <p class="prev-next-title">Derivatives from data</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
