@@ -313,6 +313,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Solving ODEs</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="ivp_with_sympy.html">Initial value problems with SymPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solve_ivp_scipy.html">Solving initial value problems numerically with SciPy</a></li>
 </ul>
 
     </div>
@@ -762,7 +763,7 @@ It looks at large inputs and ignores constant factors.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[    100     464    2154   10000   46415  215443 1000000]
 </pre></div>
 </div>
-<img alt="../_images/fba32bd8a7f2c3c35bcf5705df2215aa531a71b1ab9777170258d0f87502fb56.png" src="../_images/fba32bd8a7f2c3c35bcf5705df2215aa531a71b1ab9777170258d0f87502fb56.png" />
+<img alt="../_images/7af5a2a3527abeffd07426fbe1aa3ed747fef0da5e45a5f51fc95454077d05f8.png" src="../_images/7af5a2a3527abeffd07426fbe1aa3ed747fef0da5e45a5f51fc95454077d05f8.png" />
 </div>
 </div>
 <p>The slopes come out close to <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span>, which <strong>agrees</strong> with the predictions. Two things to keep in mind:</p>
@@ -830,10 +831,10 @@ slope for large n: 1.9777525854559215
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.7040650067844874   growth factor b = e^slope: 2.021955286362908
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6961520200809441   growth factor b = e^slope: 2.006018717152968
 </pre></div>
 </div>
-<img alt="../_images/68ea72d299cd55e64c50b633c8bf5911d74588546fc6f7a66b8b8d12891d408a.png" src="../_images/68ea72d299cd55e64c50b633c8bf5911d74588546fc6f7a66b8b8d12891d408a.png" />
+<img alt="../_images/5b5f3ecf59cf89279204028bcb1bd187b06c44237558ef09ec21c67ac4aa1382.png" src="../_images/5b5f3ecf59cf89279204028bcb1bd187b06c44237558ef09ec21c67ac4aa1382.png" />
 </div>
 </div>
 </section>
@@ -944,7 +945,7 @@ quadratic: 1.9999999999999998
 sublinear: nan
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2149/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2127/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
   y = np.log(np.abs(np.diff(np.log(eps))))
 </pre></div>
 </div>
