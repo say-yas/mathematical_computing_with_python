@@ -40,3 +40,4 @@ parts:
   - caption: Solving ODEs
     chapters:
       - file: notebooks/ivp_with_sympy
+      - file: notebooks/solve_ivp_scipy
