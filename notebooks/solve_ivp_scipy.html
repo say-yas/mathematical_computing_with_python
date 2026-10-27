@@ -692,7 +692,7 @@ sol.y = [[ 1.     0.958  1.015  1.398  0.408 -0.748 -0.261  0.873  0.466]]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>max error: 0.0007428953537662597
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>max error: 0.0007428953537667038
 </pre></div>
 </div>
 </div>
@@ -730,7 +730,9 @@ Otherwise it repeats the step with a smaller step size.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   rtol      max error   calls of f
    1e-03     7.4e-04      56
    1e-06     2.7e-06     176
-   1e-09     1.6e-08     560
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   1e-09     1.6e-08     560
 </pre></div>
 </div>
 </div>
@@ -800,8 +802,11 @@ rtol = 1e-10:   y(3) = 4.8594856793
 <section id="part-d-when-the-solution-blows-up-stop-with-an-event">
 <h2>Part D. When the solution blows up: stop with an event<a class="headerlink" href="#part-d-when-the-solution-blows-up-stop-with-an-event" title="Link to this heading">#</a></h2>
 <p>Some solutions go to infinity in <strong>finite time</strong>. Example:
-$<span class="math notranslate nohighlight">\( y' = y^2, \qquad y(0) = 1, \qquad \text{exact: } y(t) = \frac{1}{1 - t}. \)</span><span class="math notranslate nohighlight">\(
-As \)</span>t \to 1<span class="math notranslate nohighlight">\(, \)</span>y(t) \to \infty<span class="math notranslate nohighlight">\(: the solution does not exist beyond \)</span>t = 1$.</p>
+$<span class="math notranslate nohighlight">\( y' = y^2, \qquad y(0) = 1, \qquad \text{exact: } y(t) = \frac{1}{1 - t}. \)</span>$
+As</p>
+<div class="math notranslate nohighlight">
+\[\lim_{t \to 1} y(t) = \infty,\]</div>
+<p>the solution does not exist beyond <span class="math notranslate nohighlight">\(t = 1\)</span>.</p>
 <section id="step-1-what-solve-ivp-does">
 <h3>Step 1: what <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> does<a class="headerlink" href="#step-1-what-solve-ivp-does" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
@@ -820,8 +825,8 @@ As \)</span>t \to 1<span class="math notranslate nohighlight">\(, \)</span>y(t) 
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>success: False
 message: Required step size is less than spacing between numbers.
-last t : 0.9999286400563746
-last y : 480848617754195.6
+last t : 0.9999286400563745
+last y : 491075941256903.06
 </pre></div>
 </div>
 </div>
@@ -857,7 +862,7 @@ last y : 480848617754195.6
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>status : 1   (1 = stopped by an event)
 message: A termination event occurred.
 event at t = [0.999999]
-y there    = [[999999.99996715]]
+y there    = [[1000000.0000102]]
 </pre></div>
 </div>
 </div>
