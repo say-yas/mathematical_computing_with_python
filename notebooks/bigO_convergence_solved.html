@@ -315,6 +315,10 @@
 <li class="toctree-l1"><a class="reference internal" href="ivp_with_sympy.html">Initial value problems with SymPy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solve_ivp_scipy.html">Solving initial value problems numerically with SciPy</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Integration</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="integration_with_sympy_scipy.html">Integration with SymPy and SciPy</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -763,7 +767,7 @@ It looks at large inputs and ignores constant factors.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[    100     464    2154   10000   46415  215443 1000000]
 </pre></div>
 </div>
-<img alt="../_images/8fcbdcfd0d06cdb04787a226b8dad1767dc8ce5dcbdab16fea25f56b920a018f.png" src="../_images/8fcbdcfd0d06cdb04787a226b8dad1767dc8ce5dcbdab16fea25f56b920a018f.png" />
+<img alt="../_images/5ce82c8b8af6f446fdcbca81e88750a493347d18bbbd6d33ebee9766b1fb3aa1.png" src="../_images/5ce82c8b8af6f446fdcbca81e88750a493347d18bbbd6d33ebee9766b1fb3aa1.png" />
 </div>
 </div>
 <p>The slopes come out close to <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span>, which <strong>agrees</strong> with the predictions. Two things to keep in mind:</p>
@@ -831,10 +835,10 @@ slope for large n: 1.9777525854559221
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6949345202906322   growth factor b = e^slope: 2.003577875948806
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6983514639409245   growth factor b = e^slope: 2.010435698373914
 </pre></div>
 </div>
-<img alt="../_images/04949faac405a440ababb85b8e468e3a5e93e3006753772d742047180856765b.png" src="../_images/04949faac405a440ababb85b8e468e3a5e93e3006753772d742047180856765b.png" />
+<img alt="../_images/510b95627c25e54c8dd7856d8700afcdc1bbc87f8b3bdae3a4d2dffc5aca6dcd.png" src="../_images/510b95627c25e54c8dd7856d8700afcdc1bbc87f8b3bdae3a4d2dffc5aca6dcd.png" />
 </div>
 </div>
 </section>
@@ -945,7 +949,7 @@ quadratic: 1.9999999999999998
 sublinear: nan
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2473/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2432/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
   y = np.log(np.abs(np.diff(np.log(eps))))
 </pre></div>
 </div>
@@ -1134,11 +1138,11 @@ has_duplicate_sorted([3, 1, 4, 5]) = False    (expected: False)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope nested: 2.150176290941853
-slope sorted: 1.1634955768558608
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope nested: 2.0750919445598828
+slope sorted: 1.1576929953315225
 </pre></div>
 </div>
-<img alt="../_images/7b401dee9fe6abb30a521761be5e6d360b47b1403f11f966e72b7a40c81b1934.png" src="../_images/7b401dee9fe6abb30a521761be5e6d360b47b1403f11f966e72b7a40c81b1934.png" />
+<img alt="../_images/629fcc857ab0598205cf210c8fed38ba25c8fea5a2d5efb19e7a471f79af611d.png" src="../_images/629fcc857ab0598205cf210c8fed38ba25c8fea5a2d5efb19e7a471f79af611d.png" />
 </div>
 </div>
 <p><strong>Questions:</strong></p>
