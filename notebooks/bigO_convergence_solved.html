@@ -318,6 +318,11 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Integration</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="integration_with_sympy_scipy.html">Integration with SymPy and SciPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="double_integrals_and_monte_carlo.html">Double Integrals and Monte Carlo Integration</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear algebra</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="determinants_and_eigenspaces.html">Determinants and Eigenspaces</a></li>
 </ul>
 
     </div>
@@ -767,7 +772,7 @@ It looks at large inputs and ignores constant factors.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[    100     464    2154   10000   46415  215443 1000000]
 </pre></div>
 </div>
-<img alt="../_images/5ce82c8b8af6f446fdcbca81e88750a493347d18bbbd6d33ebee9766b1fb3aa1.png" src="../_images/5ce82c8b8af6f446fdcbca81e88750a493347d18bbbd6d33ebee9766b1fb3aa1.png" />
+<img alt="../_images/659e206cb0397d1b12ea3db2eea090bd55759ef24ea803401c5dd2560e299db8.png" src="../_images/659e206cb0397d1b12ea3db2eea090bd55759ef24ea803401c5dd2560e299db8.png" />
 </div>
 </div>
 <p>The slopes come out close to <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span>, which <strong>agrees</strong> with the predictions. Two things to keep in mind:</p>
@@ -835,10 +840,10 @@ slope for large n: 1.9777525854559221
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6983514639409245   growth factor b = e^slope: 2.010435698373914
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6997206037419698   growth factor b = e^slope: 2.0131901510911443
 </pre></div>
 </div>
-<img alt="../_images/510b95627c25e54c8dd7856d8700afcdc1bbc87f8b3bdae3a4d2dffc5aca6dcd.png" src="../_images/510b95627c25e54c8dd7856d8700afcdc1bbc87f8b3bdae3a4d2dffc5aca6dcd.png" />
+<img alt="../_images/30f60bb30a425040cdd51651eb66656a49307e9d1a9d211477bb0585529a11be.png" src="../_images/30f60bb30a425040cdd51651eb66656a49307e9d1a9d211477bb0585529a11be.png" />
 </div>
 </div>
 </section>
@@ -949,7 +954,7 @@ quadratic: 1.9999999999999998
 sublinear: nan
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2432/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2437/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
   y = np.log(np.abs(np.diff(np.log(eps))))
 </pre></div>
 </div>
@@ -1138,11 +1143,11 @@ has_duplicate_sorted([3, 1, 4, 5]) = False    (expected: False)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope nested: 2.0750919445598828
-slope sorted: 1.1576929953315225
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope nested: 2.0602341906515664
+slope sorted: 1.164766556059758
 </pre></div>
 </div>
-<img alt="../_images/629fcc857ab0598205cf210c8fed38ba25c8fea5a2d5efb19e7a471f79af611d.png" src="../_images/629fcc857ab0598205cf210c8fed38ba25c8fea5a2d5efb19e7a471f79af611d.png" />
+<img alt="../_images/68802ef1ce39c3e57dc02b97042783127fe95c48b2529412c0da04dcb729dc32.png" src="../_images/68802ef1ce39c3e57dc02b97042783127fe95c48b2529412c0da04dcb729dc32.png" />
 </div>
 </div>
 <p><strong>Questions:</strong></p>

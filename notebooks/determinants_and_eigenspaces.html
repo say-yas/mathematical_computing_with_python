@@ -1,0 +1,1271 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Determinants and Eigenspaces &#8212; Mathematical Computing with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/collapsible-captions.css?v=a2f12b8d" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/determinants_and_eigenspaces';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/collapsible-captions.js?v=a30ef615"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Double Integrals and Monte Carlo Integration" href="double_integrals_and_monte_carlo.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Mathematical Computing with Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Mathematical Computing with Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="starting_with_python.html">Using Python in Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="starting_with_github.html">Using GitHub: Repositories, Commits, Push/Pull, and Forks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonI.html">Introduction to Python, Part I</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonII.html">Introduction to Python, Part II</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIII.html">Introduction to Python, Part III</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIV_numpy.html">Introduction to Python, Part IV: NumPy</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonV_matplotlib.html">Introduction to Python, Part V: Plotting with Matplotlib</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Convergence and Symbolic Math</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bigO_convergence_solved.html">Big-O and Convergence of Algorithms</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="limits_convergence.html">Limits and Convergence of Algorithms</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="sympy_intro.html">Symbolic Computation with SymPy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Root Finding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bracketing_methods_solutions.html">Root Finding I: Bracketing Methods (solutions)</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="newton_method.html">Root Finding II: Newton’s Method</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="scipy_root_finding.html">Root finding with <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root_scalar</span></code></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interpolation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="scipy_interpolation.html">Interpolation with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code> (1-D)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scipy_interpolation_2d.html">Interpolation with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code> (2-D)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolation_extrapolation.html">Extrapolation (1-D) and scattered data (2-D) with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Differentiation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="symbolic_finite_differences.html">Derivatives on the computer: symbolic differentiation and finite differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="derivatives_from_data.html">Derivatives from data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Solving ODEs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ivp_with_sympy.html">Initial value problems with SymPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solve_ivp_scipy.html">Solving initial value problems numerically with SciPy</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Integration</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="integration_with_sympy_scipy.html">Integration with SymPy and SciPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="double_integrals_and_monte_carlo.html">Double Integrals and Monte Carlo Integration</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear algebra</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Determinants and Eigenspaces</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/say-yas/mathematical_computing_with_python/blob/main/book/notebooks/determinants_and_eigenspaces.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/notebooks/determinants_and_eigenspaces.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fnotebooks/determinants_and_eigenspaces.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/determinants_and_eigenspaces.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Determinants and Eigenspaces</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-making-matrices">Part A. Making matrices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetric-and-hermitian-matrices">Symmetric and Hermitian matrices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b-determinant">Part B. Determinant</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-c-eigenvalues-and-eigenspaces">Part C. Eigenvalues and eigenspaces</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algebraic-vs-geometric-multiplicity">Algebraic vs geometric multiplicity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy-np-linalg-eig">NumPy: <code class="docutils literal notranslate"><span class="pre">np.linalg.eig</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="determinants-and-eigenspaces">
+<h1>Determinants and Eigenspaces<a class="headerlink" href="#determinants-and-eigenspaces" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><strong>Determinant</strong> <span class="math notranslate nohighlight">\(\det A\)</span>: the factor by which <span class="math notranslate nohighlight">\(A\)</span> scales area (volume in 3D). <span class="math notranslate nohighlight">\(\det A = 0 \iff A\)</span> is <strong>not invertible</strong>.</p></li>
+<li><p><strong>Eigenvalue / eigenvector</strong>: <span class="math notranslate nohighlight">\(A\mathbf v = \lambda\mathbf v\)</span> with <span class="math notranslate nohighlight">\(\mathbf v \ne \mathbf 0\)</span>. <span class="math notranslate nohighlight">\(A\)</span> only stretches <span class="math notranslate nohighlight">\(\mathbf v\)</span>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span>
+
+<span class="n">lam</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">"lambda"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="part-a-making-matrices">
+<h2>Part A. Making matrices<a class="headerlink" href="#part-a-making-matrices" title="Link to this heading">#</a></h2>
+<p>Write a matrix as a <strong>list of rows</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>                 <span class="c1"># SymPy: exact</span>
+<span class="n">An</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>    <span class="c1"># NumPy: floats</span>
+<span class="n">display</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">An</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \left[\begin{matrix}1 &amp; 2\\3 &amp; 4\end{matrix}\right]\end{split}\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1. 2.]
+ [3. 4.]]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Special matrices:</strong> identity (<code class="docutils literal notranslate"><span class="pre">eye</span></code>), diagonal (<code class="docutils literal notranslate"><span class="pre">diag</span></code>), zeros.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">sp</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">sp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \left[\begin{matrix}1 &amp; 0 &amp; 0\\0 &amp; 1 &amp; 0\\0 &amp; 0 &amp; 1\end{matrix}\right]\end{split}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \left[\begin{matrix}1 &amp; 0 &amp; 0\\0 &amp; 2 &amp; 0\\0 &amp; 0 &amp; 3\end{matrix}\right]\end{split}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \left[\begin{matrix}0 &amp; 0 &amp; 0\\0 &amp; 0 &amp; 0\end{matrix}\right]\end{split}\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]]
+[[1 0 0]
+ [0 2 0]
+ [0 0 3]]
+[[0. 0. 0.]
+ [0. 0. 0.]]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Fill element by element.</strong> Start from zeros and set entries with <code class="docutils literal notranslate"><span class="pre">A[i,</span> <span class="pre">j]</span></code> (row <span class="math notranslate nohighlight">\(i\)</span>, column <span class="math notranslate nohighlight">\(j\)</span>; indices start at <span class="math notranslate nohighlight">\(0\)</span>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">G</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">G</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>     <span class="c1"># exact 1/3</span>
+<span class="n">display</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+<span class="n">Gn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">Gn</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">Gn</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">3</span>                  <span class="c1"># float 0.333...</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Gn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \left[\begin{matrix}0 &amp; 5 &amp; 0\\0 &amp; 0 &amp; 0\\0 &amp; 0 &amp; \frac{1}{3}\end{matrix}\right]\end{split}\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.         5.         0.        ]
+ [0.         0.         0.        ]
+ [0.         0.         0.33333333]]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Fill from a formula</strong> <span class="math notranslate nohighlight">\(a_{ij} = f(i, j)\)</span>. Example: <span class="math notranslate nohighlight">\(a_{ij} = i + j\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">F</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
+
+<span class="n">Fn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromfunction</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Fn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \left[\begin{matrix}0 &amp; 1 &amp; 2\\1 &amp; 2 &amp; 3\\2 &amp; 3 &amp; 4\end{matrix}\right]\end{split}\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0. 1. 2.]
+ [1. 2. 3.]
+ [2. 3. 4.]]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="symmetric-and-hermitian-matrices">
+<h3>Symmetric and Hermitian matrices<a class="headerlink" href="#symmetric-and-hermitian-matrices" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Symmetric</strong>: <span class="math notranslate nohighlight">\(A^T = A\)</span> (mirror image across the diagonal).</p></li>
+<li><p><strong>Hermitian</strong>: <span class="math notranslate nohighlight">\(A^* = A\)</span>, where <span class="math notranslate nohighlight">\(A^* = \overline{A}^{\,T}\)</span> is the <strong>conjugate transpose</strong>. For real matrices, Hermitian = symmetric.</p></li>
+</ul>
+<p><strong>Why it matters:</strong> symmetric/Hermitian matrices always have <strong>real eigenvalues</strong> and a full set of eigenvectors.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>SymPy</p></th>
+<th class="head"><p>NumPy</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>transpose</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A.T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A.T</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>conjugate transpose</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A.H</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A.conj().T</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>symmetric?</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A.is_symmetric()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.allclose(A,</span> <span class="pre">A.T)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Hermitian?</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A.is_hermitian</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.allclose(A,</span> <span class="pre">A.conj().T)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In SymPy, <span class="math notranslate nohighlight">\(i\)</span> is <code class="docutils literal notranslate"><span class="pre">sp.I</span></code>; in NumPy it is <code class="docutils literal notranslate"><span class="pre">1j</span></code>. Note <code class="docutils literal notranslate"><span class="pre">is_hermitian</span></code> has <strong>no</strong> parentheses.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Sym</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                 <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span>        <span class="mi">1</span> <span class="o">-</span> <span class="n">sp</span><span class="o">.</span><span class="n">I</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="mi">3</span>       <span class="p">]])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Sym</span><span class="p">,</span> <span class="n">H</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Sym symmetric?"</span><span class="p">,</span> <span class="n">Sym</span><span class="o">.</span><span class="n">is_symmetric</span><span class="p">(),</span> <span class="s2">"  Hermitian?"</span><span class="p">,</span> <span class="n">Sym</span><span class="o">.</span><span class="n">is_hermitian</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"H   symmetric?"</span><span class="p">,</span> <span class="n">H</span><span class="o">.</span><span class="n">is_symmetric</span><span class="p">(),</span>   <span class="s2">"  Hermitian?"</span><span class="p">,</span> <span class="n">H</span><span class="o">.</span><span class="n">is_hermitian</span><span class="p">)</span>
+
+<span class="n">Hn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="n">j</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"NumPy: H Hermitian?"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">Hn</span><span class="p">,</span> <span class="n">Hn</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \left[\begin{matrix}2 &amp; 1\\1 &amp; 3\end{matrix}\right]\end{split}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \left[\begin{matrix}2 &amp; 1 - i\\1 + i &amp; 3\end{matrix}\right]\end{split}\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sym symmetric? True   Hermitian? True
+H   symmetric? False   Hermitian? True
+NumPy: H Hermitian? True
+</pre></div>
+</div>
+</div>
+</div>
+<p>The eigenvalues of <span class="math notranslate nohighlight">\(H\)</span> are real, even though <span class="math notranslate nohighlight">\(H\)</span> has complex entries:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">H</span><span class="o">.</span><span class="n">eigenvals</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{4: 1, 1: 1}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="part-b-determinant">
+<h2>Part B. Determinant<a class="headerlink" href="#part-b-determinant" title="Link to this heading">#</a></h2>
+<p>For a <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix:
+$<span class="math notranslate nohighlight">\( \det\begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix} = ad - bc. \)</span>$</p>
+<p><strong>Example.</strong> <span class="math notranslate nohighlight">\(\det\begin{pmatrix} 3 &amp; 1 \\ 2 &amp; 4 \end{pmatrix} = 3\cdot 4 - 1\cdot 2 = 10\)</span>. In SymPy: <code class="docutils literal notranslate"><span class="pre">A.det()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="n">A</span><span class="o">.</span><span class="n">det</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 10\]</div>
+</div>
+</div>
+<p>SymPy also works with <strong>symbols</strong>, so it can derive the formula itself:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">"a b c d"</span><span class="p">)</span>
+<span class="n">Ab</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span>
+                <span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">]])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Ab</span><span class="p">)</span>
+<span class="n">Ab</span><span class="o">.</span><span class="n">det</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \left[\begin{matrix}a &amp; b\\c &amp; d\end{matrix}\right]\end{split}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle a d - b c\]</div>
+</div>
+</div>
+<p><strong>3×3 example.</strong> Same command for any size:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+<span class="n">B</span><span class="o">.</span><span class="n">det</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \left[\begin{matrix}2 &amp; 0 &amp; 1\\1 &amp; 3 &amp; 2\\1 &amp; 1 &amp; 2\end{matrix}\right]\end{split}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 6\]</div>
+</div>
+</div>
+<p><strong>A singular matrix.</strong> Consider
+$<span class="math notranslate nohighlight">\( S = \begin{pmatrix} 1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \\ 5 &amp; 7 &amp; 9 \end{pmatrix}. \)</span><span class="math notranslate nohighlight">\(
+Row 3 is the sum of rows 1 and 2, so the rows are dependent and \)</span>\det S = 0$.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
+<span class="n">S</span><span class="o">.</span><span class="n">det</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 0\]</div>
+</div>
+</div>
+<p><strong>NumPy pitfall:</strong> the same determinant in floating point is not exactly <span class="math notranslate nohighlight">\(0\)</span>. Never test <code class="docutils literal notranslate"><span class="pre">det</span> <span class="pre">==</span> <span class="pre">0</span></code>; test <code class="docutils literal notranslate"><span class="pre">abs(det)</span> <span class="pre">&lt;</span> <span class="pre">1e-10</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(2.664535259100367e-15)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="part-c-eigenvalues-and-eigenspaces">
+<h2>Part C. Eigenvalues and eigenspaces<a class="headerlink" href="#part-c-eigenvalues-and-eigenspaces" title="Link to this heading">#</a></h2>
+<p><span class="math notranslate nohighlight">\(A\mathbf v = \lambda\mathbf v\)</span> means <span class="math notranslate nohighlight">\((A - \lambda I)\mathbf v = \mathbf 0\)</span>. A nonzero <span class="math notranslate nohighlight">\(\mathbf v\)</span> exists exactly when
+$<span class="math notranslate nohighlight">\( \det(A - \lambda I) = 0 \qquad \text{(characteristic equation)}. \)</span>$</p>
+<p>The <strong>eigenspace</strong> of <span class="math notranslate nohighlight">\(\lambda\)</span> is <span class="math notranslate nohighlight">\(E_\lambda = \operatorname{Null}(A - \lambda I)\)</span>: all eigenvectors for <span class="math notranslate nohighlight">\(\lambda\)</span>, plus <span class="math notranslate nohighlight">\(\mathbf 0\)</span>.</p>
+<p><strong>Example.</strong> <span class="math notranslate nohighlight">\(A = \begin{pmatrix} 4 &amp; 1 \\ 2 &amp; 3 \end{pmatrix}\)</span>.</p>
+<p><strong>Characteristic polynomial, two ways:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">(A</span> <span class="pre">-</span> <span class="pre">lam*Id).det()</span></code> (with <code class="docutils literal notranslate"><span class="pre">Id</span> <span class="pre">=</span> <span class="pre">sp.eye(n)</span></code>) is <span class="math notranslate nohighlight">\(\det(A - \lambda I)\)</span>, as in the textbook.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">A.charpoly(lam)</span></code> is SymPy’s built-in. It computes <span class="math notranslate nohighlight">\(\det(\lambda I - A)\)</span>, which differs by a factor <span class="math notranslate nohighlight">\((-1)^n\)</span> (<span class="math notranslate nohighlight">\(n\times n\)</span> matrix). <strong>Same roots, same eigenvalues.</strong> Use <code class="docutils literal notranslate"><span class="pre">.as_expr()</span></code> to get a normal expression.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="n">Id</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>          <span class="c1"># 'Id', not 'I': sp.I is the imaginary unit</span>
+
+<span class="n">p1</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">lam</span><span class="o">*</span><span class="n">Id</span><span class="p">)</span><span class="o">.</span><span class="n">det</span><span class="p">()</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">charpoly</span><span class="p">(</span><span class="n">lam</span><span class="p">)</span><span class="o">.</span><span class="n">as_expr</span><span class="p">()</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">factor</span><span class="p">(</span><span class="n">p1</span><span class="p">),</span> <span class="n">sp</span><span class="o">.</span><span class="n">factor</span><span class="p">(</span><span class="n">p2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \left(\lambda - 5\right) \left(\lambda - 2\right)\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \left(\lambda - 5\right) \left(\lambda - 2\right)\]</div>
+</div>
+</div>
+<p>For the <span class="math notranslate nohighlight">\(3\times 3\)</span> matrix <span class="math notranslate nohighlight">\(B\)</span> from Part B (<span class="math notranslate nohighlight">\(n\)</span> odd), the two differ by a sign:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">factor</span><span class="p">((</span><span class="n">B</span> <span class="o">-</span> <span class="n">lam</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">det</span><span class="p">()),</span> <span class="n">sp</span><span class="o">.</span><span class="n">factor</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">charpoly</span><span class="p">(</span><span class="n">lam</span><span class="p">)</span><span class="o">.</span><span class="n">as_expr</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle - \left(\lambda - 2\right) \left(\lambda^{2} - 5 \lambda + 3\right)\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \left(\lambda - 2\right) \left(\lambda^{2} - 5 \lambda + 3\right)\]</div>
+</div>
+</div>
+<p><strong>Eigenvalues:</strong> roots of the characteristic polynomial. <strong>Eigenspaces:</strong> null space of <span class="math notranslate nohighlight">\(A - \lambda I\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eigs</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">lam</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">eigs</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">eigs</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"lambda = </span><span class="si">{</span><span class="n">l</span><span class="si">}</span><span class="s2">: basis of eigenspace"</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">((</span><span class="n">A</span> <span class="o">-</span> <span class="n">l</span><span class="o">*</span><span class="n">Id</span><span class="p">)</span><span class="o">.</span><span class="n">nullspace</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2, 5]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lambda = 2: basis of eigenspace
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Matrix([
+ [-1/2],
+ [   1]])]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lambda = 5: basis of eigenspace
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Matrix([
+ [1],
+ [1]])]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Shortcuts:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">A.eigenvals()</span></code> <span class="math notranslate nohighlight">\(\to\)</span> <code class="docutils literal notranslate"><span class="pre">{eigenvalue:</span> <span class="pre">algebraic</span> <span class="pre">multiplicity}</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">A.eigenvects()</span></code> <span class="math notranslate nohighlight">\(\to\)</span> list of <code class="docutils literal notranslate"><span class="pre">(eigenvalue,</span> <span class="pre">algebraic</span> <span class="pre">multiplicity,</span> <span class="pre">[basis</span> <span class="pre">of</span> <span class="pre">eigenspace])</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">eigenvals</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">eigenvects</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{5: 1, 2: 1}
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(2,
+  1,
+  [Matrix([
+   [-1/2],
+   [   1]])]),
+ (5,
+  1,
+  [Matrix([
+   [1],
+   [1]])])]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="algebraic-vs-geometric-multiplicity">
+<h3>Algebraic vs geometric multiplicity<a class="headerlink" href="#algebraic-vs-geometric-multiplicity" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Algebraic</strong>: how many times <span class="math notranslate nohighlight">\(\lambda\)</span> is a root of the characteristic polynomial.</p></li>
+<li><p><strong>Geometric</strong>: <span class="math notranslate nohighlight">\(\dim E_\lambda\)</span> (number of basis vectors).</p></li>
+</ul>
+<p>Always geometric <span class="math notranslate nohighlight">\(\le\)</span> algebraic. Both matrices below have <span class="math notranslate nohighlight">\(\lambda = 2\)</span> twice:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D1</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="n">D2</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">D</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"D1"</span><span class="p">,</span> <span class="n">D1</span><span class="p">),</span> <span class="p">(</span><span class="s2">"D2"</span><span class="p">,</span> <span class="n">D2</span><span class="p">)]:</span>
+    <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">alg</span><span class="p">,</span> <span class="n">basis</span> <span class="ow">in</span> <span class="n">D</span><span class="o">.</span><span class="n">eigenvects</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: lambda=</span><span class="si">{</span><span class="n">l</span><span class="si">}</span><span class="s2">, algebraic=</span><span class="si">{</span><span class="n">alg</span><span class="si">}</span><span class="s2">, geometric=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">basis</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>D1: lambda=2, algebraic=2, geometric=2
+D2: lambda=2, algebraic=2, geometric=1
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Why they differ:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(D_1 = 2\,\mathrm{Id}\)</span>, so <span class="math notranslate nohighlight">\(D_1\mathbf v = 2\mathbf v\)</span> for <strong>every</strong> <span class="math notranslate nohighlight">\(\mathbf v\)</span>. The eigenspace <span class="math notranslate nohighlight">\(E_2\)</span> is all of <span class="math notranslate nohighlight">\(\mathbb R^2\)</span>, with basis <span class="math notranslate nohighlight">\((1,0), (0,1)\)</span>: dimension <span class="math notranslate nohighlight">\(2\)</span>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(D_2\)</span>: <span class="math notranslate nohighlight">\((D_2 - 2\,\mathrm{Id})\mathbf v = (v_2, 0) = \mathbf 0\)</span> forces <span class="math notranslate nohighlight">\(v_2 = 0\)</span>. So <span class="math notranslate nohighlight">\(E_2\)</span> is spanned by <span class="math notranslate nohighlight">\((1, 0)\)</span> only: dimension <span class="math notranslate nohighlight">\(1\)</span>.</p></li>
+</ul>
+<p>So <span class="math notranslate nohighlight">\(D_2\)</span> has only <strong>one</strong> independent eigenvector, not enough for a basis of <span class="math notranslate nohighlight">\(\mathbb R^2\)</span>. Such a matrix cannot be diagonalized. You can always find the geometric multiplicity by counting the vectors in <code class="docutils literal notranslate"><span class="pre">nullspace()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">((</span><span class="n">D1</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">nullspace</span><span class="p">(),</span> <span class="p">(</span><span class="n">D2</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">nullspace</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Matrix([
+ [1],
+ [0]]),
+ Matrix([
+ [0],
+ [1]])]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Matrix([
+ [1],
+ [0]])]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="numpy-np-linalg-eig">
+<h3>NumPy: <code class="docutils literal notranslate"><span class="pre">np.linalg.eig</span></code><a class="headerlink" href="#numpy-np-linalg-eig" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">vals,</span> <span class="pre">vecs</span> <span class="pre">=</span> <span class="pre">np.linalg.eig(A)</span></code></p>
+<p><strong>Rule: eigenvectors are the COLUMNS of <code class="docutils literal notranslate"><span class="pre">vecs</span></code>.</strong> The eigenvector for <code class="docutils literal notranslate"><span class="pre">vals[i]</span></code> is <code class="docutils literal notranslate"><span class="pre">vecs[:,</span> <span class="pre">i]</span></code>, <strong>not</strong> <code class="docutils literal notranslate"><span class="pre">vecs[i]</span></code>. Taking rows gives wrong vectors with no error.</p>
+<p>NumPy scales eigenvectors to length <span class="math notranslate nohighlight">\(1\)</span>, so they may differ from SymPy’s by a constant factor. For symmetric/Hermitian matrices, <code class="docutils literal notranslate"><span class="pre">np.linalg.eigh</span></code> is better: real eigenvalues, sorted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">An</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">vals</span><span class="p">,</span> <span class="n">vecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">An</span><span class="p">)</span>
+<span class="n">vals</span><span class="p">,</span> <span class="n">vecs</span> <span class="o">=</span> <span class="n">vals</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">vecs</span><span class="o">.</span><span class="n">real</span>       <span class="c1"># NumPy may return complex type with 0 imaginary part</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vals</span><span class="p">)):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">vecs</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>                      <span class="c1"># column i</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"lambda=</span><span class="si">{</span><span class="n">vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, v=</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">,  Av - lambda v = </span><span class="si">{</span><span class="p">(</span><span class="n">An</span><span class="w"> </span><span class="o">@</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lambda=5.0, v=[0.7071 0.7071],  Av - lambda v = [0. 0.]
+lambda=2.0, v=[-0.4472  0.8944],  Av - lambda v = [0. 0.]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p>Solve with <strong>SymPy</strong> (exact); check with <strong>NumPy</strong> where asked.</p>
+<p><strong>Syntax you will need:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>task</p></th>
+<th class="head"><p>SymPy</p></th>
+<th class="head"><p>NumPy</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>make a matrix</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.Matrix([[1,</span> <span class="pre">2],</span> <span class="pre">[3,</span> <span class="pre">4]])</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.array([[1,</span> <span class="pre">2],</span> <span class="pre">[3,</span> <span class="pre">4]],</span> <span class="pre">dtype=float)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>identity / diagonal</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.eye(n)</span></code>, <code class="docutils literal notranslate"><span class="pre">sp.diag(a,</span> <span class="pre">b,</span> <span class="pre">c)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.eye(n)</span></code>, <code class="docutils literal notranslate"><span class="pre">np.diag([a,</span> <span class="pre">b,</span> <span class="pre">c])</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>symbol</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">=</span> <span class="pre">sp.symbols(&quot;k&quot;)</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>show nicely</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">display(expr)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">print(A)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>determinant</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A.det()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.linalg.det(A)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>solve <code class="docutils literal notranslate"><span class="pre">expr</span></code> <span class="math notranslate nohighlight">\(= 0\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.solve(expr,</span> <span class="pre">k)</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>char. polynomial</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(A</span> <span class="pre">-</span> <span class="pre">lam*sp.eye(n)).det()</span></code> or <code class="docutils literal notranslate"><span class="pre">A.charpoly(lam).as_expr()</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>factor</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.factor(expr)</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>eigenvalues</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A.eigenvals()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.linalg.eigvals(A)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>eigenvectors</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A.eigenvects()</span></code> or <code class="docutils literal notranslate"><span class="pre">(A</span> <span class="pre">-</span> <span class="pre">l*sp.eye(n)).nullspace()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">vals,</span> <span class="pre">vecs</span> <span class="pre">=</span> <span class="pre">np.linalg.eig(A)</span></code>; column <code class="docutils literal notranslate"><span class="pre">vecs[:,</span> <span class="pre">i]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>symmetric?</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A.is_symmetric()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.allclose(A,</span> <span class="pre">A.T)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Hermitian?</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A.is_hermitian</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.allclose(A,</span> <span class="pre">A.conj().T)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Exercise 1.</strong> Let
+$<span class="math notranslate nohighlight">\( M = \begin{pmatrix} 2 &amp; 1 &amp; 1 \\ 1 &amp; 2 &amp; 1 \\ 1 &amp; 1 &amp; 2 \end{pmatrix}. \)</span>$</p>
+<p>Use <strong>SymPy</strong> for (a)–(d).</p>
+<p>(a) Find the <strong>determinant</strong> of <span class="math notranslate nohighlight">\(M\)</span>.</p>
+<p>(b) Find the <strong>eigenvalues</strong> of <span class="math notranslate nohighlight">\(M\)</span> and their algebraic multiplicities.</p>
+<p>(c) Find the <strong>eigenvectors</strong>: a basis of each eigenspace. What is the geometric multiplicity of each eigenvalue?</p>
+<p>(d) Is <span class="math notranslate nohighlight">\(M\)</span> symmetric? Are your eigenvalues real, as expected?</p>
+<p>(e) Reproduce (a)–(d) with <strong>NumPy</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exercise 1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise 2.</strong> Let
+$<span class="math notranslate nohighlight">\( A = \begin{pmatrix} k &amp; 1 &amp; 0 \\ 1 &amp; k &amp; 0 \\ 0 &amp; 0 &amp; 2 \end{pmatrix}. \)</span>$</p>
+<p>Use <strong>SymPy</strong>.</p>
+<p>(a) Compute <span class="math notranslate nohighlight">\(\det A\)</span> as a function of <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>(b) Find the characteristic polynomial and <strong>factor</strong> it. Then <strong>solve</strong> it to get the eigenvalues as functions of <span class="math notranslate nohighlight">\(k\)</span>. For which <span class="math notranslate nohighlight">\(k\)</span> is one of the eigenvalues <span class="math notranslate nohighlight">\(0\)</span>? Those are the <span class="math notranslate nohighlight">\(k\)</span> where <span class="math notranslate nohighlight">\(A\)</span> is singular: check that they match the zeros of <span class="math notranslate nohighlight">\(\det A\)</span> from (a).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exercise 2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="double_integrals_and_monte_carlo.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Double Integrals and Monte Carlo Integration</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-making-matrices">Part A. Making matrices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetric-and-hermitian-matrices">Symmetric and Hermitian matrices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b-determinant">Part B. Determinant</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-c-eigenvalues-and-eigenspaces">Part C. Eigenvalues and eigenspaces</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algebraic-vs-geometric-multiplicity">Algebraic vs geometric multiplicity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy-np-linalg-eig">NumPy: <code class="docutils literal notranslate"><span class="pre">np.linalg.eig</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sharareh Sayyad
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
