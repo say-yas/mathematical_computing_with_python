@@ -45,3 +45,8 @@ parts:
   - caption: Integration
     chapters:
     - file: notebooks/integration_with_sympy_scipy
+    - file: notebooks/double_integrals_and_monte_carlo
+  
+  - caption: Linear algebra
+    chapters:
+    - file: notebooks/determinants_and_eigenspaces
