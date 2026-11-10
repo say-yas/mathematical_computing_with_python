@@ -49,4 +49,4 @@ parts:
   
   - caption: Linear algebra
     chapters:
-    - file: notebooks/determinants_and_eigenspaces
+    - file: notebooks/decompositions
