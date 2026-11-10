@@ -36,7 +36,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="../_static/collapsible-captions.css?v=a2f12b8d" />
   
   <!-- So that users can add custom icons -->
@@ -56,7 +56,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -322,7 +322,8 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear algebra</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="determinants_and_eigenspaces.html">Determinants and Eigenspaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decompositions.html">Matrix Decompositions: LU, QR, and SVD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="svd-eigenspaces.html">SVD and Eigenspaces</a></li>
 </ul>
 
     </div>
@@ -772,7 +773,7 @@ It looks at large inputs and ignores constant factors.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[    100     464    2154   10000   46415  215443 1000000]
 </pre></div>
 </div>
-<img alt="../_images/63f80bc3bb51b6403c715b3ec508c0c336c80eae5651df0d88da5fda331d05d9.png" src="../_images/63f80bc3bb51b6403c715b3ec508c0c336c80eae5651df0d88da5fda331d05d9.png" />
+<img alt="../_images/a9ef2ca719f97751268045aea9bd78fe4492bbdcc35affe20565fc815a0211ae.png" src="../_images/a9ef2ca719f97751268045aea9bd78fe4492bbdcc35affe20565fc815a0211ae.png" />
 </div>
 </div>
 <p>The slopes come out close to <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span>, which <strong>agrees</strong> with the predictions. Two things to keep in mind:</p>
@@ -803,8 +804,8 @@ It looks at large inputs and ignores constant factors.</p>
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/ae3487156f1b5ed55b61badaa3e3503ea60284e24189980e402975dfd7e2519f.png" src="../_images/ae3487156f1b5ed55b61badaa3e3503ea60284e24189980e402975dfd7e2519f.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope for small n: 1.0008273016704985
-slope for large n: 1.9777525854559221
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope for small n: 1.0008273016704996
+slope for large n: 1.9777525854559215
 </pre></div>
 </div>
 </div>
@@ -840,10 +841,10 @@ slope for large n: 1.9777525854559221
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6951586061093363   growth factor b = e^slope: 2.0040268996455177
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.696714526012273   growth factor b = e^slope: 2.0071474320043614
 </pre></div>
 </div>
-<img alt="../_images/2aa3d98b062e147bc92038918332b068e474e22fcbad91b9bcc69d9750a4ea97.png" src="../_images/2aa3d98b062e147bc92038918332b068e474e22fcbad91b9bcc69d9750a4ea97.png" />
+<img alt="../_images/d3badeb58ea71d01e1dab8e1012d9d93c4025c1fc944d62660f6d26a46415a05.png" src="../_images/d3badeb58ea71d01e1dab8e1012d9d93c4025c1fc944d62660f6d26a46415a05.png" />
 </div>
 </div>
 </section>
@@ -954,7 +955,7 @@ quadratic: 1.9999999999999998
 sublinear: nan
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2411/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2336/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
   y = np.log(np.abs(np.diff(np.log(eps))))
 </pre></div>
 </div>
