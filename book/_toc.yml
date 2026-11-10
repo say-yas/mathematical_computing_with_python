@@ -51,3 +51,4 @@ parts:
     chapters:
     - file: notebooks/decompositions
     - file: notebooks/svd-eigenspaces
+    - file: notebooks/svd_image_compression 
