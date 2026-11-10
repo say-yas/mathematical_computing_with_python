@@ -323,6 +323,8 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear algebra</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="decompositions.html">Matrix Decompositions: LU, QR, and SVD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="svd-eigenspaces.html">SVD and Eigenspaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="svd_image_compression.html">Image Compression with the SVD</a></li>
 </ul>
 
     </div>
@@ -772,7 +774,7 @@ It looks at large inputs and ignores constant factors.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[    100     464    2154   10000   46415  215443 1000000]
 </pre></div>
 </div>
-<img alt="../_images/8919bd04c82c712db9fe19f8eb76990010b899f7543258ecfd04fd620bf9e24c.png" src="../_images/8919bd04c82c712db9fe19f8eb76990010b899f7543258ecfd04fd620bf9e24c.png" />
+<img alt="../_images/3dbfe83d91ecfdc86bedc3d2b5a05e803183f835c75048febfdae34ee84b5db6.png" src="../_images/3dbfe83d91ecfdc86bedc3d2b5a05e803183f835c75048febfdae34ee84b5db6.png" />
 </div>
 </div>
 <p>The slopes come out close to <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span>, which <strong>agrees</strong> with the predictions. Two things to keep in mind:</p>
@@ -803,8 +805,8 @@ It looks at large inputs and ignores constant factors.</p>
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/ae3487156f1b5ed55b61badaa3e3503ea60284e24189980e402975dfd7e2519f.png" src="../_images/ae3487156f1b5ed55b61badaa3e3503ea60284e24189980e402975dfd7e2519f.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope for small n: 1.0008273016704985
-slope for large n: 1.9777525854559221
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope for small n: 1.0008273016704996
+slope for large n: 1.9777525854559215
 </pre></div>
 </div>
 </div>
@@ -840,10 +842,10 @@ slope for large n: 1.9777525854559221
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6961121976093241   growth factor b = e^slope: 2.0059388341201156
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.698636373214099   growth factor b = e^slope: 2.011008571752096
 </pre></div>
 </div>
-<img alt="../_images/c677812ea87f4af5f0cf9eba86a20e32b2a430fad97867cf84d3e7e337d7c077.png" src="../_images/c677812ea87f4af5f0cf9eba86a20e32b2a430fad97867cf84d3e7e337d7c077.png" />
+<img alt="../_images/49a9b4981072f9dd8f594c7b906cf3c2017dc14bef66b90c6611b1bbea687cb8.png" src="../_images/49a9b4981072f9dd8f594c7b906cf3c2017dc14bef66b90c6611b1bbea687cb8.png" />
 </div>
 </div>
 </section>
@@ -954,7 +956,7 @@ quadratic: 1.9999999999999998
 sublinear: nan
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2384/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2418/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
   y = np.log(np.abs(np.diff(np.log(eps))))
 </pre></div>
 </div>
