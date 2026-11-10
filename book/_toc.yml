@@ -50,3 +50,4 @@ parts:
   - caption: Linear algebra
     chapters:
     - file: notebooks/decompositions
+    - file: notebooks/svd-eigenspaces
