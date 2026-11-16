@@ -326,6 +326,10 @@
 <li class="toctree-l1"><a class="reference internal" href="svd-eigenspaces.html">SVD and Eigenspaces</a></li>
 <li class="toctree-l1"><a class="reference internal" href="svd_image_compression.html">Image Compression with the SVD</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="optimization_intro.html">Introduction to Optimization: Max and Min</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -694,9 +698,7 @@ $<span class="math notranslate nohighlight">\( f(x) = x^2 \sin x \; e^{-x/2}, \q
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f'  = -x**2*exp(-x/2)*sin(x)/2 + x**2*exp(-x/2)*cos(x) + 2*x*exp(-x/2)*sin(x)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f'' = (-3*x**2*sin(x)/4 - x**2*cos(x) - 2*x*sin(x) + 4*x*cos(x) + 2*sin(x))*exp(-x/2)
+f'' = (-3*x**2*sin(x)/4 - x**2*cos(x) - 2*x*sin(x) + 4*x*cos(x) + 2*sin(x))*exp(-x/2)
 
 f'(1) exact  : exp(-1/2)*cos(1) + 3*exp(-1/2)*sin(1)/2
 f'(1) numeric: 1.093276841339319
