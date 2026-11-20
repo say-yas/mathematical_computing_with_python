@@ -1,0 +1,1075 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>The Fast Fourier Transform &#8212; Mathematical Computing with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
+    <link rel="stylesheet" type="text/css" href="../_static/collapsible-captions.css?v=a2f12b8d" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/fast_fourier_transform';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/collapsible-captions.js?v=a30ef615"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to Optimization: Max and Min" href="optimization_intro.html" />
+    <link rel="prev" title="Image Compression with the SVD" href="svd_image_compression.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Mathematical Computing with Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Mathematical Computing with Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="starting_with_python.html">Using Python in Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="starting_with_github.html">Using GitHub: Repositories, Commits, Push/Pull, and Forks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonI.html">Introduction to Python, Part I</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonII.html">Introduction to Python, Part II</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIII.html">Introduction to Python, Part III</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonIV_numpy.html">Introduction to Python, Part IV: NumPy</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro_pythonV_matplotlib.html">Introduction to Python, Part V: Plotting with Matplotlib</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Convergence and Symbolic Math</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bigO_convergence_solved.html">Big-O and Convergence of Algorithms</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="limits_convergence.html">Limits and Convergence of Algorithms</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="sympy_intro.html">Symbolic Computation with SymPy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Root Finding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bracketing_methods_solutions.html">Root Finding I: Bracketing Methods (solutions)</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="newton_method.html">Root Finding II: Newton’s Method</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="scipy_root_finding.html">Root finding with <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root_scalar</span></code></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interpolation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="scipy_interpolation.html">Interpolation with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code> (1-D)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scipy_interpolation_2d.html">Interpolation with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code> (2-D)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolation_extrapolation.html">Extrapolation (1-D) and scattered data (2-D) with <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Differentiation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="symbolic_finite_differences.html">Derivatives on the computer: symbolic differentiation and finite differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="derivatives_from_data.html">Derivatives from data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Solving ODEs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ivp_with_sympy.html">Initial value problems with SymPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solve_ivp_scipy.html">Solving initial value problems numerically with SciPy</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Integration</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="integration_with_sympy_scipy.html">Integration with SymPy and SciPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="double_integrals_and_monte_carlo.html">Double Integrals and Monte Carlo Integration</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear algebra</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="decompositions.html">Matrix Decompositions: LU, QR, and SVD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="svd-eigenspaces.html">SVD and Eigenspaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="svd_image_compression.html">Image Compression with the SVD</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">The Fast Fourier Transform</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="optimization_intro.html">Introduction to Optimization: Max and Min</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization_several_variables.html">Optimization in Several Variables</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/say-yas/mathematical_computing_with_python/blob/main/book/notebooks/fast_fourier_transform.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/edit/main/book/notebooks/fast_fourier_transform.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/say-yas/mathematical_computing_with_python/issues/new?title=Issue%20on%20page%20%2Fnotebooks/fast_fourier_transform.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/fast_fourier_transform.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>The Fast Fourier Transform</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-formula">1. The formula</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-fast-the-cost">2. Why “fast”? The cost</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-look">3. A first look</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#music-find-the-notes">4. Music: find the notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#music-remove-the-noise">5. Music: remove the noise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#images-compression">6. Images: compression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="the-fast-fourier-transform">
+<h1>The Fast Fourier Transform<a class="headerlink" href="#the-fast-fourier-transform" title="Link to this heading">#</a></h1>
+<p>The Fourier transform takes a signal in <strong>time</strong> (or space) and tells you which <strong>frequencies</strong> are in it, and how much of each.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>time domain <span class="math notranslate nohighlight">\(x_n\)</span></p></th>
+<th class="head"><p>frequency domain <span class="math notranslate nohighlight">\(X_k\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>what you see</p></td>
+<td><p>a wiggly signal</p></td>
+<td><p>a few sharp spikes</p></td>
+</tr>
+<tr class="row-odd"><td><p>go there</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">irfft(X)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rfft(x)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>The <strong>DFT</strong> (Discrete Fourier Transform) is the formula.</p></li>
+<li><p>The <strong>FFT</strong> (Fast Fourier Transform) is a fast algorithm for the same formula.</p></li>
+</ul>
+<p>Two examples: <strong>music</strong> (find the notes in a noisy chord, then remove the noise) and <strong>images</strong> (compress a photo). The notebook needs <code class="docutils literal notranslate"><span class="pre">rocks.jpg</span></code> and <code class="docutils literal notranslate"><span class="pre">bridge.jpg</span></code> in the same folder.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.fft</span><span class="w"> </span><span class="kn">import</span> <span class="n">rfft</span><span class="p">,</span> <span class="n">irfft</span><span class="p">,</span> <span class="n">rfftfreq</span><span class="p">,</span> <span class="n">fft2</span><span class="p">,</span> <span class="n">ifft2</span><span class="p">,</span> <span class="n">fftshift</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="the-formula">
+<h2>1. The formula<a class="headerlink" href="#the-formula" title="Link to this heading">#</a></h2>
+<p>For <span class="math notranslate nohighlight">\(N\)</span> samples <span class="math notranslate nohighlight">\(x_0, \dots, x_{N-1}\)</span>:
+$<span class="math notranslate nohighlight">\( X_k = \sum_{n=0}^{N-1} x_n \, e^{-2\pi i\, k n / N}, \qquad k = 0, \dots, N-1. \)</span>$</p>
+<p><strong>The Fourier matrix.</strong> This is a matrix times a vector, <span class="math notranslate nohighlight">\(X = W x\)</span>, with
+$<span class="math notranslate nohighlight">\( W_{kn} = \omega^{kn}, \qquad \omega = e^{-2\pi i / N}. \)</span><span class="math notranslate nohighlight">\(
+\)</span>\omega<span class="math notranslate nohighlight">\( is a point on the unit circle, \)</span>1/N<span class="math notranslate nohighlight">\( of a turn round. Row \)</span>k<span class="math notranslate nohighlight">\( of \)</span>W<span class="math notranslate nohighlight">\( goes round the circle \)</span>k<span class="math notranslate nohighlight">\( times: it is **a wave of frequency \)</span>k<span class="math notranslate nohighlight">\(**. So \)</span>X_k<span class="math notranslate nohighlight">\( is the dot product of the signal with wave \)</span>k$: it measures <em>how much the signal looks like that wave</em>.</p>
+<p>For <span class="math notranslate nohighlight">\(N = 4\)</span>, <span class="math notranslate nohighlight">\(\omega = -i\)</span>:
+$<span class="math notranslate nohighlight">\( W = \begin{pmatrix} 1 &amp; 1 &amp; 1 &amp; 1 \\ 1 &amp; -i &amp; -1 &amp; i \\ 1 &amp; -1 &amp; 1 &amp; -1 \\ 1 &amp; i &amp; -1 &amp; -i \end{pmatrix} \)</span>$
+Row 0 adds up the samples (the average level). Row 2 flips sign every step, the fastest wiggle 4 samples can show.</p>
+<p><strong>Going back.</strong> The rows of <span class="math notranslate nohighlight">\(W\)</span> are perpendicular to each other, so <span class="math notranslate nohighlight">\(W^{-1} = \frac{1}{N}\overline{W}\)</span>: flip the sign in the exponent and divide by <span class="math notranslate nohighlight">\(N\)</span>. That is the inverse FFT.</p>
+</section>
+<section id="why-fast-the-cost">
+<h2>2. Why “fast”? The cost<a class="headerlink" href="#why-fast-the-cost" title="Link to this heading">#</a></h2>
+<p>Multiplying by the <span class="math notranslate nohighlight">\(N \times N\)</span> matrix <span class="math notranslate nohighlight">\(W\)</span> costs <span class="math notranslate nohighlight">\(N^2\)</span> operations.</p>
+<p><strong>The trick</strong> (Cooley and Tukey, 1965). Split the sum into <strong>even</strong> <span class="math notranslate nohighlight">\(n\)</span> and <strong>odd</strong> <span class="math notranslate nohighlight">\(n\)</span>. Each half is a DFT of half the size. Call them <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(O\)</span>:
+$<span class="math notranslate nohighlight">\( X_k = E_k + \omega^{k} O_k, \qquad X_{k+N/2} = E_k - \omega^{k} O_k, \qquad k = 0, \dots, N/2 - 1. \)</span>$</p>
+<p>So one DFT of size <span class="math notranslate nohighlight">\(N\)</span> = two of size <span class="math notranslate nohighlight">\(N/2\)</span> plus <span class="math notranslate nohighlight">\(N\)</span> cheap steps. Keep halving: <span class="math notranslate nohighlight">\(\log_2 N\)</span> levels with <span class="math notranslate nohighlight">\(N\)</span> work each, so <span class="math notranslate nohighlight">\(N \log_2 N\)</span> in total.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(N\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(N^2\)</span> (matrix)</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(N \log_2 N\)</span> (FFT)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1,024</p></td>
+<td><p>about 1 million</p></td>
+<td><p>about 10 thousand</p></td>
+</tr>
+<tr class="row-odd"><td><p>1,048,576 (a one-megapixel photo)</p></td>
+<td><p>about <span class="math notranslate nohighlight">\(10^{12}\)</span></p></td>
+<td><p>about 21 million</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="a-first-look">
+<h2>3. A first look<a class="headerlink" href="#a-first-look" title="Link to this heading">#</a></h2>
+<p>A signal made of two sine waves: one goes up and down 4 times over the window, the other 8 times.</p>
+<p>For a <strong>real</strong> signal we use <code class="docutils literal notranslate"><span class="pre">rfft</span></code>. It returns complex numbers <span class="math notranslate nohighlight">\(X_k\)</span> for <span class="math notranslate nohighlight">\(k = 0, 1, \dots, N/2\)</span>. Their size <code class="docutils literal notranslate"><span class="pre">np.abs(X)</span></code> says how much of frequency <span class="math notranslate nohighlight">\(k\)</span> is in the signal. For a sine of amplitude 1 the peak has height <span class="math notranslate nohighlight">\(N/2\)</span>, so <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">np.abs(X)</span> <span class="pre">/</span> <span class="pre">N</span></code> gives the amplitude.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">rfft</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">amp</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"signal"</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="s2">"o-"</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"amplitude of each frequency"</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"k"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"back again with irfft?"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">irfft</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">N</span><span class="p">),</span> <span class="n">f</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/00a7e463214674e94d934123b42bd120c2a47a3d65faf984bf4d23d31f2dfcdb.png" src="../_images/00a7e463214674e94d934123b42bd120c2a47a3d65faf984bf4d23d31f2dfcdb.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>back again with irfft? True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Two spikes of height 1, at <span class="math notranslate nohighlight">\(k = 4\)</span> and <span class="math notranslate nohighlight">\(k = 8\)</span>: exactly the two sine waves.</p>
+</section>
+<section id="music-find-the-notes">
+<h2>4. Music: find the notes<a class="headerlink" href="#music-find-the-notes" title="Link to this heading">#</a></h2>
+<p>A chord of three notes is played for half a second, sampled at <span class="math notranslate nohighlight">\(f_s = 8000\)</span> samples per second, with loud noise on top. In the wave itself you can’t see the notes.</p>
+<p><code class="docutils literal notranslate"><span class="pre">rfftfreq(N,</span> <span class="pre">d=1/fs)</span></code> gives the frequency in Hz of each entry of <code class="docutils literal notranslate"><span class="pre">rfft</span></code>. The spacing between them is <span class="math notranslate nohighlight">\(f_s / N\)</span> Hz.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fs</span> <span class="o">=</span> <span class="mi">8000</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">fs</span><span class="p">)</span>
+<span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">262</span><span class="p">,</span> <span class="mi">330</span><span class="p">,</span> <span class="mi">392</span><span class="p">]</span>                           <span class="c1"># frequencies in Hz</span>
+
+<span class="n">clean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">noisy</span> <span class="o">=</span> <span class="n">clean</span> <span class="o">+</span> <span class="mf">0.8</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">rfft</span><span class="p">(</span><span class="n">noisy</span><span class="p">)</span>
+<span class="n">freqs</span> <span class="o">=</span> <span class="n">rfftfreq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">d</span><span class="o">=</span><span class="mi">1</span> <span class="o">/</span> <span class="n">fs</span><span class="p">)</span>
+<span class="n">amp</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[:</span><span class="mi">400</span><span class="p">],</span> <span class="n">noisy</span><span class="p">[:</span><span class="mi">400</span><span class="p">])</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"noisy chord"</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"time (s)"</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">freqs</span><span class="p">,</span> <span class="n">amp</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"spectrum (red: the true notes)"</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"frequency (Hz)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">top3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">freqs</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">amp</span><span class="p">)[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]])</span>       <span class="c1"># the 3 tallest peaks</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"frequencies found:"</span><span class="p">,</span> <span class="n">top3</span><span class="p">,</span> <span class="s2">"Hz"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a4ed25f1051bed843e8b4f91adef8bf45fe858991464f5d9bbc290a60478531a.png" src="../_images/a4ed25f1051bed843e8b4f91adef8bf45fe858991464f5d9bbc290a60478531a.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>frequencies found: [262. 330. 392.] Hz
+</pre></div>
+</div>
+</div>
+</div>
+<p>The three tallest peaks sit exactly on the red lines. 262, 330 and 392 Hz are the notes C, E and G: a C major chord.</p>
+</section>
+<section id="music-remove-the-noise">
+<h2>5. Music: remove the noise<a class="headerlink" href="#music-remove-the-noise" title="Link to this heading">#</a></h2>
+<p>The notes are a few tall spikes; the noise is a low, flat carpet over all frequencies. Keep the big coefficients, set the rest to zero, and go back with <code class="docutils literal notranslate"><span class="pre">irfft</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_kept</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">amp</span> <span class="o">&gt;</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>                <span class="c1"># keep only the tall spikes</span>
+<span class="n">denoised</span> <span class="o">=</span> <span class="n">irfft</span><span class="p">(</span><span class="n">X_kept</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[:</span><span class="mi">400</span><span class="p">],</span> <span class="n">noisy</span><span class="p">[:</span><span class="mi">400</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"noisy"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[:</span><span class="mi">400</span><span class="p">],</span> <span class="n">denoised</span><span class="p">[:</span><span class="mi">400</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">"denoised"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[:</span><span class="mi">400</span><span class="p">],</span> <span class="n">clean</span><span class="p">[:</span><span class="mi">400</span><span class="p">],</span> <span class="s2">"k--"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"clean"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"time (s)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"coefficients kept:"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">X_kept</span><span class="p">),</span> <span class="s2">"of"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/68c8e11cffbf42584d0f9802bea419360129620c69b42587d46309666e8fb104.png" src="../_images/68c8e11cffbf42584d0f9802bea419360129620c69b42587d46309666e8fb104.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>coefficients kept: 3 of 2001
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="images-compression">
+<h2>6. Images: compression<a class="headerlink" href="#images-compression" title="Link to this heading">#</a></h2>
+<p>A grayscale image is a 2D array of numbers, one per pixel. The <strong>2D FFT</strong> (<code class="docutils literal notranslate"><span class="pre">fft2</span></code>) does the same in two directions: each coefficient measures how much the image looks like a stripe pattern with some direction and spacing.</p>
+<ul class="simple">
+<li><p><strong>low frequencies</strong> (wide stripes): large shapes, the sky, the outlines of the rocks,</p></li>
+<li><p><strong>high frequencies</strong> (narrow stripes): fine detail, texture, sharp edges.</p></li>
+</ul>
+<p>In a photo most coefficients are tiny. <strong>Compression:</strong> keep only the largest few percent, set the rest to zero, and go back with <code class="docutils literal notranslate"><span class="pre">ifft2</span></code>. Only the kept coefficients need to be stored. JPEG is based on the same idea.</p>
+<p>The spectrum is drawn with <code class="docutils literal notranslate"><span class="pre">fftshift</span></code>, which moves frequency 0 to the middle, and on a log scale, because the values range over many powers of 10. <code class="docutils literal notranslate"><span class="pre">vmin=np.median(spectrum)</span></code> starts the colour scale at the median value, so the faint half of the coefficients is drawn dark and the structure stands out.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">"rocks.jpg"</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>      <span class="c1"># 2D array of gray values 0 to 255</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">fft2</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"gray"</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"rocks"</span><span class="p">)</span>
+<span class="n">spectrum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fftshift</span><span class="p">(</span><span class="n">F</span><span class="p">)))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">spectrum</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"turbo"</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">spectrum</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"log |fft2|  (centre = low frequencies)"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axs</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">"off"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2adb74f9a5427a7607756bff31dce434cd8941582c76d7a31a20e285f7e4fc0e.png" src="../_images/2adb74f9a5427a7607756bff31dce434cd8941582c76d7a31a20e285f7e4fc0e.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">compress(F,</span> <span class="pre">keep)</span></code> keeps the largest fraction <code class="docutils literal notranslate"><span class="pre">keep</span></code> of the coefficients. <code class="docutils literal notranslate"><span class="pre">np.quantile(np.abs(F),</span> <span class="pre">1</span> <span class="pre">-</span> <span class="pre">keep)</span></code> is the size a coefficient needs to be in that top fraction.</p>
+<p>The error is <span class="math notranslate nohighlight">\(\|\text{compressed} - \text{original}\| \,/\, \|\text{original}\|\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compress</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">keep</span><span class="p">):</span>
+    <span class="n">cutoff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">F</span><span class="p">),</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">keep</span><span class="p">)</span>
+    <span class="n">F_kept</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">F</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">cutoff</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ifft2</span><span class="p">(</span><span class="n">F_kept</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">keep</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">]):</span>
+    <span class="n">small</span> <span class="o">=</span> <span class="n">compress</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">keep</span><span class="p">)</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">small</span> <span class="o">-</span> <span class="n">img</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">small</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"gray"</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"keep </span><span class="si">{</span><span class="n">keep</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">, error </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">"off"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/741dff0c026c5641059df95aaedf6a17da978dd558a97a10f7a431efca6fb576.png" src="../_images/741dff0c026c5641059df95aaedf6a17da978dd558a97a10f7a431efca6fb576.png" />
+</div>
+</div>
+<p>With 2% of the coefficientsit still looks like the photo. At 0.5% the large shapes survive, but the fine texture of the rock is lost: it was carried by many small high-frequency coefficients.</p>
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>task</p></th>
+<th class="head"><p>code</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FFT / inverse of a real signal</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rfft(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">irfft(X,</span> <span class="pre">n=N)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>frequencies in Hz</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rfftfreq(N,</span> <span class="pre">d=1/fs)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>amplitude of a sine</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">np.abs(X)</span> <span class="pre">/</span> <span class="pre">N</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>2D FFT / inverse (images)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fft2(img)</span></code>, <code class="docutils literal notranslate"><span class="pre">ifft2(F).real</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>filter or compress</p></td>
+<td><p>set small coefficients to 0, then invert</p></td>
+</tr>
+<tr class="row-odd"><td><p>cost</p></td>
+<td><p>matrix: <span class="math notranslate nohighlight">\(N^2\)</span>; FFT: <span class="math notranslate nohighlight">\(N \log_2 N\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Where you meet the FFT:</strong> MP3 and JPEG, Wi-Fi and 4G/5G, MRI scanners, music recognition apps.</p>
+</section>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p><strong>Syntax you will need:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>task</p></th>
+<th class="head"><p>code</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>time points, sampling rate <code class="docutils literal notranslate"><span class="pre">fs</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">=</span> <span class="pre">np.arange(0,</span> <span class="pre">0.5,</span> <span class="pre">1</span> <span class="pre">/</span> <span class="pre">fs)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>sine wave of frequency <code class="docutils literal notranslate"><span class="pre">f0</span></code> Hz</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.sin(2</span> <span class="pre">*</span> <span class="pre">np.pi</span> <span class="pre">*</span> <span class="pre">f0</span> <span class="pre">*</span> <span class="pre">t)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>noise of amplitude <code class="docutils literal notranslate"><span class="pre">s</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">*</span> <span class="pre">np.random.randn(len(t))</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>plot only part of the frequency axis</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ax.set_xlim(0,</span> <span class="pre">1000)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>spectrum</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">rfft(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">freqs</span> <span class="pre">=</span> <span class="pre">rfftfreq(len(t),</span> <span class="pre">d=1</span> <span class="pre">/</span> <span class="pre">fs)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>amplitudes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">amp</span> <span class="pre">=</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">np.abs(X)</span> <span class="pre">/</span> <span class="pre">len(t)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>the 3 largest peaks</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.sort(freqs[np.argsort(amp)[-3:]])</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>vertical line at <code class="docutils literal notranslate"><span class="pre">f0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ax.axvline(f0,</span> <span class="pre">color=&quot;red&quot;,</span> <span class="pre">linestyle=&quot;--&quot;)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>load an image</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">img</span> <span class="pre">=</span> <span class="pre">plt.imread(&quot;bridge.jpg&quot;).astype(float)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>show an image</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ax.imshow(img,</span> <span class="pre">cmap=&quot;gray&quot;,</span> <span class="pre">vmin=0,</span> <span class="pre">vmax=255)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>hide the axes of an image</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ax.axis(&quot;off&quot;)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>compress</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">compress(fft2(img),</span> <span class="pre">keep)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>relative error</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.linalg.norm(small</span> <span class="pre">-</span> <span class="pre">img)</span> <span class="pre">/</span> <span class="pre">np.linalg.norm(img)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>several plots side by side</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">axs</span> <span class="pre">=</span> <span class="pre">plt.subplots(1,</span> <span class="pre">3,</span> <span class="pre">figsize=(15,</span> <span class="pre">4))</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Exercise 1 (find the notes of a chord).</strong> Repeat the music example of section 4 with a different chord, step by step.</p>
+<p>(a) <strong>Make the signal.</strong> Use <span class="math notranslate nohighlight">\(f_s = 8000\)</span> samples per second and half a second of time points. Build the clean chord as the sum of three sine waves with frequencies 440, 554 and 659 Hz (the notes A, C#, E), each of amplitude 1.</p>
+<p>(b) <strong>Add noise.</strong> Add random noise of amplitude 1 to the clean signal. Plot the first 400 samples of the noisy signal: can you see the notes?</p>
+<p>(c) <strong>Take the FFT.</strong> Compute <code class="docutils literal notranslate"><span class="pre">rfft</span></code> of the noisy signal, the frequency of each coefficient with <code class="docutils literal notranslate"><span class="pre">rfftfreq</span></code>, and the amplitudes <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">np.abs(X)</span> <span class="pre">/</span> <span class="pre">len(t)</span></code>.</p>
+<p>(d) <strong>Plot the spectrum</strong> between 0 and 1000 Hz, with a red dashed vertical line at each of the three true frequencies. Find the frequencies of the three largest peaks and compare them with 440, 554 and 659 Hz. (The frequencies in <code class="docutils literal notranslate"><span class="pre">freqs</span></code> are 2 Hz apart, so a peak can be off by up to 1 Hz.)</p>
+<p>(e) <strong>Make the noise louder.</strong> Repeat (b) to (d) with noise amplitude 2, 5, 10 and 20. From which amplitude on are the three largest peaks no longer the right ones? Run each case a few times, since the noise is different every time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exercise 1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise 2 (compress a drawing).</strong> Load <code class="docutils literal notranslate"><span class="pre">bridge.jpg</span></code>, a black-and-white drawing.</p>
+<p>(a) Compress it keeping 10%, 2% and 0.5% of the coefficients. Show the three results side by side, with the error in each title.</p>
+<p>(b) Compare the errors with those of the rocks photo. Which image is harder to compress, and why? (Hint: which frequencies do you need for a sharp jump from black to white?)</p>
+<p>(c) Look closely at the 2% version. What do you see next to the black lines?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exercise 2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="svd_image_compression.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Image Compression with the SVD</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="optimization_intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Optimization: Max and Min</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-formula">1. The formula</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-fast-the-cost">2. Why “fast”? The cost</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-look">3. A first look</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#music-find-the-notes">4. Music: find the notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#music-remove-the-noise">5. Music: remove the noise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#images-compression">6. Images: compression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sharareh Sayyad
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
