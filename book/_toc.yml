@@ -41,6 +41,7 @@ parts:
     chapters:
       - file: notebooks/ivp_with_sympy
       - file: notebooks/solve_ivp_scipy
+      - file: notebooks/solve_systems_ivp
 
   - caption: Integration
     chapters:
