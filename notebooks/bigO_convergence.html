@@ -314,6 +314,9 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="ivp_with_sympy.html">Initial value problems with SymPy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solve_ivp_scipy.html">Solving initial value problems numerically with SciPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solve_systems_ivp.html">Systems of differential equations and phase portraits</a></li>
+
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Integration</span></p>
 <ul class="nav bd-sidenav">
@@ -780,7 +783,7 @@ It looks at large inputs and ignores constant factors.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[    100     464    2154   10000   46415  215443 1000000]
 </pre></div>
 </div>
-<img alt="../_images/7e018c884f6493b7459b1fd1b3d1ae4d510a6fbf7399a2260b4c1dbb96e0bab5.png" src="../_images/7e018c884f6493b7459b1fd1b3d1ae4d510a6fbf7399a2260b4c1dbb96e0bab5.png" />
+<img alt="../_images/a1ac9a89220e029e4823608fd1118da6b2f08e54399ea40ba442ac0fc7d20486.png" src="../_images/a1ac9a89220e029e4823608fd1118da6b2f08e54399ea40ba442ac0fc7d20486.png" />
 </div>
 </div>
 <p>The slopes come out close to <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span>, which <strong>agrees</strong> with the predictions. Two things to keep in mind:</p>
@@ -848,10 +851,10 @@ slope for large n: 1.9777525854559215
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.7002125898242954   growth factor b = e^slope: 2.014180856313163
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope: 0.6989503031067064   growth factor b = e^slope: 2.0116399865618644
 </pre></div>
 </div>
-<img alt="../_images/495ec557a72956dc1b9fc49bb230ade752b227258ce6a7452459d4758218b41f.png" src="../_images/495ec557a72956dc1b9fc49bb230ade752b227258ce6a7452459d4758218b41f.png" />
+<img alt="../_images/3e74c5f1f2d4c286f582adeae500f103fb029f4d8aedcd40d82c4e1fa32b1a46.png" src="../_images/3e74c5f1f2d4c286f582adeae500f103fb029f4d8aedcd40d82c4e1fa32b1a46.png" />
 </div>
 </div>
 </section>
@@ -962,7 +965,7 @@ quadratic: 1.9999999999999998
 sublinear: nan
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2428/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2270/2372519777.py:4: RuntimeWarning: divide by zero encountered in log
   y = np.log(np.abs(np.diff(np.log(eps))))
 </pre></div>
 </div>
